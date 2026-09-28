@@ -15,6 +15,9 @@ docs/
   brand-identity.md       Wheeler's five phases: audience, voice, colors, type, touchpoints
   pricing.md              Prices and unit economics
   business-plan.md        Business plan (Markdown copy)
+design/
+  README.md               Notes on the mockups and known fixes
+  mockups/                Claude Design screens (HTML + PNG snapshots)
 brand/
   colgrid-logo.png        Primary logo
   colgrid-logo-alt.png    Alternate logo
@@ -26,7 +29,7 @@ business/
 
 ## How to build
 
-1. **Design:** give Claude Design `docs/brand-identity.md`, `docs/mvp-spec.md` (Screens section) and `brand/colgrid-logo.png`; ask for phone mockups of the 8 screens.
+1. **Design:** done. Mockups are in `design/mockups/`; read `design/README.md` for the fixes to apply.
 2. **Build:** open this repo in Claude Code. It reads `CLAUDE.md` automatically. Start with step 1 of the build order in `docs/mvp-spec.md`.
 3. **Test:** dry run with 6–8 friends before gathering 1.
 
@@ -34,4 +37,4 @@ business/
 
 - Name: Colgrid (official Sep 28, 2026). USPTO trademark search pending (classes 41 and 9).
 - Brand: Phases 1–2 done; Phases 3–5 drafted.
-- Product: MVP spec written; build not started.
+- Product: MVP spec written; mockups done; build not started.

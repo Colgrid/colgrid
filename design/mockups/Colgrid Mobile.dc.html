@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#D9DCE0;font-family:'Space Grotesk',sans-serif;color:#1A1D20;-webkit-font-smoothing:antialiased}
+a{color:#FF9F1C;text-decoration:none}a:hover{color:#FFB54F}
+*{box-sizing:border-box}
+</style>
+</helmet>
+<div style="padding:72px 80px 120px;display:flex;flex-direction:column;gap:72px;min-width:1900px">
+
+<header style="display:flex;align-items:flex-end;gap:28px">
+  <div style="width:88px;height:88px;background:#fff;border-radius:18px;overflow:hidden;flex:none;position:relative"><img src="assets/colgrid-logo.png" alt="Colgrid" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.12em;color:#4A5057">COLGRID · MOBILE MVP · 390 × 844</div>
+    <h1 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:52px;line-height:1;font-weight:700">Player, crew &amp; admin screens</h1>
+  </div>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:28px">
+  <h2 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:26px;font-weight:600">Player flow</h2>
+  <div style="display:flex;gap:56px;flex-wrap:wrap;align-items:flex-start">
+
+    <!-- 01 HOME -->
+    <div id="1" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#1A1D20"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">01</span>Home (public)</div>
+      <div data-screen-label="01 Home" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7">
+        <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none">
+          <div style="position:relative;padding:0 0 40px;background-image:repeating-radial-gradient(ellipse at 88% 8%,transparent 0 26px,rgba(46,196,182,.13) 26px 27px);">
+            <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 0">
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;background:#fff;border-radius:10px;overflow:hidden;position:relative"><img src="assets/colgrid-logo.png" alt="Colgrid" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div><span style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:20px;letter-spacing:.06em">COLGRID</span></div>
+              <a href="#2" style="color:#F4F5F7;font-weight:600;font-size:16px;padding:12px 4px">Sign in</a>
+            </div>
+            <div style="padding:44px 20px 0;display:flex;flex-direction:column;gap:18px">
+              <div style="width:112px;height:112px;background:#fff;border-radius:22px;overflow:hidden;position:relative"><img src="assets/colgrid-logo.png" alt="Colgrid logo" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2EC4B6">CHAPTER 01 · SALT LAKE CITY</div>
+              <h1 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:48px;line-height:.98;font-weight:700;text-wrap:balance">Your city has missions.</h1>
+              <p style="margin:0;font-size:18px;line-height:1.45;color:#C9CDD2;text-wrap:pretty">Meet your team in one walkable neighborhood. Take on missions hosted by local makers, kitchens and guides. Your XP follows you to every city.</p>
+              <div style="display:flex;flex-direction:column;gap:10px;padding-top:6px">
+                <a href="#" style="height:58px;border-radius:14px;background:#FF9F1C;color:#1A1D20;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">Get a ticket — $75</a>
+                <a href="#" style="height:58px;border-radius:14px;border:2px solid #F4F5F7;color:#F4F5F7;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">Season Pass — $280 for 4</a>
+              </div>
+            </div>
+          </div>
+          <div style="padding:8px 20px 36px;display:flex;flex-direction:column;gap:20px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:#A7ADB4">HOW IT WORKS</div>
+            <div style="display:flex;flex-direction:column;position:relative">
+              <div style="position:absolute;left:17px;top:20px;bottom:20px;border-left:2px dashed #FF9F1C"></div>
+              <div style="display:flex;gap:16px;padding-bottom:22px;position:relative">
+                <div style="width:36px;height:36px;border-radius:50%;background:#FF9F1C;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">01</div>
+                <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'Chakra Petch',sans-serif;font-size:21px;font-weight:600">Join a team</div><div style="font-size:16px;line-height:1.4;color:#C9CDD2">Bring friends or come solo. Solo players get placed on a team.</div></div>
+              </div>
+              <div style="display:flex;gap:16px;padding-bottom:22px;position:relative">
+                <div style="width:36px;height:36px;border-radius:50%;background:#1A1D20;border:2px solid #FF9F1C;color:#FF9F1C;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">02</div>
+                <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'Chakra Petch',sans-serif;font-size:21px;font-weight:600">Take on missions</div><div style="font-size:16px;line-height:1.4;color:#C9CDD2">2–4 hours, one neighborhood, stops you’d walk right past.</div></div>
+              </div>
+              <div style="display:flex;gap:16px;position:relative">
+                <div style="width:36px;height:36px;border-radius:50%;background:#1A1D20;border:2px solid #FF9F1C;color:#FF9F1C;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">03</div>
+                <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'Chakra Petch',sans-serif;font-size:21px;font-weight:600">Level up</div><div style="font-size:16px;line-height:1.4;color:#C9CDD2">XP, levels and badges stay on your pass. Every gathering, every city.</div></div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 20px 36px;display:flex;flex-direction:column;gap:14px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:#A7ADB4">TWO WAYS TO PLAY</div>
+            <div style="border-radius:18px;border:2px solid #2EC4B6;padding:18px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'Chakra Petch',sans-serif;font-size:24px;font-weight:700;color:#2EC4B6">Casual</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:#2EC4B6;color:#1A1D20;padding:5px 9px;border-radius:999px">DEFAULT</span></div>
+              <div style="font-size:16px;line-height:1.4;color:#E4E6E9">Explore, make things, eat, meet people. Earn XP and badges. No leaderboard. Every gathering earns entries in the Flagship lottery.</div>
+            </div>
+            <div style="border-radius:18px;border:2px solid #E71D36;padding:18px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'Chakra Petch',sans-serif;font-size:24px;font-weight:700;color:#FF5A6E">Tournament</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:#E71D36;color:#fff;padding:5px 9px;border-radius:999px">OPT IN</span></div>
+              <div style="font-size:16px;line-height:1.4;color:#E4E6E9">Same night, same quests, same ticket. Get scored on speed, accuracy and judged challenges. Top 4 teams play Chapter Finals.</div>
+            </div>
+          </div>
+          <div style="padding:0 20px 40px">
+            <div style="background:#F4F5F7;color:#1A1D20;border-radius:20px;overflow:hidden">
+              <div style="padding:18px 18px 14px;display:flex;flex-direction:column;gap:6px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#4A5057">NEXT GATHERING</div>
+                <div style="font-family:'Chakra Petch',sans-serif;font-size:26px;font-weight:700;line-height:1.05">Chapter 01: Salt Lake</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500">Session 01 · Sat Oct 24 · 6:00 PM</div>
+              </div>
+              <div style="height:96px;margin:0 18px;border-radius:12px;background-color:#E4E6E9;background-image:linear-gradient(#C9CDD2 2px,transparent 2px),linear-gradient(90deg,#C9CDD2 2px,transparent 2px);background-size:32px 32px;display:flex;align-items:center;justify-content:center;gap:10px">
+                <span style="width:18px;height:18px;border-radius:50%;background:#FF9F1C;box-shadow:0 0 0 4px #F4F5F7,0 0 0 6px #1A1D20"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:#1A1D20;color:#F4F5F7;padding:6px 10px;border-radius:6px">LOCATION REVEALED 48H BEFORE</span>
+              </div>
+              <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px">
+                <a href="#" style="height:56px;border-radius:14px;background:#FF9F1C;color:#1A1D20;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">Get a ticket — $75</a>
+                <a href="#" style="height:56px;border-radius:14px;border:2px solid #1A1D20;color:#1A1D20;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">Season Pass — $280 for 4</a>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 20px 48px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7D848C">© 2026 COLGRID · SALT LAKE CITY, UT</div>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+
+    <!-- 02 SIGN IN -->
+    <div id="2" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">02</span>Sign in</div>
+      <div data-screen-label="02 Sign in" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7;background-image:linear-gradient(rgba(244,245,247,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(244,245,247,.05) 1px,transparent 1px);background-size:30px 30px">
+        <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+        <div style="padding:6px 12px"><a href="#1" style="color:#F4F5F7;font-size:16px;font-weight:600;padding:12px 8px;display:inline-flex">← Back</a></div>
+        <div style="padding:56px 24px 0;display:flex;flex-direction:column;gap:18px">
+          <div style="width:72px;height:72px;background:#fff;border-radius:16px;overflow:hidden;position:relative"><img src="assets/colgrid-logo.png" alt="Colgrid" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div>
+          <h1 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:38px;line-height:1.02;font-weight:700">Open your pass.</h1>
+          <p style="margin:0;font-size:18px;line-height:1.45;color:#C9CDD2">We’ll email you a link. Tap it and you’re in. No password.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;padding-top:14px">
+            <label style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:#A7ADB4">EMAIL</label>
+            <div style="height:62px;border-radius:14px;background:#F4F5F7;color:#1A1D20;border:3px solid #FF9F1C;display:flex;align-items:center;padding:0 16px;font-size:19px;font-weight:500">rosa.delgado@gmail.com<span style="width:2px;height:24px;background:#1A1D20;margin-left:2px"></span></div>
+          </div>
+          <a href="#3" style="height:60px;border-radius:14px;background:#FF9F1C;color:#1A1D20;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;margin-top:6px">Send magic link</a>
+          <p style="margin:0;font-size:16px;color:#A7ADB4">New here? <a href="#1" style="font-weight:600">Get a ticket</a></p>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+
+    <!-- 03 PASS CASUAL -->
+    <div id="3" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">03a</span>Player pass · Casual</div>
+      <div data-screen-label="03a Pass casual" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7">
+        <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:110px">
+          <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:4px 20px 0">
+            <div style="width:40px;height:40px;background:#fff;border-radius:10px;overflow:hidden;position:relative;flex:none"><img src="assets/colgrid-logo.png" alt="Colgrid" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div>
+            <div style="flex:1"></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FF9F1C;border:2px solid #FF9F1C;padding:6px 10px;border-radius:8px;white-space:nowrap;flex:none">LVL 04</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;background:#2EC4B6;color:#1A1D20;padding:8px 12px;border-radius:999px">CASUAL</span>
+          </div>
+          <div style="padding:22px 20px 0;display:flex;flex-direction:column;gap:4px">
+            <div style="font-family:'Chakra Petch',sans-serif;font-size:34px;font-weight:700;line-height:1.05">Rosa Delgado</div>
+            <div style="font-size:18px;font-weight:600">The Night Owls</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#A7ADB4">Chapter 01: Salt Lake</div>
+          </div>
+          <div style="margin:18px 20px 0;border-radius:18px;background:#F4F5F7;color:#1A1D20;padding:16px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;border-radius:50%;background:#FF9F1C;box-shadow:0 0 0 4px rgba(255,159,28,.3)"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.1em">NOW</span><span style="font-size:17px;font-weight:700">Session 02 · 9th &amp; 9th</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700">680<span style="font-size:16px;color:#4A5057"> / 1,000 XP</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#4A5057">320 TO LVL 05</span></div>
+              <div style="height:14px;border-radius:7px;background:#D5D8DC;overflow:hidden"><div style="width:68%;height:100%;background:#FF9F1C;border-radius:7px"></div></div>
+            </div>
+          </div>
+          <div style="padding:26px 20px 0;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700">Tonight’s quests</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#A7ADB4">1 / 4</span></div>
+            <div style="border-radius:14px;background:#24282C;padding:14px;display:flex;gap:12px;align-items:center">
+              <span style="width:32px;height:32px;border-radius:50%;background:#2EC4B6;color:#1A1D20;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none">✓</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600;color:#C9CDD2">Glaze a secret</span><span style="font-size:14px;color:#A7ADB4">Ninth &amp; Ninth Pottery</span></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#A7ADB4">+50</span>
+            </div>
+            <div style="border-radius:14px;background:rgba(255,159,28,.12);border:2px solid #FF9F1C;padding:14px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;gap:12px;align-items:center">
+                <span style="width:32px;height:32px;border-radius:50%;background:#FF9F1C;flex:none;display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;border-radius:50%;background:#1A1D20"></span></span>
+                <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;font-weight:700">The taco that isn’t on the menu</span><span style="font-size:14px;color:#E4E6E9">Central 9th taco stand · Stop 2</span></div>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FF9F1C">+40</span>
+              </div>
+              <a href="#4" style="height:48px;border-radius:12px;background:#FF9F1C;color:#1A1D20;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center">Check in at Stop 2</a>
+            </div>
+            <div style="border-radius:14px;border:2px dashed #3A3F45;padding:14px;display:flex;gap:12px;align-items:center">
+              <span style="width:32px;height:32px;border-radius:8px;border:2px solid #7D848C;flex:none;display:flex;align-items:center;justify-content:center"><span style="width:10px;height:8px;border-radius:2px;background:#7D848C"></span></span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600;color:#C9CDD2">The map room</span><span style="font-size:14px;color:#A7ADB4">Wasatch Stories · unlocks 8:15 PM</span></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#7D848C">+60</span>
+            </div>
+            <div style="border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;background:repeating-linear-gradient(135deg,#202326 0 8px,#26292D 8px 16px)">
+              <span style="width:32px;height:32px;border-radius:50%;border:2px dashed #7D848C;color:#A7ADB4;font-family:'JetBrains Mono',monospace;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">?</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#C9CDD2;letter-spacing:.2em">??? ???</span><span style="font-size:14px;color:#E4E6E9">Scan at Stop 2 to unlock</span></div>
+            </div>
+          </div>
+          <div style="padding:26px 20px 0;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700">Badges</span>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;background:#FF9F1C;display:flex;align-items:center;justify-content:center"><span style="width:22px;height:22px;background:#1A1D20;transform:rotate(45deg)"></span></div><span style="font-size:13px;font-weight:600">Founding</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;background:#F4F5F7;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:#1A1D20">01</div><span style="font-size:13px;font-weight:600">Session 01</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;background:#2EC4B6;display:flex;align-items:center;justify-content:center"><span style="width:24px;height:24px;border-radius:50%;border:5px solid #1A1D20"></span></div><span style="font-size:13px;font-weight:600">Maker</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;border:2px dashed #7D848C;display:flex;align-items:center;justify-content:center"><span style="width:20px;height:20px;border:3px solid #7D848C"></span></div><span style="font-size:13px;font-weight:600;color:#A7ADB4">Scout</span></div>
+            </div>
+          </div>
+          <div style="margin:26px 20px 0;padding:16px;border-radius:16px;border:2px solid #2EC4B6;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:17px;font-weight:700">Flagship · Explorer path</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#2EC4B6">3 / 5</span></div>
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px"><span style="height:8px;border-radius:4px;background:#2EC4B6"></span><span style="height:8px;border-radius:4px;background:#2EC4B6"></span><span style="height:8px;border-radius:4px;background:#2EC4B6"></span><span style="height:8px;border-radius:4px;background:#3A3F45"></span><span style="height:8px;border-radius:4px;background:#3A3F45"></span></div>
+            <span style="font-size:14px;color:#C9CDD2">3 lottery entries for the Flagship Retreat. Show up and discover to earn more.</span>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:88px;background:#111315;border-top:1px solid #2A2E33;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px 22px">
+          <a href="#3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#FF9F1C;font-size:12px;font-weight:700"><span style="width:20px;height:20px;border-radius:5px;background:#FF9F1C"></span>Pass</a>
+          <a href="#4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:20px;height:20px;border-radius:50%;border:2.5px solid #A7ADB4"></span>Check in</a>
+          <a href="#5" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:16px;height:16px;border:2.5px solid #A7ADB4;transform:rotate(45deg);margin:2px"></span>Team</a>
+          <a href="#6" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="display:flex;gap:3px;align-items:flex-end;height:20px"><span style="width:5px;height:10px;background:#A7ADB4"></span><span style="width:5px;height:18px;background:#A7ADB4"></span><span style="width:5px;height:14px;background:#A7ADB4"></span></span>Standings</a>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+
+    <!-- 03b PASS TOURNAMENT -->
+    <div id="3b" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">03b</span>Player pass · Tournament</div>
+      <div data-screen-label="03b Pass tournament" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7">
+        <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:110px">
+          <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:4px 20px 0">
+            <div style="width:40px;height:40px;background:#fff;border-radius:10px;overflow:hidden;position:relative;flex:none"><img src="assets/colgrid-logo.png" alt="Colgrid" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div>
+            <div style="flex:1"></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FF9F1C;border:2px solid #FF9F1C;padding:6px 10px;border-radius:8px;white-space:nowrap;flex:none">LVL 04</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;background:#E71D36;color:#fff;padding:8px 12px;border-radius:999px;white-space:nowrap;flex:none">TOURNAMENT</span>
+          </div>
+          <div style="padding:22px 20px 0;display:flex;align-items:flex-end;gap:12px">
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+              <div style="font-family:'Chakra Petch',sans-serif;font-size:34px;font-weight:700;line-height:1.05">Rosa Delgado</div>
+              <div style="font-size:18px;font-weight:600">The Night Owls</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#A7ADB4">Chapter 01: Salt Lake</div>
+            </div>
+            <a href="#6" style="display:flex;flex-direction:column;align-items:center;padding:8px 12px;border-radius:12px;background:#E71D36;color:#fff"><span style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1">#3</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700">214 PTS</span></a>
+          </div>
+          <div style="margin:18px 20px 0;border-radius:18px;background:#F4F5F7;color:#1A1D20;padding:16px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:12px;height:12px;border-radius:50%;background:#FF9F1C;box-shadow:0 0 0 4px rgba(255,159,28,.3)"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.1em">NOW</span><span style="font-size:17px;font-weight:700">Session 02 · 9th &amp; 9th</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700">680<span style="font-size:16px;color:#4A5057"> / 1,000 XP</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#4A5057">320 TO LVL 05</span></div>
+              <div style="height:14px;border-radius:7px;background:#D5D8DC;overflow:hidden"><div style="width:68%;height:100%;background:#FF9F1C;border-radius:7px"></div></div>
+            </div>
+          </div>
+          <div style="padding:26px 20px 0;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700">Tonight’s quests</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#A7ADB4">XP · PTS</span></div>
+            <div style="border-radius:14px;background:#24282C;padding:14px;display:flex;gap:12px;align-items:center">
+              <span style="width:32px;height:32px;border-radius:50%;background:#2EC4B6;color:#1A1D20;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none">✓</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600;color:#C9CDD2">Glaze a secret</span><span style="font-size:14px;color:#A7ADB4">Ninth &amp; Ninth Pottery · 11:42</span></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#A7ADB4;text-align:right">+50<br><span style="color:#FF5A6E">+32</span></span>
+            </div>
+            <div style="border-radius:14px;background:rgba(255,159,28,.12);border:2px solid #FF9F1C;padding:14px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;gap:12px;align-items:center">
+                <span style="width:32px;height:32px;border-radius:50%;background:#FF9F1C;flex:none;display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;border-radius:50%;background:#1A1D20"></span></span>
+                <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;font-weight:700">The taco that isn’t on the menu</span><span style="font-size:14px;color:#E4E6E9">Central 9th taco stand · Stop 2</span></div>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#FF9F1C;text-align:right">+40<br><span style="color:#FF5A6E">≤30</span></span>
+              </div>
+              <div style="display:flex;gap:8px">
+                <a href="#4" style="flex:1;height:48px;border-radius:12px;background:#FF9F1C;color:#1A1D20;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center">Check in at Stop 2</a>
+                <span style="height:48px;padding:0 12px;border-radius:12px;background:#111315;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#E71D36"></span>06:18</span>
+              </div>
+            </div>
+            <div style="border-radius:14px;border:2px dashed #3A3F45;padding:14px;display:flex;gap:12px;align-items:center">
+              <span style="width:32px;height:32px;border-radius:8px;border:2px solid #7D848C;flex:none;display:flex;align-items:center;justify-content:center"><span style="width:10px;height:8px;border-radius:2px;background:#7D848C"></span></span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600;color:#C9CDD2">The map room</span><span style="font-size:14px;color:#A7ADB4">Wasatch Stories · unlocks 8:15 PM</span></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#7D848C">+60</span>
+            </div>
+            <div style="border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;background:repeating-linear-gradient(135deg,#202326 0 8px,#26292D 8px 16px)">
+              <span style="width:32px;height:32px;border-radius:50%;border:2px dashed #7D848C;color:#A7ADB4;font-family:'JetBrains Mono',monospace;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">?</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#C9CDD2;letter-spacing:.2em">??? ???</span><span style="font-size:14px;color:#E4E6E9">Scan at Stop 2 to unlock</span></div>
+            </div>
+          </div>
+          <div style="padding:26px 20px 0;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700">Badges</span>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;background:#FF9F1C;display:flex;align-items:center;justify-content:center"><span style="width:22px;height:22px;background:#1A1D20;transform:rotate(45deg)"></span></div><span style="font-size:13px;font-weight:600">Founding</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;background:#F4F5F7;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:#1A1D20">01</div><span style="font-size:13px;font-weight:600">Session 01</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;background:#2EC4B6;display:flex;align-items:center;justify-content:center"><span style="width:24px;height:24px;border-radius:50%;border:5px solid #1A1D20"></span></div><span style="font-size:13px;font-weight:600">Maker</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:62px;height:62px;border-radius:16px;border:2px dashed #7D848C;display:flex;align-items:center;justify-content:center"><span style="width:20px;height:20px;border:3px solid #7D848C"></span></div><span style="font-size:13px;font-weight:600;color:#A7ADB4">Scout</span></div>
+            </div>
+          </div>
+          <div style="margin:26px 20px 0;padding:16px;border-radius:16px;border:2px solid #E71D36;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:17px;font-weight:700">Flagship · Finals path</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FF5A6E">IN TOP 4</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700"><span style="padding:6px 8px;border-radius:6px;background:#E71D36;color:#fff">SEASON</span><span style="flex:1;border-top:2px dashed #7D848C"></span><span style="padding:6px 8px;border-radius:6px;border:2px solid #E71D36">FINALS</span><span style="flex:1;border-top:2px dashed #7D848C"></span><span style="padding:6px 8px;border-radius:6px;border:2px solid #3A3F45;color:#A7ADB4">CHAMPIONSHIP</span></div>
+            <span style="font-size:14px;color:#C9CDD2">3rd in Chapter 01. Top 4 after Session 04 play Chapter Finals.</span>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:88px;background:#111315;border-top:1px solid #2A2E33;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px 22px">
+          <a href="#3b" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#FF9F1C;font-size:12px;font-weight:700"><span style="width:20px;height:20px;border-radius:5px;background:#FF9F1C"></span>Pass</a>
+          <a href="#4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:20px;height:20px;border-radius:50%;border:2.5px solid #A7ADB4"></span>Check in</a>
+          <a href="#5" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:16px;height:16px;border:2.5px solid #A7ADB4;transform:rotate(45deg);margin:2px"></span>Team</a>
+          <a href="#6" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="display:flex;gap:3px;align-items:flex-end;height:20px"><span style="width:5px;height:10px;background:#A7ADB4"></span><span style="width:5px;height:18px;background:#A7ADB4"></span><span style="width:5px;height:14px;background:#A7ADB4"></span></span>Standings</a>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:56px;flex-wrap:wrap;align-items:flex-start;padding-top:24px">
+    <!-- 04 CHECK IN -->
+    <div id="4" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">04a</span>Check in</div>
+      <div data-screen-label="04a Check in" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7">
+        <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+        <div style="padding:14px 20px 0;display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:#FF9F1C">STOP 2 · CENTRAL 9TH</div>
+          <h1 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:36px;font-weight:700;line-height:1.02">Check in</h1>
+          <p style="margin:0;font-size:17px;line-height:1.4;color:#C9CDD2">Your host has the code. Ask for it, or scan the QR at the counter.</p>
+        </div>
+        <div style="padding:28px 20px 0;display:flex;flex-direction:column;gap:12px">
+          <label style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:#A7ADB4">QUEST CODE</label>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr) 14px repeat(3,1fr);gap:6px;align-items:center">
+            <div style="height:72px;border-radius:12px;background:#F4F5F7;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:700;display:flex;align-items:center;justify-content:center">T</div>
+            <div style="height:72px;border-radius:12px;background:#F4F5F7;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:700;display:flex;align-items:center;justify-content:center">A</div>
+            <div style="height:72px;border-radius:12px;background:#F4F5F7;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:700;display:flex;align-items:center;justify-content:center">C</div>
+            <div style="height:3px;background:#7D848C;border-radius:2px"></div>
+            <div style="height:72px;border-radius:12px;background:#F4F5F7;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:700;display:flex;align-items:center;justify-content:center">7</div>
+            <div style="height:72px;border-radius:12px;background:#F4F5F7;border:3px solid #FF9F1C;display:flex;align-items:center;justify-content:center"><span style="width:3px;height:34px;background:#1A1D20"></span></div>
+            <div style="height:72px;border-radius:12px;background:#2A2E33;border:2px solid #3A3F45"></div>
+          </div>
+          <a href="#4b" style="height:60px;border-radius:14px;background:#3A3F45;color:#A7ADB4;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;margin-top:6px">Check in</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:26px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#7D848C"><span style="flex:1;height:1px;background:#3A3F45"></span>OR<span style="flex:1;height:1px;background:#3A3F45"></span></div>
+        <div style="padding:0 20px">
+          <a href="#4b" style="height:168px;border-radius:18px;border:2px solid #2EC4B6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#F4F5F7;background:rgba(46,196,182,.08)">
+            <span style="width:60px;height:60px;position:relative;display:block">
+              <span style="position:absolute;left:0;top:0;width:20px;height:20px;border-left:4px solid #2EC4B6;border-top:4px solid #2EC4B6"></span>
+              <span style="position:absolute;right:0;top:0;width:20px;height:20px;border-right:4px solid #2EC4B6;border-top:4px solid #2EC4B6"></span>
+              <span style="position:absolute;left:0;bottom:0;width:20px;height:20px;border-left:4px solid #2EC4B6;border-bottom:4px solid #2EC4B6"></span>
+              <span style="position:absolute;right:0;bottom:0;width:20px;height:20px;border-right:4px solid #2EC4B6;border-bottom:4px solid #2EC4B6"></span>
+              <span style="position:absolute;left:22px;top:22px;width:16px;height:16px;background:#2EC4B6"></span>
+            </span>
+            <span style="font-size:20px;font-weight:700">Scan QR</span>
+          </a>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:88px;background:#111315;border-top:1px solid #2A2E33;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px 22px">
+          <a href="#3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:20px;height:20px;border-radius:5px;border:2.5px solid #A7ADB4"></span>Pass</a>
+          <a href="#4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#FF9F1C;font-size:12px;font-weight:700"><span style="width:20px;height:20px;border-radius:50%;background:#FF9F1C"></span>Check in</a>
+          <a href="#5" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:16px;height:16px;border:2.5px solid #A7ADB4;transform:rotate(45deg);margin:2px"></span>Team</a>
+          <a href="#6" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="display:flex;gap:3px;align-items:flex-end;height:20px"><span style="width:5px;height:10px;background:#A7ADB4"></span><span style="width:5px;height:18px;background:#A7ADB4"></span><span style="width:5px;height:14px;background:#A7ADB4"></span></span>Standings</a>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+
+    <!-- 04b SUCCESS -->
+    <div id="4b" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">04b</span>Check in · success + level up</div>
+      <div data-screen-label="04b Check-in success" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7;background-image:linear-gradient(rgba(255,159,28,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,159,28,.07) 1px,transparent 1px);background-size:30px 30px">
+        <div style="position:absolute;left:38px;top:110px;width:14px;height:14px;border-radius:50%;background:#FF9F1C"></div>
+        <div style="position:absolute;left:300px;top:96px;width:18px;height:18px;background:#2EC4B6;transform:rotate(18deg)"></div>
+        <div style="position:absolute;left:330px;top:190px;width:10px;height:10px;border-radius:50%;background:#F4F5F7"></div>
+        <div style="position:absolute;left:70px;top:210px;width:24px;height:12px;background:#F4F5F7;transform:rotate(-24deg)"></div>
+        <div style="position:absolute;left:180px;top:80px;width:12px;height:12px;border:3px solid #FF9F1C;transform:rotate(45deg)"></div>
+        <div style="position:absolute;left:24px;top:330px;width:16px;height:16px;background:#FF9F1C;transform:rotate(30deg)"></div>
+        <div style="position:absolute;left:346px;top:320px;width:14px;height:14px;border-radius:50%;border:3px solid #2EC4B6"></div>
+        <div style="position:absolute;left:250px;top:150px;width:8px;height:22px;background:#FF9F1C;transform:rotate(40deg)"></div>
+        <div style="position:absolute;left:110px;top:140px;width:10px;height:10px;background:#2EC4B6;transform:rotate(45deg)"></div>
+        <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px;position:relative"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+        <div style="position:relative;padding:92px 24px 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px">
+          <div style="width:58px;height:58px;border-radius:50%;background:#FF9F1C;box-shadow:0 0 0 8px #1A1D20,0 0 0 11px #FF9F1C;display:flex;align-items:center;justify-content:center;color:#1A1D20;font-size:28px;font-weight:700;margin-bottom:22px">✓</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:700;line-height:1;color:#FF9F1C">+25 XP</div>
+          <div style="font-family:'Chakra Petch',sans-serif;font-size:28px;font-weight:700">Quest complete</div>
+          <div style="font-size:17px;color:#C9CDD2">The taco that isn’t on the menu</div>
+        </div>
+        <div style="position:relative;margin:34px 20px 0;border-radius:20px;background:#F4F5F7;color:#1A1D20;padding:18px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.14em;background:#1A1D20;color:#FF9F1C;padding:6px 10px;border-radius:6px">LEVEL UP</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px"><span style="color:#7D848C">LVL 04</span><span style="width:26px;border-top:2px dashed #1A1D20"></span><span style="width:10px;height:10px;border-radius:50%;background:#FF9F1C;box-shadow:0 0 0 2px #1A1D20"></span><span style="font-size:22px">LVL 05</span></span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="height:14px;border-radius:7px;background:#FF9F1C"></div>
+            <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:#4A5057"><span>1,005 / 1,000</span><span>NEW BADGE SLOT</span></div>
+          </div>
+          <div style="font-size:16px;line-height:1.4">A new quest just revealed itself at Stop 2.</div>
+        </div>
+        <div style="position:absolute;left:20px;right:20px;bottom:40px;display:flex;flex-direction:column;gap:10px">
+          <a href="#3" style="height:60px;border-radius:14px;background:#FF9F1C;color:#1A1D20;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center">Reveal the hidden quest</a>
+          <a href="#3" style="height:52px;border-radius:14px;color:#F4F5F7;font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center">Back to pass</a>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+
+    <!-- 05 TEAM -->
+    <div id="5" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">05</span>Team <span style="color:#4A5057">· toggle is live</span></div>
+      <div data-screen-label="05 Team" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7">
+        <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:110px">
+          <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+          <div style="padding:14px 20px 0;display:flex;flex-direction:column;gap:6px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:#A7ADB4">YOUR TEAM · CHAPTER 01</div>
+            <h1 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:38px;font-weight:700;line-height:1.02">The Night Owls</h1>
+          </div>
+          <div style="padding:20px 20px 0;display:flex;gap:10px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1"><div style="width:56px;height:56px;border-radius:50%;background:#FF9F1C;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">RD</div><span style="font-size:13px;font-weight:600">You</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1"><div style="width:56px;height:56px;border-radius:50%;background:#F4F5F7;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">JK</div><span style="font-size:13px;color:#C9CDD2">Jonah</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1"><div style="width:56px;height:56px;border-radius:50%;background:#2EC4B6;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">AM</div><span style="font-size:13px;color:#C9CDD2">Aiko</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1"><div style="width:56px;height:56px;border-radius:50%;background:#F4F5F7;color:#1A1D20;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">TP</div><span style="font-size:13px;color:#C9CDD2">Tavita</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1"><div style="width:56px;height:56px;border-radius:50%;border:2px solid #F4F5F7;color:#F4F5F7;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">LW</div><span style="font-size:13px;color:#C9CDD2">Lena</span></div>
+          </div>
+          <div style="margin:26px 20px 0;padding:16px;border-radius:18px;background:#24282C;display:flex;flex-direction:column;gap:14px">
+            <span style="font-family:'Chakra Petch',sans-serif;font-size:20px;font-weight:700">How your team plays</span>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:14px;background:#111315">
+              <sc-if value="{{ isCasual }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ setCasual }}" style="height:52px;border:none;border-radius:10px;background:#2EC4B6;color:#1A1D20;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;cursor:pointer">Casual</button>
+                <button onClick="{{ setTournament }}" style="height:52px;border:none;border-radius:10px;background:transparent;color:#C9CDD2;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;cursor:pointer">Tournament</button>
+              </sc-if>
+              <sc-if value="{{ isTournament }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ setCasual }}" style="height:52px;border:none;border-radius:10px;background:transparent;color:#C9CDD2;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;cursor:pointer">Casual</button>
+                <button onClick="{{ setTournament }}" style="height:52px;border:none;border-radius:10px;background:#E71D36;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;cursor:pointer">Tournament</button>
+              </sc-if>
+            </div>
+            <sc-if value="{{ isCasual }}" hint-placeholder-val="{{ true }}">
+              <p style="margin:0;font-size:16px;line-height:1.45;color:#E4E6E9">You earn XP and badges. No ranking. Join the tournament before Session 02. You can switch back to casual anytime.</p>
+            </sc-if>
+            <sc-if value="{{ isTournament }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;font-size:16px;line-height:1.45;color:#E4E6E9">You’re on the Chapter 01 standings. Join the tournament before Session 02. You can switch back to casual anytime.</p>
+            </sc-if>
+          </div>
+          <div style="padding:26px 20px 0;display:flex;flex-direction:column;gap:10px">
+            <span style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700">Team history</span>
+            <div style="border-radius:14px;border:2px solid #FF9F1C;padding:14px;display:flex;gap:14px;align-items:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#FF9F1C;width:34px">02</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:700">9th &amp; 9th</span><span style="font-size:14px;color:#C9CDD2">Tonight · 1 of 4 quests</span></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:#FF9F1C;color:#1A1D20;padding:5px 8px;border-radius:6px">LIVE</span>
+            </div>
+            <div style="border-radius:14px;background:#24282C;padding:14px;display:flex;gap:14px;align-items:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#A7ADB4;width:34px">01</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:700">Sugar House</span><span style="font-size:14px;color:#C9CDD2">Sep 19 · 5 of 5 quests · 5 players</span></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#FF9F1C">+410</span>
+            </div>
+            <div style="border-radius:14px;border:2px dashed #3A3F45;padding:14px;display:flex;gap:14px;align-items:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#7D848C;width:34px">03</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600;color:#C9CDD2">Location sealed</span><span style="font-size:14px;color:#A7ADB4">Revealed 48h before</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:88px;background:#111315;border-top:1px solid #2A2E33;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px 22px">
+          <a href="#3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:20px;height:20px;border-radius:5px;border:2.5px solid #A7ADB4"></span>Pass</a>
+          <a href="#4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:20px;height:20px;border-radius:50%;border:2.5px solid #A7ADB4"></span>Check in</a>
+          <a href="#5" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#FF9F1C;font-size:12px;font-weight:700"><span style="width:16px;height:16px;background:#FF9F1C;transform:rotate(45deg);margin:2px"></span>Team</a>
+          <a href="#6" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="display:flex;gap:3px;align-items:flex-end;height:20px"><span style="width:5px;height:10px;background:#A7ADB4"></span><span style="width:5px;height:18px;background:#A7ADB4"></span><span style="width:5px;height:14px;background:#A7ADB4"></span></span>Standings</a>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+
+    <!-- 06 STANDINGS -->
+    <div id="6" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">06</span>Standings</div>
+      <div data-screen-label="06 Standings" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7">
+        <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+        <div style="padding:14px 20px 0;display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:#FF5A6E">TOURNAMENT · SEASON 1</div>
+          <h1 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:36px;font-weight:700;line-height:1.02">Chapter 01 standings</h1>
+          <div style="font-size:15px;color:#A7ADB4">After Session 01 · Session 02 live</div>
+        </div>
+        <div style="padding:20px 20px 0;display:flex;flex-direction:column">
+          <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;padding:0 12px 8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7D848C;letter-spacing:.08em"><span>#</span><span>TEAM</span><span style="text-align:right">PTS</span><span style="text-align:right">±</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;align-items:center;min-height:52px;padding:0 12px;border-radius:12px;background:#24282C"><span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700">1</span><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16px;font-weight:700">Salt Flats Syndicate</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#fff;background:#E71D36;padding:2px 6px;border-radius:4px;align-self:flex-start">FINALS</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;text-align:right">248</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:#2EC4B6">▲1</span></div>
+            <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;align-items:center;min-height:52px;padding:0 12px;border-radius:12px;background:#24282C"><span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700">2</span><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16px;font-weight:700">Wasatch Wanderers</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#fff;background:#E71D36;padding:2px 6px;border-radius:4px;align-self:flex-start">FINALS</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;text-align:right">231</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:#FF5A6E">▼1</span></div>
+            <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;align-items:center;min-height:52px;padding:0 12px;border-radius:12px;background:#F4F5F7;color:#1A1D20"><span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700">3</span><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16px;font-weight:700">The Night Owls · you</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#fff;background:#E71D36;padding:2px 6px;border-radius:4px;align-self:flex-start">FINALS</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;text-align:right">214</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:#1A8E84;font-weight:700">▲2</span></div>
+            <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;align-items:center;min-height:52px;padding:0 12px;border-radius:12px;background:#24282C"><span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700">4</span><span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16px;font-weight:700">Brine Shrimp Society</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#fff;background:#E71D36;padding:2px 6px;border-radius:4px;align-self:flex-start">FINALS</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;text-align:right">198</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:#A7ADB4">—</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#FF5A6E;letter-spacing:.1em"><span style="flex:1;border-top:2px dashed #E71D36"></span>FINALS CUT<span style="flex:1;border-top:2px dashed #E71D36"></span></div>
+            <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;align-items:center;min-height:46px;padding:0 12px;border-radius:12px;background:#202326"><span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#A7ADB4">5</span><span style="font-size:16px;font-weight:600">Sugar House Sleuths</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;text-align:right">187</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:#FF5A6E">▼1</span></div>
+            <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;align-items:center;min-height:46px;padding:0 12px;border-radius:12px;background:#202326"><span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#A7ADB4">6</span><span style="font-size:16px;font-weight:600">Beehive Bandits</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;text-align:right">172</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:#2EC4B6">▲1</span></div>
+            <div style="display:grid;grid-template-columns:36px 1fr 56px 40px;gap:8px;align-items:center;min-height:46px;padding:0 12px;border-radius:12px;background:#202326"><span style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#A7ADB4">7</span><span style="font-size:16px;font-weight:600">Red Butte Rovers</span><span style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;text-align:right">150</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;color:#FF5A6E">▼2</span></div>
+          </div>
+          <p style="margin:16px 0 0;font-size:14px;color:#A7ADB4;text-align:center">Casual teams aren’t ranked.</p>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:88px;background:#111315;border-top:1px solid #2A2E33;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px 22px">
+          <a href="#3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:20px;height:20px;border-radius:5px;border:2.5px solid #A7ADB4"></span>Pass</a>
+          <a href="#4" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:20px;height:20px;border-radius:50%;border:2.5px solid #A7ADB4"></span>Check in</a>
+          <a href="#5" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#A7ADB4;font-size:12px;font-weight:600"><span style="width:16px;height:16px;border:2.5px solid #A7ADB4;transform:rotate(45deg);margin:2px"></span>Team</a>
+          <a href="#6" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#FF9F1C;font-size:12px;font-weight:700"><span style="display:flex;gap:3px;align-items:flex-end;height:20px"><span style="width:5px;height:10px;background:#FF9F1C"></span><span style="width:5px;height:18px;background:#FF9F1C"></span><span style="width:5px;height:14px;background:#FF9F1C"></span></span>Standings</a>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:28px">
+  <h2 style="margin:0;font-family:'Chakra Petch',sans-serif;font-size:26px;font-weight:600">Crew tools &amp; style sheet</h2>
+  <div style="display:flex;gap:56px;flex-wrap:wrap;align-items:flex-start">
+
+    <!-- 07 GM -->
+    <div id="7" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">07</span>Game master console</div>
+      <div data-screen-label="07 GM console" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#1A1D20;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#F4F5F7">
+        <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:40px">
+          <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#F4F5F7;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #F4F5F7;border-radius:3px"></span></span></div>
+          <div style="padding:6px 16px 0;display:flex;align-items:center;gap:10px">
+            <div style="width:36px;height:36px;background:#fff;border-radius:9px;overflow:hidden;position:relative;flex:none"><img src="assets/colgrid-logo.png" alt="Colgrid" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div>
+            <div style="flex:1;display:flex;flex-direction:column"><span style="font-family:'Chakra Petch',sans-serif;font-size:20px;font-weight:700;line-height:1.1">Run sheet · Session 02</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A7ADB4">9TH &amp; 9TH · 6:00–9:30 PM · GM MARCO</span></div>
+          </div>
+          <div style="padding:14px 16px 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:6px">
+            <div style="border-radius:12px;background:#F4F5F7;color:#1A1D20;padding:10px 12px;display:flex;flex-direction:column"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4A5057">CHECKED IN</span><span style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700">38<span style="font-size:16px;color:#4A5057">/40</span></span></div>
+            <div style="border-radius:12px;background:#24282C;padding:10px 12px;display:flex;flex-direction:column"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">TEAMS</span><span style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700">8</span></div>
+            <div style="border-radius:12px;background:#24282C;padding:10px 12px;display:flex;flex-direction:column"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">CLOCK</span><span style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:#FF9F1C">1:12</span></div>
+          </div>
+          <div style="margin:10px 16px 0;padding:12px;border-radius:12px;border:2px solid #FF9F1C;display:flex;align-items:center;gap:10px">
+            <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700">Stop 3 · The map room</span><span style="font-size:13px;color:#C9CDD2">Hidden from players until you reveal</span></div>
+            <button style="height:44px;padding:0 14px;border:none;border-radius:10px;background:#FF9F1C;color:#1A1D20;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700">Reveal location</button>
+          </div>
+          <div style="padding:16px 16px 0;display:flex;flex-direction:column;gap:4px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px"><span style="font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700">Teams</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">QUESTS 1–5</span></div>
+            <div style="display:grid;grid-template-columns:18px 1fr 92px 30px;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:#24282C"><span style="width:10px;height:10px;border-radius:50%;background:#E71D36"></span><span style="font-size:14px;font-weight:600">Salt Flats Syndicate</span><span style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#FF9F1C"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;text-align:right">2/5</span></div>
+            <div style="display:grid;grid-template-columns:18px 1fr 92px 30px;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:#24282C"><span style="width:10px;height:10px;border-radius:50%;background:#E71D36"></span><span style="font-size:14px;font-weight:600">The Night Owls</span><span style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#FF9F1C"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;text-align:right">1/5</span></div>
+            <div style="display:grid;grid-template-columns:18px 1fr 92px 30px;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:#24282C"><span style="width:10px;height:10px;border-radius:50%;background:#E71D36"></span><span style="font-size:14px;font-weight:600">Wasatch Wanderers</span><span style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#FF9F1C"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;text-align:right">3/5</span></div>
+            <div style="display:grid;grid-template-columns:18px 1fr 92px 30px;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:#24282C"><span style="width:10px;height:10px;border-radius:50%;background:#2EC4B6"></span><span style="font-size:14px;font-weight:600">Liberty Loopers</span><span style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#FF9F1C"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;text-align:right">1/5</span></div>
+            <div style="display:grid;grid-template-columns:18px 1fr 92px 30px;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:#24282C"><span style="width:10px;height:10px;border-radius:50%;background:#2EC4B6"></span><span style="font-size:14px;font-weight:600">Two Tacos Deep</span><span style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><span style="height:10px;border-radius:2px;background:#FF9F1C"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;text-align:right">0/5</span></div>
+            <div style="display:grid;grid-template-columns:18px 1fr 92px 30px;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:#24282C"><span style="width:10px;height:10px;border-radius:50%;background:#E71D36"></span><span style="font-size:14px;font-weight:600">Brine Shrimp Society</span><span style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px"><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#2EC4B6"></span><span style="height:10px;border-radius:2px;background:#FF9F1C"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span><span style="height:10px;border-radius:2px;background:#3A3F45"></span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;text-align:right">2/5</span></div>
+            <div style="display:flex;gap:14px;padding-top:4px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4"><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:#E71D36"></span>TOURNAMENT</span><span style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:#2EC4B6"></span>CASUAL</span><span>+2 MORE</span></div>
+          </div>
+          <div style="margin:16px 16px 0;padding:12px;border-radius:12px;background:#F4F5F7;color:#1A1D20;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700">Judged: best glaze story</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4A5057">0–10 · TOURNAMENT</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="flex:1;font-size:14px;font-weight:600">Salt Flats Syndicate</span><span style="width:40px;height:40px;border-radius:8px;border:2px solid #1A1D20;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">−</span><span style="width:40px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700">8</span><span style="width:40px;height:40px;border-radius:8px;background:#1A1D20;color:#F4F5F7;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">+</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="flex:1;font-size:14px;font-weight:600">The Night Owls</span><span style="width:40px;height:40px;border-radius:8px;border:2px solid #1A1D20;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">−</span><span style="width:40px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700">9</span><span style="width:40px;height:40px;border-radius:8px;background:#1A1D20;color:#F4F5F7;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">+</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="flex:1;font-size:14px;font-weight:600">Wasatch Wanderers</span><span style="width:40px;height:40px;border-radius:8px;border:2px solid #1A1D20;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">−</span><span style="width:40px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:#7D848C">–</span><span style="width:40px;height:40px;border-radius:8px;background:#1A1D20;color:#F4F5F7;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">+</span></div>
+            <button style="height:44px;border:none;border-radius:10px;background:#1A1D20;color:#F4F5F7;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700">Save scores</button>
+          </div>
+          <div style="padding:16px 16px 0">
+            <button style="width:100%;height:54px;border:2px solid #E71D36;border-radius:12px;background:transparent;color:#FF5A6E;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700">Close session</button>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F4F5F7"></div>
+      </div>
+    </div>
+
+    <!-- 08 ADMIN -->
+    <div id="8" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">08</span>Admin</div>
+      <div data-screen-label="08 Admin" style="width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:#F4F5F7;box-shadow:0 0 0 10px #0B0C0E,0 0 0 11px #3A3F45,0 30px 60px rgba(0,0,0,.3);flex:none;color:#1A1D20">
+        <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:40px">
+          <div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-weight:600;font-size:16px"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:10px;background:#1A1D20;border-radius:2px"></span><span style="width:24px;height:11px;border:1.5px solid #1A1D20;border-radius:3px"></span></span></div>
+          <div style="padding:6px 16px 0;display:flex;align-items:center;gap:10px">
+            <div style="width:36px;height:36px;background:#fff;border-radius:9px;overflow:hidden;position:relative;flex:none;box-shadow:0 0 0 1px #D5D8DC"><img src="assets/colgrid-logo.png" alt="Colgrid" style="position:absolute;width:170%;height:170%;left:-35%;top:-35%"></div>
+            <div style="flex:1;display:flex;flex-direction:column"><span style="font-family:'Chakra Petch',sans-serif;font-size:20px;font-weight:700;line-height:1.1">Admin</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#4A5057">CHAPTER 01: SALT LAKE · SEASON 1</span></div>
+          </div>
+          <div style="padding:14px 16px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button style="height:48px;border:none;border-radius:10px;background:#1A1D20;color:#F4F5F7;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700">Import players (CSV)</button>
+            <button style="height:48px;border:none;border-radius:10px;background:#FF9F1C;color:#1A1D20;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700">Print quest QR codes</button>
+          </div>
+          <div style="padding:18px 16px 0;display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700">Sessions</span>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:#fff"><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#4A5057">01</span><span style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">Sugar House</span><span style="font-size:12px;color:#4A5057">Sep 19 · 36 players · 7 teams</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:4px 7px;border-radius:5px;background:#E4E6E9;color:#4A5057">CLOSED</span></div>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 2px #FF9F1C"><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700">02</span><span style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">9th &amp; 9th</span><span style="font-size:12px;color:#4A5057">Tonight · 38/40 · 8 teams</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:4px 7px;border-radius:5px;background:#FF9F1C;color:#1A1D20">LIVE</span></div>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:#fff"><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#4A5057">03</span><span style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">Central 9th</span><span style="font-size:12px;color:#4A5057">Nov 21 · 22/40 sold</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:4px 7px;border-radius:5px;border:1.5px solid #1A1D20">SEALED</span></div>
+            <div style="display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:#fff"><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#4A5057">04</span><span style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">Marmalade · Finals</span><span style="font-size:12px;color:#4A5057">Dec 12 · 9/40 sold</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:4px 7px;border-radius:5px;border:1.5px dashed #7D848C;color:#4A5057">DRAFT</span></div>
+          </div>
+          <div style="padding:18px 16px 0;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Chakra Petch',sans-serif;font-size:17px;font-weight:700">Quests · Session 02</span><span style="font-size:13px;font-weight:600;color:#1A1D20;text-decoration:underline">+ Add quest</span></div>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px 12px;border-radius:10px;background:#fff"><span style="font-size:15px;font-weight:600">1 · Glaze a secret</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:#1A1D20;color:#F4F5F7;padding:3px 7px;border-radius:5px">NNP-4K7</span><span style="font-size:12px;color:#4A5057;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#2EC4B6"></span>Ninth &amp; Ninth Pottery · $220</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4A5057;text-align:right">+50 XP</span></div>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px 12px;border-radius:10px;background:#fff"><span style="font-size:15px;font-weight:600">2 · The off-menu taco</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:#1A1D20;color:#F4F5F7;padding:3px 7px;border-radius:5px">TAC-7Q2</span><span style="font-size:12px;color:#4A5057;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#2EC4B6"></span>Central 9th taco stand · $180</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4A5057;text-align:right">+40 XP</span></div>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px 12px;border-radius:10px;background:#fff"><span style="font-size:15px;font-weight:600">3 · The map room</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:#1A1D20;color:#F4F5F7;padding:3px 7px;border-radius:5px">MAP-2H9</span><span style="font-size:12px;color:#4A5057;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#2EC4B6"></span>Wasatch Stories (guide) · $200</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4A5057;text-align:right">+60 XP</span></div>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px 12px;border-radius:10px;background:repeating-linear-gradient(135deg,#fff 0 8px,#F0F1F3 8px 16px)"><span style="font-size:15px;font-weight:600">H · Hidden: the back booth</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:#1A1D20;color:#F4F5F7;padding:3px 7px;border-radius:5px">HID-8X1</span><span style="font-size:12px;color:#4A5057;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#2EC4B6"></span>Unlocks from Stop 2 scan</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4A5057;text-align:right">+75 XP</span></div>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px 12px;border-radius:10px;background:#fff"><span style="font-size:15px;font-weight:600">J · Judged: best glaze story</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:#1A1D20;color:#F4F5F7;padding:3px 7px;border-radius:5px">JDG-5R3</span><span style="font-size:12px;color:#4A5057;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:#E71D36"></span>Scored by GM · tournament only</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4A5057;text-align:right">0–10 PTS</span></div>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#1A1D20"></div>
+      </div>
+    </div>
+
+    <!-- STYLE SHEET -->
+    <div id="style" style="display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px"><span style="background:#1A1D20;color:#FF9F1C;padding:4px 8px;border-radius:6px;font-weight:700">SS</span>Style sheet</div>
+      <div style="width:880px;min-height:844px;border-radius:28px;background:#1A1D20;color:#F4F5F7;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:36px 40px;align-content:start">
+        <div style="grid-column:1 / -1;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A7ADB4">COLOR</span>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="height:88px;border-radius:12px;background:#1A1D20;box-shadow:inset 0 0 0 2px #3A3F45"></div><span style="font-size:14px;font-weight:700">Asphalt</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A7ADB4">#1A1D20 · base</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="height:88px;border-radius:12px;background:#FF9F1C"></div><span style="font-size:14px;font-weight:700">Beacon Amber</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A7ADB4">#FF9F1C · action, XP</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="height:88px;border-radius:12px;background:#F4F5F7"></div><span style="font-size:14px;font-weight:700">Concrete</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A7ADB4">#F4F5F7 · cards</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="height:88px;border-radius:12px;background:#2EC4B6"></div><span style="font-size:14px;font-weight:700">Chapter Teal</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A7ADB4">#2EC4B6 · casual</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="height:88px;border-radius:12px;background:#E71D36"></div><span style="font-size:14px;font-weight:700">Signal Red</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A7ADB4">#E71D36 · tournament</span></div>
+          </div>
+          <span style="font-size:13px;color:#A7ADB4">Red text on Asphalt uses tint #FF5A6E for contrast; the solid #E71D36 is for fills with white text. Logo always sits on its own white tile.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A7ADB4">TYPE</span>
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'Chakra Petch',sans-serif;font-size:48px;font-weight:700;line-height:1">Display</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">CHAKRA 700 · 48</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'Chakra Petch',sans-serif;font-size:34px;font-weight:700;line-height:1">Title</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">CHAKRA 700 · 34–38</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'Chakra Petch',sans-serif;font-size:22px;font-weight:700">Section</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">CHAKRA 700 · 22</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:18px">Body large for outdoors</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">GROTESK 400 · 18</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:14px;color:#C9CDD2">Meta and host names</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">GROTESK 400 · 14</span></div>
+          <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#FF9F1C">+25 XP · TAC-7Q2</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A7ADB4">MONO 700</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A7ADB4">BUTTONS · 56–60 TALL</span>
+          <span style="height:58px;border-radius:14px;background:#FF9F1C;color:#1A1D20;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">Primary action</span>
+          <span style="height:58px;border-radius:14px;border:2px solid #F4F5F7;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">Secondary</span>
+          <span style="height:58px;border-radius:14px;border:2px solid #2EC4B6;background:rgba(46,196,182,.08);font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center">Discovery / scan</span>
+          <span style="height:54px;border-radius:12px;border:2px solid #E71D36;color:#FF5A6E;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center">Destructive (crew)</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A7ADB4;padding-top:8px">CHIPS</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;background:#2EC4B6;color:#1A1D20;padding:8px 12px;border-radius:999px">CASUAL</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;background:#E71D36;color:#fff;padding:8px 12px;border-radius:999px;white-space:nowrap;flex:none">TOURNAMENT</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#FF9F1C;border:2px solid #FF9F1C;padding:6px 10px;border-radius:8px;white-space:nowrap;flex:none">LVL 04</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:#FF9F1C;color:#1A1D20;padding:6px 9px;border-radius:6px">LIVE</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:#E71D36;color:#fff;padding:6px 9px;border-radius:6px">FINALS</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A7ADB4">QUEST STATES</span>
+          <div style="border-radius:14px;background:#24282C;padding:12px 14px;display:flex;gap:12px;align-items:center"><span style="width:28px;height:28px;border-radius:50%;background:#2EC4B6;color:#1A1D20;font-weight:700;display:flex;align-items:center;justify-content:center">✓</span><span style="flex:1;font-size:16px;font-weight:600;color:#C9CDD2">Done · muted, teal check</span></div>
+          <div style="border-radius:14px;background:rgba(255,159,28,.12);border:2px solid #FF9F1C;padding:12px 14px;display:flex;gap:12px;align-items:center"><span style="width:28px;height:28px;border-radius:50%;background:#FF9F1C;display:flex;align-items:center;justify-content:center"><span style="width:9px;height:9px;border-radius:50%;background:#1A1D20"></span></span><span style="flex:1;font-size:16px;font-weight:700">Active · amber, one at a time</span></div>
+          <div style="border-radius:14px;border:2px dashed #3A3F45;padding:12px 14px;display:flex;gap:12px;align-items:center"><span style="width:28px;height:28px;border-radius:8px;border:2px solid #7D848C;display:flex;align-items:center;justify-content:center"><span style="width:9px;height:7px;border-radius:2px;background:#7D848C"></span></span><span style="flex:1;font-size:16px;font-weight:600;color:#C9CDD2">Locked · dashed, shows when</span></div>
+          <div style="border-radius:14px;padding:12px 14px;display:flex;gap:12px;align-items:center;background:repeating-linear-gradient(135deg,#202326 0 8px,#2A2E33 8px 16px)"><span style="width:28px;height:28px;border-radius:50%;border:2px dashed #7D848C;color:#A7ADB4;font-family:'JetBrains Mono',monospace;font-weight:700;display:flex;align-items:center;justify-content:center">?</span><span style="flex:1;font-size:16px;font-weight:600;color:#E4E6E9">Hidden · striped, shows how</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A7ADB4">XP BAR</span>
+          <div style="border-radius:16px;background:#F4F5F7;color:#1A1D20;padding:16px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700">680<span style="font-size:16px;color:#4A5057"> / 1,000 XP</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#4A5057">LVL 04</span></div>
+            <div style="height:14px;border-radius:7px;background:#D5D8DC;overflow:hidden"><div style="width:68%;height:100%;background:#FF9F1C;border-radius:7px"></div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;color:#C9CDD2">Flagship progress · Explorer</span><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px"><span style="height:8px;border-radius:4px;background:#2EC4B6"></span><span style="height:8px;border-radius:4px;background:#2EC4B6"></span><span style="height:8px;border-radius:4px;background:#2EC4B6"></span><span style="height:8px;border-radius:4px;background:#3A3F45"></span><span style="height:8px;border-radius:4px;background:#3A3F45"></span></div></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A7ADB4;padding-top:6px">MOTIFS</span>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+            <div style="height:64px;border-radius:10px;background-color:#1A1D20;box-shadow:inset 0 0 0 1px #3A3F45;background-image:linear-gradient(rgba(244,245,247,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(244,245,247,.12) 1px,transparent 1px);background-size:14px 14px"></div>
+            <div style="height:64px;border-radius:10px;box-shadow:inset 0 0 0 1px #3A3F45;background:repeating-radial-gradient(ellipse at 80% 20%,transparent 0 9px,rgba(46,196,182,.4) 9px 10px)"></div>
+            <div style="height:64px;border-radius:10px;box-shadow:inset 0 0 0 1px #3A3F45;display:flex;align-items:center;justify-content:center;gap:0"><span style="width:12px;height:12px;border-radius:50%;background:#FF9F1C"></span><span style="width:50px;border-top:2px dashed #FF9F1C"></span><span style="width:12px;height:12px;border-radius:50%;border:2px solid #FF9F1C"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { mode: 'casual' };
+  renderVals() {
+    return {
+      isCasual: this.state.mode === 'casual',
+      isTournament: this.state.mode === 'tournament',
+      setCasual: () => this.setState({ mode: 'casual' }),
+      setTournament: () => this.setState({ mode: 'tournament' }),
+    };
+  }
+}
+</script>
+</body>
+</html>
