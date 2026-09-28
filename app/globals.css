@@ -1,0 +1,120 @@
+/* Colgrid design tokens. Source: CLAUDE.md "Brand in the UI" and design/README.md. */
+:root {
+  /* Brand colors */
+  --asphalt: #1a1d20;        /* base */
+  --asphalt-raised: #24282c; /* cards on dark */
+  --asphalt-deep: #111315;
+  --beacon-amber: #ff9f1c;   /* actions, XP, active states */
+  --beacon-amber-hover: #ffb54f;
+  --concrete: #f4f5f7;       /* cards, light areas */
+  --chapter-teal: #2ec4b6;   /* casual / explorer, discovery, hosts */
+  --signal-red: #e71d36;     /* tournament fills (white text on top) */
+  --signal-red-text: #ff5a6e;/* red text on dark, for contrast */
+  --ink-muted: #c9cdd2;
+  --ink-subtle: #8a9097;
+
+  /* Fonts (loaded in app/layout.tsx) */
+  --font-display: var(--font-chakra-petch), system-ui, sans-serif;
+  --font-body: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Shape and touch */
+  --radius-card: 18px;
+  --radius-button: 14px;
+  --tap-min: 56px;           /* big tap targets for outdoor use */
+  --page-max: 480px;         /* mobile-first column */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--asphalt);
+  color: var(--concrete);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0;
+}
+
+a {
+  color: var(--beacon-amber);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--beacon-amber-hover);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  min-height: 100dvh;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 0 20px;
+  border-radius: var(--radius-button);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  border: 2px solid transparent;
+}
+.button--primary {
+  background: var(--beacon-amber);
+  color: var(--asphalt);
+}
+.button--secondary {
+  background: transparent;
+  color: var(--concrete);
+  border-color: var(--concrete);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.chip--casual {
+  background: var(--chapter-teal);
+  color: var(--asphalt);
+}
+.chip--tournament {
+  background: var(--signal-red);
+  color: #fff;
+}
+
+/* Logo always sits on its own white tile and is never recolored (design/README.md). */
+.logo-tile {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  display: inline-flex;
+}
