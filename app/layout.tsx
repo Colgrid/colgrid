@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Chakra_Petch, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
 const chakraPetch = Chakra_Petch({
@@ -18,9 +19,47 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
+// Search engines, link previews and AI assistants read this. Each public page can override it.
+// The share image comes from app/opengraph-image.tsx; icons from app/icon.png and app/apple-icon.png.
 export const metadata: Metadata = {
-  title: "Colgrid",
-  description: "Your city has missions. A real-world team game, starting in Salt Lake City.",
+  metadataBase: new URL(SITE.url),
+  title: { default: SITE.title, template: "%s · Colgrid" },
+  description: SITE.description,
+  applicationName: SITE.name,
+  keywords: [
+    "Colgrid",
+    "team game",
+    "real-world game",
+    "things to do in Salt Lake City",
+    "Salt Lake City",
+    "team building",
+    "local makers",
+    "missions",
+    "quests",
+    "night out",
+  ],
+  creator: SITE.name,
+  publisher: SITE.name,
+  category: "games",
+  openGraph: {
+    type: "website",
+    siteName: SITE.name,
+    locale: SITE.locale,
+    url: "/",
+    title: SITE.title,
+    description: SITE.shortDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.title,
+    description: SITE.shortDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  formatDetection: { telephone: false, email: false, address: false },
 };
 
 export const viewport: Viewport = {

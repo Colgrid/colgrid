@@ -6,7 +6,8 @@ import { loadPass } from "@/app/pass/data";
 import { activeQuest } from "@/lib/game/pass";
 import CheckInForm from "./CheckInForm";
 
-export const metadata: Metadata = { title: "Check in · Colgrid" };
+// Private page: keep it out of search results.
+export const metadata: Metadata = { title: "Check in", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
 export default async function CheckInPage({ searchParams }: { searchParams: Promise<{ code?: string }> }) {
