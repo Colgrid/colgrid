@@ -791,3 +791,89 @@ button.button {
 .quest--judged .quest__xp {
   color: var(--ink-subtle);
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Home: how it works and FAQ
+   --------------------------------------------------------------------------------------------- */
+.home-kicker {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink-subtle);
+}
+.steps {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.steps li {
+  display: flex;
+  gap: 14px;
+}
+.steps__num {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--beacon-amber);
+  color: var(--asphalt);
+  font-size: 13px;
+  font-weight: 700;
+}
+.steps h3 {
+  font-size: 19px;
+}
+.steps p,
+.faq p {
+  margin: 6px 0 0;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.faq {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq details {
+  border-radius: 14px;
+  background: var(--asphalt-raised);
+  padding: 0 16px;
+}
+.faq summary {
+  min-height: var(--tap-min);
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: "+";
+  margin-left: auto;
+  font-family: var(--font-mono);
+  color: var(--beacon-amber);
+}
+.faq details[open] summary::after {
+  content: "–";
+}
+.faq details[open] {
+  padding-bottom: 16px;
+}
+.home-footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid #30353b;
+  font-size: 14px;
+  color: var(--ink-subtle);
+}

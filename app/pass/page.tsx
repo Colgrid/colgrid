@@ -7,7 +7,8 @@ import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
 import { loadPass, type PassData } from "./data";
 
-export const metadata: Metadata = { title: "Your pass · Colgrid" };
+// Private page: keep it out of search results.
+export const metadata: Metadata = { title: "Your pass", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
 // Chapter 01 plays in Salt Lake City. When more chapters open, this moves onto the chapter row.

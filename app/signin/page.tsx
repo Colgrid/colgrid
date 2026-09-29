@@ -6,7 +6,8 @@ import { createClient } from "@/lib/supabase/server";
 import { safeNext } from "@/lib/safe-next";
 import SignInForm from "./SignInForm";
 
-export const metadata: Metadata = { title: "Sign in · Colgrid" };
+// Private page: keep it out of search results.
+export const metadata: Metadata = { title: "Sign in", robots: { index: false, follow: false } };
 
 export default async function SignInPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
   const { error, next: nextParam } = await searchParams;
