@@ -22,7 +22,8 @@ insert into public.badge (key, name, description) values
 on conflict (key) do nothing;
 
 -- Chapter, season, sessions --------------------------------------------------------------------
-insert into public.chapter (number, city, neighborhood_default) values (1, 'Salt Lake City', '9th & 9th');
+insert into public.chapter (number, city, neighborhood_default) values (1, 'Salt Lake City', '9th & 9th')
+on conflict (number) do nothing;
 
 insert into public.season (chapter_id, number, starts_on, tournament_lock_session_number)
 select id, 1, (now() - interval '28 days')::date, 2 from public.chapter where number = 1;

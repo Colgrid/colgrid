@@ -252,7 +252,7 @@ Game mechanics must support the revenue model: tickets and memberships lead, boo
 
 The pilot answers one question: **will someone who had a good time at gathering 1 come back to gathering 2 because their team and progress continue?**
 
-**Locked scope:** Salt Lake City, one season of 3–4 gatherings, 30–50 players each, one walkable neighborhood (9th & 9th or Central 9th). Persistent profiles, teams, XP, quests, casual/tournament choice. Build spec: [mvp-spec.md](mvp-spec.md).
+**Locked scope:** Salt Lake City, one season of 3–4 gatherings, 30–50 players each, one walkable neighborhood (9th & 9th). Adults 18+. The first event is a small pilot/dry run in October 2026, before the full season. Persistent profiles, teams, XP, quests, casual/tournament choice. Build spec: [mvp-spec.md](mvp-spec.md).
 
 | Area | Metric | Target |
 | --- | --- | --- |

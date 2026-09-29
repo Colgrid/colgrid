@@ -14,4 +14,15 @@ export const SITE = {
   region: "UT",
   country: "US",
   email: "colgridco@gmail.com",
+  // Official profiles. Listed in structured data ("sameAs") so search engines and AI assistants
+  // know these accounts are Colgrid, and linked in the site footer.
+  social: [
+    { name: "Instagram", url: "https://www.instagram.com/colgrid/" },
+    { name: "TikTok", url: "https://www.tiktok.com/@colgrid0" },
+    { name: "YouTube", url: "https://www.youtube.com/@Colgrid" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/company/colgrid/" },
+    { name: "Reddit", url: "https://www.reddit.com/user/Colgrid/" },
+    { name: "Pinterest", url: "https://www.pinterest.com/colgrid/" },
+    { name: "GitHub", url: "https://github.com/Colgrid" },
+  ],
 } as const;

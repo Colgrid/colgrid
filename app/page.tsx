@@ -41,7 +41,11 @@ const FAQ = [
   },
   {
     q: "How much does it cost?",
-    a: "$75 per player for one gathering, or $280 for all four with a Season Pass. A ticket includes 3–4 hosted quests and all materials, a finale meal and first drink, a numbered session badge, and your web pass with XP, levels and badges.",
+    a: "$75 per player. A ticket includes 3–4 hosted quests and all materials, a finale meal and first drink, a numbered session badge, and your web pass with XP, levels and badges.",
+  },
+  {
+    q: "Who can play?",
+    a: "Adults 18 and over. Come with friends, a partner, family, coworkers, or on your own.",
   },
   {
     q: "Do I need a team?",
@@ -69,6 +73,7 @@ const jsonLd = {
       logo: `${SITE.url}/brand/colgrid-logo.png`,
       email: SITE.email,
       description: SITE.description,
+      sameAs: SITE.social.map((s) => s.url),
       areaServed: { "@type": "City", name: SITE.city, containedInPlace: { "@type": "State", name: "Utah" } },
     },
     {
@@ -117,7 +122,7 @@ export default function Home() {
       </div>
 
       <p style={{ fontSize: 16, lineHeight: 1.45, color: "var(--ink-subtle)", marginTop: 32 }}>
-        The pilot season is being built. Tickets open soon: $75 a gathering, or $280 for all four with a Season Pass.
+        The first Colgrid gathering is coming to 9th & 9th in October. Tickets are $75 and open soon.
       </p>
 
       <Link href="/signin" className="button button--secondary" style={{ marginTop: 24 }}>
@@ -158,6 +163,15 @@ export default function Home() {
       </section>
 
       <footer className="home-footer">
+        <ul className="social" aria-label="Colgrid elsewhere">
+          {SITE.social.map((s) => (
+            <li key={s.name}>
+              <a href={s.url} rel="me noopener" target="_blank">
+                {s.name}
+              </a>
+            </li>
+          ))}
+        </ul>
         <p>
           Colgrid · Chapter 01: Salt Lake City · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </p>

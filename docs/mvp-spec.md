@@ -19,6 +19,20 @@ Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-ident
 | Game master console | Automated team matching |
 | Post-session survey link | Payments to hosts (paid outside the app) |
 
+## Pilot decisions (Sep 28, 2026)
+
+| Decision | Choice |
+| --- | --- |
+| First event | A small paid pilot/dry run ($75/person) with real ticket buyers, not the full Season 1 launch. It tests the full customer experience, from buying a ticket to the post-session survey, before Season 1 launches. |
+| Date | October 2026, ideally within the next few weeks |
+| Neighborhood | 9th & 9th |
+| Hosts | 3–4 local businesses/makers |
+| Age | Adults 18+ (Eventbrite age restriction plus a required checkout question) |
+| Tickets | Eventbrite, one ticket type: **Colgrid Pilot, $75/person**. No Season Pass until the pilot has run (Stripe waits on the IRS name update). Flow: Eventbrite ticket → registrations → run the event → collect feedback → then build the Season Pass. |
+| Ticket question | "Who are you coming with?" Friends / Partner / Family / Coworkers / Solo / Other. Asked as an Eventbrite checkout question, imported with the player from the attendee export, and asked again in the post-session survey. |
+
+The dry run's players, XP and badges are real and stay on their passes (progress only goes up). It runs as its own practice season so it doesn't use up Season 1's sessions or its tournament opt-in window.
+
 ## Users
 
 | Role | What they do |
@@ -44,7 +58,7 @@ Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-ident
 
 | # | Screen | Who | Key content |
 | --- | --- | --- | --- |
-| 1 | Home (public) | Anyone | What Colgrid is, how it works (casual or tournament), next gathering, $75 / $280 buy buttons |
+| 1 | Home (public) | Anyone | What Colgrid is, how it works (casual or tournament), next gathering, ticket button ($75 Eventbrite pilot ticket; $280 Season Pass after the pilot) |
 | 2 | Sign in | Player | Email magic link |
 | 3 | Player pass | Player | Header: Colgrid, level, play mode · identity: name, team, Chapter 01: Salt Lake · now: session and neighborhood · XP bar · quests (done, active, locked, hidden) · badges · flagship progress |
 | 4 | Check in | Player | Code entry + camera QR scan, success state with XP gained |
@@ -63,7 +77,7 @@ season         id, chapter_id, number, starts_on, tournament_lock_session_number
 session        id, season_id, number, date, start_location (hidden until revealed_at), revealed_at, status
 host           id, name, business, contact
 quest          id, session_id, host_id, title, type, xp, is_hidden, is_judged, code (unique), max_points
-player         id, email, name, created_at
+player         id, email, name, coming_with (friends|partner|family|coworkers|solo|other), created_at
 team           id, season_id, name, mode ('casual' | 'tournament'), mode_changed_at
 team_member    team_id, player_id
 attendance     session_id, player_id, team_id
@@ -99,7 +113,7 @@ Starter levels: L1 = 0, L2 = 100, L3 = 250, L4 = 450, L5 = 700 (tune after sessi
 - **Next.js** (web, mobile-first) on **Vercel**, hosted at getcolgrid.com
 - **Supabase**: Postgres, auth (email magic link), row-level security
 - **Resend** (or Supabase email) for sign-in and reveal emails
-- Tickets: **Stripe Payment Links** or **Eventbrite**; import buyers by CSV, webhook later
+- Tickets: **Eventbrite** for the pilot; import buyers from Eventbrite's attendee CSV export, webhook later. Stripe Payment Links later, once the business name matches IRS records
 - QR: generate per-quest codes as printable PDFs for host plaques
 
 ## Build order
@@ -111,7 +125,9 @@ Starter levels: L1 = 0, L2 = 100, L3 = 250, L4 = 450, L5 = 700 (tune after sessi
 5. GM console (attendance, verify, reveal, close session)
 6. Admin screens + player import
 7. Public home page
-8. Pilot dry run with 6–8 friends before gathering 1
+8. Paid pilot/dry run with real ticket buyers before Season 1
+
+Steps 1–3 are done. For the October dry run, the order is now **6 → 5 → 7 → dry run → 4**: the dry run needs sessions, quests, QR plaques and imported players (6), a way to run the night (5) and a ticket link (7). It is casual only, so standings (4) can follow it.
 
 ## Done when
 
