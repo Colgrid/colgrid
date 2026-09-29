@@ -69,6 +69,7 @@ const jsonLd = {
       logo: `${SITE.url}/brand/colgrid-logo.png`,
       email: SITE.email,
       description: SITE.description,
+      sameAs: SITE.social.map((s) => s.url),
       areaServed: { "@type": "City", name: SITE.city, containedInPlace: { "@type": "State", name: "Utah" } },
     },
     {
@@ -158,6 +159,15 @@ export default function Home() {
       </section>
 
       <footer className="home-footer">
+        <ul className="social" aria-label="Colgrid elsewhere">
+          {SITE.social.map((s) => (
+            <li key={s.name}>
+              <a href={s.url} rel="me noopener" target="_blank">
+                {s.name}
+              </a>
+            </li>
+          ))}
+        </ul>
         <p>
           Colgrid · Chapter 01: Salt Lake City · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </p>
