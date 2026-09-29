@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 // Bottom tabs from the mockups: Pass · Check in · Team · Standings.
-// Check in, Team and Standings arrive in build steps 3 and 4; until then they're shown but disabled.
+// Team and Standings arrive in build step 4; until then they're shown but disabled.
 type Tab = { key: string; label: string; href: string | null };
 
 const TABS: Tab[] = [
   { key: "pass", label: "Pass", href: "/pass" },
-  { key: "checkin", label: "Check in", href: null },
+  { key: "checkin", label: "Check in", href: "/check-in" },
   { key: "team", label: "Team", href: null },
   { key: "standings", label: "Standings", href: null },
 ];

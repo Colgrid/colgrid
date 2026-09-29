@@ -1,6 +1,7 @@
 "use server";
 
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { NEXT_COOKIE, safeNext } from "@/lib/safe-next";
 import { createClient } from "@/lib/supabase/server";
 
 export type SignInState = {
@@ -36,6 +37,18 @@ export async function sendMagicLink(_prev: SignInState, formData: FormData): Pro
     }
     console.error("signInWithOtp failed", error.status, error.message);
     return { status: "error", email, message: "We couldn't send the link just now. Try again in a minute." };
+  }
+
+  // Remember where they were headed (e.g. a QR check-in) so the email link brings them back there.
+  const next = safeNext(String(formData.get("next") ?? ""));
+  if (next) {
+    (await cookies()).set(NEXT_COOKIE, next, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: origin.startsWith("https://"),
+      maxAge: 60 * 60,
+      path: "/",
+    });
   }
 
   return { status: "sent", email };

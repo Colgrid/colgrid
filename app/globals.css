@@ -608,3 +608,186 @@ button.button {
 .tabbar__tab--soon {
   opacity: 0.4;
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Check in (step 3)
+   --------------------------------------------------------------------------------------------- */
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--beacon-amber);
+  margin: 0;
+}
+.input--code {
+  min-height: 72px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.input--code::placeholder {
+  color: #b8bec5;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 20px;
+  font-size: 12px;
+  color: var(--ink-subtle);
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #30353b;
+}
+.scan-button {
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--radius-card);
+  border: 2px solid var(--chapter-teal);
+  background: rgba(46, 196, 182, 0.08);
+  color: var(--chapter-teal);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.scan-button span {
+  color: var(--concrete);
+}
+.scanner {
+  position: relative;
+}
+.scanner__video {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  background: #000;
+  display: block;
+}
+.scanner__frame {
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 64%;
+  aspect-ratio: 1;
+  border: 3px solid var(--chapter-teal);
+  border-radius: 16px;
+  pointer-events: none;
+}
+.form__error strong {
+  color: var(--signal-red-text);
+}
+.form__error {
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+.checkin-success {
+  text-align: center;
+  padding-top: 12px;
+}
+.checkin-success .button {
+  display: flex;
+}
+.checkin-success__xp {
+  margin: 0;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--beacon-amber);
+}
+.checkin-success__headline {
+  font-size: 30px;
+  margin-top: 14px;
+}
+.checkin-success__quest {
+  margin: 6px 0 0;
+  font-size: 17px;
+  color: var(--ink-muted);
+}
+.checkin-success__badge {
+  margin: 18px 0 0;
+  color: var(--chapter-teal);
+}
+.xp-lines {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--asphalt-raised);
+  text-align: left;
+}
+.xp-lines li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  color: var(--ink-muted);
+}
+.xp-lines li .mono {
+  color: var(--beacon-amber);
+  font-weight: 700;
+}
+.xp-lines .xp-lines__pts .mono {
+  color: var(--signal-red-text);
+}
+.level-card {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--concrete);
+  color: var(--asphalt);
+  text-align: left;
+}
+.level-card__top {
+  margin: 0;
+  font-size: 18px;
+}
+.level-card__tag {
+  display: inline-block;
+  padding: 3px 8px;
+  margin-right: 6px;
+  border-radius: 6px;
+  background: var(--asphalt);
+  color: var(--beacon-amber);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.level-card--up {
+  box-shadow: 0 0 0 3px var(--beacon-amber);
+}
+.level-card__nums {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #4a5057;
+}
+
+/* Quest list additions */
+.quest {
+  flex-wrap: wrap;
+}
+.quest__cta {
+  flex-basis: 100%;
+  margin-top: 4px;
+}
+.quest--judged {
+  background: transparent;
+  border: 2px dashed rgba(255, 159, 28, 0.45);
+}
+.quest--judged .quest__icon {
+  color: var(--beacon-amber);
+  border: 2px solid rgba(255, 159, 28, 0.45);
+}
+.quest--judged .quest__xp {
+  color: var(--ink-subtle);
+}

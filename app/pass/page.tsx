@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
@@ -235,7 +236,6 @@ function QuestSection({ pass, tournament }: { pass: Pass; tournament: boolean })
           ))}
         </ol>
       )}
-      {live && total > 0 && <p className="fine-print">Finish a quest and your host gives you the code. Check-in arrives in the next update.</p>}
     </section>
   );
 }
@@ -262,13 +262,14 @@ function QuestItem({ quest, tournament }: { quest: QuestView; tournament: boolea
     active: [quest.host_business, stop].filter(Boolean).join(" · ") || null,
     locked: [stop, "Up next"].filter(Boolean).join(" · "),
     open: "Revealed. Find it before the night ends.",
+    judged: "Scored by the game master",
     missed: "Not completed",
   };
 
   return (
     <li className={`quest quest--${quest.state}`} aria-current={quest.state === "active" ? "step" : undefined}>
       <span className="quest__icon" aria-hidden="true">
-        {quest.state === "done" ? "✓" : quest.state === "open" ? "!" : ""}
+        {quest.state === "done" ? "✓" : quest.state === "open" ? "!" : quest.state === "judged" ? "★" : ""}
       </span>
       <div className="quest__body">
         <p className="quest__title">{quest.title}</p>
@@ -281,6 +282,11 @@ function QuestItem({ quest, tournament }: { quest: QuestView; tournament: boolea
       <span className="visually-hidden">
         {quest.state === "done" ? "Completed" : quest.state === "active" ? "Current quest" : quest.state === "locked" ? "Locked" : ""}
       </span>
+      {quest.state === "active" && (
+        <Link href="/check-in" className="button button--primary quest__cta">
+          {quest.stop_number !== null ? `Check in at Stop ${quest.stop_number}` : "Check in"}
+        </Link>
+      )}
     </li>
   );
 }

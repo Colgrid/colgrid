@@ -5,9 +5,11 @@
 | `migrations/20260928000001_init.sql` | All tables, the game rules, and row-level security |
 | `migrations/20260928000002_signin.sql` | Sign-in: links a ticket to an account by email and awards the Founding badge |
 | `migrations/20260928000003_grants.sql` | Lets the website's signed-in and signed-out roles reach the tables (row-level security still decides which rows) |
+| `migrations/20260928000004_checkin.sql` | Quest check-in: codes, XP to present teammates, tournament points, all-quests bonus, code-guessing limit |
 | `seed.sql` | Sample data: Chapter 01 Salt Lake, Season 1, 4 sessions, 18 quests, 6 teams, 30 players (made up) |
 | `tests/10_rules.test.sql` | 13 checks that the rules hold |
 | `tests/20_signin.test.sql` | 6 checks that sign-in links the right pass |
+| `tests/30_checkin.test.sql` | 13 checks on check-in and XP |
 | `templates/` | Branded sign-in emails to paste into Supabase |
 | `tests/00_local_supabase_stub.sql` | Local testing only; never run on Supabase |
 
@@ -60,6 +62,9 @@ Sign in with that email and the pass opens with her team, level, quests and badg
 | Quests never reused | each quest belongs to one session; codes are unique |
 | Hidden stays hidden | players read sessions and quests only through `player_sessions()` / `player_quests()`, which mask unrevealed locations and hidden quests and never return codes or host fees |
 | Players see only their own pass and team | row-level security on every table |
+| A code counts once per team; XP to present teammates; points for tournament teams only | `check_in()`, `completion` primary key, `xp_event_once` index |
+| No XP awarded twice | unique `(player, reason, source)` on `xp_event` |
+| No guessing codes | 8 wrong codes in 10 minutes pauses check-in (`check_in_attempt`) |
 | A pass belongs to the ticket's email | `claim_my_pass()` links only a confirmed email to the player row with the same email |
 
 ## Run the tests locally (developers)
@@ -72,9 +77,11 @@ psql -d colgrid_test -f supabase/tests/00_local_supabase_stub.sql
 psql -d colgrid_test -f supabase/migrations/20260928000001_init.sql
 psql -d colgrid_test -f supabase/migrations/20260928000002_signin.sql
 psql -d colgrid_test -f supabase/migrations/20260928000003_grants.sql
+psql -d colgrid_test -f supabase/migrations/20260928000004_checkin.sql
 psql -d colgrid_test -f supabase/seed.sql
 psql -d colgrid_test -f supabase/tests/10_rules.test.sql
 psql -d colgrid_test -f supabase/tests/20_signin.test.sql
+psql -d colgrid_test -f supabase/tests/30_checkin.test.sql
 ```
 
 Every line should read `PASS`.

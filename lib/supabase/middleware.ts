@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 // Pages that need a signed-in player. Everything else is public.
-const SIGNED_IN_ONLY = ["/pass"];
+const SIGNED_IN_ONLY = ["/pass", "/check-in"];
 
 export async function updateSession(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -36,6 +36,8 @@ export async function updateSession(request: NextRequest) {
     const signIn = request.nextUrl.clone();
     signIn.pathname = "/signin";
     signIn.search = "";
+    // Come back here after signing in (e.g. a host's QR code opened /check-in?code=...).
+    signIn.searchParams.set("next", `${path}${request.nextUrl.search}`);
     return NextResponse.redirect(signIn);
   }
 

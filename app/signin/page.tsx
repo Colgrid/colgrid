@@ -3,18 +3,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { safeNext } from "@/lib/safe-next";
 import SignInForm from "./SignInForm";
 
 export const metadata: Metadata = { title: "Sign in · Colgrid" };
 
-export default async function SignInPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default async function SignInPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
+  const { error, next: nextParam } = await searchParams;
+  const next = safeNext(nextParam);
+
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (user) redirect("/pass");
-
-  const { error } = await searchParams;
+  if (user) redirect(next ?? "/pass");
 
   return (
     <main className="page">
@@ -31,7 +33,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
       <p className="lede">We&apos;ll email you a link. Tap it and you&apos;re in. No password.</p>
 
       <div style={{ marginTop: 32 }}>
-        <SignInForm linkError={error === "link"} />
+        <SignInForm linkError={error === "link"} next={next} />
       </div>
 
       <p className="fine-print">
