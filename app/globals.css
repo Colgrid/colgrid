@@ -1644,3 +1644,37 @@ button.button {
   color: var(--asphalt);
   border-color: var(--asphalt);
 }
+
+/* Add to home screen card (pass) */
+.install-card {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: var(--radius-card);
+  border: 2px solid var(--chapter-teal);
+  background: rgba(46, 196, 182, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.install-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  line-height: 1.45;
+}
+.install-card__text span {
+  color: var(--ink-muted);
+  font-size: 15px;
+}
+.install-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.install-card__actions .button {
+  flex: 1;
+}
+.install-card__close {
+  color: var(--ink-subtle);
+  font-weight: 600;
+}

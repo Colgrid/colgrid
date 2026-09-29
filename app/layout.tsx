@@ -22,6 +22,8 @@ const jetbrainsMono = JetBrains_Mono({
 // Search engines, link previews and AI assistants read this. Each public page can override it.
 // The share image comes from app/opengraph-image.tsx; icons from app/icon.png and app/apple-icon.png.
 export const metadata: Metadata = {
+  // Added to a phone's home screen, Colgrid opens full-screen like an app (see app/manifest.ts).
+  appleWebApp: { capable: true, title: "Colgrid", statusBarStyle: "black-translucent" },
   metadataBase: new URL(SITE.url),
   title: { default: SITE.title, template: "%s · Colgrid" },
   description: SITE.description,
