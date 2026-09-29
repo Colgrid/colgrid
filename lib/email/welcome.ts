@@ -20,6 +20,8 @@ export function welcomeEmail(to: WelcomeTarget, ctx: WelcomeContext) {
     "",
     "Your team gets assigned at the start. The exact starting location drops 24–48 hours before. Bring your phone, charged.",
     "",
+    "Tip: once your pass is open, add it to your home screen (iPhone: Share, then Add to Home Screen). It opens like an app, no download.",
+    "",
     "Colgrid",
   ].join("\n");
 
@@ -34,6 +36,7 @@ export function welcomeEmail(to: WelcomeTarget, ctx: WelcomeContext) {
     <p style="margin:14px 0 0;font-size:17px;line-height:1.5;color:#C9CDD2;">Your pass is ready. Open it with this email address, the one on your ticket. No password.</p>
     <a href="${signin}" style="display:block;margin:28px 0 0;padding:18px 20px;background:#FF9F1C;color:#1A1D20;border-radius:14px;text-align:center;font-size:17px;font-weight:700;text-decoration:none;">Open my pass</a>
     <p style="margin:24px 0 0;font-size:15px;line-height:1.5;color:#C9CDD2;">Your team gets assigned at the start. The exact starting location drops 24&ndash;48 hours before. Bring your phone, charged.</p>
+    <p style="margin:14px 0 0;font-size:15px;line-height:1.5;color:#C9CDD2;"><strong style="color:#F4F5F7;">Tip:</strong> once your pass is open, add it to your home screen (iPhone: Share, then Add to Home Screen). It opens like an app, no download.</p>
     <p style="margin:24px 0 0;font-size:14px;color:#8A9097;">Colgrid &middot; getcolgrid.com</p>
   </div>
 </div>`;

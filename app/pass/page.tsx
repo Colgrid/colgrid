@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import InstallCard from "@/app/components/InstallCard";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
@@ -64,6 +65,8 @@ function PlayerPass({ pass }: { pass: Pass }) {
         </section>
 
         <NowCard pass={pass} level={level} />
+
+        <InstallCard />
 
         <QuestSection pass={pass} tournament={tournament} />
 
