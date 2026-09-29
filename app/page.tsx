@@ -44,6 +44,10 @@ const FAQ = [
     a: "$75 per player for one gathering, or $280 for all four with a Season Pass. A ticket includes 3–4 hosted quests and all materials, a finale meal and first drink, a numbered session badge, and your web pass with XP, levels and badges.",
   },
   {
+    q: "Who can play?",
+    a: "Adults 18 and over. Come with friends, a partner, family, coworkers, or on your own.",
+  },
+  {
     q: "Do I need a team?",
     a: "No. Bring friends or come solo. Solo players are placed on a team.",
   },

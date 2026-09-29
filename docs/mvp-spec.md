@@ -19,6 +19,19 @@ Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-ident
 | Game master console | Automated team matching |
 | Post-session survey link | Payments to hosts (paid outside the app) |
 
+## Pilot decisions (Sep 28, 2026)
+
+| Decision | Choice |
+| --- | --- |
+| First event | A small pilot/dry run with real players, not the full Season 1 launch. Test the game, fix problems, then launch the season. |
+| Date | October 2026, ideally within the next few weeks |
+| Neighborhood | 9th & 9th |
+| Hosts | 3–4 local businesses/makers |
+| Age | Adults 18+ (confirmed at checkout) |
+| Ticket question | "Who are you coming with?" Friends / Partner / Family / Coworkers / Solo / Other. Asked at checkout, imported with the player, and asked again in the post-session survey. |
+
+The dry run's players, XP and badges are real and stay on their passes (progress only goes up). It runs as its own practice season so it doesn't use up Season 1's sessions or its tournament opt-in window.
+
 ## Users
 
 | Role | What they do |
@@ -63,7 +76,7 @@ season         id, chapter_id, number, starts_on, tournament_lock_session_number
 session        id, season_id, number, date, start_location (hidden until revealed_at), revealed_at, status
 host           id, name, business, contact
 quest          id, session_id, host_id, title, type, xp, is_hidden, is_judged, code (unique), max_points
-player         id, email, name, created_at
+player         id, email, name, coming_with (friends|partner|family|coworkers|solo|other), created_at
 team           id, season_id, name, mode ('casual' | 'tournament'), mode_changed_at
 team_member    team_id, player_id
 attendance     session_id, player_id, team_id
@@ -112,6 +125,8 @@ Starter levels: L1 = 0, L2 = 100, L3 = 250, L4 = 450, L5 = 700 (tune after sessi
 6. Admin screens + player import
 7. Public home page
 8. Pilot dry run with 6–8 friends before gathering 1
+
+Steps 1–3 are done. For the October dry run, the order is now **6 → 5 → 7 → dry run → 4**: the dry run needs sessions, quests, QR plaques and imported players (6), a way to run the night (5) and a ticket link (7). It is casual only, so standings (4) can follow it.
 
 ## Done when
 

@@ -18,7 +18,7 @@ Where the mockups and `docs/` disagree, **the docs win**. Known differences to c
 | --- | --- |
 | Main quests worth +40 to +60 XP; hidden quest +75 | Main quest **25 XP**, hidden quest **30 XP**, attend **50 XP**, all main quests done **+20 each** (`docs/game-design.md` §9) |
 | Success screen shows +25 XP but the same quest is +40 on the pass; level-up shows 1,005 / 1,000 from 680 | XP shown must match the quest; level thresholds from `docs/mvp-spec.md` |
-| Session dates Sep–Dec (Admin, Home) | Pilot dates not set; projections assume the first gathering in Feb 2027 |
+| Session dates Sep–Dec (Admin, Home) | Pilot/dry run in October 2026 in 9th & 9th (`docs/mvp-spec.md`, Pilot decisions); the business plan's projections still assume Feb 2027 |
 | Host payouts shown on quest rows ($180–$220) | Fine for admin only; never show host pay to players |
 | "Close session" button sits under the home indicator on the GM console | Keep it fully visible above the safe area |
 
