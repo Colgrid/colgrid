@@ -4,6 +4,7 @@
 | --- | --- |
 | `migrations/20260928000001_init.sql` | All tables, the game rules, and row-level security |
 | `migrations/20260928000002_signin.sql` | Sign-in: links a ticket to an account by email and awards the Founding badge |
+| `migrations/20260928000003_grants.sql` | Lets the website's signed-in and signed-out roles reach the tables (row-level security still decides which rows) |
 | `seed.sql` | Sample data: Chapter 01 Salt Lake, Season 1, 4 sessions, 18 quests, 6 teams, 30 players (made up) |
 | `tests/10_rules.test.sql` | 13 checks that the rules hold |
 | `tests/20_signin.test.sql` | 6 checks that sign-in links the right pass |
@@ -19,7 +20,7 @@
 
 ## Sign-in setup (step 2, one time)
 
-1. **Run the sign-in migration.** SQL Editor → New query → paste `migrations/20260928000002_signin.sql` → **Run**.
+1. **Run the sign-in migrations.** SQL Editor → New query → paste `migrations/20260928000002_signin.sql` → **Run**. Then do the same with `migrations/20260928000003_grants.sql`.
 2. **Tell Supabase where links go.** Authentication → URL Configuration:
    - Site URL: `https://getcolgrid.com`
    - Redirect URLs: add `https://getcolgrid.com/**` (and `http://localhost:3000/**` if you run it locally)
@@ -70,6 +71,7 @@ createdb colgrid_test
 psql -d colgrid_test -f supabase/tests/00_local_supabase_stub.sql
 psql -d colgrid_test -f supabase/migrations/20260928000001_init.sql
 psql -d colgrid_test -f supabase/migrations/20260928000002_signin.sql
+psql -d colgrid_test -f supabase/migrations/20260928000003_grants.sql
 psql -d colgrid_test -f supabase/seed.sql
 psql -d colgrid_test -f supabase/tests/10_rules.test.sql
 psql -d colgrid_test -f supabase/tests/20_signin.test.sql
