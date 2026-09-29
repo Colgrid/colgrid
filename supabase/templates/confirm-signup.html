@@ -1,0 +1,16 @@
+<!-- Colgrid sign-in email. Paste into Supabase: Authentication -> Emails -> Confirm signup.
+     Subject: Your Colgrid pass is ready -->
+<div style="margin:0;padding:32px 16px;background:#1A1D20;font-family:'Space Grotesk',Helvetica,Arial,sans-serif;color:#F4F5F7;">
+  <div style="max-width:440px;margin:0 auto;">
+    <div style="display:inline-block;background:#FFFFFF;border-radius:12px;padding:6px;">
+      <img src="https://getcolgrid.com/brand/colgrid-logo.png" width="44" height="44" alt="Colgrid" style="display:block;border:0;">
+    </div>
+    <p style="margin:28px 0 0;font-family:'JetBrains Mono',Menlo,monospace;font-size:12px;letter-spacing:2px;color:#2EC4B6;">CHAPTER 01 &middot; SALT LAKE CITY</p>
+    <h1 style="margin:8px 0 0;font-size:30px;line-height:1.1;color:#F4F5F7;">Welcome to Colgrid.</h1>
+    <p style="margin:14px 0 0;font-size:17px;line-height:1.5;color:#C9CDD2;">Tap the button to open your pass for the first time. Your XP, levels and badges start here and follow you to every chapter.</p>
+    <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email"
+       style="display:block;margin:28px 0 0;padding:18px 20px;background:#FF9F1C;color:#1A1D20;border-radius:14px;text-align:center;font-size:17px;font-weight:700;text-decoration:none;">Open my pass</a>
+    <p style="margin:24px 0 0;font-size:14px;line-height:1.5;color:#8A9097;">The link works once and expires in an hour. Didn't ask for it? Ignore this email and nothing happens.</p>
+    <p style="margin:24px 0 0;font-size:14px;color:#8A9097;">Colgrid &middot; getcolgrid.com</p>
+  </div>
+</div>
