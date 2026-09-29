@@ -5,7 +5,7 @@ import { sendMagicLink, type SignInState } from "./actions";
 
 const initial: SignInState = { status: "idle", email: "" };
 
-export default function SignInForm({ linkError }: { linkError: boolean }) {
+export default function SignInForm({ linkError, next }: { linkError: boolean; next: string | null }) {
   const [state, formAction, pending] = useActionState(sendMagicLink, initial);
 
   if (state.status === "sent") {
@@ -19,6 +19,7 @@ export default function SignInForm({ linkError }: { linkError: boolean }) {
         <p className="notice__small">Nothing there? Check spam, or send it again below.</p>
         <form action={formAction}>
           <input type="hidden" name="email" value={state.email} />
+          {next && <input type="hidden" name="next" value={next} />}
           <button className="button button--secondary" type="submit" disabled={pending} style={{ width: "100%", marginTop: 16 }}>
             {pending ? "Sending…" : "Send it again"}
           </button>
@@ -31,6 +32,7 @@ export default function SignInForm({ linkError }: { linkError: boolean }) {
 
   return (
     <form action={formAction} className="form">
+      {next && <input type="hidden" name="next" value={next} />}
       <label className="label mono" htmlFor="email">
         EMAIL
       </label>

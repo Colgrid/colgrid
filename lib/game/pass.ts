@@ -37,6 +37,7 @@ export type QuestState =
   | "locked"  // a later main quest (dashed)
   | "open"    // a hidden quest the game master revealed, not done yet
   | "hidden"  // a hidden quest still hidden (striped); title never shown
+  | "judged"  // a challenge the game master scores; nothing to check in
   | "missed"; // after the session closed: a quest the team didn't complete
 
 export type QuestView = PassQuest & { state: QuestState };
@@ -63,11 +64,12 @@ function byStop(a: PassQuest, b: PassQuest): number {
   return (a.title ?? "").localeCompare(b.title ?? "");
 }
 
-// Main quests in stop order, then hidden quests. While a session is live, the first unfinished main
-// quest is active and later ones are locked. After it closes, unfinished quests show as missed,
-// and hidden quests nobody found stay hidden for good.
+// Main quests in stop order, then judged challenges, then hidden quests. While a session is live, the
+// first unfinished main quest is active and later ones are locked. After it closes, unfinished quests
+// show as missed, and hidden quests nobody found stay hidden for good.
 export function questViews(quests: readonly PassQuest[], sessionStatus: "live" | "closed"): QuestView[] {
-  const main = quests.filter((q) => !q.is_hidden).sort(byStop);
+  const main = quests.filter((q) => !q.is_hidden && !q.is_judged).sort(byStop);
+  const judged = quests.filter((q) => !q.is_hidden && q.is_judged).sort(byStop);
   const hidden = quests.filter((q) => q.is_hidden).sort(byStop);
   let activeGiven = false;
 
@@ -81,6 +83,11 @@ export function questViews(quests: readonly PassQuest[], sessionStatus: "live" |
     return { ...q, state: "locked" };
   });
 
+  const judgedViews: QuestView[] = judged.map((q) => {
+    if (q.completed) return { ...q, state: "done" };
+    return { ...q, state: sessionStatus === "closed" ? "missed" : "judged" };
+  });
+
   // Found or revealed hidden quests first; ones still hidden go last.
   const hiddenViews: QuestView[] = hidden
     .map((q): QuestView => {
@@ -90,7 +97,12 @@ export function questViews(quests: readonly PassQuest[], sessionStatus: "live" |
     })
     .sort((a, b) => Number(a.state === "hidden") - Number(b.state === "hidden"));
 
-  return [...mainViews, ...hiddenViews];
+  return [...mainViews, ...judgedViews, ...hiddenViews];
+}
+
+// The quest the team is on right now, if any.
+export function activeQuest(views: readonly QuestView[]): QuestView | null {
+  return views.find((v) => v.state === "active") ?? null;
 }
 
 export function questProgress(views: readonly QuestView[]): { done: number; total: number } {

@@ -1,7 +1,7 @@
 // Run with: npm test
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pickSessions, questViews, questProgress } from "./pass.ts";
+import { activeQuest, pickSessions, questViews, questProgress } from "./pass.ts";
 import type { PassQuest, PassSession } from "./pass.ts";
 
 function session(number: number, status: PassSession["status"]): PassSession {
@@ -83,4 +83,15 @@ test("after the session closes, unfinished quests are missed and unfound hidden 
 test("all quests done: nothing active", () => {
   const views = questViews([quest("a", 1, { completed: true }), quest("b", 2, { completed: true })], "live");
   assert.ok(views.every((v) => v.state === "done"));
+});
+
+test("judged challenges are never the active quest and sit after the main quests", () => {
+  const views = questViews(
+    [quest("j", null, { is_judged: true }), quest("a", 1, { completed: true }), quest("b", 2)],
+    "live",
+  );
+  assert.deepEqual(views.map((v) => [v.id, v.state]), [["a", "done"], ["b", "active"], ["j", "judged"]]);
+  assert.equal(activeQuest(views)?.id, "b");
+  const allDone = questViews([quest("j", null, { is_judged: true }), quest("a", 1, { completed: true })], "live");
+  assert.equal(activeQuest(allDone), null);
 });
