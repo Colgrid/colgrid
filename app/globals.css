@@ -1305,3 +1305,342 @@ button.button {
     border-radius: 0;
   }
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Game master console (step 5): dark, like the GM mockup
+   --------------------------------------------------------------------------------------------- */
+.gm {
+  padding-bottom: 64px;
+}
+.gm .eyebrow a {
+  color: var(--beacon-amber);
+}
+.gm-sub {
+  font-size: 12px;
+  color: var(--ink-subtle);
+  margin: 6px 0 0;
+  letter-spacing: 0.06em;
+}
+.gm-msg {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--chapter-teal);
+  background: rgba(46, 196, 182, 0.12);
+  font-weight: 600;
+}
+.gm-stats {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+.gm-stat {
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--asphalt-raised);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.gm-stat > span {
+  font-size: 11px;
+  color: var(--ink-subtle);
+}
+.gm-stat strong {
+  font-size: 28px;
+}
+.gm-stat small {
+  font-size: 15px;
+  color: var(--ink-subtle);
+}
+.gm-stat--light {
+  background: var(--concrete);
+  color: var(--asphalt);
+}
+.gm-stat--light > span,
+.gm-stat--light small {
+  color: #4a5057;
+}
+.gm-clock {
+  color: var(--beacon-amber);
+}
+.gm-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--asphalt-raised);
+}
+.gm-card p {
+  margin: 4px 0 0;
+  color: var(--ink-muted);
+  line-height: 1.45;
+  font-size: 15px;
+}
+.gm-card--amber {
+  border: 2px solid var(--beacon-amber);
+}
+.gm-card--danger {
+  border: 2px solid var(--signal-red);
+}
+.gm-danger {
+  background: transparent;
+  border: 2px solid var(--signal-red);
+  color: var(--signal-red-text);
+  width: 100%;
+}
+.gm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+.gm-form--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.gm-form input:not([type="checkbox"]),
+.gm-inline select,
+.gm-rename input,
+.gm-score input {
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #3a3f45;
+  background: var(--asphalt);
+  color: var(--concrete);
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+.gm-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--ink-subtle);
+}
+.gm-form label input:not([type="checkbox"]) {
+  width: 90px;
+}
+.gm-check {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 15px !important;
+  color: var(--ink-muted) !important;
+}
+.gm-check input {
+  width: 22px;
+  height: 22px;
+}
+.gm-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.gm-teams,
+.gm-players,
+.gm-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gm-session {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--asphalt-raised);
+  color: var(--concrete) !important;
+}
+.gm-session > span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.gm-session > span:first-child span {
+  font-size: 14px;
+  color: var(--ink-subtle);
+}
+.gm .status {
+  color: var(--ink-muted);
+  border-color: #3a3f45;
+}
+.gm .status--live {
+  color: var(--asphalt);
+}
+.gm-team {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--asphalt-raised);
+}
+.gm-team__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gm-rename {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+.gm-rename input {
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  font-weight: 700;
+  background: transparent;
+  border-color: transparent;
+}
+.gm-rename input:focus {
+  border-color: #3a3f45;
+}
+.gm-team__members {
+  margin: 4px 0 0 22px;
+  font-size: 14px;
+  color: var(--ink-subtle);
+}
+.gm-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+.gm-dot--tournament {
+  background: var(--signal-red);
+}
+.gm-dot--casual {
+  background: var(--chapter-teal);
+}
+.gm-squares {
+  display: flex;
+  gap: 3px;
+}
+.gm-squares span {
+  width: 16px;
+  height: 10px;
+  border-radius: 3px;
+  background: #3a3f45;
+}
+.gm-squares span.on {
+  background: var(--chapter-teal);
+}
+.gm-small {
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #3a3f45;
+  background: transparent;
+  color: var(--concrete);
+  font-family: var(--font-body);
+  font-weight: 700;
+  cursor: pointer;
+}
+.gm-player {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--asphalt-raised);
+}
+.gm-player__who {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.gm-player__who span {
+  font-size: 13px;
+  color: var(--ink-subtle);
+  overflow-wrap: anywhere;
+}
+.gm-inline {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+.gm-inline select {
+  flex: 1;
+  min-width: 0;
+}
+.gm-present {
+  min-height: 48px;
+  min-width: 96px;
+  border-radius: 12px;
+  border: none;
+  background: var(--beacon-amber);
+  color: var(--asphalt);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.gm-present:disabled {
+  background: #3a3f45;
+  color: var(--ink-subtle);
+  cursor: not-allowed;
+}
+.gm-here {
+  min-width: 96px;
+  text-align: center;
+  color: var(--chapter-teal);
+  font-weight: 700;
+}
+.gm-absent {
+  color: var(--ink-subtle);
+  font-size: 14px;
+}
+.gm-judged {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--concrete);
+  color: var(--asphalt);
+}
+.gm-judged__title {
+  margin: 0 0 8px;
+}
+.gm-judged__title span {
+  font-size: 11px;
+  color: #6b7178;
+}
+.gm-judged .fine-print {
+  color: #4a5057;
+}
+.gm-score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+.gm-score span {
+  flex: 1;
+  font-weight: 700;
+}
+.gm-score input {
+  width: 80px;
+  background: #fff;
+  color: var(--asphalt);
+  border-color: #c9cdd2;
+}
+.gm-judged .gm-small {
+  color: var(--asphalt);
+  border-color: var(--asphalt);
+}
