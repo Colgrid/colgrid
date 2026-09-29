@@ -19,7 +19,7 @@ type Pass = Extract<PassData, { kind: "pass" }>;
 export default async function PassPage() {
   const data = await loadPass();
   if (!data) redirect("/signin");
-  if (data.kind === "no-pass") return <NoPass email={data.email} isStaff={data.isStaff} />;
+  if (data.kind === "no-pass") return <NoPass email={data.email} isStaff={data.isStaff} isAdmin={data.isAdmin} />;
   return <PlayerPass pass={data} />;
 }
 
@@ -130,7 +130,7 @@ function PlayerPass({ pass }: { pass: Pass }) {
           </ul>
         </section>
 
-        <AccountFooter email={pass.email} isStaff={pass.isStaff} />
+        <AccountFooter email={pass.email} isStaff={pass.isStaff} isAdmin={pass.isAdmin} />
       </main>
       <TabBar active="pass" />
     </>
@@ -294,13 +294,14 @@ function QuestItem({ quest, tournament }: { quest: QuestView; tournament: boolea
 
 // ------------------------------------------------------------------------------------------------
 
-function AccountFooter({ email, isStaff }: { email: string; isStaff: boolean }) {
+function AccountFooter({ email, isStaff, isAdmin }: { email: string; isStaff: boolean; isAdmin: boolean }) {
   return (
     <footer className="account">
       <p>
         Signed in as <span className="mono">{email}</span>
         {isStaff && <span className="account__crew mono"> · CREW</span>}
       </p>
+      {isAdmin && <Link href="/admin">Admin</Link>}
       <form action="/auth/signout" method="post">
         <button type="submit" className="link-button">
           Sign out
@@ -310,7 +311,7 @@ function AccountFooter({ email, isStaff }: { email: string; isStaff: boolean }) 
   );
 }
 
-function NoPass({ email, isStaff }: { email: string; isStaff: boolean }) {
+function NoPass({ email, isStaff, isAdmin }: { email: string; isStaff: boolean; isAdmin: boolean }) {
   return (
     <main className="page">
       <span className="logo-tile logo-tile--sm">
@@ -319,7 +320,8 @@ function NoPass({ email, isStaff }: { email: string; isStaff: boolean }) {
       <h1 style={{ fontSize: 32, marginTop: 24 }}>{isStaff ? "You’re crew." : "No pass here yet."}</h1>
       {isStaff ? (
         <p className="lede">
-          This account runs the game, but it has no player pass. The game master console arrives in a later update.
+          This account runs the game, but it has no player pass.{" "}
+          {isAdmin ? <Link href="/admin">Open the admin</Link> : "The game master console arrives in a later update."}
         </p>
       ) : (
         <>
@@ -333,7 +335,7 @@ function NoPass({ email, isStaff }: { email: string; isStaff: boolean }) {
         </>
       )}
       <div style={{ marginTop: 32 }}>
-        <AccountFooter email={email} isStaff={isStaff} />
+        <AccountFooter email={email} isStaff={isStaff} isAdmin={isAdmin} />
       </div>
     </main>
   );

@@ -9,11 +9,12 @@ export type PlayMode = "casual" | "tournament";
 export type PassBadge = { key: string; name: string; description: string | null; earned: boolean };
 
 export type PassData =
-  | { kind: "no-pass"; email: string; isStaff: boolean }
+  | { kind: "no-pass"; email: string; isStaff: boolean; isAdmin: boolean }
   | {
       kind: "pass";
       email: string;
       isStaff: boolean;
+      isAdmin: boolean;
       player: { id: string; name: string };
       totalXp: number;
       team: { id: string; name: string; mode: PlayMode } | null;
@@ -57,9 +58,11 @@ export async function loadPass(): Promise<PassData | null> {
     supabase.rpc("claim_my_pass"),
     supabase.from("staff").select("role").eq("user_id", user.id),
   ]);
-  const isStaff = rows(staffRows).length > 0;
+  const staff = rows<{ role: string }>(staffRows);
+  const isStaff = staff.length > 0;
+  const isAdmin = staff.some((s) => s.role === "admin");
   const playerId = typeof claimed === "string" ? claimed : null;
-  if (!playerId) return { kind: "no-pass", email, isStaff };
+  if (!playerId) return { kind: "no-pass", email, isStaff, isAdmin };
 
   const [playerRes, xpRes, memberRes, seasonRes, badgeRes, myBadgeRes, hiddenRes, attendanceRes] = await Promise.all([
     supabase.from("player").select("id, name").eq("id", playerId).single(),
@@ -77,7 +80,7 @@ export async function loadPass(): Promise<PassData | null> {
   ]);
 
   const player = playerRes.data as unknown as { id: string; name: string } | null;
-  if (!player) return { kind: "no-pass", email, isStaff };
+  if (!player) return { kind: "no-pass", email, isStaff, isAdmin };
 
   const totalXp = Number((xpRes.data as unknown as { total_xp: number } | null)?.total_xp ?? 0);
 
@@ -125,6 +128,7 @@ export async function loadPass(): Promise<PassData | null> {
     kind: "pass",
     email,
     isStaff,
+    isAdmin,
     player,
     totalXp,
     team: team ? { id: team.id, name: team.name, mode: team.mode } : null,

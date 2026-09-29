@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 // Pages that need a signed-in player. Everything else is public.
-const SIGNED_IN_ONLY = ["/pass", "/check-in"];
+const SIGNED_IN_ONLY = ["/pass", "/check-in", "/admin"];
 
 export async function updateSession(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

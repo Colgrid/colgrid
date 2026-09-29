@@ -37,7 +37,7 @@ business/
 
 - Name: Colgrid (official Sep 28, 2026). USPTO trademark search pending (classes 41 and 9).
 - Brand: Phases 1–2 done; Phases 3–5 drafted.
-- Product: MVP spec written; mockups done; build steps 1 (foundation), 2 (magic-link sign-in and player pass) and 3 (quest check-in, XP, level up) done.
+- Product: MVP spec written; mockups done; build steps 1 (foundation), 2 (magic-link sign-in and player pass) 3 (quest check-in, XP, level up) and 6 (admin: sessions, quests, hosts, QR plaques, Eventbrite import, welcome emails) done.
 
 ## For developers
 
