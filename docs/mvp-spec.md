@@ -23,7 +23,7 @@ Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-ident
 
 | Decision | Choice |
 | --- | --- |
-| First event | A small pilot/dry run with real players, not the full Season 1 launch. Test the game, fix problems, then launch the season. |
+| First event | A small paid pilot/dry run ($75/person) with real ticket buyers, not the full Season 1 launch. It tests the full customer experience, from buying a ticket to the post-session survey, before Season 1 launches. |
 | Date | October 2026, ideally within the next few weeks |
 | Neighborhood | 9th & 9th |
 | Hosts | 3–4 local businesses/makers |
@@ -125,7 +125,7 @@ Starter levels: L1 = 0, L2 = 100, L3 = 250, L4 = 450, L5 = 700 (tune after sessi
 5. GM console (attendance, verify, reveal, close session)
 6. Admin screens + player import
 7. Public home page
-8. Pilot dry run with 6–8 friends before gathering 1
+8. Paid pilot/dry run with real ticket buyers before Season 1
 
 Steps 1–3 are done. For the October dry run, the order is now **6 → 5 → 7 → dry run → 4**: the dry run needs sessions, quests, QR plaques and imported players (6), a way to run the night (5) and a ticket link (7). It is casual only, so standings (4) can follow it.
 
