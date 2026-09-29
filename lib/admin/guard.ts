@@ -13,3 +13,15 @@ export async function requireAdmin() {
   if (isAdmin !== true) redirect("/pass");
   return { supabase, user };
 }
+
+// Game masters and admins (the crew) run the night from /gm.
+export async function requireStaff() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/signin?next=/gm");
+  const { data: isStaff } = await supabase.rpc("is_staff");
+  if (isStaff !== true) redirect("/pass");
+  return { supabase, user };
+}

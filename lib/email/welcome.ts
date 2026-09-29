@@ -1,15 +1,10 @@
 // "You're in" email sent after ticket buyers are imported. Sent through Resend's API with the
 // RESEND_API_KEY server variable (never NEXT_PUBLIC_, never in GitHub).
 import { SITE } from "@/lib/site";
+import { FROM, escapeHtml, sendBatch } from "./resend";
 
 export type WelcomeTarget = { email: string; name: string };
 export type WelcomeContext = { sessionLabel: string; neighborhood: string | null; when: string };
-
-const FROM = "Colgrid <pass@getcolgrid.com>";
-
-function escapeHtml(s: string): string {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
-}
 
 export function welcomeEmail(to: WelcomeTarget, ctx: WelcomeContext) {
   const first = to.name.split(" ")[0] || "there";
@@ -45,27 +40,10 @@ export function welcomeEmail(to: WelcomeTarget, ctx: WelcomeContext) {
   return { from: FROM, to: [to.email], subject, html, text };
 }
 
-// Sends in batches of up to 100 (Resend's limit). Returns the emails that went out.
+// Sends one welcome email per player. Returns the emails that went out.
 export async function sendWelcomeEmails(
   targets: WelcomeTarget[],
   ctx: WelcomeContext,
 ): Promise<{ sent: string[]; error: string | null }> {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) return { sent: [], error: "RESEND_API_KEY isn't set in Vercel, so no emails were sent." };
-  const sent: string[] = [];
-  for (let i = 0; i < targets.length; i += 100) {
-    const batch = targets.slice(i, i + 100);
-    const res = await fetch("https://api.resend.com/emails/batch", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify(batch.map((t) => welcomeEmail(t, ctx))),
-    });
-    if (!res.ok) {
-      const detail = await res.text().catch(() => "");
-      console.error("Resend batch failed", res.status, detail.slice(0, 300));
-      return { sent, error: `Resend refused the send (${res.status}). ${sent.length} sent before that.` };
-    }
-    sent.push(...batch.map((t) => t.email));
-  }
-  return { sent, error: null };
+  return sendBatch(targets.map((t) => welcomeEmail(t, ctx)));
 }

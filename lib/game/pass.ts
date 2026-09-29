@@ -14,6 +14,7 @@ export type PassSession = {
   revealed: boolean;
   status: SessionStatus;
   is_finals: boolean;
+  survey_url?: string | null;
 };
 
 // Shape returned by player_quests(). Hidden quests arrive with title and host masked (null).

@@ -228,6 +228,11 @@ function QuestSection({ pass, tournament }: { pass: Pass; tournament: boolean })
           {done} / {total}
         </span>
       </div>
+      {!live && focus.session.survey_url && (
+        <a href={focus.session.survey_url} className="button button--primary" target="_blank" rel="noopener" style={{ marginTop: 12 }}>
+          How was it? Take the 2-minute survey
+        </a>
+      )}
       {total === 0 ? (
         <p className="empty">No quests posted yet.</p>
       ) : (
@@ -301,6 +306,7 @@ function AccountFooter({ email, isStaff, isAdmin }: { email: string; isStaff: bo
         Signed in as <span className="mono">{email}</span>
         {isStaff && <span className="account__crew mono"> · CREW</span>}
       </p>
+      {isStaff && <Link href="/gm">Run the night</Link>}
       {isAdmin && <Link href="/admin">Admin</Link>}
       <form action="/auth/signout" method="post">
         <button type="submit" className="link-button">
@@ -321,7 +327,13 @@ function NoPass({ email, isStaff, isAdmin }: { email: string; isStaff: boolean; 
       {isStaff ? (
         <p className="lede">
           This account runs the game, but it has no player pass.{" "}
-          {isAdmin ? <Link href="/admin">Open the admin</Link> : "The game master console arrives in a later update."}
+          <Link href="/gm">Run the night</Link>
+          {isAdmin && (
+            <>
+              {" · "}
+              <Link href="/admin">Admin</Link>
+            </>
+          )}
         </p>
       ) : (
         <>
