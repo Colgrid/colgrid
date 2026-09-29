@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 // Placeholder home page for the foundation step. The full public home page is step 7 of
 // docs/mvp-spec.md; this one exists so the first deploy shows the brand is wired up.
@@ -27,6 +28,10 @@ export default function Home() {
       <p style={{ fontSize: 16, lineHeight: 1.45, color: "var(--ink-subtle)", marginTop: 32 }}>
         The pilot season is being built. Tickets open soon.
       </p>
+
+      <Link href="/signin" className="button button--secondary" style={{ marginTop: 24 }}>
+        Have a ticket? Open your pass
+      </Link>
     </main>
   );
 }

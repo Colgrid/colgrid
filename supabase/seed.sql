@@ -18,7 +18,8 @@ insert into public.badge (key, name, description) values
   ('two-city',         'Two-city',         'Played in two chapters'),
   ('chapter-champion', 'Chapter Champion', 'Won the Chapter Finals'),
   ('maker',            'Maker',            'Completed a making quest'),
-  ('scout',            'Scout',            'Found a hidden quest');
+  ('scout',            'Scout',            'Found a hidden quest')
+on conflict (key) do nothing;
 
 -- Chapter, season, sessions --------------------------------------------------------------------
 insert into public.chapter (number, city, neighborhood_default) values (1, 'Salt Lake City', '9th & 9th');
