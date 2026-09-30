@@ -24,7 +24,7 @@ export const SITE = {
     neighborhood: "9th & 9th",
     price: 75,
     ticketUrl: "https://www.eventbrite.com/e/9th-9th-interactive-team-quest-tastings-finale-meal-tickets-2002520543853",
-    ticketsOpen: false,
+    ticketsOpen: true,
   },
   // Official profiles. Listed in structured data ("sameAs") so search engines and AI assistants
   // know these accounts are Colgrid, and linked in the site footer.
