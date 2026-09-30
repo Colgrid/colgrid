@@ -1,8 +1,9 @@
 import { submitLead } from "@/app/leads/actions";
 
 // One form, two flavors. Big fields and labels above inputs: most people fill this in on a phone.
-export default function LeadForm({ kind }: { kind: "corporate" | "host" }) {
+export default function LeadForm({ kind }: { kind: "corporate" | "host" | "contact" }) {
   const corporate = kind === "corporate";
+  const contact = kind === "contact";
   return (
     <form action={submitLead} className="lead-form">
       <input type="hidden" name="kind" value={kind} />
@@ -19,11 +20,13 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" }) {
         Email
         <input name="email" type="email" required maxLength={200} autoComplete="email" />
       </label>
-      <label>
-        {corporate ? "Company" : "Business name"}
-        <input name="organization" maxLength={160} autoComplete="organization" required={!corporate} />
-      </label>
-      {corporate ? (
+      {!contact && (
+        <label>
+          {corporate ? "Company" : "Business name"}
+          <input name="organization" maxLength={160} autoComplete="organization" required={!corporate} />
+        </label>
+      )}
+      {contact ? null : corporate ? (
         <>
           <label>
             How many players?
@@ -41,11 +44,17 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" }) {
         </label>
       )}
       <label>
-        {corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
-        <textarea name="message" rows={3} maxLength={2000} placeholder={corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"} />
+        {contact ? "Your message" : corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
+        <textarea
+          name="message"
+          rows={contact ? 5 : 3}
+          maxLength={2000}
+          required={contact}
+          placeholder={contact ? "Questions about a ticket, accessibility, press…" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
+        />
       </label>
       <button type="submit" className="button button--primary">
-        {corporate ? "Get a quote" : "Become a host"}
+        {contact ? "Send" : corporate ? "Get a quote" : "Become a host"}
       </button>
     </form>
   );

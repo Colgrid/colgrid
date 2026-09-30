@@ -13,9 +13,11 @@ begin
   if public.submit_lead('corporate', 'Dana Reyes', 'dana@acme.co', 'Acme', null, 28, null, null) <> 'duplicate' then raise exception 'FAIL double submit accepted'; end if;
   if public.submit_lead('corporate', 'X', 'not-an-email', null, null, null, null, null) <> 'invalid' then raise exception 'FAIL bad email accepted'; end if;
   if public.submit_lead('vendor', 'X', 'x@y.co', null, null, null, null, null) <> 'invalid' then raise exception 'FAIL unknown form accepted'; end if;
+  if public.submit_lead('contact', 'Ana', 'ana@x.co', null, null, null, null, 'Is there parking?') <> 'ok' then raise exception 'FAIL contact form'; end if;
+  if public.submit_lead('contact', 'Ana', 'ana2@x.co', null, null, null, null, '  ') <> 'invalid' then raise exception 'FAIL empty contact message accepted'; end if;
   begin perform 1 from public.lead; exception when insufficient_privilege then ok := true; end;
   if not ok then raise exception 'FAIL visitors can read leads'; end if;
-  perform pg_temp.pass('anyone can send the corporate or host form; double-submits and bad emails are refused; visitors cannot read leads');
+  perform pg_temp.pass('anyone can send the corporate, host or contact form; double-submits and bad emails are refused; visitors cannot read leads');
 end $$;
 reset role;
 

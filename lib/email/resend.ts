@@ -1,6 +1,6 @@
 // Sends emails through Resend's batch API with the RESEND_API_KEY server variable
 // (never NEXT_PUBLIC_, never in GitHub). Up to 100 per request.
-export type Email = { from: string; to: string[]; subject: string; html: string; text: string };
+export type Email = { from: string; to: string[]; subject: string; html: string; text: string; reply_to?: string };
 
 export const FROM = "Colgrid <pass@getcolgrid.com>";
 
@@ -42,7 +42,7 @@ export function shell(headline: string, paragraphs: string[], button?: { label: 
     <div style="display:inline-block;background:#FFFFFF;border-radius:12px;padding:6px;">
       <img src="${logoUrl}" width="44" height="44" alt="Colgrid" style="display:block;border:0;">
     </div>
-    <p style="margin:28px 0 0;font-family:'JetBrains Mono',Menlo,monospace;font-size:12px;letter-spacing:2px;color:#2EC4B6;">CHAPTER 01 &middot; SALT LAKE CITY</p>
+    <p style="margin:28px 0 0;font-family:'JetBrains Mono',Menlo,monospace;font-size:12px;letter-spacing:2px;color:#2EC4B6;">SALT LAKE CITY</p>
     <h1 style="margin:8px 0 0;font-size:30px;line-height:1.1;color:#F4F5F7;">${escapeHtml(headline)}</h1>
     ${body}
     ${cta}

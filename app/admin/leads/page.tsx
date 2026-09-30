@@ -6,7 +6,7 @@ import Notice from "../Notice";
 
 type Lead = {
   id: string;
-  kind: "corporate" | "host";
+  kind: "corporate" | "host" | "contact";
   name: string;
   email: string;
   organization: string | null;
@@ -27,7 +27,7 @@ export default async function AdminLeads({ searchParams }: { searchParams: Promi
   return (
     <>
       <h1 className="admin-title">Leads</h1>
-      <p className="admin-meta">From the corporate and host forms on the home page. You also get each one by email.</p>
+      <p className="admin-meta">From the corporate, host and contact forms. You also get each one by email.</p>
       <Notice msg={msg} />
       {leads.length === 0 ? (
         <p className="admin-empty">No leads yet.</p>
@@ -37,7 +37,7 @@ export default async function AdminLeads({ searchParams }: { searchParams: Promi
             <li key={l.id} className="admin-quest">
               <div className="admin-quest__main">
                 <strong>
-                  {l.kind === "host" ? "Host" : "Corporate"} · {l.organization ?? l.name}
+                  {l.kind === "host" ? "Host" : l.kind === "contact" ? "Message" : "Corporate"} · {l.organization ?? l.name}
                 </strong>
                 <span>
                   {l.name} · <a href={`mailto:${l.email}`}>{l.email}</a>

@@ -13,7 +13,8 @@ const field = (form: FormData, key: string, max = 200) => {
 };
 
 export async function submitLead(form: FormData) {
-  const kind = form.get("kind") === "host" ? "host" : "corporate";
+  const raw = form.get("kind");
+  const kind = raw === "host" ? "host" : raw === "contact" ? "contact" : "corporate";
   // Hidden field real people never fill in; bots do. Pretend it worked.
   if (field(form, "website")) redirect(`/thanks?kind=${kind}`);
 
@@ -41,7 +42,7 @@ export async function submitLead(form: FormData) {
   if (data === "invalid") redirect(`/thanks?kind=${kind}&error=invalid`);
 
   if (data === "ok") {
-    const title = kind === "host" ? "New quest host lead" : "New corporate run lead";
+    const title = kind === "host" ? "New quest host lead" : kind === "contact" ? "New message from the website" : "New corporate run lead";
     const rows: [string, string | number | null][] = [
       ["Name", lead.name],
       ["Email", lead.email],
@@ -55,7 +56,8 @@ export async function submitLead(form: FormData) {
     await sendBatch([
       {
         from: FROM,
-        to: [SITE.email],
+        to: [SITE.notifyEmail],
+        reply_to: lead.email ?? undefined,
         subject: `${title}: ${lead.organization ?? lead.name}`,
         text: [...filled.map(([k, v]) => `${k}: ${v}`), "", `All leads: ${SITE.url}/admin/leads`].join("\n"),
         html: shell(

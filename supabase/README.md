@@ -11,6 +11,7 @@
 | `migrations/20260930000011_leads.sql` | Corporate and host forms: `submit_lead()` (anyone), `lead` table (admins only) |
 | `migrations/20260930000012_guided.sql` | Guided mode: mission briefings, puzzle answers, start code self check-in, route slots, finale |
 | `migrations/20260930000013_location.sql` | Verify stops with no one there: map pin + radius, on-site answer, short stay; `complete_mission()` |
+| `migrations/20260930000014_contact.sql` | The contact form (no public email address) |
 | `migrations/20260930000010_reveal_schedule.sql` | Supabase only: pings the site every 5 minutes (pg_cron + pg_net). Skip it in local tests |
 | `migrations/20260928000006_gm.sql` | Game master console: attendance, start/close (session badge), survey link |
 | `migrations/20260928000005_admin.sql` | Admin: pilot season (Season 00), tickets, generated quest codes, Eventbrite import, "coming with" answer |
@@ -103,6 +104,7 @@ psql -d colgrid_test -f supabase/migrations/20260930000009_auto_reveal.sql
 psql -d colgrid_test -f supabase/migrations/20260930000011_leads.sql
 psql -d colgrid_test -f supabase/migrations/20260930000012_guided.sql
 psql -d colgrid_test -f supabase/migrations/20260930000013_location.sql
+psql -d colgrid_test -f supabase/migrations/20260930000014_contact.sql
 psql -d colgrid_test -f supabase/seed.sql
 psql -d colgrid_test -f supabase/tests/10_rules.test.sql
 psql -d colgrid_test -f supabase/tests/20_signin.test.sql

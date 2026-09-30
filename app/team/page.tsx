@@ -52,13 +52,12 @@ export default async function TeamPage({ searchParams }: { searchParams: Promise
     team = (data as Team | null) ?? null;
   }
   const pilot = season?.number === 0;
-  const chapter = pass.kind === "pass" && pass.chapter ? `CHAPTER ${formatNumber(pass.chapter.number)}` : "";
 
   return (
     <>
       <main className="page page--tabs">
         <p className="mono eyebrow" style={{ color: "var(--ink-subtle)" }}>
-          YOUR TEAM{chapter ? ` · ${chapter}` : ""}
+          YOUR TEAM
         </p>
 
         {!team ? (

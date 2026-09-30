@@ -30,7 +30,7 @@ export function welcomeEmail(to: WelcomeTarget, ctx: WelcomeContext) {
     <div style="display:inline-block;background:#FFFFFF;border-radius:12px;padding:6px;">
       <img src="${SITE.url}/brand/colgrid-logo.png" width="44" height="44" alt="Colgrid" style="display:block;border:0;">
     </div>
-    <p style="margin:28px 0 0;font-family:'JetBrains Mono',Menlo,monospace;font-size:12px;letter-spacing:2px;color:#2EC4B6;">CHAPTER 01 &middot; SALT LAKE CITY</p>
+    <p style="margin:28px 0 0;font-family:'JetBrains Mono',Menlo,monospace;font-size:12px;letter-spacing:2px;color:#2EC4B6;">SALT LAKE CITY</p>
     <h1 style="margin:8px 0 0;font-size:30px;line-height:1.1;color:#F4F5F7;">You're in, ${escapeHtml(first)}.</h1>
     <p style="margin:14px 0 0;font-size:17px;line-height:1.5;color:#C9CDD2;">${escapeHtml(ctx.sessionLabel)}${escapeHtml(where)} &middot; ${escapeHtml(ctx.when)}</p>
     <p style="margin:14px 0 0;font-size:17px;line-height:1.5;color:#C9CDD2;">Your pass is ready. Open it with this email address, the one on your ticket. No password.</p>
