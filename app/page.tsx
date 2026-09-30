@@ -185,9 +185,9 @@ export default function Home() {
         )}
       </section>
 
-      <Link href="/signin" className="button button--secondary" style={{ marginTop: 24 }}>
+      <a href={`${SITE.appUrl}/signin`} className="button button--secondary" style={{ marginTop: 24 }}>
         Have a ticket? Open your pass
-      </Link>
+      </a>
 
       <section className="section" aria-labelledby="how">
         <h2 id="how" className="mono home-kicker">

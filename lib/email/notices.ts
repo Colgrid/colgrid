@@ -16,7 +16,7 @@ export function revealEmail(to: Recipient, s: SessionInfo, location: string): Em
     `${s.label}${where}, ${s.when}.`,
     `Start here: ${location}`,
     "",
-    `Your team gets assigned when you arrive. Your pass: ${SITE.url}/pass`,
+    `Your team gets assigned when you arrive. Your pass: ${SITE.appUrl}/pass`,
     "",
     `${SITE.support.label} ${SITE.support.phone}`,
     "",
@@ -30,7 +30,7 @@ export function revealEmail(to: Recipient, s: SessionInfo, location: string): Em
       "Your team gets assigned when you arrive. Bring your phone, charged.",
       `${escapeHtml(SITE.support.label)} <a href="tel:${SITE.support.tel}" style="color:#FF9F1C;font-weight:700;text-decoration:none;">${escapeHtml(SITE.support.phone)}</a>`,
     ],
-    { label: "Open my pass", href: `${SITE.url}/pass` },
+    { label: "Open my pass", href: `${SITE.appUrl}/pass` },
   );
   return { from: FROM, to: [to.email], subject, html, text };
 }
@@ -41,14 +41,14 @@ export function thanksEmail(to: Recipient, s: SessionInfo, surveyUrl: string | n
     `Thanks for playing ${s.label}, ${first(to.name)}. Your XP, level and badges are on your pass, and they carry forward to every gathering.`,
     surveyUrl ? `Tell us how it went. It takes two minutes and shapes the next one: ${surveyUrl}` : "",
   ].filter(Boolean);
-  const text = [...lines, "", `Your pass: ${SITE.url}/pass`, "", "Colgrid"].join("\n\n");
+  const text = [...lines, "", `Your pass: ${SITE.appUrl}/pass`, "", "Colgrid"].join("\n\n");
   const html = shell(
     "You played. How was it?",
     [
       `Thanks for playing ${escapeHtml(s.label)}. Your XP, level and badges are on your pass, and they carry forward to every gathering.`,
       surveyUrl ? "Tell us how it went. It takes two minutes and shapes the next one." : "",
     ].filter(Boolean),
-    surveyUrl ? { label: "Take the 2-minute survey", href: surveyUrl } : { label: "Open my pass", href: `${SITE.url}/pass` },
+    surveyUrl ? { label: "Take the 2-minute survey", href: surveyUrl } : { label: "Open my pass", href: `${SITE.appUrl}/pass` },
   );
   return { from: FROM, to: [to.email], subject, html, text };
 }

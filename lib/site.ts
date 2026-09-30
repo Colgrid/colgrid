@@ -2,7 +2,8 @@
 // Wording follows docs/brand-identity.md (positioning, key messages) and prices follow docs/pricing.md.
 export const SITE = {
   name: "Colgrid",
-  url: "https://getcolgrid.com",
+  url: "https://getcolgrid.com", // the public site: home, tickets, corporate, hosts, legal
+  appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
   tagline: "Your city has missions.",
   title: "Colgrid: a real-world team game in Salt Lake City",
   description:

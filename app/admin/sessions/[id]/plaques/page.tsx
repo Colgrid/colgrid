@@ -37,7 +37,7 @@ export default async function Plaques({ params }: { params: Promise<{ id: string
       <div className="plaques">
         <StartSign number={session.number} neighborhood={session.neighborhood} code={session.start_code} />
         {quests.map((q) => {
-          const url = `${SITE.url}/check-in?code=${q.code}`;
+          const url = `${SITE.appUrl}/check-in?code=${q.code}`;
           const { path, viewBox } = qrSvgPath(encodeQr(url, "Q"), 4);
           return (
             <article key={q.id} className="plaque">
@@ -55,7 +55,7 @@ export default async function Plaques({ params }: { params: Promise<{ id: string
                 <path d={path} fill="#1A1D20" />
               </svg>
               <p className="plaque__code mono">{q.code}</p>
-              <p className="plaque__or">or type the code at getcolgrid.com/check-in</p>
+              <p className="plaque__or">or type the code at colgrid.app/check-in</p>
               <footer className="plaque__foot">
                 <span>{q.host?.business ?? session.neighborhood ?? ""}</span>
                 <span>{q.title}</span>
@@ -71,7 +71,7 @@ export default async function Plaques({ params }: { params: Promise<{ id: string
 // The sign at the drop point: scanning it checks a player in, places them on a team and unlocks
 // mission 1 (guided mode). It works from 30 minutes before the start.
 function StartSign({ number, neighborhood, code }: { number: number; neighborhood: string | null; code: string }) {
-  const url = `${SITE.url}/check-in?code=${code}`;
+  const url = `${SITE.appUrl}/check-in?code=${code}`;
   const { path, viewBox } = qrSvgPath(encodeQr(url, "Q"), 4);
   return (
     <article className="plaque plaque--start">
@@ -87,7 +87,7 @@ function StartSign({ number, neighborhood, code }: { number: number; neighborhoo
         <path d={path} fill="#1A1D20" />
       </svg>
       <p className="plaque__code mono">{code}</p>
-      <p className="plaque__or">No ticket on your phone yet? Sign in at getcolgrid.com with the email on your ticket.</p>
+      <p className="plaque__or">No ticket on your phone yet? Sign in at colgrid.app with the email on your ticket.</p>
       <footer className="plaque__foot">
         <span>{neighborhood ?? ""}</span>
         <span>Colgrid</span>

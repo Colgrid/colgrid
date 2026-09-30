@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { safeNext } from "@/lib/safe-next";
@@ -22,9 +21,9 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
 
   return (
     <main className="page">
-      <Link href="/" className="back-link">
-        ← Back
-      </Link>
+      <a href={SITE.url} className="back-link">
+        ← Colgrid
+      </a>
 
       <span className="logo-tile" style={{ marginTop: 40 }}>
         {/* Scaled inside the tile to trim the file's white margin. The logo itself is unchanged. */}
@@ -45,7 +44,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
             Get a ticket for {SITE.nextGathering.when.split(" · ")[0]}
           </a>
         ) : (
-          <Link href="/">Tickets open soon.</Link>
+          <a href={SITE.url}>Tickets open soon.</a>
         )}
       </p>
     </main>
