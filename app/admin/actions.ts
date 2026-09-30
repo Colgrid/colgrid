@@ -233,3 +233,16 @@ export async function removeTicket(form: FormData) {
   revalidatePath("/admin/players");
   back(path, error ? "Couldn't remove the ticket." : "Ticket removed. Their pass stays, but they're off this session's list.");
 }
+
+// ---------------------------------------------------------------------------------------------
+// Leads (corporate and host forms)
+// ---------------------------------------------------------------------------------------------
+export async function setLeadStatus(form: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = String(form.get("id") ?? "");
+  const status = String(form.get("status") ?? "");
+  if (!["new", "contacted", "won", "lost"].includes(status)) redirect("/admin/leads");
+  const { error } = await supabase.from("lead").update({ status }).eq("id", id);
+  revalidatePath("/admin/leads");
+  redirect(`/admin/leads?msg=${encodeURIComponent(error ? "Couldn't save." : `Marked ${status}.`)}`);
+}
