@@ -265,7 +265,11 @@ export default function Home() {
       </section>
 
       <footer className="home-footer">
-        <p className="home-footer__brand">{SITE.footerLine}</p>
+        <p className="home-footer__brand">
+          <strong>Colgrid</strong>
+          <br />
+          {SITE.footerLine}
+        </p>
         <ul className="social" aria-label="Colgrid elsewhere">
           {SITE.social.map((s) => (
             <li key={s.name}>

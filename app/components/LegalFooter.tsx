@@ -6,7 +6,11 @@ export default function LegalFooter() {
   return (
     <footer className="home-footer">
       <p className="home-footer__brand">
-        {SITE.footerLine} <Link href="/">Home</Link>
+        <Link href="/">
+          <strong>Colgrid</strong>
+        </Link>
+        <br />
+        {SITE.footerLine}
       </p>
       <nav className="home-footer__links" aria-label="About Colgrid">
         <Link href="/contact">Contact</Link>
