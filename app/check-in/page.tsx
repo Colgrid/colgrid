@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import SupportLine from "@/app/components/SupportLine";
 import TabBar from "@/app/components/TabBar";
 import { loadPass } from "@/app/pass/data";
 import { activeQuest } from "@/lib/game/pass";
@@ -46,6 +47,11 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
               <CheckInForm initialCode={code ?? ""} />
             </div>
           </>
+        )}
+        {live && (
+          <div style={{ marginTop: 28 }}>
+            <SupportLine />
+          </div>
         )}
       </main>
       <TabBar active="checkin" />

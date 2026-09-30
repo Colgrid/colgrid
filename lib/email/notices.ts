@@ -18,6 +18,8 @@ export function revealEmail(to: Recipient, s: SessionInfo, location: string): Em
     "",
     `Your team gets assigned when you arrive. Your pass: ${SITE.url}/pass`,
     "",
+    `${SITE.support.label} ${SITE.support.phone}`,
+    "",
     "Colgrid",
   ].join("\n");
   const html = shell(
@@ -26,6 +28,7 @@ export function revealEmail(to: Recipient, s: SessionInfo, location: string): Em
       `${escapeHtml(s.label)}${escapeHtml(where)} &middot; ${escapeHtml(s.when)}`,
       `<strong style="color:#F4F5F7;">Start here: ${escapeHtml(location)}</strong>`,
       "Your team gets assigned when you arrive. Bring your phone, charged.",
+      `${escapeHtml(SITE.support.label)} <a href="tel:${SITE.support.tel}" style="color:#FF9F1C;font-weight:700;text-decoration:none;">${escapeHtml(SITE.support.phone)}</a>`,
     ],
     { label: "Open my pass", href: `${SITE.url}/pass` },
   );

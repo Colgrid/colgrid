@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { FROM, escapeHtml, sendBatch, shell } from "@/lib/email/resend";
 import { SITE } from "@/lib/site";
 import { createClient } from "@/lib/supabase/server";
+import { turnstilePasses } from "@/lib/turnstile";
 
 const field = (form: FormData, key: string, max = 200) => {
   const v = String(form.get(key) ?? "").trim().slice(0, max);
@@ -17,6 +18,8 @@ export async function submitLead(form: FormData) {
   const kind = raw === "host" ? "host" : raw === "contact" ? "contact" : "corporate";
   // Hidden field real people never fill in; bots do. Pretend it worked.
   if (field(form, "website")) redirect(`/thanks?kind=${kind}`);
+  // Cloudflare Turnstile (when switched on): no token or a failed check = likely a bot.
+  if (!(await turnstilePasses(field(form, "cf-turnstile-response", 4096)))) redirect(`/thanks?kind=${kind}&error=bot`);
 
   const lead = {
     name: field(form, "name", 120),

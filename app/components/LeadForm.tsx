@@ -1,4 +1,5 @@
 import { submitLead } from "@/app/leads/actions";
+import { turnstileSiteKey } from "@/lib/turnstile";
 
 // One form, two flavors. Big fields and labels above inputs: most people fill this in on a phone.
 export default function LeadForm({ kind }: { kind: "corporate" | "host" | "contact" }) {
@@ -53,6 +54,12 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" | "conta
           placeholder={contact ? "Questions about a ticket, accessibility, press…" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
         />
       </label>
+      {turnstileSiteKey && (
+        <>
+          <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+          <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="dark" data-size="flexible" />
+        </>
+      )}
       <button type="submit" className="button button--primary">
         {contact ? "Send" : corporate ? "Get a quote" : "Become a host"}
       </button>

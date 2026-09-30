@@ -16,9 +16,12 @@ export const SITE = {
   location: "Salt Lake City, Utah",
   // Where form submissions (corporate, host, contact) are sent. Never shown on the site:
   // visitors use the contact form, which keeps the address away from spam bots.
-  notifyEmail: "colgridco@gmail.com",
-  // The public address (in case it's ever needed, e.g. on Eventbrite). Not shown on the site.
-  publicEmail: "hello@getcolgrid.com",
+  notifyEmail: "hello@getcolgrid.com",
+  // Game-day support (Quo): calls and texts. Shown on the pass and in player emails, not on the public site.
+  support: { label: "Need help during the event? Call or text us.", phone: "(801) 441-3621", tel: "+18014413621" },
+  // Cloudflare Turnstile site key (public by design). The secret goes in Vercel as TURNSTILE_SECRET_KEY.
+  // Blank = the forms work without the check (the hidden honeypot field still stops simple bots).
+  turnstileSiteKey: "",
   // The next gathering shown on the home page. Flip ticketsOpen to true when you're ready to promote:
   // the "Get tickets" button, the Eventbrite link and the search-engine event listing only appear then.
   nextGathering: {

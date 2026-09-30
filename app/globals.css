@@ -2260,3 +2260,38 @@ button.button {
   color: var(--ink-subtle);
   margin-top: 8px;
 }
+
+/* Game-day support line (pass, check-in) */
+.support-line {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--asphalt-raised);
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.support-line--live {
+  border: 2px solid var(--chapter-teal);
+  color: var(--concrete);
+}
+.support-line__actions {
+  display: inline-flex;
+  gap: 8px;
+}
+.support-line__actions a {
+  min-height: 40px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+  background: var(--concrete);
+  color: var(--asphalt);
+  font-weight: 700;
+  text-decoration: none;
+}
