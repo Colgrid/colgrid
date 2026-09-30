@@ -68,7 +68,7 @@ export default async function OpenGraphImage() {
           <img src={logoSrc} width={224} height={224} alt="" />
         </div>
         <div style={{ marginTop: 44, fontFamily: "JetBrains Mono", fontSize: 26, letterSpacing: 4, color: "#2EC4B6" }}>
-          CHAPTER 01 · SALT LAKE CITY
+          SALT LAKE CITY
         </div>
         <div style={{ marginTop: 14, fontFamily: "Chakra Petch", fontSize: 92, fontWeight: 700, lineHeight: 1 }}>
           {SITE.tagline}

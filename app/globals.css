@@ -2211,3 +2211,52 @@ button.button {
 .pin-input input {
   flex: 1 1 200px;
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Footer links and legal pages
+   --------------------------------------------------------------------------------------------- */
+.home-footer__brand {
+  margin: 0 0 12px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.home-footer__brand a {
+  color: var(--concrete);
+  text-decoration: none;
+}
+.home-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 14px;
+}
+.home-footer__links a {
+  color: var(--ink-subtle);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.legal h2 {
+  font-size: 22px;
+  margin-top: 28px;
+}
+.legal p,
+.legal li {
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+.legal ul {
+  padding-left: 20px;
+  margin: 10px 0 0;
+}
+.legal li + li {
+  margin-top: 8px;
+}
+.legal a {
+  color: var(--beacon-amber);
+}
+.legal__updated {
+  font-size: 12px;
+  color: var(--ink-subtle);
+  margin-top: 8px;
+}

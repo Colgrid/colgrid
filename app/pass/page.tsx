@@ -57,7 +57,7 @@ function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
             <p className="identity__team">{pass.team?.name ?? "Your team drops at the opening ritual."}</p>
             {pass.chapter && (
               <p className="mono identity__chapter">
-                Chapter {formatNumber(pass.chapter.number)}: {pass.chapter.city}
+                {pass.chapter.city}
               </p>
             )}
           </div>

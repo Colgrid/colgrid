@@ -1,32 +1,31 @@
 # Colgrid
 
-> Colgrid is a real-world team game that turns a city into missions. Teams meet in one walkable neighborhood for a 2–4 hour gathering and take on quests hosted by local makers, kitchens and guides. Players earn XP, levels and badges on a web pass that carries forward to every gathering and every city, building toward an annual flagship. Chapter 01 is Salt Lake City, Utah.
+> Colgrid is a real-world team game that turns a city into missions. Teams meet in one walkable neighborhood for a 2–4 hour gathering and take on quests hosted by local makers, kitchens and guides. Players earn XP, levels and badges on a web pass that carries forward to every gathering and every city. Colgrid is based in Salt Lake City, Utah.
 
 ## Key facts
 
 - What it is: a persistent real-world team game (not a one-off outing). Your team, level and badges carry forward.
-- Where: Salt Lake City (Chapter 01). Each gathering is in one walkable neighborhood; the starting location is revealed 24–48 hours before.
-- Format: 30–50 players per gathering, in teams, for 2–4 hours. Season 1 has four gatherings.
+- Where: Salt Lake City, Utah. Each gathering is in one walkable neighborhood; the starting location is revealed 24–48 hours before.
+- Format: teams of players, 2–4 hours, 3–4 hosted quests, local tastings, and a shared finale meal. The app guides each team from mission to mission; teams prove each stop by being there and answering something only visible on site.
 - Who it's for: adults 18+ who want more from a night out than dinner and drinks: friends, partners, family, coworkers and solo players. Solo players are placed on a team.
-- Two ways to play: every team plays casually by default and nobody is ranked. Teams can opt into the tournament before the season's second session to climb the chapter standings, play the Chapter Finals and compete for the Championship. The tournament costs nothing extra.
-- Price: $75 per player, sold on Eventbrite. A Season Pass comes after the pilot. No other discounts.
-- A ticket includes: 3–4 hosted quests and materials, a finale meal and first drink, a numbered session badge, a printed quest passport, and the web pass.
-- Progress never goes down: XP only goes up, and levels and badges are never taken away. Nothing is ranked or rewarded by money spent.
-- Next gathering: the first Colgrid gathering (the pilot) is Saturday, October 17, 2026, 4–7 PM, in 9th & 9th, Salt Lake City. $75 per person, adults 18+. Tickets: https://www.eventbrite.com/e/9th-9th-interactive-team-quest-tastings-finale-meal-tickets-2002520543853
-- After the pilot: the full Season 1 in Salt Lake City.
-- Contact: colgridco@gmail.com
+- Competitive? No. Nobody is ranked; it's about the experience. Everyone earns XP, levels and badges.
+- Price: $75 per player, sold on Eventbrite.
+- A ticket includes: 3–4 hosted quests and materials, tastings, a finale meal and first drink, a numbered session badge, and the web pass.
+- Next gathering: the first Colgrid gathering is Saturday, October 17, 2026, 4–7 PM, in 9th & 9th, Salt Lake City. $75 per person, adults 18+. Tickets: https://www.eventbrite.com/e/9th-9th-interactive-team-quest-tastings-finale-meal-tickets-2002520543853
+- Companies: private team runs from $2,500 for up to 20 players (+$95 per extra player). Request a quote on the home page.
+- Local businesses: makers, kitchens and guides can apply to host a quest on the home page.
+- Contact: https://getcolgrid.com/contact
 
 ## Official profiles
 
 - [Instagram](https://www.instagram.com/colgrid/)
-- [X](https://x.com/Colgrid)
 - [TikTok](https://www.tiktok.com/@colgrid0)
-- [YouTube](https://www.youtube.com/@Colgrid)
 - [LinkedIn](https://www.linkedin.com/company/colgrid/)
-- [Reddit](https://www.reddit.com/user/Colgrid/)
-- [Pinterest](https://www.pinterest.com/colgrid/)
-- [GitHub](https://github.com/Colgrid)
 
 ## Pages
 
-- [Home](https://getcolgrid.com/): what Colgrid is, how it works, prices and FAQ
+- [Home](https://getcolgrid.com/): what Colgrid is, how it works, the next gathering, prices, corporate runs, hosting, FAQ
+- [Contact](https://getcolgrid.com/contact)
+- [Terms](https://getcolgrid.com/terms)
+- [Privacy](https://getcolgrid.com/privacy)
+- [Accessibility](https://getcolgrid.com/accessibility)

@@ -13,7 +13,12 @@ export const SITE = {
   city: "Salt Lake City",
   region: "UT",
   country: "US",
-  email: "colgridco@gmail.com",
+  location: "Salt Lake City, Utah",
+  // Where form submissions (corporate, host, contact) are sent. Never shown on the site:
+  // visitors use the contact form, which keeps the address away from spam bots.
+  notifyEmail: "colgridco@gmail.com",
+  // The public address (in case it's ever needed, e.g. on Eventbrite). Not shown on the site.
+  publicEmail: "hello@getcolgrid.com",
   // The next gathering shown on the home page. Flip ticketsOpen to true when you're ready to promote:
   // the "Get tickets" button, the Eventbrite link and the search-engine event listing only appear then.
   nextGathering: {
@@ -30,16 +35,12 @@ export const SITE = {
   // experience first (decided Sept 30, 2026). While false, players never see standings or the
   // tournament switch. The rules and database stay in place for when it comes back.
   tournamentOpen: false,
-  // Official profiles. Listed in structured data ("sameAs") so search engines and AI assistants
+  // Official profiles, in the footer. Listed in structured data ("sameAs") so search engines and AI assistants
   // know these accounts are Colgrid, and linked in the site footer.
   social: [
     { name: "Instagram", url: "https://www.instagram.com/colgrid/" },
-    { name: "X", url: "https://x.com/Colgrid" },
     { name: "TikTok", url: "https://www.tiktok.com/@colgrid0" },
-    { name: "YouTube", url: "https://www.youtube.com/@Colgrid" },
     { name: "LinkedIn", url: "https://www.linkedin.com/company/colgrid/" },
-    { name: "Reddit", url: "https://www.reddit.com/user/Colgrid/" },
-    { name: "Pinterest", url: "https://www.pinterest.com/colgrid/" },
-    { name: "GitHub", url: "https://github.com/Colgrid" },
+    // Add Facebook here once the page exists.
   ],
 } as const;

@@ -57,7 +57,7 @@ const FAQ = [
   },
   {
     q: "Where does it happen?",
-    a: "Chapter 01 is Salt Lake City. Each gathering takes place in one walkable neighborhood, and the starting location is revealed 24–48 hours before.",
+    a: "Salt Lake City, Utah. Each gathering takes place in one walkable neighborhood, and the starting location is revealed 24–48 hours before.",
   },
   {
     q: "How much does it cost?",
@@ -97,7 +97,6 @@ const jsonLd = {
       name: SITE.name,
       url: SITE.url,
       logo: `${SITE.url}/brand/colgrid-logo.png`,
-      email: SITE.email,
       description: SITE.description,
       sameAs: SITE.social.map((s) => s.url),
       areaServed: { "@type": "City", name: SITE.city, containedInPlace: { "@type": "State", name: "Utah" } },
@@ -154,7 +153,7 @@ export default function Home() {
       </span>
 
       <p className="mono" style={{ color: "var(--chapter-teal)", letterSpacing: "0.12em", fontSize: 13, marginTop: 28 }}>
-        CHAPTER 01 · SALT LAKE CITY
+        SALT LAKE CITY
       </p>
       <h1 style={{ fontSize: 44, marginTop: 8 }}>Turn your city into a game board.</h1>
       <p style={{ fontSize: 18, lineHeight: 1.45, color: "var(--ink-muted)", marginTop: 16 }}>
@@ -275,6 +274,11 @@ export default function Home() {
       </section>
 
       <footer className="home-footer">
+        <p className="home-footer__brand">
+          <strong>Colgrid</strong>
+          <br />
+          {SITE.location}
+        </p>
         <ul className="social" aria-label="Colgrid elsewhere">
           {SITE.social.map((s) => (
             <li key={s.name}>
@@ -284,9 +288,12 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <p>
-          Colgrid · Chapter 01: Salt Lake City · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-        </p>
+        <nav className="home-footer__links" aria-label="About Colgrid">
+          <Link href="/contact">Contact</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/accessibility">Accessibility</Link>
+        </nav>
       </footer>
     </main>
   );
