@@ -6,7 +6,7 @@ import InstallCard from "@/app/components/InstallCard";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { activeQuest, allMainDone, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
-import AnswerForm from "./AnswerForm";
+import MissionCheck from "./MissionCheck";
 import Countdown from "./Countdown";
 import { loadPass, type PassData } from "./data";
 
@@ -276,10 +276,27 @@ function MissionPanel({ pass }: { pass: Pass }) {
       <h2 id="mission-title" className="mission__title">
         {q.title}
       </h2>
-      {(q.where_text || q.host_business) && <p className="mission__where">{q.where_text ?? q.host_business}</p>}
+      {(q.where_text || q.host_business) && (
+        <p className="mission__where">
+          {q.where_text ?? q.host_business}{" "}
+          <a
+            className="mission__map"
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${q.where_text ?? q.host_business}, ${focus.session.neighborhood ?? ""} Salt Lake City`)}`}
+            target="_blank"
+            rel="noopener"
+          >
+            Map
+          </a>
+        </p>
+      )}
       {q.briefing && <p className="mission__text">{q.briefing}</p>}
-      {q.verify === "answer" ? (
-        <AnswerForm questId={q.id} />
+      {q.verify && q.verify !== "code" ? (
+        <>
+          <MissionCheck questId={q.id} needsLocation={q.verify.startsWith("location")} needsAnswer={q.verify.endsWith("answer")} />
+          <Link href="/check-in" className="mission__fallback">
+            Have a host code? Enter it instead
+          </Link>
+        </>
       ) : (
         <>
           <p className="mission__verify">Done? Your host has the code.</p>

@@ -25,7 +25,17 @@ function int(form: FormData, key: string): number | null {
 // Guided mode: the mission briefing players see when the quest unlocks.
 function briefingFields(form: FormData) {
   const minutes = int(form, "time_limit_min");
+  // Map pin "lat, lng" (pasted from Google Maps or from "Use my location"). Blank = no location check.
+  const pin = String(form.get("pin") ?? "").match(/(-?\d{1,2}(?:\.\d+)?)\s*[, ]\s*(-?\d{1,3}(?:\.\d+)?)/);
+  const lat = pin ? Number(pin[1]) : null;
+  const lng = pin ? Number(pin[2]) : null;
+  const radius = int(form, "radius_m");
+  const stay = int(form, "dwell_sec");
   return {
+    lat: lat !== null && Math.abs(lat) <= 90 ? lat : null,
+    lng: lng !== null && Math.abs(lng) <= 180 ? lng : null,
+    radius_m: radius ? Math.min(500, Math.max(10, radius)) : 40,
+    dwell_sec: stay === null ? 90 : Math.min(1800, Math.max(0, stay)),
     where_text: text(form, "where_text", 300),
     briefing: text(form, "briefing", 1500),
     time_limit_min: minutes && minutes > 0 ? Math.min(240, minutes) : null,

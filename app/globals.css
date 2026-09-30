@@ -2162,3 +2162,51 @@ button.button {
 .plaque--start {
   border: 6px solid #ff9f1c;
 }
+.mission__stay {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--chapter-teal);
+  color: var(--asphalt);
+  font-weight: 600;
+}
+.mission__hint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #5a6067;
+}
+.mission__map {
+  margin-left: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #b86e00;
+}
+.mission__fallback {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #5a6067;
+}
+.admin-verify {
+  margin: 4px 0;
+  padding: 12px;
+  border: 2px solid #d4d7db;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-verify legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+.pin-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.pin-input input {
+  flex: 1 1 200px;
+}

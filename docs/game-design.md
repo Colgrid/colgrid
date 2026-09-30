@@ -214,7 +214,7 @@ They return because their team is there, every gathering is new, and each one mo
 | Infinite progress | Your level only goes up, in any city |
 | Scarcity | Capped attendance, rare multi-city badges, earned flagship spots |
 
-Fair play (Proposed): a host shows the quest's log code only after the quest is done; stagger starts and cap teams per stop; a simple code of play (respect hosts, non-players and neighbors); no joining the tournament after the season's 2nd session.
+Fair play (Proposed): stops are verified without a person there: the phone must be at the stop's map pin and, where set, the team types an answer only visible on site (decided Sept 30, 2026); host codes stay as a backup, shown only after the quest is done; tournament teams add a photo at each stop (later); stagger starts and cap teams per stop; a simple code of play (respect hosts, non-players and neighbors); no joining the tournament after the season's 2nd session.
 
 ## 13. Hosts and chapter leads
 

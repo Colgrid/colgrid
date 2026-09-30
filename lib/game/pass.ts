@@ -34,7 +34,7 @@ export type PassQuest = {
   where_text?: string | null;
   briefing?: string | null;
   time_limit_min?: number | null;
-  verify?: "code" | "answer";
+  verify?: "code" | "answer" | "location" | "location+answer";
   completed_at?: string | null;
 };
 
