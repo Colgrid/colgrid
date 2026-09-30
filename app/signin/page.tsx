@@ -4,6 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { safeNext } from "@/lib/safe-next";
+import { SITE } from "@/lib/site";
 import SignInForm from "./SignInForm";
 
 // Private page: keep it out of search results.
@@ -38,7 +39,14 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
       </div>
 
       <p className="fine-print">
-        Use the email you bought your ticket with. New here? <Link href="/">Tickets open soon.</Link>
+        Use the email you bought your ticket with. New here?{" "}
+        {SITE.nextGathering.ticketsOpen ? (
+          <a href={SITE.nextGathering.ticketUrl} rel="noopener">
+            Get a ticket for {SITE.nextGathering.when.split(" · ")[0]}
+          </a>
+        ) : (
+          <Link href="/">Tickets open soon.</Link>
+        )}
       </p>
     </main>
   );
