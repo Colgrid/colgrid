@@ -30,6 +30,12 @@ export type PassQuest = {
   unlocked: boolean;
   completed: boolean;
   points: number | null;
+  // Guided mode: the mission briefing. Answers and codes never reach the pass.
+  where_text?: string | null;
+  briefing?: string | null;
+  time_limit_min?: number | null;
+  verify?: "code" | "answer";
+  completed_at?: string | null;
 };
 
 export type QuestState =
@@ -41,7 +47,8 @@ export type QuestState =
   | "judged"  // a challenge the game master scores; nothing to check in
   | "missed"; // after the session closed: a quest the team didn't complete
 
-export type QuestView = PassQuest & { state: QuestState };
+// mission: 1, 2, 3… in this team's route order (main quests only).
+export type QuestView = PassQuest & { state: QuestState; mission?: number };
 
 export type SessionPick = {
   live: PassSession | null; // happening now
@@ -65,23 +72,32 @@ function byStop(a: PassQuest, b: PassQuest): number {
   return (a.title ?? "").localeCompare(b.title ?? "");
 }
 
-// Main quests in stop order, then judged challenges, then hidden quests. While a session is live, the
-// first unfinished main quest is active and later ones are locked. After it closes, unfinished quests
-// show as missed, and hidden quests nobody found stay hidden for good.
-export function questViews(quests: readonly PassQuest[], sessionStatus: "live" | "closed"): QuestView[] {
-  const main = quests.filter((q) => !q.is_hidden && !q.is_judged).sort(byStop);
+// Rotates the stops so teams spread out: route slot 0 starts at the first stop, slot 1 at the
+// second, and so on, wrapping around (8 teams on 4 stops = 2 teams per stop at a time).
+export function routeOrder<T>(stops: readonly T[], slot: number | null | undefined): T[] {
+  if (!stops.length || !slot) return [...stops];
+  const k = ((slot % stops.length) + stops.length) % stops.length;
+  return [...stops.slice(k), ...stops.slice(0, k)];
+}
+
+// Main quests in this team's route order, then judged challenges, then hidden quests. While a
+// session is live, the first unfinished main quest is active and later ones are locked. After it
+// closes, unfinished quests show as missed, and hidden quests nobody found stay hidden for good.
+export function questViews(quests: readonly PassQuest[], sessionStatus: "live" | "closed", slot: number | null = null): QuestView[] {
+  const main = routeOrder(quests.filter((q) => !q.is_hidden && !q.is_judged).sort(byStop), slot);
   const judged = quests.filter((q) => !q.is_hidden && q.is_judged).sort(byStop);
   const hidden = quests.filter((q) => q.is_hidden).sort(byStop);
   let activeGiven = false;
 
-  const mainViews: QuestView[] = main.map((q) => {
-    if (q.completed) return { ...q, state: "done" };
-    if (sessionStatus === "closed") return { ...q, state: "missed" };
+  const mainViews: QuestView[] = main.map((q, i) => {
+    const mission = i + 1;
+    if (q.completed) return { ...q, state: "done", mission };
+    if (sessionStatus === "closed") return { ...q, state: "missed", mission };
     if (!activeGiven) {
       activeGiven = true;
-      return { ...q, state: "active" };
+      return { ...q, state: "active", mission };
     }
-    return { ...q, state: "locked" };
+    return { ...q, state: "locked", mission };
   });
 
   const judgedViews: QuestView[] = judged.map((q) => {
@@ -104,6 +120,12 @@ export function questViews(quests: readonly PassQuest[], sessionStatus: "live" |
 // The quest the team is on right now, if any.
 export function activeQuest(views: readonly QuestView[]): QuestView | null {
   return views.find((v) => v.state === "active") ?? null;
+}
+
+// Every main mission done (and there was at least one): time for the finale.
+export function allMainDone(views: readonly QuestView[]): boolean {
+  const main = views.filter((v) => v.mission !== undefined);
+  return main.length > 0 && main.every((v) => v.state === "done");
 }
 
 export function questProgress(views: readonly QuestView[]): { done: number; total: number } {

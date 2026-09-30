@@ -89,7 +89,7 @@ export default function CheckInForm({ initialCode }: { initialCode: string }) {
         )}
 
         <Link href="/pass" className="button button--primary" style={{ marginTop: 28 }}>
-          Back to pass
+          See your next mission
         </Link>
         <button
           type="button"

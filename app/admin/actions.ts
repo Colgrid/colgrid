@@ -22,6 +22,17 @@ function int(form: FormData, key: string): number | null {
   const n = Number(v);
   return Number.isFinite(n) ? Math.round(n) : null;
 }
+// Guided mode: the mission briefing players see when the quest unlocks.
+function briefingFields(form: FormData) {
+  const minutes = int(form, "time_limit_min");
+  return {
+    where_text: text(form, "where_text", 300),
+    briefing: text(form, "briefing", 1500),
+    time_limit_min: minutes && minutes > 0 ? Math.min(240, minutes) : null,
+    answer: text(form, "answer", 200),
+  };
+}
+
 function back(path: string, msg: string): never {
   redirect(`${path}${path.includes("?") ? "&" : "?"}msg=${encodeURIComponent(msg)}`);
 }
@@ -41,6 +52,9 @@ function sessionFields(form: FormData) {
     start_location: text(form, "start_location", 200),
     revealed_at: revealAt,
     is_finals: form.get("is_finals") === "on",
+    finale_name: text(form, "finale_name", 120),
+    finale_where: text(form, "finale_where", 300),
+    finale_at: localToIso(String(form.get("finale_at") ?? "")),
   };
 }
 
@@ -91,6 +105,7 @@ export async function createQuest(form: FormData) {
     host_id: text(form, "host_id", 64),
     max_points: int(form, "max_points"),
     host_fee_cents: feeDollars ? Math.round(Number(feeDollars) * 100) || null : null,
+    ...briefingFields(form),
   });
   if (error) back(`/admin/sessions/${sessionId}`, "Couldn't add the quest.");
   revalidatePath(`/admin/sessions/${sessionId}`);
@@ -119,6 +134,7 @@ export async function updateQuest(form: FormData) {
       host_id: text(form, "host_id", 64),
       max_points: int(form, "max_points"),
       host_fee_cents: feeDollars ? Math.round(Number(feeDollars) * 100) || null : null,
+      ...briefingFields(form),
     })
     .eq("id", id);
   revalidatePath(`/admin/sessions/${sessionId}`);
