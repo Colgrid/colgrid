@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPage from "@/app/components/LegalPage";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Privacy", description: "What Colgrid collects and how it's used.", alternates: { canonical: "/privacy" } };
 
 export default function Privacy() {
   return (
     <LegalPage title="Privacy" updated="September 30, 2026">
-      <p>Short version: we collect what we need to run the game, we don&apos;t sell it, and you can ask us to delete it.</p>
+      <p>
+        This policy explains how {SITE.legalName} (&ldquo;Colgrid,&rdquo; &ldquo;we&rdquo;) handles your information. Short version: we collect
+        what we need to run the game, we don&apos;t sell it, and you can ask us to delete it.
+      </p>
 
       <h2>What we collect</h2>
       <ul>

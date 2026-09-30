@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPage from "@/app/components/LegalPage";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Terms", description: "The terms for playing Colgrid.", alternates: { canonical: "/terms" } };
 
@@ -8,8 +9,8 @@ export default function Terms() {
   return (
     <LegalPage title="Terms" updated="September 30, 2026">
       <p>
-        These terms cover playing Colgrid and using getcolgrid.com and your Colgrid pass. By buying a ticket or using the site, you agree to
-        them. Colgrid is based in Salt Lake City, Utah.
+        These terms cover playing Colgrid and using getcolgrid.com and your Colgrid pass. Colgrid is run by {SITE.legalName} (&ldquo;Colgrid,&rdquo;
+        &ldquo;we&rdquo;), based in Utah. By buying a ticket or using the site, you agree to them.
       </p>
 
       <h2>Tickets</h2>
