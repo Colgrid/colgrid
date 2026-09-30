@@ -152,10 +152,7 @@ export default function Home() {
         <Image src="/brand/colgrid-logo.png" alt="Colgrid" width={96} height={96} priority style={{ transform: "scale(1.7)" }} />
       </span>
 
-      <p className="mono" style={{ color: "var(--chapter-teal)", letterSpacing: "0.12em", fontSize: 13, marginTop: 28 }}>
-        SALT LAKE CITY
-      </p>
-      <h1 style={{ fontSize: 44, marginTop: 8 }}>Turn your city into a game board.</h1>
+      <h1 style={{ fontSize: 44, marginTop: 28 }}>Turn your city into a game board.</h1>
       <p style={{ fontSize: 18, lineHeight: 1.45, color: "var(--ink-muted)", marginTop: 16 }}>
         Colgrid is a real-world team game. Meet your team in one walkable neighborhood. Take on missions hosted by local makers,
         kitchens and guides. Your XP follows you to every city.
@@ -232,10 +229,7 @@ export default function Home() {
       </section>
 
       <section className="section lead-card" id="corporate" aria-labelledby="corporate-h">
-        <p className="mono lead-card__kicker" style={{ color: "var(--beacon-amber)" }}>
-          CORPORATE PRIVATE RUNS · FROM $2,500
-        </p>
-        <h2 id="corporate-h" className="lead-card__title">
+        <h2 id="corporate-h" className="lead-card__title" style={{ marginTop: 0 }}>
           Your team, a whole neighborhood, one afternoon.
         </h2>
         <p className="lead-card__body">
@@ -246,10 +240,7 @@ export default function Home() {
       </section>
 
       <section className="section lead-card" id="host" aria-labelledby="host-h">
-        <p className="mono lead-card__kicker" style={{ color: "var(--chapter-teal)" }}>
-          FOR LOCAL MAKERS, KITCHENS AND GUIDES
-        </p>
-        <h2 id="host-h" className="lead-card__title">
+        <h2 id="host-h" className="lead-card__title" style={{ marginTop: 0 }}>
           Host a quest.
         </h2>
         <p className="lead-card__body">
@@ -274,11 +265,7 @@ export default function Home() {
       </section>
 
       <footer className="home-footer">
-        <p className="home-footer__brand">
-          <strong>Colgrid</strong>
-          <br />
-          {SITE.location}
-        </p>
+        <p className="home-footer__brand">{SITE.footerLine}</p>
         <ul className="social" aria-label="Colgrid elsewhere">
           {SITE.social.map((s) => (
             <li key={s.name}>

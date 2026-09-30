@@ -14,6 +14,8 @@ export const SITE = {
   region: "UT",
   country: "US",
   location: "Salt Lake City, Utah",
+  // The one line at the bottom of every page. "Salt Lake City" stays in for local search.
+  footerLine: "Colgrid creates fun team experiences with games, challenges, food and local adventures in Salt Lake City.",
   // Where form submissions (corporate, host, contact) are sent. Never shown on the site:
   // visitors use the contact form, which keeps the address away from spam bots.
   notifyEmail: "colgridco@gmail.com",
