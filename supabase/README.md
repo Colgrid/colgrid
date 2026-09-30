@@ -5,6 +5,7 @@
 | `migrations/20260928000001_init.sql` | All tables, the game rules, and row-level security |
 | `migrations/20260928000002_signin.sql` | Sign-in: links a ticket to an account by email and awards the Founding badge |
 | `migrations/20260928000003_grants.sql` | Lets the website's signed-in and signed-out roles reach the tables (row-level security still decides which rows) |
+| `migrations/20260929000007_add_player.sql` | Add one player by hand (comps, walk-ins) from the admin or the console |
 | `migrations/20260928000006_gm.sql` | Game master console: attendance, start/close (session badge), survey link |
 | `migrations/20260928000005_admin.sql` | Admin: pilot season (Season 00), tickets, generated quest codes, Eventbrite import, "coming with" answer |
 | `migrations/20260928000004_checkin.sql` | Quest check-in: codes, XP to present teammates, tournament points, all-quests bonus, code-guessing limit |
@@ -14,6 +15,7 @@
 | `tests/30_checkin.test.sql` | 13 checks on check-in and XP |
 | `tests/40_admin.test.sql` | 6 checks on the admin import |
 | `tests/50_gm.test.sql` | 3 checks on running the night |
+| `tests/60_add_player.test.sql` | 3 checks on adding a player by hand |
 | `templates/` | Branded sign-in emails to paste into Supabase |
 | `tests/00_local_supabase_stub.sql` | Local testing only; never run on Supabase |
 
@@ -84,12 +86,14 @@ psql -d colgrid_test -f supabase/migrations/20260928000003_grants.sql
 psql -d colgrid_test -f supabase/migrations/20260928000004_checkin.sql
 psql -d colgrid_test -f supabase/migrations/20260928000005_admin.sql
 psql -d colgrid_test -f supabase/migrations/20260928000006_gm.sql
+psql -d colgrid_test -f supabase/migrations/20260929000007_add_player.sql
 psql -d colgrid_test -f supabase/seed.sql
 psql -d colgrid_test -f supabase/tests/10_rules.test.sql
 psql -d colgrid_test -f supabase/tests/20_signin.test.sql
 psql -d colgrid_test -f supabase/tests/30_checkin.test.sql
 psql -d colgrid_test -f supabase/tests/40_admin.test.sql
 psql -d colgrid_test -f supabase/tests/50_gm.test.sql
+psql -d colgrid_test -f supabase/tests/60_add_player.test.sql
 ```
 
 Every line should read `PASS`.

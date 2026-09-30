@@ -2,9 +2,14 @@ import Link from "next/link";
 import { requireAdmin } from "@/lib/admin/guard";
 import { rows } from "@/lib/rows";
 import { formatWhen } from "@/lib/time";
+import AddPlayerForm from "@/app/components/AddPlayerForm";
+import { removeTicket } from "../actions";
+import Notice from "../Notice";
 
 type Session = { id: string; number: number; neighborhood: string | null; starts_at: string | null; season: { number: number; name: string | null } | null };
 type Ticket = {
+  id: string;
+  source: string;
   order_ref: string | null;
   player: { id: string; name: string; email: string; coming_with: string | null; user_id: string | null; welcomed_at: string | null } | null;
 };
@@ -18,8 +23,8 @@ const LABELS: Record<string, string> = {
   other: "Other",
 };
 
-export default async function Players({ searchParams }: { searchParams: Promise<{ session?: string }> }) {
-  const { session: sessionParam } = await searchParams;
+export default async function Players({ searchParams }: { searchParams: Promise<{ session?: string; msg?: string }> }) {
+  const { session: sessionParam, msg } = await searchParams;
   const { supabase } = await requireAdmin();
   const { data: sessionData } = await supabase
     .from("session")
@@ -32,7 +37,7 @@ export default async function Players({ searchParams }: { searchParams: Promise<
   if (current) {
     const { data } = await supabase
       .from("ticket")
-      .select("order_ref, player:player_id (id, name, email, coming_with, user_id, welcomed_at)")
+      .select("id, source, order_ref, player:player_id (id, name, email, coming_with, user_id, welcomed_at)")
       .eq("session_id", current.id);
     tickets = rows<Ticket>(data).filter((t) => t.player);
     tickets.sort((a, b) => (a.order_ref ?? "").localeCompare(b.order_ref ?? "") || a.player!.name.localeCompare(b.player!.name));
@@ -51,6 +56,7 @@ export default async function Players({ searchParams }: { searchParams: Promise<
   return (
     <>
       <h1 className="admin-title">Players</h1>
+      <Notice msg={msg} />
       {sessions.length > 1 && (
         <p className="admin-meta">
           {sessions.map((s) => (
@@ -79,6 +85,10 @@ export default async function Players({ searchParams }: { searchParams: Promise<
               <strong>{signedIn}</strong>
             </div>
           </div>
+          <details className="admin-form-toggle">
+            <summary>+ Add a player by hand (comp, invited friend, walk-in)</summary>
+            <AddPlayerForm sessionId={current.id} returnTo={`/admin/players?session=${current.id}`} className="admin-form" />
+          </details>
           {tickets.length > 0 && (
             <p className="admin-hint">
               Coming with:{" "}
@@ -101,6 +111,7 @@ export default async function Players({ searchParams }: { searchParams: Promise<
                   <th>With</th>
                   <th>Order</th>
                   <th>Pass</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -109,8 +120,18 @@ export default async function Players({ searchParams }: { searchParams: Promise<
                     <td>{t.player!.name}</td>
                     <td>{t.player!.email}</td>
                     <td>{LABELS[t.player!.coming_with ?? ""] ?? "—"}</td>
-                    <td>{t.order_ref ?? "—"}</td>
+                    <td>{t.order_ref ?? (t.source === "manual" ? "added" : "—")}</td>
                     <td>{t.player!.user_id ? "Signed in" : t.player!.welcomed_at ? "Emailed" : "Not yet"}</td>
+                    <td>
+                      <form action={removeTicket}>
+                        <input type="hidden" name="ticket_id" value={t.id} />
+                        <input type="hidden" name="session_id" value={current.id} />
+                        <input type="hidden" name="player_id" value={t.player!.id} />
+                        <button type="submit" className="link-button link-button--danger" title="For refunds. Only before they've played.">
+                          Remove
+                        </button>
+                      </form>
+                    </td>
                   </tr>
                 ))}
               </tbody>

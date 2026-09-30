@@ -97,10 +97,30 @@ const jsonLd = {
   ],
 };
 
+const next = SITE.nextGathering;
+
+// Listed for search engines only once tickets are open (the Eventbrite page stays private until then).
+const eventLd = next.ticketsOpen
+  ? {
+      "@type": "Event",
+      "@id": `${SITE.url}/#next-gathering`,
+      name: next.name,
+      startDate: next.startsAt,
+      endDate: next.endsAt,
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: { "@type": "Place", name: `${next.neighborhood}, Salt Lake City`, address: { "@type": "PostalAddress", addressLocality: "Salt Lake City", addressRegion: "UT", addressCountry: "US" } },
+      organizer: { "@id": `${SITE.url}/#organization` },
+      typicalAgeRange: "18-",
+      offers: { "@type": "Offer", price: next.price, priceCurrency: "USD", url: next.ticketUrl, availability: "https://schema.org/InStock" },
+    }
+  : null;
+
 export default function Home() {
+  const structured = eventLd ? { ...jsonLd, "@graph": [...jsonLd["@graph"], eventLd] } : jsonLd;
   return (
     <main className="page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured).replace(/</g, "\\u003c") }} />
 
       <span className="logo-tile">
         {/* Scaled inside the tile to trim the file's white margin, as in the mockups. The logo itself is unchanged. */}
@@ -121,9 +141,25 @@ export default function Home() {
         <span className="chip chip--tournament">TOURNAMENT</span>
       </div>
 
-      <p style={{ fontSize: 16, lineHeight: 1.45, color: "var(--ink-subtle)", marginTop: 32 }}>
-        The first Colgrid gathering is coming to 9th & 9th in October. Tickets are $75 and open soon.
-      </p>
+      <section className="next-card" aria-labelledby="next">
+        <p id="next" className="mono next-card__kicker">
+          NEXT GATHERING · THE FIRST ONE
+        </p>
+        <p className="next-card__when">{next.when}</p>
+        <p className="next-card__where">
+          {next.neighborhood}, Salt Lake City · start location drops 48 hours before
+        </p>
+        <p className="next-card__meta">
+          3–4 hosted missions, local tastings, a finale meal and a keepsake. Adults 18+. ${next.price} per person.
+        </p>
+        {next.ticketsOpen ? (
+          <a href={next.ticketUrl} className="button button--primary" style={{ marginTop: 16 }} rel="noopener">
+            Get tickets · ${next.price}
+          </a>
+        ) : (
+          <p className="next-card__soon mono">TICKETS OPEN SOON</p>
+        )}
+      </section>
 
       <Link href="/signin" className="button button--secondary" style={{ marginTop: 24 }}>
         Have a ticket? Open your pass

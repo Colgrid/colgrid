@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/guard";
 import { rows } from "@/lib/rows";
 import { formatWhen, isoToLocal } from "@/lib/time";
-import { createQuest, deleteQuest, updateSession } from "../../actions";
+import { createQuest, deleteQuest, updateQuest, updateSession } from "../../actions";
 import Notice from "../../Notice";
 
 type Session = {
@@ -19,6 +19,7 @@ type Session = {
 };
 type Quest = {
   id: string;
+  host_id: string | null;
   stop_number: number | null;
   title: string;
   type: string;
@@ -46,7 +47,7 @@ export default async function AdminSession({ params, searchParams }: { params: P
       .maybeSingle(),
     supabase
       .from("quest")
-      .select("id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, host:host_id (business)")
+      .select("id, host_id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, host:host_id (business)")
       .eq("session_id", id),
     supabase.from("host").select("id, business").order("business"),
     supabase.from("ticket").select("id", { count: "exact", head: true }).eq("session_id", id),
@@ -117,6 +118,64 @@ export default async function AdminSession({ params, searchParams }: { params: P
                     </button>
                   </form>
                 </div>
+                <details className="admin-quest__edit">
+                  <summary>Edit</summary>
+                  <form action={updateQuest} className="admin-form">
+                    <input type="hidden" name="id" value={q.id} />
+                    <input type="hidden" name="session_id" value={session.id} />
+                    <label>
+                      Title
+                      <input name="title" required maxLength={120} defaultValue={q.title} />
+                    </label>
+                    <label>
+                      Type
+                      <select name="type" defaultValue={q.type}>
+                        {QUEST_TYPES.map((t) => (
+                          <option key={t} value={t}>
+                            {t.replace("_", " ")}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label>
+                      Host
+                      <select name="host_id" defaultValue={q.host_id ?? ""}>
+                        <option value="">No host</option>
+                        {hosts.map((h) => (
+                          <option key={h.id} value={h.id}>
+                            {h.business}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label>
+                      Stop number
+                      <input name="stop_number" type="number" min={1} defaultValue={q.stop_number ?? ""} />
+                    </label>
+                    <label className="admin-check">
+                      <input name="is_hidden" type="checkbox" defaultChecked={q.is_hidden} /> Hidden quest
+                    </label>
+                    <label className="admin-check">
+                      <input name="is_judged" type="checkbox" defaultChecked={q.is_judged} /> Judged challenge
+                    </label>
+                    <label>
+                      XP
+                      <input name="xp" type="number" min={1} max={500} defaultValue={q.xp} />
+                    </label>
+                    <label>
+                      Tournament points (optional)
+                      <input name="max_points" type="number" min={1} max={100} defaultValue={q.max_points ?? ""} />
+                    </label>
+                    <label>
+                      Host fee in dollars (admin only)
+                      <input name="host_fee" type="number" min={0} step="1" defaultValue={q.host_fee_cents != null ? q.host_fee_cents / 100 : ""} />
+                    </label>
+                    <button className="button button--dark" type="submit">
+                      Save quest
+                    </button>
+                    <p className="admin-hint">The code ({q.code}) stays the same, so printed plaques still work.</p>
+                  </form>
+                </details>
               </li>
             ))}
           </ul>

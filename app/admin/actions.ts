@@ -97,6 +97,35 @@ export async function createQuest(form: FormData) {
   back(`/admin/sessions/${sessionId}`, `Added "${title}".`);
 }
 
+export async function updateQuest(form: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = text(form, "id", 64);
+  const sessionId = text(form, "session_id", 64);
+  const title = text(form, "title", 120);
+  const type = text(form, "type", 20);
+  if (!id || !title || !type || !QUEST_TYPES.includes(type)) back(`/admin/sessions/${sessionId}`, "A quest needs a title and a type.");
+  const isHidden = form.get("is_hidden") === "on";
+  const isJudged = form.get("is_judged") === "on";
+  const feeDollars = text(form, "host_fee", 12);
+  const { error } = await supabase
+    .from("quest")
+    .update({
+      title,
+      type,
+      stop_number: isHidden || isJudged ? null : int(form, "stop_number"),
+      xp: Math.max(1, int(form, "xp") ?? (isHidden ? 30 : 25)),
+      is_hidden: isHidden,
+      is_judged: isJudged,
+      host_id: text(form, "host_id", 64),
+      max_points: int(form, "max_points"),
+      host_fee_cents: feeDollars ? Math.round(Number(feeDollars) * 100) || null : null,
+    })
+    .eq("id", id);
+  revalidatePath(`/admin/sessions/${sessionId}`);
+  // XP already earned for this quest stays as it was: progress only goes up.
+  back(`/admin/sessions/${sessionId}`, error ? "Couldn't save the quest." : `Saved "${title}".`);
+}
+
 export async function deleteQuest(form: FormData) {
   const { supabase } = await requireAdmin();
   const id = text(form, "id", 64);
@@ -187,4 +216,20 @@ export async function sendWelcome(sessionId: string): Promise<WelcomeResult> {
   }
   revalidatePath("/admin/players");
   return { sent: sent.length, alreadyWelcomed: players.length - pending.length, error };
+}
+
+// Remove a ticket (e.g. a refund). Only before they've been checked in: once someone has played,
+// their attendance, XP and badges stay (progress only goes up).
+export async function removeTicket(form: FormData) {
+  const { supabase } = await requireAdmin();
+  const ticketId = text(form, "ticket_id", 64);
+  const sessionId = text(form, "session_id", 64);
+  const playerId = text(form, "player_id", 64);
+  const path = `/admin/players?session=${sessionId}`;
+  if (!ticketId || !sessionId || !playerId) back(path, "Missing ticket.");
+  const { data: here } = await supabase.from("attendance").select("player_id").eq("session_id", sessionId).eq("player_id", playerId);
+  if (rows(here).length) back(path, "They already played this session, so their ticket stays.");
+  const { error } = await supabase.from("ticket").delete().eq("id", ticketId);
+  revalidatePath("/admin/players");
+  back(path, error ? "Couldn't remove the ticket." : "Ticket removed. Their pass stays, but they're off this session's list.");
 }
