@@ -14,6 +14,10 @@ type Session = {
   start_location: string | null;
   revealed_at: string | null;
   reveal_emailed_at: string | null;
+  start_code: string;
+  finale_name: string | null;
+  finale_where: string | null;
+  finale_at: string | null;
   status: string;
   is_finals: boolean;
   season: { number: number; name: string | null } | null;
@@ -30,6 +34,10 @@ type Quest = {
   code: string;
   max_points: number | null;
   host_fee_cents: number | null;
+  where_text: string | null;
+  briefing: string | null;
+  time_limit_min: number | null;
+  answer: string | null;
   host: { business: string } | null;
 };
 
@@ -43,12 +51,12 @@ export default async function AdminSession({ params, searchParams }: { params: P
   const [sessionRes, questRes, hostRes, ticketRes] = await Promise.all([
     supabase
       .from("session")
-      .select("id, number, neighborhood, starts_at, start_location, revealed_at, reveal_emailed_at, status, is_finals, season:season_id (number, name)")
+      .select("id, number, neighborhood, starts_at, start_location, revealed_at, reveal_emailed_at, start_code, finale_name, finale_where, finale_at, status, is_finals, season:season_id (number, name)")
       .eq("id", id)
       .maybeSingle(),
     supabase
       .from("quest")
-      .select("id, host_id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, host:host_id (business)")
+      .select("id, host_id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, where_text, briefing, time_limit_min, answer, host:host_id (business)")
       .eq("session_id", id),
     supabase.from("host").select("id, business").order("business"),
     supabase.from("ticket").select("id", { count: "exact", head: true }).eq("session_id", id),
@@ -79,6 +87,11 @@ export default async function AdminSession({ params, searchParams }: { params: P
         <Link href={`/admin/players?session=${session.id}`}>{ticketRes.count ?? 0} players</Link>
       </p>
       <Notice msg={msg} />
+
+      <p className="admin-meta">
+        Start code <span className="code-chip mono">{session.start_code}</span> · players scan the start sign (on the plaques page) to check
+        in, get placed on a team and unlock mission 1. It works from 30 minutes before the start and starts the session by itself.
+      </p>
 
       <div className="admin-actions">
         <Link href={`/admin/sessions/${session.id}/plaques`} className="button button--primary">
@@ -160,6 +173,22 @@ export default async function AdminSession({ params, searchParams }: { params: P
                       <input name="is_judged" type="checkbox" defaultChecked={q.is_judged} /> Judged challenge
                     </label>
                     <label>
+                      Where to go (shown when the mission unlocks)
+                      <input name="where_text" maxLength={300} defaultValue={q.where_text ?? ""} />
+                    </label>
+                    <label>
+                      What to do
+                      <textarea name="briefing" rows={3} maxLength={1500} defaultValue={q.briefing ?? ""} />
+                    </label>
+                    <label>
+                      Target minutes (optional countdown)
+                      <input name="time_limit_min" type="number" min={1} max={240} defaultValue={q.time_limit_min ?? ""} />
+                    </label>
+                    <label>
+                      Answer (puzzle stops only: players type this instead of a host code; separate options with |)
+                      <input name="answer" maxLength={200} defaultValue={q.answer ?? ""} />
+                    </label>
+                    <label>
                       XP
                       <input name="xp" type="number" min={1} max={500} defaultValue={q.xp} />
                     </label>
@@ -222,6 +251,22 @@ export default async function AdminSession({ params, searchParams }: { params: P
               <input name="is_judged" type="checkbox" /> Judged challenge (scored by the game master; no code check-in)
             </label>
             <label>
+              Where to go (shown when the mission unlocks)
+              <input name="where_text" maxLength={300} placeholder="e.g. Kiln & Co, 912 E 900 S (green door)" />
+            </label>
+            <label>
+              What to do
+              <textarea name="briefing" rows={3} maxLength={1500} placeholder="e.g. Ask the counter for the Colgrid craft kit. Build your team's badge together." />
+            </label>
+            <label>
+              Target minutes (optional countdown)
+              <input name="time_limit_min" type="number" min={1} max={240} placeholder="e.g. 20" />
+            </label>
+            <label>
+              Answer (puzzle stops only: players type this instead of a host code; separate options with |)
+              <input name="answer" maxLength={200} placeholder="e.g. 1912|nineteen twelve" />
+            </label>
+            <label>
               XP (blank = 25, or 30 for hidden)
               <input name="xp" type="number" min={1} max={500} />
             </label>
@@ -268,6 +313,18 @@ export default async function AdminSession({ params, searchParams }: { params: P
                 ? `The reveal email goes to every ticket holder automatically at ${formatWhen(session.revealed_at)}.`
                 : "Add the start location and the reveal email goes out automatically at the reveal time."}
           </p>
+          <label>
+            Finale place (shown once a team finishes every mission)
+            <input name="finale_name" maxLength={120} defaultValue={session.finale_name ?? ""} placeholder="e.g. Pago" />
+          </label>
+          <label>
+            Finale address
+            <input name="finale_where" maxLength={300} defaultValue={session.finale_where ?? ""} />
+          </label>
+          <label>
+            Finale time (Salt Lake time)
+            <input name="finale_at" type="datetime-local" defaultValue={isoToLocal(session.finale_at)} />
+          </label>
           <label className="admin-check">
             <input name="is_finals" type="checkbox" defaultChecked={session.is_finals} /> Chapter Finals
           </label>

@@ -220,7 +220,7 @@ Fair play (Proposed): a host shows the quest's log code only after the quest is 
 
 **Locked:** local makers, cooks and guides host quests instead of renting tables; they're paid a host fee ($180–$240 per stop). A chapter playbook with fixed rituals, rules and standards keeps every city consistent. Each city's lead is trained and certified; leads grow from the most active alumni; later, chapters are licensed to partners.
 
-Pilot: 3–4 paid quest hosts, a start venue, a final venue for the shared meal and finale, and one game master on the night.
+Pilot: 3–4 paid quest hosts, a start venue, a final venue for the shared meal and finale, and one game master on the night. The app runs the quest flow (guided mode); the game master only handles exceptions, which is what lets a chapter run without a full-time game master.
 
 ## 14. Host-city value and impact (Locked)
 

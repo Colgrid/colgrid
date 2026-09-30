@@ -51,3 +51,14 @@ test("every failure has plain words", () => {
     if (v.kind === "error") assert.ok(v.title.length > 0 && v.message.length > 0);
   }
 });
+
+test("the start sign checks you in and points to the first mission", () => {
+  const v = describeCheckIn({ status: "arrived", team_name: "The Night Owls", xp_before: 0, xp_after: 50, breakdown: [{ reason: "attend", amount: 50 }] });
+  assert.equal(v.kind, "success");
+  if (v.kind !== "success") return;
+  assert.equal(v.headline, "You're in.");
+  assert.equal(v.questTitle, "Your team: The Night Owls");
+  assert.equal(v.xpGained, 50);
+  assert.equal(describeCheckIn({ status: "too_early" }).kind, "error");
+  assert.equal(describeCheckIn({ status: "wrong_answer" }).kind, "error");
+});

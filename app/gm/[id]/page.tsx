@@ -32,6 +32,7 @@ type Session = {
   revealed_at: string | null;
   status: "scheduled" | "live" | "closed";
   survey_url: string | null;
+  start_code: string;
   season: { number: number; name: string | null } | null;
 };
 type Ticket = { order_ref: string | null; player: { id: string; name: string; email: string } | null };
@@ -48,7 +49,7 @@ export default async function RunSheet({ params, searchParams }: { params: Promi
 
   const { data: sessionData } = await supabase
     .from("session")
-    .select("id, number, season_id, neighborhood, starts_at, start_location, revealed_at, status, survey_url, season:season_id (number, name)")
+    .select("id, number, season_id, neighborhood, starts_at, start_location, revealed_at, status, survey_url, start_code, season:season_id (number, name)")
     .eq("id", id)
     .maybeSingle();
   const session = sessionData as unknown as Session | null;
@@ -168,7 +169,10 @@ export default async function RunSheet({ params, searchParams }: { params: Promi
           <input type="hidden" name="session_id" value={id} />
           <div>
             <strong>Not started</strong>
-            <p>Starting opens check-in: quest codes work and passes show tonight&apos;s quests.</p>
+            <p>
+              Starting opens check-in: quest codes work and passes show tonight&apos;s quests. It also starts by itself when the first player
+              scans the start sign (code <span className="mono">{session.start_code}</span>), from 30 minutes before.
+            </p>
           </div>
           <button type="submit" className="button button--primary">
             Start session

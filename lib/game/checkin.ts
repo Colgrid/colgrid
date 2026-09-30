@@ -11,6 +11,10 @@ export type CheckInStatus =
   | "no_team"
   | "no_pass"
   | "too_many"
+  | "arrived"      // start code: checked in for the night
+  | "already_here" // start code scanned again
+  | "too_early"    // start code more than 30 minutes before the start
+  | "wrong_answer" // puzzle stop
   | "error";
 
 export type XpReason = "attend" | "quest" | "hidden_quest" | "all_main_quests" | "adjustment";
@@ -29,6 +33,7 @@ export type CheckInResult = {
   breakdown?: { reason: XpReason; amount: number }[];
   new_badges?: { key: string; name: string }[];
   session_number?: number;
+  starts_at?: string | null;
 };
 
 export type CheckInView =
@@ -77,7 +82,7 @@ export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => Leve
         message: `${r.quest_title ?? "This challenge"} is scored by the game master. Just bring your best.`,
       };
     case "no_team":
-      return { kind: "error", title: "You're not on a team yet.", message: "Find a game master. They'll put you on one." };
+      return { kind: "error", title: "You're not on a team yet.", message: "Scan the Colgrid sign at the start, or find the Colgrid crew." };
     case "no_pass":
       return { kind: "error", title: "We can't find your pass.", message: "Sign in with the email on your ticket." };
     case "too_many":
@@ -88,6 +93,30 @@ export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => Leve
       };
     case "error":
       return { kind: "error", title: "Something went wrong.", message: "Your code wasn't counted. Try again in a moment." };
+    case "too_early":
+      return { kind: "error", title: "Not yet.", message: "Check-in at the start opens 30 minutes before the session. Grab a coffee." };
+    case "wrong_answer":
+      return { kind: "error", title: "Not quite.", message: "Look again. The answer is out there." };
+    case "arrived":
+    case "already_here": {
+      const beforeXp = r.xp_before ?? 0;
+      const afterXp = r.xp_after ?? beforeXp;
+      const before = levelFor(beforeXp);
+      const after = levelFor(afterXp);
+      return {
+        kind: "success",
+        headline: r.status === "arrived" ? "You're in." : "You're already checked in.",
+        questTitle: r.team_name ? `Your team: ${r.team_name}` : "",
+        xpGained: Math.max(0, afterXp - beforeXp),
+        lines: (r.breakdown ?? []).map((b) => ({ label: REASON_LABEL[b.reason] ?? "XP", amount: b.amount })),
+        points: null,
+        before,
+        after,
+        leveledUp: after.level > before.level,
+        badges: [],
+        note: "Your first mission is on your pass. Find your teammates and go.",
+      };
+    }
     case "ok":
     case "already": {
       const beforeXp = r.xp_before ?? 0;

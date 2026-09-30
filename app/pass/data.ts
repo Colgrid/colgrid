@@ -6,6 +6,16 @@ import { pickSessions, questViews, type PassQuest, type PassSession, type QuestV
 
 export type PlayMode = "casual" | "tournament";
 
+// Guided mode: this player's team route and the finale (my_guided()).
+export type Guided = {
+  arrived: boolean;
+  slot: number | null;
+  mission_started_at: string | null;
+  finale_name: string | null;
+  finale_where: string | null;
+  finale_at: string | null;
+};
+
 export type PassBadge = { key: string; name: string; description: string | null; earned: boolean };
 
 export type PassData =
@@ -23,7 +33,7 @@ export type PassData =
       sessions: SessionPick;
       sessionCount: number;
       // The session whose quests the pass shows: the live one, else the last one played.
-      focus: { session: PassSession; quests: QuestView[] } | null;
+      focus: { session: PassSession; quests: QuestView[]; guided: Guided | null } | null;
       // Tournament teams only. Casual teams are never ranked (CLAUDE.md rule 1).
       standing: { rank: number; points: number; teamCount: number } | null;
       badges: PassBadge[];
@@ -117,8 +127,12 @@ export async function loadPass(): Promise<PassData | null> {
   const focusSession = sessions.live ?? sessions.last;
   let focus: Extract<PassData, { kind: "pass" }>["focus"] = null;
   if (focusSession && focusSession.status !== "scheduled") {
-    const { data } = await supabase.rpc("player_quests", { p_session_id: focusSession.id });
-    focus = { session: focusSession, quests: questViews(rows<PassQuest>(data), focusSession.status) };
+    const [{ data }, { data: guidedData }] = await Promise.all([
+      supabase.rpc("player_quests", { p_session_id: focusSession.id }),
+      supabase.rpc("my_guided", { p_session_id: focusSession.id }),
+    ]);
+    const guided = (guidedData as Guided | null) ?? null;
+    focus = { session: focusSession, quests: questViews(rows<PassQuest>(data), focusSession.status, guided?.slot ?? null), guided };
   }
 
   const seasonSessionIds = new Set(sessionList.map((s) => s.id));

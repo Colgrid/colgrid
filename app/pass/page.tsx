@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 import InstallCard from "@/app/components/InstallCard";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
-import { questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
+import { activeQuest, allMainDone, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
+import AnswerForm from "./AnswerForm";
+import Countdown from "./Countdown";
 import { loadPass, type PassData } from "./data";
 
 // Private page: keep it out of search results.
@@ -17,16 +19,18 @@ const CHAPTER_TIME_ZONE = "America/Denver";
 
 type Pass = Extract<PassData, { kind: "pass" }>;
 
-export default async function PassPage() {
+export default async function PassPage({ searchParams }: { searchParams: Promise<{ complete?: string }> }) {
+  const { complete } = await searchParams;
   const data = await loadPass();
   if (!data) redirect("/signin");
   if (data.kind === "no-pass") return <NoPass email={data.email} isStaff={data.isStaff} isAdmin={data.isAdmin} />;
-  return <PlayerPass pass={data} />;
+  const gained = complete !== undefined ? Math.max(0, Number(complete) || 0) : null;
+  return <PlayerPass pass={data} gained={gained} />;
 }
 
 // ------------------------------------------------------------------------------------------------
 
-function PlayerPass({ pass }: { pass: Pass }) {
+function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
   const level = levelFor(pass.totalXp);
   const mode = pass.team?.mode ?? "casual";
   const tournament = mode === "tournament";
@@ -63,6 +67,15 @@ function PlayerPass({ pass }: { pass: Pass }) {
             </div>
           )}
         </section>
+
+        {gained !== null && (
+          <p className="mission-toast" role="status">
+            <strong>Mission complete.</strong>
+            {gained > 0 && <span className="mono"> +{gained} XP</span>}
+          </p>
+        )}
+
+        <MissionPanel pass={pass} />
 
         <NowCard pass={pass} level={level} />
 
@@ -205,6 +218,80 @@ function NowCard({ pass, level }: { pass: Pass; level: ReturnType<typeof levelFo
   );
 }
 
+// ------------------------------------------------------------------------------------------------
+// Guided mode: the app tells the team where to go and what to do, one mission at a time.
+
+function formatTime(iso: string | null): string | null {
+  if (!iso) return null;
+  return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: CHAPTER_TIME_ZONE }).format(new Date(iso));
+}
+
+function MissionPanel({ pass }: { pass: Pass }) {
+  const focus = pass.focus;
+  if (!focus || focus.session.status !== "live") return null;
+  const guided = focus.guided;
+
+  if (guided && !guided.arrived) {
+    return (
+      <section className="mission mission--arrive">
+        <p className="mono mission__kicker">YOU&apos;RE NOT CHECKED IN YET</p>
+        <h2 className="mission__title">Find the Colgrid sign.</h2>
+        <p className="mission__text">
+          {focus.session.start_location ? `It's at the start: ${focus.session.start_location}. ` : ""}Scan it to check in, meet your team and
+          unlock your first mission.
+        </p>
+        <Link href="/check-in" className="button button--primary">
+          Scan the start sign
+        </Link>
+      </section>
+    );
+  }
+
+  const main = focus.quests.filter((q) => q.mission !== undefined);
+  if (allMainDone(focus.quests)) {
+    if (!guided?.finale_name) return null;
+    return (
+      <section className="mission mission--finale">
+        <p className="mono mission__kicker">FINAL MISSION UNLOCKED</p>
+        <h2 className="mission__title">Head to {guided.finale_name}.</h2>
+        {guided.finale_where && <p className="mission__where">{guided.finale_where}</p>}
+        <p className="mission__text">
+          Every mission done. Regroup with every team for the finale meal and your first drink
+          {guided.finale_at ? `, around ${formatTime(guided.finale_at)}` : ""}. Badges get handed out there.
+        </p>
+      </section>
+    );
+  }
+
+  const q = activeQuest(focus.quests);
+  if (!q) return null;
+  return (
+    <section className="mission" aria-labelledby="mission-title">
+      <div className="mission__top">
+        <p className="mono mission__kicker">
+          MISSION {q.mission} OF {main.length}
+        </p>
+        {q.time_limit_min && guided?.mission_started_at && <Countdown startedAt={guided.mission_started_at} minutes={q.time_limit_min} />}
+      </div>
+      <h2 id="mission-title" className="mission__title">
+        {q.title}
+      </h2>
+      {(q.where_text || q.host_business) && <p className="mission__where">{q.where_text ?? q.host_business}</p>}
+      {q.briefing && <p className="mission__text">{q.briefing}</p>}
+      {q.verify === "answer" ? (
+        <AnswerForm questId={q.id} />
+      ) : (
+        <>
+          <p className="mission__verify">Done? Your host has the code.</p>
+          <Link href="/check-in" className="button button--primary">
+            Enter the code
+          </Link>
+        </>
+      )}
+    </section>
+  );
+}
+
 function QuestSection({ pass, tournament }: { pass: Pass; tournament: boolean }) {
   const focus = pass.focus;
 
@@ -266,10 +353,27 @@ function QuestItem({ quest, tournament }: { quest: QuestView; tournament: boolea
     );
   }
 
-  const meta: Record<Exclude<QuestView["state"], "hidden">, string | null> = {
-    done: [quest.host_business, stop].filter(Boolean).join(" · ") || null,
-    active: [quest.host_business, stop].filter(Boolean).join(" · ") || null,
-    locked: [stop, "Up next"].filter(Boolean).join(" · "),
+  const label = quest.mission !== undefined ? `Mission ${quest.mission}` : stop;
+  if (quest.state === "locked") {
+    // Later missions stay a mystery until they unlock.
+    return (
+      <li className="quest quest--locked">
+        <span className="quest__icon" aria-hidden="true" />
+        <div className="quest__body">
+          <p className="quest__title">{label ?? "Up next"}</p>
+          <p className="quest__meta">Unlocks when you finish the one before.</p>
+        </div>
+        <div className="quest__reward mono">
+          <span className="quest__xp">+{quest.xp}</span>
+        </div>
+        <span className="visually-hidden">Locked</span>
+      </li>
+    );
+  }
+
+  const meta: Record<Exclude<QuestView["state"], "hidden" | "locked">, string | null> = {
+    done: [label, quest.host_business].filter(Boolean).join(" · ") || null,
+    active: [label, "Now"].filter(Boolean).join(" · "),
     open: "Revealed. Find it before the night ends.",
     judged: "Scored by the game master",
     missed: "Not completed",
@@ -289,13 +393,8 @@ function QuestItem({ quest, tournament }: { quest: QuestView; tournament: boolea
         {tournament && quest.state === "done" && quest.points !== null && <span className="quest__pts">+{quest.points}</span>}
       </div>
       <span className="visually-hidden">
-        {quest.state === "done" ? "Completed" : quest.state === "active" ? "Current quest" : quest.state === "locked" ? "Locked" : ""}
+        {quest.state === "done" ? "Completed" : quest.state === "active" ? "Current quest" : ""}
       </span>
-      {quest.state === "active" && (
-        <Link href="/check-in" className="button button--primary quest__cta">
-          {quest.stop_number !== null ? `Check in at Stop ${quest.stop_number}` : "Check in"}
-        </Link>
-      )}
     </li>
   );
 }

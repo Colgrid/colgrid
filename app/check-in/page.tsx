@@ -37,7 +37,11 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
           </p>
         ) : (
           <>
-            <p className="lede">Your host has the code. Ask for it, or scan the QR at the counter.</p>
+            <p className="lede">
+              {data.focus?.guided && !data.focus.guided.arrived
+                ? "Just got here? Scan the Colgrid sign at the start to check in and unlock your first mission."
+                : "Your host has the code. Ask for it, or scan the QR at the counter."}
+            </p>
             <div style={{ marginTop: 28 }}>
               <CheckInForm initialCode={code ?? ""} />
             </div>

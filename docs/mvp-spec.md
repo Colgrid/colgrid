@@ -38,7 +38,7 @@ The dry run's players, XP and badges are real and stay on their passes (progress
 | Role | What they do |
 | --- | --- |
 | Player | Signs in, sees their pass, chooses play mode with their team, checks in quests |
-| Game master (GM) | Runs the night: assigns teams, opens quests, verifies judged challenges, runs finals |
+| Game master (GM) | Handles exceptions: safety, a host who doesn't show, walk-ins, judged challenges, finals. In guided mode the app runs the flow (decided Sept 30, 2026) |
 | Admin (owner) | Creates chapters, seasons, sessions, quests, hosts; imports ticket buyers |
 | Host | No login in the MVP. Holds a printed plaque with a quest code/QR, shown only after the quest is done |
 
@@ -47,7 +47,8 @@ The dry run's players, XP and badges are real and stay on their passes (progress
 1. **Buy and join.** Player buys on the ticket link → admin imports buyers (CSV or webhook) → player gets an email with a magic sign-in link → first sign-in creates their pass with the Founding badge.
 2. **Choose how to play.** On the pass, the team sees "Casual (default)". Any team member can switch the team to Tournament until the season's 2nd session starts; after that the toggle only allows dropping to Casual.
 3. **Pre-game.** 24–48 h before, the GM publishes the start location; players see it on their pass and get an email/text.
-4. **Opening ritual.** GM assigns or confirms teams in the console; each player's pass shows team name and first quest.
+4. **Opening ritual.** Teams are made ahead of time from ticket groups. Players scan the start sign at the drop point: the app checks them in (+50 XP), places solo ticket holders on the smallest team, starts the session (from 30 minutes before) and unlocks mission 1. The GM can still assign teams in the console.
+4a. **Guided missions.** One mission unlocks at a time with where to go, what to do and a target time. Teams start at different stops (route slots in arrival order, rotating the stops) so no host gets swamped. Puzzle stops take a typed answer instead of a host code. When every mission is done, the pass sends the team to the finale.
 5. **Quest check-in.** Team finishes a quest → host shows the code/QR → one player scans or types it → every present teammate gets the XP; tournament teams get points. A code works once per team.
 6. **Judged challenges.** GM scores creative/performance quests in the console.
 7. **Closing ritual.** GM marks attendance, awards the session badge, reveals standings (tournament teams only) and the next date. Passes update live.

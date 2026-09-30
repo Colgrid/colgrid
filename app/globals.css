@@ -2053,3 +2053,112 @@ button.button {
   gap: 6px;
   align-items: center;
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Guided mode: the current mission, arrival and finale cards
+   --------------------------------------------------------------------------------------------- */
+.mission {
+  margin-top: 20px;
+  padding: 18px 16px;
+  border-radius: var(--radius-card);
+  background: var(--concrete);
+  color: var(--asphalt);
+  border-top: 6px solid var(--beacon-amber);
+}
+.mission--arrive {
+  border-top-color: var(--chapter-teal);
+}
+.mission--finale {
+  background: var(--beacon-amber);
+  border-top-color: var(--asphalt);
+}
+.mission__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.mission__kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #5a6067;
+}
+.mission--finale .mission__kicker {
+  color: var(--asphalt);
+}
+.mission__clock {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--asphalt);
+  color: var(--concrete);
+  white-space: nowrap;
+}
+.mission__clock--soon {
+  background: var(--beacon-amber);
+  color: var(--asphalt);
+}
+.mission__clock--over {
+  background: #d9dce0;
+  color: var(--asphalt);
+}
+.mission__title {
+  font-size: 28px;
+  line-height: 1.1;
+  margin-top: 8px;
+  color: var(--asphalt);
+}
+.mission__where {
+  margin: 10px 0 0;
+  font-weight: 700;
+  font-size: 17px;
+}
+.mission__where::before {
+  content: "→ ";
+  color: var(--beacon-amber-text, #b86e00);
+}
+.mission--finale .mission__where::before {
+  color: var(--asphalt);
+}
+.mission__text {
+  margin: 10px 0 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.mission__verify {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: #5a6067;
+}
+.mission .button {
+  margin-top: 12px;
+  width: 100%;
+}
+.mission__answer {
+  margin-top: 16px;
+}
+.mission__answer .label {
+  color: #5a6067;
+}
+.mission__answer .input {
+  width: 100%;
+  background: #fff;
+  color: var(--asphalt);
+}
+.mission .form__error {
+  color: #a3001a;
+}
+.mission-toast {
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--chapter-teal);
+  color: var(--asphalt);
+  font-size: 17px;
+}
+.plaque--start {
+  border: 6px solid #ff9f1c;
+}
