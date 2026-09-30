@@ -104,7 +104,8 @@ export async function revealLocation(form: FormData) {
 
   const { error } = await supabase
     .from("session")
-    .update({ start_location: location, revealed_at: new Date().toISOString() })
+    // The game master decided about the email here, so the automatic reveal email skips this session.
+    .update({ start_location: location, revealed_at: new Date().toISOString(), reveal_emailed_at: new Date().toISOString() })
     .eq("id", id);
   if (error) back(id, "Couldn't reveal the location.");
   let msg = "Location revealed. Players see it on their pass now.";
