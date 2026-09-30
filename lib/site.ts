@@ -30,6 +30,7 @@ export const SITE = {
   // know these accounts are Colgrid, and linked in the site footer.
   social: [
     { name: "Instagram", url: "https://www.instagram.com/colgrid/" },
+    { name: "X", url: "https://x.com/Colgrid" },
     { name: "TikTok", url: "https://www.tiktok.com/@colgrid0" },
     { name: "YouTube", url: "https://www.youtube.com/@Colgrid" },
     { name: "LinkedIn", url: "https://www.linkedin.com/company/colgrid/" },
