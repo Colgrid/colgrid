@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import LeadForm from "@/app/components/LeadForm";
 import { SITE } from "@/lib/site";
 
 // Public home page. The full version is step 7 of docs/mvp-spec.md; this one already carries the
@@ -30,6 +31,25 @@ const HOW_IT_WORKS = [
   },
 ];
 
+// The pilot night, hour by hour (Saturday, Oct 17, 4–7 PM).
+const THE_NIGHT = [
+  {
+    title: "Quests",
+    when: "4:00",
+    body: "Meet at the drop point, get your team and your first mission, then work through 3–4 hosted quests across the neighborhood. Make something, find something, solve something.",
+  },
+  {
+    title: "Local tastings",
+    when: "Along the way",
+    body: "Some missions happen at the counter. Taste what the neighborhood's kitchens and makers are proudest of, and earn XP for it.",
+  },
+  {
+    title: "Finale meal",
+    when: "Around 6:00",
+    body: "Every team regroups for a shared meal and first drink. Stories, badges, and a hint of what the next session holds.",
+  },
+];
+
 const FAQ = [
   {
     q: "What is Colgrid?",
@@ -54,6 +74,10 @@ const FAQ = [
   {
     q: "Is it competitive?",
     a: "Only if you want it to be. Every team plays casually by default, and nobody is ranked. Teams can opt into the tournament before the season's second session to climb the chapter standings, play the Chapter Finals and go for the Championship. Entering the tournament costs nothing extra.",
+  },
+  {
+    q: "Can we book a private run for our company?",
+    a: "Yes. A corporate private run is $2,500 for up to 20 players, plus $95 per extra player, with hosted quests, tastings and a finale meal planned for your group. Use the form on this page to get a quote.",
   },
   {
     q: "How long is a gathering?",
@@ -130,7 +154,7 @@ export default function Home() {
       <p className="mono" style={{ color: "var(--chapter-teal)", letterSpacing: "0.12em", fontSize: 13, marginTop: 28 }}>
         CHAPTER 01 · SALT LAKE CITY
       </p>
-      <h1 style={{ fontSize: 44, marginTop: 8 }}>{SITE.tagline}</h1>
+      <h1 style={{ fontSize: 44, marginTop: 8 }}>Turn your city into a game board.</h1>
       <p style={{ fontSize: 18, lineHeight: 1.45, color: "var(--ink-muted)", marginTop: 16 }}>
         Colgrid is a real-world team game. Meet your team in one walkable neighborhood. Take on missions hosted by local makers,
         kitchens and guides. Your XP follows you to every city.
@@ -182,6 +206,54 @@ export default function Home() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="section" aria-labelledby="night">
+        <h2 id="night" className="mono home-kicker">
+          THREE HOURS, THREE PARTS
+        </h2>
+        <ol className="night">
+          {THE_NIGHT.map((p) => (
+            <li key={p.title}>
+              <span className="night__when mono">{p.when}</span>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </li>
+          ))}
+        </ol>
+        {next.ticketsOpen && (
+          <a href={next.ticketUrl} className="button button--primary" style={{ marginTop: 20 }} rel="noopener">
+            Get tickets for Oct 17 · ${next.price}
+          </a>
+        )}
+      </section>
+
+      <section className="section lead-card" id="corporate" aria-labelledby="corporate-h">
+        <p className="mono lead-card__kicker" style={{ color: "var(--beacon-amber)" }}>
+          CORPORATE PRIVATE RUNS · FROM $2,500
+        </p>
+        <h2 id="corporate-h" className="lead-card__title">
+          Your team, a whole neighborhood, one afternoon.
+        </h2>
+        <p className="lead-card__body">
+          A private Colgrid run for your company: hosted quests, local tastings and a finale meal, built around your group. $2,500 for up to 20
+          players, +$95 per extra player.
+        </p>
+        <LeadForm kind="corporate" />
+      </section>
+
+      <section className="section lead-card" id="host" aria-labelledby="host-h">
+        <p className="mono lead-card__kicker" style={{ color: "var(--chapter-teal)" }}>
+          FOR LOCAL MAKERS, KITCHENS AND GUIDES
+        </p>
+        <h2 id="host-h" className="lead-card__title">
+          Host a quest.
+        </h2>
+        <p className="lead-card__body">
+          Teams of players come to you with a mission you design: a tasting, a quick make, a story only you can tell. You&apos;re paid for every
+          session, and players leave knowing where to find you.
+        </p>
+        <LeadForm kind="host" />
       </section>
 
       <section className="section" aria-labelledby="faq">

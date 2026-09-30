@@ -851,6 +851,7 @@ button.button {
   min-height: var(--tap-min);
   display: flex;
   align-items: center;
+  gap: 12px;
   font-weight: 700;
   cursor: pointer;
   list-style: none;
@@ -1946,4 +1947,109 @@ button.button {
 .standings__pts {
   font-weight: 700;
   font-size: 17px;
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Home: the night in three parts, and the corporate + host forms
+   --------------------------------------------------------------------------------------------- */
+.night {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.night li {
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--asphalt-raised);
+  border-left: 4px solid var(--beacon-amber);
+}
+.night li:nth-child(2) {
+  border-left-color: var(--chapter-teal);
+}
+.night li:nth-child(3) {
+  border-left-color: var(--concrete);
+}
+.night__when {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-subtle);
+}
+.night h3 {
+  font-size: 21px;
+  margin-top: 4px;
+}
+.night p {
+  margin: 6px 0 0;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.lead-card {
+  margin-top: 40px;
+  padding: 20px 16px;
+  border-radius: var(--radius-card);
+  background: var(--asphalt-raised);
+  scroll-margin-top: 16px;
+}
+.lead-card__kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.lead-card__title {
+  font-size: 26px;
+  margin-top: 8px;
+}
+.lead-card__body {
+  margin: 10px 0 0;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.lead-form {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.lead-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--concrete);
+}
+.lead-form input,
+.lead-form textarea {
+  min-height: var(--tap-min);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid #3a3f45;
+  background: var(--asphalt-deep);
+  color: var(--concrete);
+  font: inherit;
+  font-size: 16px;
+}
+.lead-form input:focus,
+.lead-form textarea:focus {
+  outline: none;
+  border-color: var(--beacon-amber);
+}
+.lead-form .button {
+  margin-top: 4px;
+}
+.lead-form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.lead-status {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }

@@ -8,6 +8,7 @@
 | `migrations/20260929000007_add_player.sql` | Add one player by hand (comps, walk-ins) from the admin or the console |
 | `migrations/20260929000008_team.sql` | `my_team()`: the Team screen's roster (no emails), mode and session history |
 | `migrations/20260930000009_auto_reveal.sql` | The reveal email sends itself: `cron_due_reveals()` behind a database-only secret |
+| `migrations/20260930000011_leads.sql` | Corporate and host forms: `submit_lead()` (anyone), `lead` table (admins only) |
 | `migrations/20260930000010_reveal_schedule.sql` | Supabase only: pings the site every 5 minutes (pg_cron + pg_net). Skip it in local tests |
 | `migrations/20260928000006_gm.sql` | Game master console: attendance, start/close (session badge), survey link |
 | `migrations/20260928000005_admin.sql` | Admin: pilot season (Season 00), tickets, generated quest codes, Eventbrite import, "coming with" answer |
@@ -21,6 +22,7 @@
 | `tests/60_add_player.test.sql` | 3 checks on adding a player by hand |
 | `tests/70_team.test.sql` | 3 checks on the Team screen |
 | `tests/80_auto_reveal.test.sql` | 2 checks on the automatic reveal email |
+| `tests/90_leads.test.sql` | 3 checks on the lead forms |
 | `templates/` | Branded sign-in emails to paste into Supabase |
 | `tests/00_local_supabase_stub.sql` | Local testing only; never run on Supabase |
 
@@ -94,6 +96,7 @@ psql -d colgrid_test -f supabase/migrations/20260928000006_gm.sql
 psql -d colgrid_test -f supabase/migrations/20260929000007_add_player.sql
 psql -d colgrid_test -f supabase/migrations/20260929000008_team.sql
 psql -d colgrid_test -f supabase/migrations/20260930000009_auto_reveal.sql
+psql -d colgrid_test -f supabase/migrations/20260930000011_leads.sql
 psql -d colgrid_test -f supabase/seed.sql
 psql -d colgrid_test -f supabase/tests/10_rules.test.sql
 psql -d colgrid_test -f supabase/tests/20_signin.test.sql
@@ -103,6 +106,7 @@ psql -d colgrid_test -f supabase/tests/50_gm.test.sql
 psql -d colgrid_test -f supabase/tests/60_add_player.test.sql
 psql -d colgrid_test -f supabase/tests/70_team.test.sql
 psql -d colgrid_test -f supabase/tests/80_auto_reveal.test.sql
+psql -d colgrid_test -f supabase/tests/90_leads.test.sql
 ```
 
 Every line should read `PASS`.
