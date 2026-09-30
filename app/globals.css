@@ -1678,3 +1678,81 @@ button.button {
   color: var(--ink-subtle);
   font-weight: 600;
 }
+
+/* Home: next gathering */
+.next-card {
+  margin-top: 28px;
+  padding: 18px;
+  border-radius: var(--radius-card);
+  background: var(--asphalt-raised);
+  border: 2px solid var(--beacon-amber);
+}
+.next-card p {
+  margin: 0;
+}
+.next-card__kicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--beacon-amber);
+}
+.next-card__when {
+  margin-top: 8px !important;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+}
+.next-card__where {
+  margin-top: 4px !important;
+  color: var(--ink-muted);
+}
+.next-card__meta {
+  margin-top: 10px !important;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-subtle);
+}
+.next-card__soon {
+  margin-top: 14px !important;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--chapter-teal);
+}
+.next-card .button {
+  display: flex;
+}
+
+/* Quest edit (admin) and walk-ins (console) */
+.admin-quest {
+  flex-wrap: wrap;
+}
+.admin-quest__edit {
+  flex-basis: 100%;
+}
+.admin-quest__edit summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #b86a00;
+  font-size: 14px;
+}
+.gm-walkin {
+  margin-top: 12px;
+}
+.gm-walkin summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--beacon-amber);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.gm-form select {
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #3a3f45;
+  background: var(--asphalt);
+  color: var(--concrete);
+  font-family: var(--font-body);
+  font-size: 16px;
+}

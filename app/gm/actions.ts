@@ -9,6 +9,7 @@ import { revealEmail, thanksEmail, type Recipient, type SessionInfo } from "@/li
 import { sendBatch } from "@/lib/email/resend";
 import { planTeams } from "@/lib/game/teams";
 import { rows } from "@/lib/rows";
+import { safeNext } from "@/lib/safe-next";
 import { formatWhen } from "@/lib/time";
 
 function text(form: FormData, key: string, max = 200): string | null {
@@ -249,4 +250,25 @@ export async function scoreJudged(form: FormData) {
     .upsert({ quest_id: questId, team_id: teamId, points: Math.min(points, max) }, { onConflict: "quest_id,team_id" });
   revalidatePath(`/gm/${id}`);
   back(id, error ? "Couldn't save the score." : `Scored ${Math.min(points, max)}.`);
+}
+
+// Add one player by hand: comps, invited friends, walk-ins. Works like one row of the Eventbrite import.
+export async function addPlayer(form: FormData) {
+  const { supabase } = await requireStaff();
+  const id = text(form, "session_id", 64);
+  const returnTo = safeNext(text(form, "return_to", 200)) ?? `/gm/${id}`;
+  const to = (msg: string): never => redirect(`${returnTo}${returnTo.includes("?") ? "&" : "?"}msg=${encodeURIComponent(msg)}`);
+  if (!id) back(id, "Missing session.");
+  const { data, error } = await supabase.rpc("add_player", {
+    p_session_id: id,
+    p_email: text(form, "email", 254),
+    p_name: text(form, "name", 120),
+    p_coming_with: text(form, "coming_with", 20),
+  });
+  const status = (data as { status?: string } | null)?.status;
+  revalidatePath(returnTo.split("?")[0]);
+  if (error) to("Couldn't add the player.");
+  if (status === "bad_email") to("That email doesn't look right.");
+  if (status === "closed") to("That session is closed.");
+  to(status === "already" ? "They already have a ticket for this session." : "Player added. Send their welcome email from Import, or they can sign in at getcolgrid.com.");
 }

@@ -5,6 +5,7 @@ import { requireStaff } from "@/lib/admin/guard";
 import { rows } from "@/lib/rows";
 import { formatWhen } from "@/lib/time";
 import Clock from "../Clock";
+import AddPlayerForm from "@/app/components/AddPlayerForm";
 import {
   assignTeam,
   autoTeams,
@@ -273,6 +274,12 @@ export default async function RunSheet({ params, searchParams }: { params: Promi
             {present.size}/{tickets.length} HERE
           </span>
         </div>
+        {session.status !== "closed" && (
+          <details className="gm-walkin">
+            <summary>+ Add a walk-in or comp</summary>
+            <AddPlayerForm sessionId={id} returnTo={`/gm/${id}`} className="gm-form" />
+          </details>
+        )}
         {tickets.length === 0 ? (
           <p className="empty">
             No ticket holders yet. <Link href={`/admin/import?session=${id}`}>Import them from Eventbrite</Link>.
