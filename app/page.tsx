@@ -73,7 +73,9 @@ const FAQ = [
   },
   {
     q: "Is it competitive?",
-    a: "Only if you want it to be. Every team plays casually by default, and nobody is ranked. Teams can opt into the tournament before the season's second session to climb the chapter standings, play the Chapter Finals and go for the Championship. Entering the tournament costs nothing extra.",
+    a: SITE.tournamentOpen
+      ? "Only if you want it to be. Every team plays casually by default, and nobody is ranked. Teams can opt into the tournament before the season's second session to climb the chapter standings, play the Chapter Finals and go for the Championship. Entering the tournament costs nothing extra."
+      : "No. Colgrid is about the experience: nobody is ranked, and there's no race against other teams. Everyone earns XP, levels and badges that carry forward to every gathering.",
   },
   {
     q: "Can we book a private run for our company?",
@@ -160,10 +162,12 @@ export default function Home() {
         kitchens and guides. Your XP follows you to every city.
       </p>
 
-      <div style={{ display: "flex", gap: 8, marginTop: 20 }}>
-        <span className="chip chip--casual">CASUAL</span>
-        <span className="chip chip--tournament">TOURNAMENT</span>
-      </div>
+      {SITE.tournamentOpen && (
+        <div style={{ display: "flex", gap: 8, marginTop: 20 }}>
+          <span className="chip chip--casual">CASUAL</span>
+          <span className="chip chip--tournament">TOURNAMENT</span>
+        </div>
+      )}
 
       <section className="next-card" aria-labelledby="next">
         <p id="next" className="mono next-card__kicker">

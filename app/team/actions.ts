@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { SITE } from "@/lib/site";
 import { createClient } from "@/lib/supabase/server";
 
 // Switch how the team plays. The database enforces the rules (docs/game-design.md):
@@ -9,6 +10,7 @@ import { createClient } from "@/lib/supabase/server";
 // dropping back to casual is always allowed.
 export async function setTeamMode(form: FormData) {
   const teamId = String(form.get("team_id") ?? "");
+  if (!SITE.tournamentOpen) redirect("/team"); // the tournament is paused
   const mode = form.get("mode") === "tournament" ? "tournament" : "casual";
   const supabase = await createClient();
   const { error } = await supabase.rpc("set_team_mode", { p_team_id: teamId, p_mode: mode });

@@ -6,7 +6,9 @@ Every gathering is $75 per player, or $280 for all four with a Season Pass.
 
 **Pilot (October 2026):** one Eventbrite ticket, Colgrid Pilot at $75/person. The Season Pass goes on sale after the pilot has run and been tested. Eventbrite's U.S. fees (3.7% + $1.79 per ticket, plus 2.9% payment processing) are passed to the buyer, so they don't come out of the margins below.
 
- There are no other discounts or early-bird prices. Every ticket plays casually by default; entering the tournament is optional and costs nothing extra.
+ There are no other discounts or early-bird prices. The tournament is paused for now (Sept 30, 2026), so every ticket plays casually.
+
+**Going forward (Sept 30, 2026):** prices can vary by experience (a full 3-hour gathering vs. a shorter weeknight one, themed nights), set from what it includes and the partner costs, with a target of about **50% gross margin**. The $75 pilot price stays.
 
 | Product | Price | Cost to serve | Margin |
 | --- | --- | --- | --- |

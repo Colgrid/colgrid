@@ -30,6 +30,12 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 6. **Hidden stays hidden** until revealed (start location, hidden quests).
 7. Stay in MVP scope (`docs/mvp-spec.md`). No native app, no built-in checkout, no chat.
 
+## Current focus (Sept 30, 2026)
+
+- Tournament paused (`SITE.tournamentOpen = false`): no standings or tournament switch for players. Rules 1–2 still hold for when it returns.
+- Oct 17 = 3–4 quests + tastings + finale meal + player pass. The app runs the night; stops are verified by location + on-site answer, with host codes as backup.
+- Design challenges around being physically present, not around beating AI. Rotate locations and questions.
+
 ## Brand in the UI
 
 - Name: **Colgrid** (never "The Gathering" or any other old working name).
