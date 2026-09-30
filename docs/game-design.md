@@ -6,6 +6,23 @@ Version 3 · Sep 28, 2026 · Matt [last name]
 
 This version adds the Colgrid name and the two ways to play (casual by default, tournament by choice). Anything not marked **Locked** is a design hypothesis to test or an open decision.
 
+## Decisions, Sept 30, 2026 (Matt)
+
+These override anything below that disagrees.
+
+- **Tournament paused.** Colgrid is about a great experience first. No rankings, standings or tournament switch for players until the basic format is proven. Section 5 stays as the plan for later; the site hides it (`SITE.tournamentOpen = false`).
+- **October 17 scope:** 3–4 quests + tastings + finale meal + the player pass. Nothing else.
+- **The app runs the night.** Guided missions, staggered routes, self check-in at the start sign. A person only handles exceptions.
+- **Verification without people.** A stop is finished by being there (the phone's location inside the stop's radius) and interacting with it (an answer only visible on site). Host codes/QR stickers are a backup and admin override. Photo checks come back with the tournament.
+- **Design challenges around physical presence**, not around being hard for AI to solve. If you have to be there and interact with the place to answer it, it can't be solved from a couch, and it's a better experience anyway.
+- **Keep quests fresh:** rotate locations, questions and challenges so nobody can memorize a route (rule 5: every gathering happens once).
+- **Later, after the first few gatherings show what people want:**
+  - two formats: full 3-hour gatherings and shorter weeknight ones;
+  - themes and niches: families, singles, coworkers, food-focused, seasonal;
+  - difficulty levels;
+  - partner applications through the site (the host form on the home page is the first version);
+  - pricing per experience, based on what it includes and partner costs, targeting about 50% gross margin.
+
 ## 1. Overview
 
 Colgrid is a persistent real-world team game built around local experiences, discovery, making and community. The city supplies the content, gatherings are the play sessions, and a player's progress follows them everywhere, building toward an annual flagship.

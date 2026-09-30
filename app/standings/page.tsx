@@ -4,6 +4,7 @@ import TabBar from "@/app/components/TabBar";
 import { loadPass } from "@/app/pass/data";
 import { formatNumber } from "@/lib/game/levels";
 import { rows } from "@/lib/rows";
+import { SITE } from "@/lib/site";
 import { createClient } from "@/lib/supabase/server";
 
 // Private page: keep it out of search results.
@@ -16,6 +17,7 @@ type Row = { rank: number; team_id: string; team_name: string; points: number; q
 const FINALS_CUT = 4; // top 4 play the Chapter Finals (docs/mvp-spec.md, user flow 9)
 
 export default async function StandingsPage() {
+  if (!SITE.tournamentOpen) redirect("/team"); // the tournament is paused
   const pass = await loadPass();
   if (!pass) redirect("/signin?next=/standings");
   const season = pass.kind === "pass" ? pass.season : null;

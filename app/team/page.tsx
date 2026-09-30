@@ -4,6 +4,7 @@ import TabBar from "@/app/components/TabBar";
 import { loadPass } from "@/app/pass/data";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { createClient } from "@/lib/supabase/server";
+import { SITE } from "@/lib/site";
 import { formatWhen } from "@/lib/time";
 import { setTeamMode } from "./actions";
 
@@ -86,6 +87,7 @@ export default async function TeamPage({ searchParams }: { searchParams: Promise
               ))}
             </ul>
 
+{SITE.tournamentOpen && (
             <section className="mode-card">
               <h2 className="section__title">How your team plays</h2>
               {pilot ? (
@@ -127,6 +129,7 @@ export default async function TeamPage({ searchParams }: { searchParams: Promise
                 </>
               )}
             </section>
+            )}
 
             <section className="section">
               <h2 className="section__title">Team history</h2>

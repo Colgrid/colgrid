@@ -1,14 +1,16 @@
 import Link from "next/link";
+import { SITE } from "@/lib/site";
 
 // Bottom tabs from the mockups: Pass · Check in · Team · Standings.
 // All four tabs are live.
 type Tab = { key: string; label: string; href: string | null };
 
+// Standings only shows while the tournament is open (it's paused for now).
 const TABS: Tab[] = [
   { key: "pass", label: "Pass", href: "/pass" },
   { key: "checkin", label: "Check in", href: "/check-in" },
   { key: "team", label: "Team", href: "/team" },
-  { key: "standings", label: "Standings", href: "/standings" },
+  ...(SITE.tournamentOpen ? [{ key: "standings", label: "Standings", href: "/standings" }] : []),
 ];
 
 function Icon({ tab }: { tab: string }) {

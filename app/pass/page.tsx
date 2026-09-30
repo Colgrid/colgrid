@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import InstallCard from "@/app/components/InstallCard";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
+import { SITE } from "@/lib/site";
 import { activeQuest, allMainDone, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
 import MissionCheck from "./MissionCheck";
 import Countdown from "./Countdown";
@@ -33,7 +34,7 @@ export default async function PassPage({ searchParams }: { searchParams: Promise
 function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
   const level = levelFor(pass.totalXp);
   const mode = pass.team?.mode ?? "casual";
-  const tournament = mode === "tournament";
+  const tournament = SITE.tournamentOpen && mode === "tournament";
   const finals = pass.sessions.next?.is_finals ? pass.sessions.next : null;
 
   return (
@@ -46,7 +47,7 @@ function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
           </span>
           <div className="pass-header__chips">
             <span className="chip chip--level">{formatLevel(level.level)}</span>
-            <span className={`chip chip--${mode}`}>{mode.toUpperCase()}</span>
+            {SITE.tournamentOpen && <span className={`chip chip--${mode}`}>{mode.toUpperCase()}</span>}
           </div>
         </header>
 

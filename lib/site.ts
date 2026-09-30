@@ -6,7 +6,7 @@ export const SITE = {
   tagline: "Your city has missions.",
   title: "Colgrid: a real-world team game in Salt Lake City",
   description:
-    "Colgrid is a real-world team game that turns a city into missions. Meet your team in one walkable Salt Lake City neighborhood, take on quests hosted by local makers, kitchens and guides, and earn XP, levels and badges that follow you to every gathering and every city. Play casually, or opt into the tournament.",
+    "Colgrid is a real-world team game that turns a city into missions. Meet your team in one walkable Salt Lake City neighborhood, take on quests hosted by local makers, kitchens and guides, and earn XP, levels and badges that follow you to every gathering and every city.",
   shortDescription:
     "A real-world team game in Salt Lake City. Missions hosted by local makers, kitchens and guides. XP, levels and badges that follow you to every city.",
   locale: "en_US",
@@ -26,6 +26,10 @@ export const SITE = {
     ticketUrl: "https://www.eventbrite.com/e/9th-9th-interactive-team-quest-tastings-finale-meal-tickets-2002520543853",
     ticketsOpen: true,
   },
+  // The tournament (team rankings, standings, Chapter Finals) is paused: Colgrid is about the
+  // experience first (decided Sept 30, 2026). While false, players never see standings or the
+  // tournament switch. The rules and database stay in place for when it comes back.
+  tournamentOpen: false,
   // Official profiles. Listed in structured data ("sameAs") so search engines and AI assistants
   // know these accounts are Colgrid, and linked in the site footer.
   social: [

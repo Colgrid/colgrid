@@ -4,6 +4,8 @@ Sep 28, 2026 · Matt [last name]
 
 The MVP is the smallest product that runs one pilot season in Salt Lake (4 gatherings, 30–50 players each) and answers one question: **do players come back because their team and progress carry forward?** Everything not needed for that question is out of scope.
 
+**Sept 30, 2026:** the tournament is paused and October 17 is 3–4 quests + tastings + finale meal + the player pass. See the decisions at the top of [game-design.md](game-design.md).
+
 Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-identity.md](brand-identity.md). Prices: [pricing.md](pricing.md).
 
 ## Scope
