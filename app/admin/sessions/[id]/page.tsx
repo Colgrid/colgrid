@@ -13,6 +13,7 @@ type Session = {
   starts_at: string | null;
   start_location: string | null;
   revealed_at: string | null;
+  reveal_emailed_at: string | null;
   status: string;
   is_finals: boolean;
   season: { number: number; name: string | null } | null;
@@ -42,7 +43,7 @@ export default async function AdminSession({ params, searchParams }: { params: P
   const [sessionRes, questRes, hostRes, ticketRes] = await Promise.all([
     supabase
       .from("session")
-      .select("id, number, neighborhood, starts_at, start_location, revealed_at, status, is_finals, season:season_id (number, name)")
+      .select("id, number, neighborhood, starts_at, start_location, revealed_at, reveal_emailed_at, status, is_finals, season:season_id (number, name)")
       .eq("id", id)
       .maybeSingle(),
     supabase
@@ -260,6 +261,13 @@ export default async function AdminSession({ params, searchParams }: { params: P
             Reveal the location at (blank = 48 hours before)
             <input name="revealed_at" type="datetime-local" defaultValue={isoToLocal(session.revealed_at)} />
           </label>
+          <p className="admin-hint">
+            {session.reveal_emailed_at
+              ? `Reveal email sent ${formatWhen(session.reveal_emailed_at)}.`
+              : session.revealed_at && session.start_location
+                ? `The reveal email goes to every ticket holder automatically at ${formatWhen(session.revealed_at)}.`
+                : "Add the start location and the reveal email goes out automatically at the reveal time."}
+          </p>
           <label className="admin-check">
             <input name="is_finals" type="checkbox" defaultChecked={session.is_finals} /> Chapter Finals
           </label>
