@@ -10,7 +10,7 @@ export function welcomeEmail(to: WelcomeTarget, ctx: WelcomeContext) {
   const first = to.name.split(" ")[0] || "there";
   const where = ctx.neighborhood ? ` in ${ctx.neighborhood}` : "";
   const subject = "You're in. Your Colgrid pass is ready.";
-  const signin = `${SITE.url}/signin`;
+  const signin = `${SITE.appUrl}/signin`;
   const text = [
     `Hi ${first},`,
     "",

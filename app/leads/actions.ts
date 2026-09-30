@@ -62,11 +62,11 @@ export async function submitLead(form: FormData) {
         to: [SITE.notifyEmail],
         reply_to: lead.email ?? undefined,
         subject: `${title}: ${lead.organization ?? lead.name}`,
-        text: [...filled.map(([k, v]) => `${k}: ${v}`), "", `All leads: ${SITE.url}/admin/leads`].join("\n"),
+        text: [...filled.map(([k, v]) => `${k}: ${v}`), "", `All leads: ${SITE.appUrl}/admin/leads`].join("\n"),
         html: shell(
           title,
           filled.map(([k, v]) => `<strong style="color:#F4F5F7;">${k}:</strong> ${escapeHtml(String(v))}`),
-          { label: "Open leads", href: `${SITE.url}/admin/leads` },
+          { label: "Open leads", href: `${SITE.appUrl}/admin/leads` },
         ),
       },
     ]).catch(() => null); // the lead is saved either way

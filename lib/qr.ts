@@ -1,6 +1,6 @@
 // Minimal QR code generator (byte mode, error correction level M or Q, versions 1–40).
 // Follows ISO/IEC 18004 as implemented in Project Nayuki's QR Code generator (MIT License).
-// Used for host plaques: each QR opens getcolgrid.com/check-in?code=XXX-XXX.
+// Used for host plaques: each QR opens colgrid.app/check-in?code=XXX-XXX.
 // Verified by decoding generated codes with an independent reader (see lib/qr.test.ts notes).
 
 type Ecc = "M" | "Q";

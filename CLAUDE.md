@@ -35,6 +35,7 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 - Tournament paused (`SITE.tournamentOpen = false`): no standings or tournament switch for players. Rules 1–2 still hold for when it returns.
 - Oct 17 = 3–4 quests + tastings + finale meal + player pass. The app runs the night; stops are verified by location + on-site answer, with host codes as backup.
 - Design challenges around being physically present, not around beating AI. Rotate locations and questions.
+- Two domains, one app: getcolgrid.com is the public site (home, tickets, corporate, hosts, contact, legal); colgrid.app is the player app (sign-in, pass, check-in, team) and crew tools. `middleware.ts` moves player pages to colgrid.app; player links in emails and QR codes use `SITE.appUrl`.
 - Support: game-day help is call/text (801) 441-3621 (Quo), shown on the pass and in player emails only. General questions go through the contact form (stored in Leads, emailed privately to colgridco@gmail.com, protected by Cloudflare Turnstile). Never show an email address on the site. Instagram DMs are secondary.
 
 ## Brand in the UI

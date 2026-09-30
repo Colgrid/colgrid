@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 // Scans a host's QR code with the phone camera where the browser can (Chrome on Android).
 // Everywhere else (iPhone Safari), the phone's own Camera app reads the QR and opens
-// getcolgrid.com/check-in?code=... with the code filled in, so we explain that instead.
+// colgrid.app/check-in?code=... with the code filled in, so we explain that instead.
 
 type Detector = { detect(source: HTMLVideoElement): Promise<{ rawValue: string }[]> };
 type DetectorCtor = new (options: { formats: string[] }) => Detector;
