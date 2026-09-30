@@ -5,6 +5,7 @@ import { rows } from "@/lib/rows";
 import { formatWhen, isoToLocal } from "@/lib/time";
 import { createQuest, deleteQuest, updateQuest, updateSession } from "../../actions";
 import Notice from "../../Notice";
+import PinInput from "../../PinInput";
 
 type Session = {
   id: string;
@@ -38,6 +39,10 @@ type Quest = {
   briefing: string | null;
   time_limit_min: number | null;
   answer: string | null;
+  lat: number | null;
+  lng: number | null;
+  radius_m: number;
+  dwell_sec: number;
   host: { business: string } | null;
 };
 
@@ -56,7 +61,7 @@ export default async function AdminSession({ params, searchParams }: { params: P
       .maybeSingle(),
     supabase
       .from("quest")
-      .select("id, host_id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, where_text, briefing, time_limit_min, answer, host:host_id (business)")
+      .select("id, host_id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, where_text, briefing, time_limit_min, answer, lat, lng, radius_m, dwell_sec, host:host_id (business)")
       .eq("session_id", id),
     supabase.from("host").select("id, business").order("business"),
     supabase.from("ticket").select("id", { count: "exact", head: true }).eq("session_id", id),
@@ -117,6 +122,8 @@ export default async function AdminSession({ params, searchParams }: { params: P
                   <span>
                     {q.host?.business ?? (q.is_judged ? "Scored by the game master" : "No host")}
                     {q.host_fee_cents != null ? ` · $${(q.host_fee_cents / 100).toFixed(0)}` : ""} · {q.type.replace("_", " ")}
+                    {" · "}
+                    {q.is_judged ? "judged" : q.lat !== null && q.answer ? "pin + answer" : q.lat !== null ? "pin" : q.answer ? "answer" : "host code"}
                   </span>
                 </div>
                 <div className="admin-quest__side">
@@ -184,10 +191,26 @@ export default async function AdminSession({ params, searchParams }: { params: P
                       Target minutes (optional countdown)
                       <input name="time_limit_min" type="number" min={1} max={240} defaultValue={q.time_limit_min ?? ""} />
                     </label>
-                    <label>
-                      Answer (puzzle stops only: players type this instead of a host code; separate options with |)
-                      <input name="answer" maxLength={200} defaultValue={q.answer ?? ""} />
-                    </label>
+                    <fieldset className="admin-verify">
+                      <legend>How players prove they did it (no one needs to be there)</legend>
+                      <label>
+                        Map pin: the phone must be here
+                        <PinInput defaultValue={q.lat !== null && q.lng !== null ? `${q.lat}, ${q.lng}` : ""} />
+                      </label>
+                      <label>
+                        Radius in meters
+                        <input name="radius_m" type="number" min={10} max={500} defaultValue={q.radius_m} />
+                      </label>
+                      <label>
+                        Stay, in seconds (pin-only stops, so walking past doesn&apos;t count)
+                        <input name="dwell_sec" type="number" min={0} max={1800} defaultValue={q.dwell_sec} />
+                      </label>
+                      <label>
+                        Answer: something you only know by being there (separate options with |)
+                        <input name="answer" maxLength={200} defaultValue={q.answer ?? ""} />
+                      </label>
+                      <p className="admin-hint">Pin + answer is best. The host code ({q.code}) always works too, as a backup.</p>
+                    </fieldset>
                     <label>
                       XP
                       <input name="xp" type="number" min={1} max={500} defaultValue={q.xp} />
@@ -262,10 +285,26 @@ export default async function AdminSession({ params, searchParams }: { params: P
               Target minutes (optional countdown)
               <input name="time_limit_min" type="number" min={1} max={240} placeholder="e.g. 20" />
             </label>
-            <label>
-              Answer (puzzle stops only: players type this instead of a host code; separate options with |)
-              <input name="answer" maxLength={200} placeholder="e.g. 1912|nineteen twelve" />
-            </label>
+            <fieldset className="admin-verify">
+              <legend>How players prove they did it (no one needs to be there)</legend>
+              <label>
+                Map pin: the phone must be here
+                <PinInput defaultValue="" />
+              </label>
+              <label>
+                Radius in meters
+                <input name="radius_m" type="number" min={10} max={500} defaultValue={40} />
+              </label>
+              <label>
+                Stay, in seconds (pin-only stops, so walking past doesn&apos;t count)
+                <input name="dwell_sec" type="number" min={0} max={1800} defaultValue={90} />
+              </label>
+              <label>
+                Answer: something you only know by being there (separate options with |)
+                <input name="answer" maxLength={200} placeholder="e.g. 1912|nineteen twelve" />
+              </label>
+              <p className="admin-hint">Pin + answer is best. Leave both blank to use the host code only.</p>
+            </fieldset>
             <label>
               XP (blank = 25, or 30 for hidden)
               <input name="xp" type="number" min={1} max={500} />
