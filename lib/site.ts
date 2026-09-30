@@ -16,7 +16,7 @@ export const SITE = {
   location: "Salt Lake City, Utah",
   // Where form submissions (corporate, host, contact) are sent. Never shown on the site:
   // visitors use the contact form, which keeps the address away from spam bots.
-  notifyEmail: "hello@getcolgrid.com",
+  notifyEmail: "colgridco@gmail.com",
   // Game-day support (Quo): calls and texts. Shown on the pass and in player emails, not on the public site.
   support: { label: "Need help during the event? Call or text us.", phone: "(801) 441-3621", tel: "+18014413621" },
   // Cloudflare Turnstile site key (public by design). The secret goes in Vercel as TURNSTILE_SECRET_KEY.
