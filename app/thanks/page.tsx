@@ -16,7 +16,11 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
         <>
           <h1 style={{ fontSize: 36, marginTop: 8 }}>That didn&apos;t go through.</h1>
           <p className="lede">
-            {error === "invalid" ? "We need your name and a valid email. " : "Lots of sign-ups at once. Give it a few minutes. "}
+            {error === "invalid"
+              ? "We need your name and a valid email. "
+              : error === "bot"
+                ? "We couldn't confirm you're not a bot. Wait for the check above the button to finish, then send it again. "
+                : "Lots of sign-ups at once. Give it a few minutes. "}
             Or try the <Link href="/contact">contact form</Link> in a bit.
           </p>
           <Link href={contact ? "/contact" : `/#${host ? "host" : "corporate"}`} className="button button--primary" style={{ marginTop: 24 }}>

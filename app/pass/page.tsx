@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import InstallCard from "@/app/components/InstallCard";
+import SupportLine from "@/app/components/SupportLine";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { SITE } from "@/lib/site";
@@ -77,6 +78,8 @@ function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
         )}
 
         <MissionPanel pass={pass} />
+
+        {(pass.sessions.live || pass.sessions.next) && <SupportLine prominent={!!pass.sessions.live} />}
 
         <NowCard pass={pass} level={level} />
 
