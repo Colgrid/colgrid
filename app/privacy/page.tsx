@@ -45,7 +45,7 @@ export default function Privacy() {
       <h2>Who we share it with</h2>
       <p>
         Only the services that run Colgrid for us: Supabase (our database and sign-in), Vercel (hosting) and Resend
-        (email). We don&apos;t sell your information or share it with advertisers. Quest hosts don&apos;t get your details.
+        (email). We don&apos;t sell your information or share it with advertisers. Local partners don&apos;t get your details.
       </p>
 
       <h2>Your choices</h2>

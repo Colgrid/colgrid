@@ -20,7 +20,7 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
                 : "Lots of sign-ups at once. Give it a few minutes. "}
             Or try the <Link href="/contact">contact form</Link> in a bit.
           </p>
-          <Link href={contact ? "/contact" : host ? "/hosts" : "/companies"} className="button button--primary" style={{ marginTop: 24 }}>
+          <Link href={contact ? "/contact" : host ? "/partners" : "/companies"} className="button button--primary" style={{ marginTop: 24 }}>
             Try again
           </Link>
         </>
@@ -31,7 +31,7 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
         {contact
           ? "Thanks for writing. We'll get back to you within two days."
           : host
-          ? "We'll be in touch within two days to talk about your mission. Teams are going to love finding you."
+          ? "We'll be in touch within two days to talk about your stop. Teams are going to love finding you."
           : "We'll be in touch within two days with dates and a quote. Your team doesn't know what's coming."}
       </p>
       </>

@@ -2,7 +2,7 @@
 // Wording follows docs/brand-identity.md (positioning, key messages) and prices follow docs/pricing.md.
 export const SITE = {
   name: "Colgrid",
-  url: "https://getcolgrid.com", // the public site: home, corporate, hosts, contact, legal
+  url: "https://getcolgrid.com", // the public site: home, companies, partners, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
   tagline: "Your city has missions.",
   title: "Colgrid: a real-world team game in Salt Lake City",
@@ -19,7 +19,7 @@ export const SITE = {
   footerLine: "Colgrid creates fun team experiences with games, challenges, food, and local adventures.",
   // Legal name, used only where it matters (Terms, Privacy). The brand everywhere else is just "Colgrid".
   legalName: "Colgrid LLC",
-  // Where form submissions (corporate, host, contact) are sent. Never shown on the site:
+  // Where form submissions (corporate, partner, contact) are sent. Never shown on the site:
   // visitors use the contact form, which keeps the address away from spam bots.
   notifyEmail: "colgridco@gmail.com",
   // Game-day support (Quo): calls and texts. Shown on the pass and in player emails, not on the public site.

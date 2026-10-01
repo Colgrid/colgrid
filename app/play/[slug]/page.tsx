@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!r) return { title: "Route" };
   return {
     title: `${r.route_name}${r.neighborhood ? ` · ${r.neighborhood}` : ""}`,
-    description: `A Colgrid route: ${r.stops.length} stops to play with friends, no host needed.`,
+    description: `A Colgrid route: ${r.stops.length} stops to play with friends.`,
   };
 }
 
@@ -62,7 +62,7 @@ export default async function PlayRoute({ params, searchParams }: { params: Prom
       <h1 className="play__title">{r.route_name}</h1>
       <p className="lede">
         {open
-          ? `${r.stops.length} stops${r.neighborhood ? ` in ${r.neighborhood}` : ""}. Go with friends, any time the places are open. No host, no ticket.`
+          ? `${r.stops.length} stops${r.neighborhood ? ` in ${r.neighborhood}` : ""}. Go with friends, any time the places are open.`
           : r.status === "not_open"
             ? "Opens soon."
             : "This route has closed."}

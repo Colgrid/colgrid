@@ -6,12 +6,12 @@
 
 - What it is: a persistent real-world game (not a one-off outing). Your team, level and badges carry forward.
 - Where: Salt Lake City, Utah. Each route runs through one walkable neighborhood, with stops at local makers, kitchens and public places.
-- How it works: start a team, invite friends with a link, and play whenever the places on the route are open. No host and no schedule: the app shows where to go and checks that you're at each stop (your phone's location plus something only visible on site).
+- How it works: start a team, invite friends with a link, and play whenever the places on the route are open. The app shows where to go and checks that you're at each stop (your phone's location plus something only visible on site).
 - Who it's for: adults 18+: friends, partners, family and coworkers.
 - Competitive? No. Nobody is ranked; it's about the experience. Everyone earns XP, levels and badges.
 - No download: Colgrid runs in the phone's browser at colgrid.app and can be added to the home screen.
 - Companies: private team experiences. Request a quote: https://getcolgrid.com/companies
-- Local businesses: makers, kitchens and guides can apply to be a stop: https://getcolgrid.com/hosts
+- Local businesses: shops, restaurants and makers can become a Colgrid partner: https://getcolgrid.com/partners
 - Contact: https://getcolgrid.com/contact
 
 ## Official profiles
@@ -25,7 +25,7 @@
 - [Home](https://getcolgrid.com/): what Colgrid is and how it works
 - [FAQ](https://getcolgrid.com/faq)
 - [Companies](https://getcolgrid.com/companies): private team experiences
-- [Hosts](https://getcolgrid.com/hosts): be a stop on a route
+- [Partners](https://getcolgrid.com/partners): become a local partner
 - [Player app](https://colgrid.app): sign in, pass, routes, missions
 - [Contact](https://getcolgrid.com/contact)
 - [Terms](https://getcolgrid.com/terms)

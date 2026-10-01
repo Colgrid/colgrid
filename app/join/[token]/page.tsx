@@ -47,7 +47,7 @@ export default async function JoinPage({ params, searchParams }: { params: Promi
       <h1 className="play__title">Join {invite.team_name}.</h1>
       <p className="lede">
         {invite.route_name}
-        {invite.neighborhood ? ` in ${invite.neighborhood}` : ""}. A Colgrid route you play together, no host needed.
+        {invite.neighborhood ? ` in ${invite.neighborhood}` : ""}. A Colgrid route you play together.
       </p>
 
       {invite.status === "closed" ? (

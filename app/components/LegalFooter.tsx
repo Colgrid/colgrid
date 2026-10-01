@@ -25,7 +25,7 @@ export default function LegalFooter({ social = false }: { social?: boolean }) {
       )}
       <nav className="home-footer__links" aria-label="About Colgrid">
         <Link href="/companies">Companies</Link>
-        <Link href="/hosts">Hosts</Link>
+        <Link href="/partners">Partners</Link>
         <Link href="/faq">FAQ</Link>
         <Link href="/contact">Contact</Link>
         <Link href="/terms">Terms</Link>

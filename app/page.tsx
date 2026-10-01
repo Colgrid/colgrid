@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
 // The home page sells the player experience to someone who has never heard of Colgrid:
 // what it is, how it works, and how progress carries on. No tickets, no dates: Colgrid is a game
 // you play with friends whenever the places are open (Open Play, decided Oct 1, 2026).
-// Companies, hosts and the full FAQ have their own pages.
+// Companies, partners and the full FAQ have their own pages.
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -77,8 +77,7 @@ export default function Home() {
       <section className="home-section" aria-labelledby="what">
         <h2 id="what">A game you can play any day.</h2>
         <p>
-          Routes run through one neighborhood, with stops at local makers, kitchens and places you&apos;d normally walk right past. No host, no
-          schedule: go when your friends are free and the places are open.
+          Routes run through one neighborhood, with stops at local makers, kitchens and places you&apos;d normally walk right past. Go when your friends are free and the places are open.
         </p>
       </section>
 

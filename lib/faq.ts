@@ -15,7 +15,6 @@ export const FULL_FAQ: Faq[] = [
     a: "Colgrid is a real-world game you play with friends. Pick a route, go to each stop together, take on the mission there, and earn XP. Your level and badges carry forward to every route and every city.",
   },
   ...HOME_FAQ,
-  { q: "Is there a host?", a: "No. Your phone tells you where to go and checks that you're there. Stops are local businesses and public places." },
   {
     q: "Is it competitive?",
     a: "No. Nobody is ranked, and there's no race against other teams. Everyone earns XP and badges that carry forward.",

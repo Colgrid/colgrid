@@ -28,7 +28,7 @@ export default function Terms() {
 
       <h2>Playing fair</h2>
       <ul>
-        <li>Respect hosts, their staff and customers, neighbors and everyone else on the street. Private property is off-limits unless a mission sends you there.</li>
+        <li>Respect our local partners, their staff and customers, neighbors and everyone else on the street. Private property is off-limits unless a mission sends you there.</li>
         <li>Don&apos;t share quest codes or answers, fake your location, or interfere with other teams.</li>
         <li>We can remove a player who puts others at risk or breaks these rules, without a refund.</li>
       </ul>
@@ -46,7 +46,7 @@ export default function Terms() {
       </p>
 
       <h2>Partners</h2>
-      <p>Stops are run by independent local businesses. They are responsible for their own premises, food and drinks.</p>
+      <p>Stops are run by independent local partners. They are responsible for their own premises, food and drinks.</p>
 
       <h2>The legal part</h2>
       <p>

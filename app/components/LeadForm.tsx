@@ -61,7 +61,7 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" | "conta
         </>
       )}
       <button type="submit" className="button button--primary">
-        {contact ? "Send" : corporate ? "Get a quote" : "Become a host"}
+        {contact ? "Send" : corporate ? "Get a quote" : "Become a partner"}
       </button>
     </form>
   );
