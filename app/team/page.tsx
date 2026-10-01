@@ -67,7 +67,7 @@ export default async function TeamPage({ searchParams }: { searchParams: Promise
         {!team ? (
           <>
             <h1 style={{ fontSize: 34, marginTop: 8 }}>No team yet.</h1>
-            <p className="lede">Your team drops at the opening ritual. Solo? You&apos;ll be placed on one, and they&apos;ll be waiting for you next time too.</p>
+            <p className="lede">You&apos;ll get your team at the start.</p>
           </>
         ) : (
           <>

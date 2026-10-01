@@ -37,7 +37,7 @@ export default function ShareSheet({ moment, onClose }: { moment: ShareMoment; o
           setCanShareFiles(false);
         }
       })
-      .catch(() => setNote("Couldn't make the card. Check your connection and try again."));
+      .catch(() => setNote("Couldn't make the card. Try again."));
     return () => {
       if (url) URL.revokeObjectURL(url);
     };
@@ -51,7 +51,7 @@ export default function ShareSheet({ moment, onClose }: { moment: ShareMoment; o
       onClose();
     } catch (e) {
       if ((e as { name?: string })?.name === "AbortError") void logShare(moment.kind, "cancelled");
-      else setNote("Sharing didn't work here. Save the image instead.");
+      else setNote("Couldn't share. Save the image instead.");
     }
   }
 
@@ -61,7 +61,7 @@ export default function ShareSheet({ moment, onClose }: { moment: ShareMoment; o
       void logShare(moment.kind, "copied");
       setNote("Text copied.");
     } catch {
-      setNote("Couldn't copy. Select the text and copy it.");
+      setNote("Couldn't copy.");
     }
   }
 
@@ -72,7 +72,7 @@ export default function ShareSheet({ moment, onClose }: { moment: ShareMoment; o
         {blobUrl ? <img src={blobUrl} alt="Your Colgrid card" /> : <span className="share-sheet__loading mono">MAKING YOUR CARD…</span>}
       </div>
       <label className="share-sheet__label mono" htmlFor="share-text">
-        YOUR CAPTION
+        CAPTION
       </label>
       <textarea id="share-text" className="share-sheet__text" rows={3} maxLength={300} value={text} onChange={(e: { target: { value: string } }) => setText(e.target.value)} />
       {note && (
@@ -92,7 +92,7 @@ export default function ShareSheet({ moment, onClose }: { moment: ShareMoment; o
           </a>
         )}
         <button type="button" className="button button--dark" onClick={copy}>
-          Copy caption
+          Copy text
         </button>
       </div>
       <button type="button" className="link-button share-sheet__done" onClick={onClose}>

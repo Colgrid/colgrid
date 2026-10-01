@@ -59,7 +59,7 @@ export default function QrScanner({ onCode }: { onCode: (code: string) => void }
           }
         }, 300);
       } catch {
-        setProblem("We couldn't open the camera. Allow camera access, or type the code instead.");
+        setProblem("Camera is off. Type the code instead.");
         setOpen(false);
       }
     })();
@@ -91,7 +91,7 @@ export default function QrScanner({ onCode }: { onCode: (code: string) => void }
         onClick={() => {
           setProblem(null);
           if (supported) setOpen(true);
-          else setProblem("Open your phone's Camera app and point it at the QR. It opens this page with the code filled in.");
+          else setProblem("Use your Camera app to scan the QR.");
         }}
       >
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">

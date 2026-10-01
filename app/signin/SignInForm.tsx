@@ -13,10 +13,9 @@ export default function SignInForm({ linkError, next }: { linkError: boolean; ne
       <div className="notice" role="status">
         <p className="notice__title">Check your email.</p>
         <p>
-          We sent a link to <strong>{state.email}</strong>. Tap it on this phone and your pass opens. It works once and
-          expires in an hour.
+          Tap the link we sent to <strong>{state.email}</strong>.
         </p>
-        <p className="notice__small">Nothing there? Check spam, or send it again below.</p>
+        <p className="notice__small">Nothing there? Check spam.</p>
         <form action={formAction}>
           <input type="hidden" name="email" value={state.email} />
           {next && <input type="hidden" name="next" value={next} />}
@@ -28,7 +27,7 @@ export default function SignInForm({ linkError, next }: { linkError: boolean; ne
     );
   }
 
-  const message = state.status === "error" ? state.message : linkError ? "That link expired or was already used. Send a new one." : null;
+  const message = state.status === "error" ? state.message : linkError ? "That link expired. Send a new one." : null;
 
   return (
     <form action={formAction} className="form">

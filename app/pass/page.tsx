@@ -158,7 +158,7 @@ function NowCard({ pass, level }: { pass: Pass; level: ReturnType<typeof levelFo
   let detail: string | null = null;
   if (shown) {
     const when = live ? null : formatWhen(shown.starts_at);
-    const where = shown.revealed && shown.start_location ? `Start: ${shown.start_location}` : "Start location drops 24–48 hours before.";
+    const where = shown.revealed && shown.start_location ? `Start: ${shown.start_location}` : "Location drops 48 hours before.";
     detail = when ? `${when} · ${where}` : where;
   }
 
@@ -199,14 +199,10 @@ function MissionPanel({ pass }: { pass: Pass }) {
   if (arriving) {
     return (
       <section className="mission mission--arrive">
-        <p className="mono mission__kicker">IT&apos;S TIME · CHECK IN TO START</p>
         <h2 className="mission__title">Find the Colgrid sign.</h2>
-        <p className="mission__text">
-          {arriving.revealed && arriving.start_location ? `It's at the start: ${arriving.start_location}. ` : ""}Scan it, or type its code, to
-          check in, meet your team and unlock your first mission.
-        </p>
+        {arriving.revealed && arriving.start_location && <p className="mission__where">{arriving.start_location}</p>}
         <Link href="/check-in" className="button button--primary">
-          Check in at the start
+          Check in
         </Link>
       </section>
     );
@@ -217,14 +213,10 @@ function MissionPanel({ pass }: { pass: Pass }) {
   if (guided && !guided.arrived) {
     return (
       <section className="mission mission--arrive">
-        <p className="mono mission__kicker">YOU&apos;RE NOT CHECKED IN YET</p>
         <h2 className="mission__title">Find the Colgrid sign.</h2>
-        <p className="mission__text">
-          {focus.session.start_location ? `It's at the start: ${focus.session.start_location}. ` : ""}Scan it to check in, meet your team and
-          unlock your first mission.
-        </p>
+        {focus.session.start_location && <p className="mission__where">{focus.session.start_location}</p>}
         <Link href="/check-in" className="button button--primary">
-          Scan the start sign
+          Check in
         </Link>
       </section>
     );
@@ -239,8 +231,7 @@ function MissionPanel({ pass }: { pass: Pass }) {
         <h2 className="mission__title">Head to {guided.finale_name}.</h2>
         {guided.finale_where && <p className="mission__where">{guided.finale_where}</p>}
         <p className="mission__text">
-          Every mission done. Regroup with every team for the finale meal
-          {guided.finale_at ? `, around ${formatTime(guided.finale_at)}` : ""}. Badges get handed out there.
+          Every mission done. Finale meal{guided.finale_at ? ` at ${formatTime(guided.finale_at)}` : ""}.
         </p>
       </section>
     );
@@ -302,8 +293,8 @@ function QuestSection({ pass, tournament }: { pass: Pass; tournament: boolean })
         <p className="empty">
           {next
             ? arrivalOpen(next)
-              ? "Check in at the start to unlock your first mission."
-              : `Quests unlock when Session ${formatNumber(next.number)} starts. Keep your phone charged.`
+              ? "Check in at the start."
+              : "Missions unlock when the session starts."
             : "No quests right now."}
         </p>
       </section>
