@@ -1,3 +1,5 @@
+-- SUPERSEDED: Founding was made inactive right after this, by 20261001000019_founding_inactive.sql (runs after this file).
+-- Kept because it was applied to the live database.
 -- Colgrid: Founding badge for the Oct 17 launch.
 -- Run after 20260928000002_signin.sql (any time after). Safe to re-run.
 --
