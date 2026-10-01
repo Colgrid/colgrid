@@ -15,6 +15,9 @@ export type PassSession = {
   status: SessionStatus;
   is_finals: boolean;
   survey_url?: string | null;
+  // Open routes (self-guided): a route name and a play window instead of a start time and place.
+  route_name?: string | null;
+  open_until?: string | null;
 };
 
 // Shape returned by player_quests(). Hidden quests arrive with title and host masked (null).
@@ -36,6 +39,10 @@ export type PassQuest = {
   time_limit_min?: number | null;
   verify?: "code" | "answer" | "location" | "location+answer";
   completed_at?: string | null;
+  // Open routes: opening hours and the stop's pin (for "Open in Maps").
+  hours_text?: string | null;
+  lat?: number | null;
+  lng?: number | null;
 };
 
 export type QuestState =
@@ -60,7 +67,8 @@ export type SessionPick = {
 // session on the first scan). Until then, there's nothing to do but wait.
 export const ARRIVAL_WINDOW_MIN = 30;
 export function arrivalOpen(session: PassSession | null, now: number = Date.now()): boolean {
-  if (!session || session.status !== "scheduled" || !session.starts_at) return false;
+  // Open routes have no start: the first finished stop starts the route.
+  if (!session || session.status !== "scheduled" || !session.starts_at || session.open_until) return false;
   return now >= new Date(session.starts_at).getTime() - ARRIVAL_WINDOW_MIN * 60_000;
 }
 

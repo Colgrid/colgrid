@@ -84,7 +84,7 @@ export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => Leve
     case "no_team":
       return { kind: "error", title: "No team yet.", message: "Check in at the start first." };
     case "no_pass":
-      return { kind: "error", title: "We can't find your pass.", message: "Sign in with the email on your ticket." };
+      return { kind: "error", title: "We can't find your pass.", message: "Sign in and try again." };
     case "too_many":
       return {
         kind: "error",

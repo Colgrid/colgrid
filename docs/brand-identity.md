@@ -1,5 +1,7 @@
 # Colgrid Brand Identity: All Five Phases
 
+> **Decision, Oct 1, 2026 (Matt): Open Play replaces the ticketed-event model.** Colgrid is an ongoing self-guided city game: free sign-up, teams, invite links and routes played whenever the places are open, with no host, ticket or schedule. Eventbrite, the Oct 17 event and the $75-per-player ticket are dropped. Direction to test (nothing paid is built yet): free core Open Play → paid premium routes or experiences later → optional membership if repeat play supports it → separate revenue from company experiences and business partnerships. Future web payments: Stripe. The hosted-event tools stay in the app, hidden, for later hosted or company experiences. Everything below this note that describes tickets, Eventbrite, $75 or scheduled gatherings is kept as **historical context**, not current direction.
+
 Sep 28, 2026 · Matt [last name]
 
 The brand name is **Colgrid**, made official on September 28, 2026 (trademark search pending). This doc runs Alina Wheeler's five phases from *Designing Brand Identity* end to end: Phase 1 is backed by research, Phase 2 now has its name, and Phases 3–5 are working drafts.
@@ -404,7 +406,7 @@ The brand has to look and sound the same in every city even when someone else ru
 
 | Stage                        | Brand work                                          | Gate to move on                             |
 |------------------------------|-----------------------------------------------------|---------------------------------------------|
-| Pilot: Chapter 01, Salt Lake | Name, core identity, pass, keepsakes                | More than 50% of players return             |
+| Pilot: Chapter 01, Salt Lake | Name, core identity, pass, keepsakes                | Measure the return rate (pilot sets the baseline) |
 | Chapter expansion            | Chapter playbook and guidelines; Chapter 02 (Ogden) | Chapter 02 runs to standard                 |
 | Network and flagship         | Flagship identity, multi-city badges, Vanguard kit  | Enough qualified players to fill a flagship |
 

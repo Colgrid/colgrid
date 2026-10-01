@@ -1,18 +1,23 @@
+import PendingSync from "@/app/components/PendingSync";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import InstallCard from "@/app/components/InstallCard";
 import SupportLine from "@/app/components/SupportLine";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import type { ShareMoment } from "@/lib/share";
+import { isIos, mapsUrl, openThrough } from "@/lib/routes";
 import { SITE } from "@/lib/site";
 import { activeQuest, allMainDone, arrivalOpen, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
 import CompleteOverlay from "./CompleteOverlay";
 import FirstRun from "./FirstRun";
 import MissionCheck from "./MissionCheck";
-import { loadPass, type PassData } from "./data";
+import InviteButton from "./InviteButton";
+import { loadPass, type OpenRoute, type PassData } from "./data";
+import { createClient } from "@/lib/supabase/server";
 
 // Private page: keep it out of search results.
 export const metadata: Metadata = { title: "Your pass", robots: { index: false, follow: false } };
@@ -23,22 +28,32 @@ const CHAPTER_TIME_ZONE = "America/Denver";
 
 type Pass = Extract<PassData, { kind: "pass" }>;
 
+// The built-in survey, unless the crew set a different survey link for this session.
+const surveyHref = (s: { id: string; survey_url?: string | null }) => s.survey_url || `/survey/${s.id}`;
+
 export default async function PassPage({ searchParams }: { searchParams: Promise<{ complete?: string; kind?: string }> }) {
   const { complete, kind } = await searchParams;
   const data = await loadPass();
   if (!data) redirect("/signin");
-  if (data.kind === "no-pass") return <NoPass email={data.email} isStaff={data.isStaff} isAdmin={data.isAdmin} />;
+  if (data.kind === "no-pass") {
+    const { data: routeRows } = await (await createClient()).rpc("open_routes");
+    return <NoPass email={data.email} isStaff={data.isStaff} isAdmin={data.isAdmin} routes={Array.isArray(routeRows) ? (routeRows as OpenRoute[]) : []} />;
+  }
   const gained = complete !== undefined ? Math.max(0, Number(complete) || 0) : null;
-  return <PlayerPass pass={data} gained={gained} kind={kind ?? "mission"} />;
+  const ios = isIos((await headers()).get("user-agent"));
+  return <PlayerPass pass={data} gained={gained} kind={kind ?? "mission"} ios={ios} />;
 }
 
 // ------------------------------------------------------------------------------------------------
 
-function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null; kind: string }) {
+function PlayerPass({ pass, gained, kind, ios }: { pass: Pass; gained: number | null; kind: string; ios: boolean }) {
   const level = levelFor(pass.totalXp);
   const mode = pass.team?.mode ?? "casual";
   const tournament = SITE.tournamentOpen && mode === "tournament";
   const live = pass.sessions.live;
+  // After the night: the last session has closed and nothing is about to start. The pass just says so;
+  // the thank-you email handles what's next.
+  const done = !live && pass.focus?.session.status === "closed" && !arrivalOpen(pass.sessions.next);
 
   return (
     <>
@@ -59,7 +74,7 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
         <section className="identity">
           <div>
             <h1 className="identity__name">{pass.player.name}</h1>
-            <p className="identity__team">{pass.team?.name ?? "Your team drops at the start."}</p>
+            <p className="identity__team">{pass.team?.name ?? (pass.season ? "Your team drops at the start." : "Pick a route and name your team.")}</p>
           </div>
           {tournament && pass.standing && (
             <div className="rank-box" aria-label={`Rank ${pass.standing.rank}, ${pass.standing.points} points`}>
@@ -70,17 +85,30 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
         </section>
 
         {/* What matters right now: the session and your progress, then the mission. */}
-        <NowCard pass={pass} level={level} />
+        {done ? (
+          <section className="mission mission--done">
+            <h2 className="mission__title">You&apos;re done.</h2>
+            <p className="done__xp mono">{level.totalXp.toLocaleString("en-US")} XP</p>
+            <p className="done__level">Level {formatNumber(level.level)}</p>
+            <a href={surveyHref(pass.focus!.session)} className="button button--primary" style={{ marginTop: 20, width: "100%" }}>
+              How was it?
+            </a>
+          </section>
+        ) : (
+          <NowCard pass={pass} level={level} />
+        )}
 
-        <MissionPanel pass={pass} />
+        <MissionPanel pass={pass} ios={ios} />
+        <RouteExtras pass={pass} />
+
+        <PendingSync />
 
         {(live || pass.sessions.next) && <SupportLine />}
 
 
         {/* During a session the mission card is the whole story; the list comes back as a recap. */}
-        {!live && <QuestSection pass={pass} tournament={tournament} />}
+        {!live && !done && (pass.season ? <QuestSection pass={pass} tournament={tournament} /> : <RouteList routes={pass.routes} title="Pick a route" />)}
 
-        {!live && <InstallCard />}
 
         <AccountFooter email={pass.email} isStaff={pass.isStaff} isAdmin={pass.isAdmin} />
       </main>
@@ -97,7 +125,7 @@ function Celebration({ pass, gained, kind }: { pass: Pass; gained: number; kind:
   let next: string | null = null;
   if (focus && focus.session.status === "live") {
     const active = activeQuest(focus.quests);
-    if (allMainDone(focus.quests)) next = focus.guided?.finale_name ? "Final mission unlocked" : "Every mission done";
+    if (allMainDone(focus.quests)) next = focus.guided?.open_route ? "Route complete" : focus.guided?.finale_name ? "Final mission unlocked" : "Every mission done";
     else if (active?.mission) next = `Mission ${active.mission} unlocked`;
   }
   const headline = kind === "arrived" ? "You're in." : kind === "hidden" ? "Hidden quest found." : "Mission complete.";
@@ -156,7 +184,9 @@ function NowCard({ pass, level }: { pass: Pass; level: ReturnType<typeof levelFo
   const pct = Math.round(level.progress * 100);
 
   let detail: string | null = null;
-  if (shown) {
+  if (shown?.open_until) {
+    detail = openThrough(shown.open_until);
+  } else if (shown) {
     const when = live ? null : formatWhen(shown.starts_at);
     const where = shown.revealed && shown.start_location ? `Start: ${shown.start_location}` : "Location drops 48 hours before.";
     detail = when ? `${when} · ${where}` : where;
@@ -164,9 +194,11 @@ function NowCard({ pass, level }: { pass: Pass; level: ReturnType<typeof levelFo
 
   return (
     <section className={`now-card${live ? " now-card--live" : ""}`}>
-      <p className="mono now-card__tag">{shown ? `SESSION ${formatNumber(shown.number)}${live ? " · NOW" : ""}` : "SEASON"}</p>
-      <p className="now-card__name">{shown ? shown.neighborhood ?? "Colgrid" : "See you next season."}</p>
-      {!live && detail && <p className="now-card__detail">{detail}</p>}
+      <p className="mono now-card__tag">
+        {shown?.open_until ? `${shown.neighborhood ?? "ROUTE"}`.toUpperCase() : shown ? `SESSION ${formatNumber(shown.number)}${live ? " · NOW" : ""}` : pass.season ? "SEASON" : "SALT LAKE CITY"}
+      </p>
+      <p className="now-card__name">{shown ? (shown.open_until && shown.route_name) || shown.neighborhood || "Colgrid" : pass.season ? "See you next season." : "Welcome to Colgrid."}</p>
+      {(!live || shown?.open_until) && detail && <p className="now-card__detail">{detail}</p>}
 
       <p className="now-card__xp mono">{level.totalXp.toLocaleString("en-US")} XP</p>
       <div
@@ -192,7 +224,7 @@ function formatTime(iso: string | null): string | null {
   return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: CHAPTER_TIME_ZONE }).format(new Date(iso));
 }
 
-function MissionPanel({ pass }: { pass: Pass }) {
+function MissionPanel({ pass, ios }: { pass: Pass; ios: boolean }) {
   const focus = pass.focus;
   // Nobody has started the session yet, but it's time: point the player to the start.
   const arriving = !pass.sessions.live && arrivalOpen(pass.sessions.next) ? pass.sessions.next : null;
@@ -217,7 +249,8 @@ function MissionPanel({ pass }: { pass: Pass }) {
   if (!focus || focus.session.status !== "live") return null;
   const guided = focus.guided;
 
-  if (guided && !guided.arrived) {
+  // Open routes have no start: the first finished stop starts the route.
+  if (guided && !guided.arrived && !guided.open_route) {
     return (
       <section className="mission mission--arrive">
         <h2 className="mission__title">Head to the start.</h2>
@@ -232,6 +265,17 @@ function MissionPanel({ pass }: { pass: Pass }) {
 
   const main = focus.quests.filter((q) => q.mission !== undefined);
   if (allMainDone(focus.quests)) {
+    if (guided?.open_route) {
+      return (
+        <section className="mission mission--finale">
+          <h2 className="mission__title">Route complete.</h2>
+          <p className="mission__text">Every stop done. Your XP is on your pass.</p>
+          <a href={`/survey/${focus.session.id}`} className="button button--dark" style={{ marginTop: 16, width: "100%" }}>
+            How was it?
+          </a>
+        </section>
+      );
+    }
     if (!guided?.finale_name) return null;
     return (
       <section className="mission mission--finale">
@@ -258,18 +302,9 @@ function MissionPanel({ pass }: { pass: Pass }) {
         {q.title}
       </h2>
       {(q.where_text || q.host_business) && (
-        <p className="mission__where">
-          {q.where_text ?? q.host_business}{" "}
-          <a
-            className="mission__map"
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${q.where_text ?? q.host_business}, ${focus.session.neighborhood ?? ""} Salt Lake City`)}`}
-            target="_blank"
-            rel="noopener"
-          >
-            Map
-          </a>
-        </p>
+        <p className="mission__where">{q.where_text ?? q.host_business}</p>
       )}
+      {guided?.open_route && <StopDirections quest={q} ios={ios} />}
       {q.briefing && <p className="mission__text">{q.briefing}</p>}
       {q.verify && q.verify !== "code" ? (
         <>
@@ -280,12 +315,71 @@ function MissionPanel({ pass }: { pass: Pass }) {
         </>
       ) : (
         <>
-          <p className="mission__verify">Done? Your host has the code.</p>
           <Link href="/check-in" className="button button--primary">
             Enter the code
           </Link>
         </>
       )}
+    </section>
+  );
+}
+
+// Open routes: hours (typed in admin) and a hand-off to the phone's maps app. No map in Colgrid.
+function StopDirections({ quest, ios }: { quest: QuestView; ios: boolean }) {
+  const maps = mapsUrl({ lat: quest.lat, lng: quest.lng, where: quest.where_text }, ios);
+  if (!quest.hours_text && !maps) return null;
+  return (
+    <p className="mission__route">
+      {quest.hours_text && <span>{quest.hours_text}</span>}
+      {maps && (
+        <a href={maps} target="_blank" rel="noopener">
+          Open in Maps
+        </a>
+      )}
+    </p>
+  );
+}
+
+// Open routes: invite friends while the route is on; add-to-home-screen after the first stop; other routes after.
+function RouteExtras({ pass }: { pass: Pass }) {
+  const focus = pass.focus;
+  const guided = focus?.guided;
+  if (!focus || !guided?.open_route) return null;
+  const live = focus.session.status === "live";
+  const main = focus.quests.filter((q) => q.mission !== undefined);
+  const doneCount = main.filter((q) => q.state === "done").length;
+  const finished = main.length > 0 && doneCount === main.length;
+  return (
+    <>
+      {live && !finished && guided.invite && (
+        <section className="invite-card">
+          <p className="invite-card__text">Playing with friends? Send them your team link.</p>
+          <InviteButton url={`${SITE.appUrl}/join/${guided.invite}`} team={pass.team?.name ?? "my team"} sessionId={focus.session.id} />
+        </section>
+      )}
+      {doneCount > 0 && <InstallCard sessionId={focus.session.id} />}
+      {(finished || !live) && <RouteList routes={pass.routes.filter((r) => r.slug !== guided.slug && !r.my_done)} title="Play another route" />}
+    </>
+  );
+}
+
+function RouteList({ routes, title }: { routes: OpenRoute[]; title: string }) {
+  if (!routes.length) return null;
+  return (
+    <section className="section">
+      <h2 className="section__title">{title}</h2>
+      <ul className="route-list">
+        {routes.map((r) => (
+          <li key={r.slug}>
+            <Link href={`/play/${r.slug}`} className="route-list__item">
+              <strong>{r.route_name}</strong>
+              <span>
+                {[r.neighborhood, `${r.stops} stops`, openThrough(r.open_until)].filter(Boolean).join(" · ")}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
@@ -320,8 +414,8 @@ function QuestSection({ pass, tournament }: { pass: Pass; tournament: boolean })
           {done} / {total}
         </span>
       </div>
-      {!live && focus.session.survey_url && (
-        <a href={focus.session.survey_url} className="button button--primary" target="_blank" rel="noopener" style={{ marginTop: 12 }}>
+      {focus.session.status === "closed" && (
+        <a href={surveyHref(focus.session)} className="button button--primary" style={{ marginTop: 12 }}>
           How was it? Take the 2-minute survey
         </a>
       )}
@@ -421,7 +515,7 @@ function AccountFooter({ email, isStaff, isAdmin }: { email: string; isStaff: bo
   );
 }
 
-function NoPass({ email, isStaff, isAdmin }: { email: string; isStaff: boolean; isAdmin: boolean }) {
+function NoPass({ email, isStaff, isAdmin, routes }: { email: string; isStaff: boolean; isAdmin: boolean; routes: OpenRoute[] }) {
   return (
     <main className="page">
       <span className="logo-tile logo-tile--sm">
@@ -442,14 +536,11 @@ function NoPass({ email, isStaff, isAdmin }: { email: string; isStaff: boolean; 
       ) : (
         <>
           <p className="lede">
-            We couldn&apos;t find a ticket for <strong>{email}</strong>.
-          </p>
-          <p className="lede">
-            Bought with a different email? Sign out and use that one. Just bought? Your pass opens once your ticket is in. We&apos;ll
-            email you.
+            There&apos;s no Colgrid pass on <strong>{email}</strong> yet. {routes.length ? "Pick a route to start one." : "Routes open soon."}
           </p>
         </>
       )}
+      {!isStaff && <RouteList routes={routes} title="Routes" />}
       <div style={{ marginTop: 32 }}>
         <AccountFooter email={email} isStaff={isStaff} isAdmin={isAdmin} />
       </div>

@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Privacy", description: "What Colgrid
 
 export default function Privacy() {
   return (
-    <LegalPage title="Privacy" updated="September 30, 2026">
+    <LegalPage title="Privacy" updated="October 1, 2026">
       <p>
         This policy explains how {SITE.legalName} (&ldquo;Colgrid,&rdquo; &ldquo;we&rdquo;) handles your information. Short version: we collect
         what we need to run the game, we don&apos;t sell it, and you can ask us to delete it.
@@ -16,10 +16,10 @@ export default function Privacy() {
       <h2>What we collect</h2>
       <ul>
         <li>
-          <strong>From your ticket:</strong> your name, email, and who you&apos;re coming with. Eventbrite shares these with us when you buy.
+          <strong>When you sign up:</strong> your email, your first name and your team&apos;s name.
         </li>
         <li>
-          <strong>From playing:</strong> your team, which gatherings you attended, the quests your team finished, and your XP, levels and
+          <strong>From playing:</strong> your team, the routes you played, the quests your team finished, and your XP, levels and
           badges.
         </li>
         <li>
@@ -36,15 +36,15 @@ export default function Privacy() {
 
       <h2>How we use it</h2>
       <ul>
-        <li>To run gatherings: sign you in, put you on a team, reveal the start location, and keep your progress.</li>
-        <li>To email you about gatherings you have a ticket for (sign-in links, the location drop, a thank-you and survey).</li>
+        <li>To run the game: sign you in, keep your team together, check you&apos;re at a stop, and keep your progress.</li>
+        <li>To email you sign-in links and messages about routes you play (for example, a thank-you and a short survey).</li>
         <li>To answer your messages.</li>
       </ul>
       <p>Your teammates see your first name and level. They never see your email.</p>
 
       <h2>Who we share it with</h2>
       <p>
-        Only the services that run Colgrid for us: Eventbrite (tickets), Supabase (our database and sign-in), Vercel (hosting) and Resend
+        Only the services that run Colgrid for us: Supabase (our database and sign-in), Vercel (hosting) and Resend
         (email). We don&apos;t sell your information or share it with advertisers. Quest hosts don&apos;t get your details.
       </p>
 

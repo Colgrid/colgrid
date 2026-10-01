@@ -6,6 +6,7 @@ import { formatWhen, isoToLocal } from "@/lib/time";
 import { createQuest, deleteQuest, updateQuest, updateSession } from "../../actions";
 import Notice from "../../Notice";
 import PinInput from "../../PinInput";
+import OpenRoute from "./OpenRoute";
 
 type Session = {
   id: string;
@@ -24,6 +25,9 @@ type Session = {
   finale_at: string | null;
   status: string;
   is_finals: boolean;
+  route_name: string | null;
+  slug: string | null;
+  open_until: string | null;
   season: { number: number; name: string | null } | null;
 };
 type Quest = {
@@ -46,6 +50,7 @@ type Quest = {
   lng: number | null;
   radius_m: number;
   dwell_sec: number;
+  hours_text: string | null;
   host: { business: string } | null;
 };
 
@@ -59,12 +64,12 @@ export default async function AdminSession({ params, searchParams }: { params: P
   const [sessionRes, questRes, hostRes, ticketRes] = await Promise.all([
     supabase
       .from("session")
-      .select("id, number, neighborhood, starts_at, start_location, revealed_at, reveal_emailed_at, start_code, start_lat, start_lng, start_radius_m, finale_name, finale_where, finale_at, status, is_finals, season:season_id (number, name)")
+      .select("id, number, neighborhood, starts_at, start_location, revealed_at, reveal_emailed_at, start_code, start_lat, start_lng, start_radius_m, finale_name, finale_where, finale_at, status, is_finals, route_name, slug, open_until, season:season_id (number, name)")
       .eq("id", id)
       .maybeSingle(),
     supabase
       .from("quest")
-      .select("id, host_id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, where_text, briefing, time_limit_min, answer, lat, lng, radius_m, dwell_sec, host:host_id (business)")
+      .select("id, host_id, stop_number, title, type, xp, is_hidden, is_judged, code, max_points, host_fee_cents, where_text, briefing, time_limit_min, answer, lat, lng, radius_m, dwell_sec, hours_text, host:host_id (business)")
       .eq("session_id", id),
     supabase.from("host").select("id, business").order("business"),
     supabase.from("ticket").select("id", { count: "exact", head: true }).eq("session_id", id),
@@ -96,10 +101,12 @@ export default async function AdminSession({ params, searchParams }: { params: P
       </p>
       <Notice msg={msg} />
 
+      {!session.open_until && (
       <p className="admin-meta">
         Players check in by tapping I&apos;m here at the start pin (from 30 minutes before; it starts the session by itself). Backup start code
         to say out loud: <span className="code-chip mono">{session.start_code}</span>
       </p>
+      )}
 
       <div className="admin-actions">
         <Link href={`/admin/sessions/${session.id}/plaques`} className="button button--primary">
@@ -107,6 +114,9 @@ export default async function AdminSession({ params, searchParams }: { params: P
         </Link>
         <Link href={`/admin/import?session=${session.id}`} className="button button--dark">
           Import players
+        </Link>
+        <Link href={`/admin/sessions/${session.id}/survey`} className="button button--dark">
+          Survey answers
         </Link>
       </div>
 
@@ -185,6 +195,10 @@ export default async function AdminSession({ params, searchParams }: { params: P
                     <label>
                       Where to go (shown when the mission unlocks)
                       <input name="where_text" maxLength={300} defaultValue={q.where_text ?? ""} />
+                    </label>
+                    <label>
+                      Hours (open routes; shown to players, e.g. Tue–Sat 10–6)
+                      <input name="hours_text" maxLength={120} defaultValue={q.hours_text ?? ""} />
                     </label>
                     <label>
                       What to do
@@ -281,6 +295,10 @@ export default async function AdminSession({ params, searchParams }: { params: P
               <input name="where_text" maxLength={300} placeholder="e.g. Kiln & Co, 912 E 900 S (green door)" />
             </label>
             <label>
+              Hours (open routes; shown to players)
+              <input name="hours_text" maxLength={120} placeholder="e.g. Tue–Sat 10–6, or Any time" />
+            </label>
+            <label>
               What to do
               <textarea name="briefing" rows={3} maxLength={1500} placeholder="e.g. Ask the counter for the Colgrid craft kit. Build your team's badge together." />
             </label>
@@ -327,6 +345,8 @@ export default async function AdminSession({ params, searchParams }: { params: P
           </form>
         </details>
       </section>
+
+      <OpenRoute session={session} mainQuestIds={quests.filter((q) => !q.is_hidden && !q.is_judged).map((q) => q.id)} />
 
       <section className="admin-section">
         <h2>Session details</h2>

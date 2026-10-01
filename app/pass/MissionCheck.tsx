@@ -1,7 +1,11 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
+import { queueForLater } from "@/app/components/PendingSync";
+import { enqueue, isNetworkError, timeout } from "@/lib/offline-queue";
 import { arriveHere, completeMission, type MissionState } from "./actions";
+
+const num = (v: FormDataEntryValue | null) => (v === null || v === "" || !Number.isFinite(Number(v)) ? null : Number(v));
 
 // questId for a mission; sessionId for checking in at the start (location only).
 type Props = { questId?: string; sessionId?: string; needsLocation: boolean; needsAnswer: boolean };
@@ -9,7 +13,32 @@ type Props = { questId?: string; sessionId?: string; needsLocation: boolean; nee
 // Finish a stop from the phone: "I'm here" reads the phone's location (and the answer, if the stop
 // has one) and the database decides. Nothing about location is saved.
 export default function MissionCheck({ questId, sessionId, needsLocation, needsAnswer }: Props) {
-  const [state, action, pending] = useActionState<MissionState, FormData>(sessionId ? arriveHere : completeMission, { error: null, stay: null, attempt: 0 });
+  // No signal (or it drops mid-send): keep the check-in on the phone and send it when signal is back.
+  const send = async (prev: MissionState, form: FormData): Promise<MissionState> => {
+    const save = () =>
+      queueForLater(() => {
+        const store = window.localStorage;
+        const at = Date.now();
+        const lat = num(form.get("lat"));
+        const lng = num(form.get("lng"));
+        const accuracy = num(form.get("accuracy"));
+        if (sessionId) enqueue(store, { kind: "arrive", sessionId, lat, lng, accuracy, at });
+        else if (questId) enqueue(store, { kind: "mission", questId, answer: String(form.get("answer") ?? "").trim() || null, lat, lng, accuracy, at });
+      });
+    if (navigator.onLine === false) {
+      save();
+      return { ...prev, error: null, stay: null, queued: true };
+    }
+    try {
+      const next = await timeout((sessionId ? arriveHere : completeMission)(prev, form), 20000);
+      return next ?? prev;
+    } catch (e) {
+      if (!isNetworkError(e)) throw e;
+      save();
+      return { ...prev, error: null, stay: null, queued: true };
+    }
+  };
+  const [state, action, pending] = useActionState<MissionState, FormData>(send, { error: null, stay: null, attempt: 0 });
   const formRef = useRef<HTMLFormElement>(null);
   const latRef = useRef<HTMLInputElement>(null);
   const lngRef = useRef<HTMLInputElement>(null);
@@ -104,6 +133,11 @@ export default function MissionCheck({ questId, sessionId, needsLocation, needsA
           {error}
         </p>
       )}
+      {state.queued && !error && (
+        <p className="mission__stay" role="status">
+          Saved. It&apos;ll send when you&apos;re back online.
+        </p>
+      )}
       {stayLeft !== null && (
         <p className="mission__stay" role="status">
           Stay here… <span className="mono">{stayLeft}s</span>
@@ -112,7 +146,6 @@ export default function MissionCheck({ questId, sessionId, needsLocation, needsA
       <button type="submit" className="button button--primary" disabled={busy} style={{ width: "100%", marginTop: 12 }}>
         {label}
       </button>
-      {needsLocation && <p className="mission__hint">Uses your location once to confirm you&apos;re at the stop. It isn&apos;t saved.</p>}
     </form>
   );
 }

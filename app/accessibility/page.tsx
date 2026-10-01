@@ -18,7 +18,7 @@ export default function Accessibility() {
         <li>Gatherings are about 2–4 hours and cover roughly 1–1.5 miles of walking at an easy pace, with stops along the way.</li>
         <li>Routes stay on public sidewalks. Some partner businesses may have steps or narrow spaces; we note this when we know it.</li>
         <li>Missions mix making, tasting, looking and talking, so every team member can take part in different ways.</li>
-        <li>Tell us about food allergies or dietary needs when you buy your ticket.</li>
+        <li>Tell us about food allergies or dietary needs through the contact form before you play.</li>
       </ul>
       <p>
         If you use a mobility aid, need a slower pace, or have any other need, <Link href="/contact">contact us</Link> before the gathering.

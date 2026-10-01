@@ -4,7 +4,26 @@ import Link from "next/link";
 import { useActionState, useCallback, useEffect, useRef, useState } from "react";
 import { describeCheckIn } from "@/lib/game/checkin";
 import { formatLevel, levelFor } from "@/lib/game/levels";
+import { queueForLater } from "@/app/components/PendingSync";
+import { enqueue, isNetworkError, timeout } from "@/lib/offline-queue";
 import { submitCheckIn, type CheckInState } from "./actions";
+
+// No signal (or it drops mid-send): keep the code on the phone and send it when signal is back.
+async function sendCode(prev: CheckInState, form: FormData): Promise<CheckInState> {
+  const code = String(form.get("code") ?? "").trim();
+  const save = () => queueForLater(() => enqueue(window.localStorage, { kind: "code", code, at: Date.now() }));
+  if (code && navigator.onLine === false) {
+    save();
+    return { result: null, code, queued: true };
+  }
+  try {
+    return (await timeout(submitCheckIn(prev, form), 20000)) ?? prev;
+  } catch (e) {
+    if (!code || !isNetworkError(e)) throw e;
+    save();
+    return { result: null, code, queued: true };
+  }
+}
 import QrScanner from "./QrScanner";
 
 // "tac7q2" -> "TAC-7Q2" as the player types.
@@ -14,7 +33,7 @@ function formatCode(input: string): string {
 }
 
 export default function CheckInForm({ initialCode }: { initialCode: string }) {
-  const [state, formAction, pending] = useActionState<CheckInState, FormData>(submitCheckIn, {
+  const [state, formAction, pending] = useActionState<CheckInState, FormData>(sendCode, {
     result: null,
     code: formatCode(initialCode),
   });
@@ -133,6 +152,11 @@ export default function CheckInForm({ initialCode }: { initialCode: string }) {
           <div id="checkin-error" className="form__error" role="alert">
             <strong>{error.title}</strong> {error.message}
           </div>
+        )}
+        {state.queued && !error && (
+          <p className="mission__stay" role="status">
+            Saved. It&apos;ll send when you&apos;re back online.
+          </p>
         )}
         <button className="button button--primary" type="submit" disabled={pending || code.replace("-", "").length !== 6} style={{ width: "100%", marginTop: 16 }}>
           {pending ? "Checking…" : "Check in"}

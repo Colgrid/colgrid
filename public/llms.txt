@@ -1,19 +1,17 @@
 # Colgrid
 
-> Colgrid is a real-world team game that turns a city into missions. Teams meet in one walkable neighborhood for a 2–4 hour gathering and take on quests hosted by local makers, kitchens and guides. Players earn XP, levels and badges on a web pass that carries forward to every gathering and every city. Colgrid is based in Salt Lake City, Utah.
+> Colgrid is a real-world game you play with friends. Pick a route through a neighborhood, go to each stop together, take on the mission there, and earn XP, levels and badges on a web pass that carries forward to every route and every city. Colgrid is based in Salt Lake City, Utah, and is opening soon.
 
 ## Key facts
 
-- What it is: a persistent real-world team game (not a one-off outing). Your team, level and badges carry forward.
-- Where: Salt Lake City, Utah. Each gathering is in one walkable neighborhood; the starting location is revealed 24–48 hours before.
-- Format: teams of players, 2–4 hours, 3–4 hosted quests, local tastings, and a shared finale meal. The app guides each team from mission to mission; teams prove each stop by being there and answering something only visible on site.
-- Who it's for: adults 18+ who want more from a night out than dinner and drinks: friends, partners, family, coworkers and solo players. Solo players are placed on a team.
+- What it is: a persistent real-world game (not a one-off outing). Your team, level and badges carry forward.
+- Where: Salt Lake City, Utah. Each route runs through one walkable neighborhood, with stops at local makers, kitchens and public places.
+- How it works: start a team, invite friends with a link, and play whenever the places on the route are open. No host and no schedule: the app shows where to go and checks that you're at each stop (your phone's location plus something only visible on site).
+- Who it's for: adults 18+: friends, partners, family and coworkers.
 - Competitive? No. Nobody is ranked; it's about the experience. Everyone earns XP, levels and badges.
-- Price: $75 per player, sold on Eventbrite.
-- A ticket includes: 3–4 hosted missions, local tastings, the finale meal, a keepsake, and your Colgrid pass.
-- Next gathering: the first Colgrid gathering is Saturday, October 17, 2026, 4–7 PM, in 9th & 9th, Salt Lake City. $75 per person, adults 18+. Tickets: https://www.eventbrite.com/e/9th-9th-interactive-team-quest-tastings-finale-meal-tickets-2002520543853
-- Companies: private team runs from $2,500 for up to 20 players (+$95 per extra player). Request a quote: https://getcolgrid.com/companies
-- Local businesses: makers, kitchens and guides can apply to host a quest: https://getcolgrid.com/hosts
+- No download: Colgrid runs in the phone's browser at colgrid.app and can be added to the home screen.
+- Companies: private team experiences. Request a quote: https://getcolgrid.com/companies
+- Local businesses: makers, kitchens and guides can apply to be a stop: https://getcolgrid.com/hosts
 - Contact: https://getcolgrid.com/contact
 
 ## Official profiles
@@ -24,11 +22,11 @@
 
 ## Pages
 
-- [Home](https://getcolgrid.com/): what Colgrid is, how it works, the next gathering and price
+- [Home](https://getcolgrid.com/): what Colgrid is and how it works
 - [FAQ](https://getcolgrid.com/faq)
-- [Companies](https://getcolgrid.com/companies): private team runs
-- [Hosts](https://getcolgrid.com/hosts): host a quest
-- [Player app](https://colgrid.app): sign in, pass, missions
+- [Companies](https://getcolgrid.com/companies): private team experiences
+- [Hosts](https://getcolgrid.com/hosts): be a stop on a route
+- [Player app](https://colgrid.app): sign in, pass, routes, missions
 - [Contact](https://getcolgrid.com/contact)
 - [Terms](https://getcolgrid.com/terms)
 - [Privacy](https://getcolgrid.com/privacy)

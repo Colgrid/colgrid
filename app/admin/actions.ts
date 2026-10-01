@@ -54,6 +54,7 @@ function briefingFields(form: FormData) {
     briefing: text(form, "briefing", 1500),
     time_limit_min: minutes && minutes > 0 ? Math.min(240, minutes) : null,
     answer: text(form, "answer", 200),
+    hours_text: text(form, "hours_text", 120),
   };
 }
 
@@ -104,6 +105,26 @@ export async function updateSession(form: FormData) {
   if (error) back(`/admin/sessions/${id}`, "Couldn't save the session.");
   revalidatePath(`/admin/sessions/${id}`);
   back(`/admin/sessions/${id}`, "Saved.");
+}
+
+// Open route (self-guided test): name, link, play window. Open = live; Close = closed (no badge, no emails).
+export async function saveOpenRoute(form: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = text(form, "id", 64);
+  if (!id) back("/admin", "Missing session.");
+  const page = `/admin/sessions/${id}`;
+  const slug = (text(form, "slug", 40) ?? "").toLowerCase();
+  const until = localToIso(String(form.get("open_until") ?? ""));
+  const action = String(form.get("action") ?? "save");
+  if (!/^[a-z0-9][a-z0-9-]{1,39}$/.test(slug)) back(page, "The link needs letters, numbers or dashes, like route-01.");
+  if (!until) back(page, "Set when the route closes.");
+  const update: Record<string, unknown> = { route_name: text(form, "route_name", 80), slug, open_until: until };
+  if (action === "open") Object.assign(update, { status: "live", revealed_at: new Date().toISOString(), reveal_emailed_at: new Date().toISOString() });
+  if (action === "close") update.status = "closed";
+  const { error } = await supabase.from("session").update(update).eq("id", id);
+  if (error) back(page, error.code === "23505" ? "Another route already uses that link." : "Couldn't save the route.");
+  revalidatePath(page);
+  back(page, action === "open" ? "Route is open. Anyone with the link can play." : action === "close" ? "Route closed." : "Route saved.");
 }
 
 // ---------------------------------------------------------------------------------------------

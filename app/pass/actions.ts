@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-export type MissionState = { error: string | null; stay: number | null; attempt: number };
+export type MissionState = { error: string | null; stay: number | null; attempt: number; queued?: boolean };
 
 const num = (form: FormData, key: string) => {
   const v = Number(form.get(key));
@@ -86,7 +86,7 @@ export async function arriveHere(prev: MissionState, form: FormData): Promise<Mi
     case "not_live":
       return fail("This session has ended.");
     case "no_team":
-      return fail("We can't find your ticket. Ask the crew.");
+      return fail("You're not on a team yet.");
     default:
       return fail("Didn't work. Try again.");
   }

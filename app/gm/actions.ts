@@ -10,6 +10,7 @@ import { sendBatch } from "@/lib/email/resend";
 import { planTeams } from "@/lib/game/teams";
 import { rows } from "@/lib/rows";
 import { safeNext } from "@/lib/safe-next";
+import { SITE } from "@/lib/site";
 import { formatWhen } from "@/lib/time";
 
 function text(form: FormData, key: string, max = 200): string | null {
@@ -82,7 +83,7 @@ export async function closeSession(form: FormData) {
       .map((a) => a.player)
       .filter((p): p is Recipient => !!p);
     if (session && recipients.length) {
-      const { sent, error: mailError } = await sendBatch(recipients.map((r) => thanksEmail(r, info(session), session.survey_url)));
+      const { sent, error: mailError } = await sendBatch(recipients.map((r) => thanksEmail(r, info(session), session.survey_url || `${SITE.appUrl}/survey/${id}`)));
       msg += mailError ? ` ${mailError}` : ` Thank-you email sent to ${sent.length}.`;
     }
   }
@@ -127,7 +128,7 @@ export async function saveSurvey(form: FormData) {
   if (url && !/^https:\/\//i.test(url)) back(id, "The survey link should start with https://");
   const { error } = await supabase.from("session").update({ survey_url: url }).eq("id", id);
   revalidatePath(`/gm/${id}`);
-  back(id, error ? "Couldn't save the survey link." : url ? "Survey link saved. Players see it on their pass after the session." : "Survey link removed.");
+  back(id, error ? "Couldn't save the survey link." : url ? "Survey link saved. Players get it instead of the built-in survey." : "Back to the built-in survey.");
 }
 
 // ---------------------------------------------------------------------------------------------

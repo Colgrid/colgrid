@@ -1,3 +1,6 @@
+
+> **Decision, Oct 1, 2026 (Matt): Open Play replaces the ticketed-event model.** Colgrid is an ongoing self-guided city game: free sign-up, teams, invite links and routes played whenever the places are open, with no host, ticket or schedule. Eventbrite, the Oct 17 event and the $75-per-player ticket are dropped. Direction to test (nothing paid is built yet): free core Open Play → paid premium routes or experiences later → optional membership if repeat play supports it → separate revenue from company experiences and business partnerships. Future web payments: Stripe. The hosted-event tools stay in the app, hidden, for later hosted or company experiences. Everything below this note that describes tickets, Eventbrite, $75 or scheduled gatherings is kept as **historical context**, not current direction.
+
 BUSINESS PLAN
 
 **Business Name:** Colgrid
@@ -114,7 +117,7 @@ BUSINESS PLAN
 
 <u>Company and Industry Risks:</u>
 
-- **Return rate:** the model depends on players coming back. The pilot tests this directly, with a target of more than 50% returning, before expansion spending.
+- **Return rate:** the model depends on players coming back. The pilot measures this directly and sets the baseline before any expansion spending.
 
 - **Host reliability:** a quest host who cancels breaks a session. Mitigation: keep 1–2 backup hosts per neighborhood and pay hosts promptly so they want to return.
 
@@ -214,7 +217,7 @@ BUSINESS PLAN
 
 - **B2B outreach (owner time):** direct outreach to HR teams and district associations, using each impact report as proof.
 
-- **Retention:** the game itself is the retention plan. Teams reunite, the next date is announced at the closing ritual, levels only go up, the \$280 Season Pass locks in four gatherings, and progress counts toward the flagship. Tournament teams return to defend their standing and reach the chapter finals; casual players return for their team, new quests and Explorer entries. Target: more than 50% of players return.
+- **Retention:** the game itself is the retention plan. Teams reunite, the next date is announced at the closing ritual, levels only go up, the \$280 Season Pass locks in four gatherings, and progress counts toward the flagship. Tournament teams return to defend their standing and reach the chapter finals; casual players return for their team, new quests and Explorer entries. The pilot measures the return rate and sets the baseline.
 
 > <u>**Physical Location and intended geographical service area**:</u>
 >
@@ -268,7 +271,7 @@ BUSINESS PLAN
 
 > **<u>Other Key Activities & Metrics to monitor and measure for Success:</u>**
 
-- **Return rate:** more than 50% of players return for gatherings 2, 3 and 4 (the pilot's main test).
+- **Return rate:** how many players return for later gatherings (the pilot's main question; its result is the baseline).
 
 - **Quest completion:** more than 85% of teams finish every main quest.
 

@@ -18,7 +18,7 @@ insert into auth.users (id, email, email_confirmed_at) values
   ('00000000-0000-0000-0000-0000000000d2', 'no.ticket@example.com', now()),
   ('00000000-0000-0000-0000-0000000000d3', 'jonah.kim@example.com', null);     -- not confirmed yet
 
--- 1. First sign-in links the pass and awards the Founding badge --------------------------------
+-- 1. First sign-in links the pass (Founding is inactive) --------------------------------
 set role authenticated;
 set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000d1';
 do $$
@@ -29,11 +29,12 @@ begin
   if v <> (select id from public.player where email = 'new.player@example.com') then
     raise exception 'FAIL linked the wrong player';
   end if;
-  if not exists (select 1 from public.player_badge pb join public.badge b on b.id = pb.badge_id
-                 where pb.player_id = v and b.key = 'founding') then
-    raise exception 'FAIL no Founding badge after first sign-in';
+  -- Founding is inactive (Oct 1, 2026): signing in gives no badge.
+  if exists (select 1 from public.player_badge pb join public.badge b on b.id = pb.badge_id
+             where pb.player_id = v and b.key = 'founding') then
+    raise exception 'FAIL Founding was given while it is inactive';
   end if;
-  perform pg_temp.pass('first sign-in links the pass by email (any case) and awards Founding');
+  perform pg_temp.pass('first sign-in links the pass by email (any case); Founding is inactive, so no badge');
 
   v2 := public.claim_my_pass();
   if v2 is distinct from v then raise exception 'FAIL second sign-in changed the pass'; end if;
