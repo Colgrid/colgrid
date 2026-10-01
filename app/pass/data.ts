@@ -75,7 +75,7 @@ export async function loadPass(): Promise<PassData | null> {
 
   const email = user.email ?? "";
   const [{ data: claimed }, { data: staffRows }] = await Promise.all([
-    // Returns the player's id, linking their ticket by email on first sign-in.
+    // Returns the player's id, linking the account to its player pass by email on first sign-in.
     supabase.rpc("claim_my_pass"),
     supabase.from("staff").select("role").eq("user_id", user.id),
   ]);

@@ -1,5 +1,7 @@
 # Colgrid MVP Spec: Salt Lake Pilot
 
+> **Decision, Oct 1, 2026 (Matt): Open Play replaces the ticketed-event model.** Colgrid is an ongoing self-guided city game: free sign-up, teams, invite links and routes played whenever the places are open, with no host, ticket or schedule. Eventbrite, the Oct 17 event and the $75-per-player ticket are dropped. Direction to test (nothing paid is built yet): free core Open Play → paid premium routes or experiences later → optional membership if repeat play supports it → separate revenue from company experiences and business partnerships. Future web payments: Stripe. The hosted-event tools stay in the app, hidden, for later hosted or company experiences. Everything below this note that describes tickets, Eventbrite, $75 or scheduled gatherings is kept as **historical context**, not current direction.
+
 Sep 28, 2026 · Matt [last name]
 
 The MVP is the smallest product that runs one pilot season in Salt Lake (4 gatherings, 30–50 players each) and answers one question: **do players come back because their team and progress carry forward?** Everything not needed for that question is out of scope.
@@ -39,7 +41,7 @@ The dry run's players, XP and badges are real and stay on their passes (progress
 
 Testing a second way to play next to the hosted gathering: an **open route** that people play on their own, any time the places are open. The question: will someone discover a route, make a team, invite friends, play without a host, finish, and choose another route?
 
-- An open route is a normal session with a route name, a link (`colgrid.app/play/<route>`) and a closing time. Admin → session → **Open route**: Open now / Close now; it closes itself at the closing time (no badge, no emails). Sessions without this (the Oct 17 gathering) are unchanged.
+- An open route is a normal session with a route name, a link (`colgrid.app/play/<route>`) and a closing time. Admin → session → **Open route**: Open now / Close now; it closes itself at the closing time (no badge, no emails). Sessions without this (hosted gatherings, kept hidden for later) are unchanged.
 - Anyone can sign up from the route page (email link or 6-digit code, first name, no ticket), name a team and text an invite link (`/join/<token>`). Friends who join go on that team; nobody is placed on a stranger's team.
 - No start pin and no host: the first finished stop starts a team's route (+50). Stops are verified the usual way (location + on-site answer; host code as backup). Same XP: 25 per quest, +20 each for finishing every stop. Each stop shows hours (typed in admin) and Open in Maps (hands off to the phone's maps app; no map in Colgrid).
 - After the first finished stop, the pass offers Add to Home Screen (never required). After the last, it shows the survey and the other open routes.

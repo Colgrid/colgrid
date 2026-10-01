@@ -35,7 +35,7 @@ export default async function AdminHome({ searchParams }: { searchParams: Promis
       <Notice msg={msg} />
       <div className="admin-actions">
         <Link href="/admin/import" className="button button--dark">
-          Import players (Eventbrite)
+          Import players (CSV)
         </Link>
         <Link href="/admin/hosts" className="button button--primary">
           Hosts

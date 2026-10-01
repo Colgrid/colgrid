@@ -71,9 +71,6 @@ export default function Home() {
         <h1>Turn your city into a game board.</h1>
         <p className="home-lede">Colgrid is a real-world game you play with friends. Pick a route, take on missions, discover local places, earn XP.</p>
         <p className="home-when">Opening soon in Salt Lake City.</p>
-        <a href={`${SITE.appUrl}/signin`} className="home-quiet">
-          Open your pass →
-        </a>
       </section>
 
       {/* 2. What is Colgrid? */}

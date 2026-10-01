@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/signin?error=link`);
   }
 
-  // Link the ticket to this account on first sign-in (awards the Founding badge).
+  // Link this account to its player pass, if one exists for the email (Founding is inactive).
   await supabase.rpc("claim_my_pass");
 
   // Back to where they were headed (set when they asked for the link), else their pass.
