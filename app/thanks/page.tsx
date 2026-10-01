@@ -9,9 +9,6 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
   const contact = kind === "contact";
   return (
     <main className="page">
-      <p className="mono eyebrow" style={{ color: "var(--chapter-teal)" }}>
-        {contact ? "CONTACT" : host ? "QUEST HOSTS" : "PRIVATE RUNS"}
-      </p>
       {error ? (
         <>
           <h1 style={{ fontSize: 36, marginTop: 8 }}>That didn&apos;t go through.</h1>

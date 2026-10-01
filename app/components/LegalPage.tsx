@@ -4,9 +4,6 @@ import LegalFooter from "./LegalFooter";
 export default function LegalPage({ title, updated, children }: { title: string; updated: string; children: React.ReactNode }) {
   return (
     <main className="page legal">
-      <p className="mono eyebrow" style={{ color: "var(--chapter-teal)" }}>
-        COLGRID
-      </p>
       <h1 style={{ fontSize: 36, marginTop: 8 }}>{title}</h1>
       <p className="legal__updated mono">Last updated {updated}</p>
       {children}

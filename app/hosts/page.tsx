@@ -12,9 +12,6 @@ export default function Hosts() {
   return (
     <main className="page home">
       <section className="home-hero">
-        <p className="mono eyebrow" style={{ color: "var(--chapter-teal)" }}>
-          FOR LOCAL MAKERS, KITCHENS AND GUIDES
-        </p>
         <h1>Host a quest.</h1>
         <p className="home-lede">
           Teams of players come to you with a mission you design: a tasting, a quick make, a story only you can tell. You&apos;re paid for every

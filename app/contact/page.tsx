@@ -13,9 +13,6 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <main className="page">
-      <p className="mono eyebrow" style={{ color: "var(--chapter-teal)" }}>
-        CONTACT
-      </p>
       <h1 style={{ fontSize: 36, marginTop: 8 }}>Say hello.</h1>
       <p className="lede">
         Questions about a ticket, accessibility, press, or anything else. We answer within two days. Want to host a quest or book your

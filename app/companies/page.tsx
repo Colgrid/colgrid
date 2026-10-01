@@ -12,13 +12,10 @@ export default function Companies() {
   return (
     <main className="page home">
       <section className="home-hero">
-        <p className="mono eyebrow" style={{ color: "var(--beacon-amber)" }}>
-          PRIVATE RUNS · FROM $2,500
-        </p>
         <h1>Your team, a whole neighborhood, one afternoon.</h1>
         <p className="home-lede">
-          A private Colgrid run for your company: hosted quests, local tastings and a finale meal, built around your group. $2,500 for up to
-          20 players, +$95 per extra player.
+          A private Colgrid run for your company: hosted quests, local tastings and a finale meal, built around your group. From $2,500 for
+          up to 20 players, +$95 per extra player.
         </p>
       </section>
       <section className="home-section" aria-label="Get a quote">
