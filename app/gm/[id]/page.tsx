@@ -171,7 +171,7 @@ export default async function RunSheet({ params, searchParams }: { params: Promi
             <strong>Not started</strong>
             <p>
               Starting opens check-in: quest codes work and passes show tonight&apos;s quests. It also starts by itself when the first player
-              scans the start sign (code <span className="mono">{session.start_code}</span>), from 30 minutes before.
+              checks in at the start, from 30 minutes before. Backup start code: <span className="mono">{session.start_code}</span>
             </p>
           </div>
           <button type="submit" className="button button--primary">

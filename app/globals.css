@@ -2116,9 +2116,6 @@ button.button {
   color: var(--asphalt);
   font-size: 17px;
 }
-.plaque--start {
-  border: 6px solid #ff9f1c;
-}
 .mission__stay {
   margin: 12px 0 0;
   padding: 10px 12px;

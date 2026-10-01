@@ -194,16 +194,23 @@ function formatTime(iso: string | null): string | null {
 
 function MissionPanel({ pass }: { pass: Pass }) {
   const focus = pass.focus;
-  // Nobody has started the session yet, but it's time: point the player to the start sign.
+  // Nobody has started the session yet, but it's time: point the player to the start.
   const arriving = !pass.sessions.live && arrivalOpen(pass.sessions.next) ? pass.sessions.next : null;
   if (arriving) {
     return (
       <section className="mission mission--arrive">
-        <h2 className="mission__title">Find the Colgrid sign.</h2>
+        <h2 className="mission__title">Head to the start.</h2>
         {arriving.revealed && arriving.start_location && <p className="mission__where">{arriving.start_location}</p>}
-        <Link href="/check-in" className="button button--primary">
-          Check in
-        </Link>
+        {arriving.revealed ? (
+          <>
+            <MissionCheck sessionId={arriving.id} needsLocation needsAnswer={false} />
+            <Link href="/check-in" className="mission__fallback">
+              Have a start code? Enter it
+            </Link>
+          </>
+        ) : (
+          <p className="mission__text">Location drops 48 hours before.</p>
+        )}
       </section>
     );
   }
@@ -213,10 +220,11 @@ function MissionPanel({ pass }: { pass: Pass }) {
   if (guided && !guided.arrived) {
     return (
       <section className="mission mission--arrive">
-        <h2 className="mission__title">Find the Colgrid sign.</h2>
+        <h2 className="mission__title">Head to the start.</h2>
         {focus.session.start_location && <p className="mission__where">{focus.session.start_location}</p>}
-        <Link href="/check-in" className="button button--primary">
-          Check in
+        <MissionCheck sessionId={focus.session.id} needsLocation needsAnswer={false} />
+        <Link href="/check-in" className="mission__fallback">
+          Have a start code? Enter it
         </Link>
       </section>
     );

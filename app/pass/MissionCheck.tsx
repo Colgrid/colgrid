@@ -1,14 +1,15 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
-import { completeMission, type MissionState } from "./actions";
+import { arriveHere, completeMission, type MissionState } from "./actions";
 
-type Props = { questId: string; needsLocation: boolean; needsAnswer: boolean };
+// questId for a mission; sessionId for checking in at the start (location only).
+type Props = { questId?: string; sessionId?: string; needsLocation: boolean; needsAnswer: boolean };
 
 // Finish a stop from the phone: "I'm here" reads the phone's location (and the answer, if the stop
 // has one) and the database decides. Nothing about location is saved.
-export default function MissionCheck({ questId, needsLocation, needsAnswer }: Props) {
-  const [state, action, pending] = useActionState<MissionState, FormData>(completeMission, { error: null, stay: null, attempt: 0 });
+export default function MissionCheck({ questId, sessionId, needsLocation, needsAnswer }: Props) {
+  const [state, action, pending] = useActionState<MissionState, FormData>(sessionId ? arriveHere : completeMission, { error: null, stay: null, attempt: 0 });
   const formRef = useRef<HTMLFormElement>(null);
   const latRef = useRef<HTMLInputElement>(null);
   const lngRef = useRef<HTMLInputElement>(null);
@@ -75,7 +76,8 @@ export default function MissionCheck({ questId, needsLocation, needsAnswer }: Pr
 
   return (
     <form ref={formRef} action={action} onSubmit={onSubmit} className="mission__answer">
-      <input type="hidden" name="quest_id" value={questId} />
+      <input type="hidden" name="quest_id" value={questId ?? ""} />
+      <input type="hidden" name="session_id" value={sessionId ?? ""} />
       <input type="hidden" name="lat" ref={latRef} />
       <input type="hidden" name="lng" ref={lngRef} />
       <input type="hidden" name="accuracy" ref={accRef} />

@@ -16,6 +16,9 @@ type Session = {
   revealed_at: string | null;
   reveal_emailed_at: string | null;
   start_code: string;
+  start_lat: number | null;
+  start_lng: number | null;
+  start_radius_m: number;
   finale_name: string | null;
   finale_where: string | null;
   finale_at: string | null;
@@ -56,7 +59,7 @@ export default async function AdminSession({ params, searchParams }: { params: P
   const [sessionRes, questRes, hostRes, ticketRes] = await Promise.all([
     supabase
       .from("session")
-      .select("id, number, neighborhood, starts_at, start_location, revealed_at, reveal_emailed_at, start_code, finale_name, finale_where, finale_at, status, is_finals, season:season_id (number, name)")
+      .select("id, number, neighborhood, starts_at, start_location, revealed_at, reveal_emailed_at, start_code, start_lat, start_lng, start_radius_m, finale_name, finale_where, finale_at, status, is_finals, season:season_id (number, name)")
       .eq("id", id)
       .maybeSingle(),
     supabase
@@ -94,8 +97,8 @@ export default async function AdminSession({ params, searchParams }: { params: P
       <Notice msg={msg} />
 
       <p className="admin-meta">
-        Start code <span className="code-chip mono">{session.start_code}</span> · players scan the start sign (on the plaques page) to check
-        in, get placed on a team and unlock mission 1. It works from 30 minutes before the start and starts the session by itself.
+        Players check in by tapping I&apos;m here at the start pin (from 30 minutes before; it starts the session by itself). Backup start code
+        to say out loud: <span className="code-chip mono">{session.start_code}</span>
       </p>
 
       <div className="admin-actions">
@@ -340,6 +343,14 @@ export default async function AdminSession({ params, searchParams }: { params: P
           <label>
             Start location (hidden until the reveal)
             <input name="start_location" defaultValue={session.start_location ?? ""} />
+          </label>
+          <label>
+            Start pin: players must be here to check in (stand there and tap Use my location)
+            <PinInput name="start_pin" defaultValue={session.start_lat !== null && session.start_lng !== null ? `${session.start_lat}, ${session.start_lng}` : ""} />
+          </label>
+          <label>
+            Start radius in meters
+            <input name="start_radius_m" type="number" min={10} max={500} defaultValue={session.start_radius_m} />
           </label>
           <label>
             Reveal the location at (blank = 48 hours before)

@@ -37,7 +37,7 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
         ) : arriving ? (
           <>
             <p className="lede">
-              Scan the Colgrid sign at the start.
+              Enter the start code.
             </p>
             <div style={{ marginTop: 28 }}>
               <CheckInForm initialCode={code ?? ""} />
@@ -51,7 +51,7 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
           <>
             <p className="lede">
               {data.focus?.guided && !data.focus.guided.arrived
-                ? "Scan the Colgrid sign at the start."
+                ? "Enter the start code."
                 : "Enter your mission code."}
             </p>
             <div style={{ marginTop: 28 }}>

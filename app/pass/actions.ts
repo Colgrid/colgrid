@@ -52,3 +52,42 @@ export async function completeMission(prev: MissionState, form: FormData): Promi
       return fail("That mission isn't open right now.");
   }
 }
+
+// Check in at the start: the phone must be inside the start pin's radius (no sign needed).
+// The start code on the Check in tab still works as a backup.
+export async function arriveHere(prev: MissionState, form: FormData): Promise<MissionState> {
+  const sessionId = String(form.get("session_id") ?? "");
+  const attempt = prev.attempt + 1;
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("arrive_here", {
+    p_session_id: sessionId,
+    p_lat: num(form, "lat"),
+    p_lng: num(form, "lng"),
+    p_accuracy: num(form, "accuracy"),
+  });
+  const r = (data ?? {}) as { status?: string; xp_before?: number; xp_after?: number; distance_m?: number };
+  const fail = (error: string) => ({ error, stay: null, attempt });
+  if (error || !r.status) return fail("Didn't work. Try again.");
+  switch (r.status) {
+    case "arrived":
+    case "already_here":
+      revalidatePath("/pass");
+      redirect(`/pass?complete=${Math.max(0, (r.xp_after ?? 0) - (r.xp_before ?? 0))}&kind=arrived`);
+    case "too_far":
+      return fail(`About ${r.distance_m ?? "?"} m away. Get closer.`);
+    case "need_location":
+      return fail("Turn on location to check in.");
+    case "weak_signal":
+      return fail("Signal is weak. Step outside and try again.");
+    case "too_early":
+      return fail("Check-in opens 30 minutes before the start.");
+    case "not_revealed":
+      return fail("The start isn't revealed yet.");
+    case "not_live":
+      return fail("This session has ended.");
+    case "no_team":
+      return fail("We can't find your ticket. Ask the crew.");
+    default:
+      return fail("Didn't work. Try again.");
+  }
+}
