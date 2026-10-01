@@ -404,7 +404,7 @@ The brand has to look and sound the same in every city even when someone else ru
 
 | Stage                        | Brand work                                          | Gate to move on                             |
 |------------------------------|-----------------------------------------------------|---------------------------------------------|
-| Pilot: Chapter 01, Salt Lake | Name, core identity, pass, keepsakes                | More than 50% of players return             |
+| Pilot: Chapter 01, Salt Lake | Name, core identity, pass, keepsakes                | Measure the return rate (pilot sets the baseline) |
 | Chapter expansion            | Chapter playbook and guidelines; Chapter 02 (Ogden) | Chapter 02 runs to standard                 |
 | Network and flagship         | Flagship identity, multi-city badges, Vanguard kit  | Enough qualified players to fill a flagship |
 

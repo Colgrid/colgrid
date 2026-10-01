@@ -2622,3 +2622,100 @@ button.button {
   font-size: 18px;
   color: #5a6067;
 }
+
+/* Check-ins saved on the phone while there's no signal */
+.pending-line {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: var(--chapter-teal);
+  text-align: center;
+}
+
+/* Post-gathering survey: big tap targets, one question at a glance */
+.survey h1 {
+  font-size: 36px;
+}
+.survey__form {
+  margin-top: 28px;
+}
+.survey__q {
+  border: 0;
+  margin: 0 0 32px;
+  padding: 0;
+  min-width: 0;
+}
+.survey__q legend {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  padding: 0;
+}
+.survey__choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.survey__choices--scale {
+  flex-wrap: nowrap;
+}
+.survey__choice {
+  flex: 1 1 0;
+  position: relative;
+}
+.survey__choice--wide {
+  flex: 1 1 100%;
+}
+.survey__choices:not(.survey__choices--scale) .survey__choice--wide {
+  flex-basis: calc(33.33% - 6px);
+  min-width: 96px;
+}
+.survey__choices--stack {
+  flex-direction: column;
+}
+.survey__choices--stack .survey__choice--wide {
+  flex-basis: auto;
+}
+.survey__choice input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+}
+.survey__choice span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(244, 245, 247, 0.2);
+  font-weight: 600;
+  text-align: center;
+}
+.survey__choice input:checked + span {
+  background: var(--beacon-amber);
+  border-color: var(--beacon-amber);
+  color: var(--asphalt);
+}
+.survey__choice input:focus-visible + span {
+  outline: 2px solid var(--beacon-amber);
+  outline-offset: 2px;
+}
+.survey__ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+.survey textarea.input {
+  width: 100%;
+  padding: 12px 16px;
+  resize: vertical;
+}
+.survey__fine {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}

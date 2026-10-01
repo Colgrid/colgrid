@@ -334,12 +334,15 @@ export default async function RunSheet({ params, searchParams }: { params: Promi
         <h2 className="section__title">Survey</h2>
         <form action={saveSurvey} className="gm-form">
           <input type="hidden" name="session_id" value={id} />
-          <input name="survey_url" type="url" defaultValue={session.survey_url ?? ""} placeholder="https://forms.gle/…" aria-label="Survey link" />
+          <input name="survey_url" type="url" defaultValue={session.survey_url ?? ""} placeholder="Optional: a different survey link" aria-label="Survey link" />
           <button type="submit" className="button button--secondary">
             Save survey link
           </button>
         </form>
-        <p className="fine-print">Shown on players&apos; passes after the session, and in the thank-you email.</p>
+        <p className="fine-print">
+          Players get the built-in 10-question survey on their pass after the session and in the thank-you email.{" "}
+          <a href={`/admin/sessions/${id}/survey`}>See answers</a>. Paste a link only to use a different survey.
+        </p>
       </section>
 
       {/* Close */}
@@ -350,7 +353,7 @@ export default async function RunSheet({ params, searchParams }: { params: Promi
             <strong>Close session</strong>
             <p>Ends check-in and gives everyone who came the {sessionName} badge. This can&apos;t be undone.</p>
             <label className="gm-check">
-              <input type="checkbox" name="send_thanks" defaultChecked /> Email a thank-you{session.survey_url ? " with the survey" : ""} to the {present.size} who came
+              <input type="checkbox" name="send_thanks" defaultChecked /> Email a thank-you with the survey to the {present.size} who came
             </label>
             <label className="gm-check">
               <input type="checkbox" name="confirm" required /> Yes, close {sessionName}

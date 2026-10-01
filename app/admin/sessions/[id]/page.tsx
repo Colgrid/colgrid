@@ -108,6 +108,9 @@ export default async function AdminSession({ params, searchParams }: { params: P
         <Link href={`/admin/import?session=${session.id}`} className="button button--dark">
           Import players
         </Link>
+        <Link href={`/admin/sessions/${session.id}/survey`} className="button button--dark">
+          Survey answers
+        </Link>
       </div>
 
       <section className="admin-section">

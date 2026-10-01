@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-export type MissionState = { error: string | null; stay: number | null; attempt: number };
+export type MissionState = { error: string | null; stay: number | null; attempt: number; queued?: boolean };
 
 const num = (form: FormData, key: string) => {
   const v = Number(form.get(key));

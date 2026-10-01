@@ -19,7 +19,7 @@ Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-ident
 | XP, levels, badges | Team roles, referral bonuses, badge rarity |
 | Tournament standings (opt-in teams only) | Chat, social feed, photo uploads |
 | Game master console | Automated team matching |
-| Post-session survey link | Payments to hosts (paid outside the app) |
+| Post-session survey (built in: 10 questions + optional comment) | Payments to hosts (paid outside the app) |
 
 ## Pilot decisions (Sep 28, 2026)
 
@@ -31,7 +31,7 @@ Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-ident
 | Hosts | 3–4 local businesses/makers |
 | Age | Adults 18+ (Eventbrite age restriction plus a required checkout question) |
 | Tickets | Eventbrite, one ticket type: **Colgrid Pilot, $75/person**. No Season Pass until the pilot has run (Stripe waits on the IRS name update). Flow: Eventbrite ticket → registrations → run the event → collect feedback → then build the Season Pass. |
-| Ticket question | "Who are you coming with?" Friends / Partner / Family / Coworkers / Solo / Other. Asked as an Eventbrite checkout question, imported with the player from the attendee export, and asked again in the post-session survey. |
+| Ticket question | "Who are you coming with?" Friends / Partner / Family / Coworkers / Solo / Other. Asked as an Eventbrite checkout question, imported with the player from the attendee export. |
 
 The dry run's players, XP and badges are real and stay on their passes (progress only goes up). It runs as its own practice season so it doesn't use up Season 1's sessions or its tournament opt-in window.
 
@@ -51,10 +51,10 @@ The dry run's players, XP and badges are real and stay on their passes (progress
 3. **Pre-game.** 24–48 h before, the GM publishes the start location; players see it on their pass and get an email/text.
 4. **Opening ritual.** Teams are made ahead of time from ticket groups. Players go to the start and tap I'm here: the phone must be inside the start pin's radius (no sign; the start code is a backup the crew can say out loud). The app checks them in (+50 XP), places solo ticket holders on the smallest team, starts the session (from 30 minutes before) and unlocks mission 1. The GM can still assign teams in the console.
 4a. **Guided missions.** One mission unlocks at a time with where to go, what to do and a target time. Teams start at different stops (route slots in arrival order, rotating the stops) so no host gets swamped. Puzzle stops take a typed answer instead of a host code. When every mission is done, the pass sends the team to the finale.
-5. **Quest check-in.** Team finishes a quest → one player taps **I'm here** on the mission: the phone's location must be inside the stop's radius (set once per stop; never stored) and, where the stop has one, the team types an answer only visible on site. Pin-only stops need a short stay. Every present teammate gets the XP; tournament teams get points. It counts once per team. **Backups:** the host code / QR sticker, and admin override. **Tournament (later):** add a team photo at each stop. Decided Sept 30, 2026: no person is needed at a stop to verify it, so Colgrid can run at any number of locations.
+5. **Quest check-in.** Team finishes a quest → one player taps **I'm here** on the mission: the phone's location must be inside the stop's radius (set once per stop; never stored) and, where the stop has one, the team types an answer only visible on site. Pin-only stops need a short stay. Every present teammate gets the XP; tournament teams get points. It counts once per team. **Backups:** the host code / QR sticker, and admin override. **Tournament (later):** add a team photo at each stop. Decided Sept 30, 2026: no person is needed at a stop to verify it, so Colgrid can run at any number of locations. **No signal:** a check-in or answer made offline is saved on the phone and sent automatically when signal returns; the server counts it once, so XP is never doubled.
 6. **Judged challenges.** GM scores creative/performance quests in the console.
 7. **Closing ritual.** GM marks attendance, awards the session badge, reveals standings (tournament teams only) and the next date. Passes update live.
-8. **After.** Survey link on the pass; players see what the team did while they were away.
+8. **After.** The survey on the pass and in the thank-you email; players see what the team did while they were away.
 9. **Chapter Finals.** At the season's last session, the GM marks the top 4 tournament teams as finalists, scores the finals mission and crowns the Chapter Champion (badge).
 
 ## Screens

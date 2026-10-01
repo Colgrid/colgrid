@@ -170,6 +170,36 @@ Proposed rules:
 
 **Filter:** does it reinforce the theme, get people participating, benefit someone besides the organizer, make the night more memorable, and create something worth repeating? If not, cut it.
 
+### Quest design rules (Locked, Oct 1, 2026)
+
+Every quest must:
+
+1. Be easy to understand: one read of the mission card and the team knows what to do.
+2. Be fun within the first few minutes, not after a long setup.
+3. Need teamwork: more than one person has something to do.
+4. Work in the physical place: you have to be there and interact with it (see "Verification without people" above).
+5. Be finishable within the scheduled time, including walking between stops.
+6. Give players something to talk about afterward.
+
+### Safety rules (Locked)
+
+Shown to players in plain words before the first mission, and built into every quest:
+
+- Follow traffic laws. Use sidewalks and crosswalks.
+- Respect businesses and residents. Don't disrupt other customers.
+- Don't enter restricted areas.
+- Follow host instructions.
+- Stay within the gathering area.
+
+No quest may reward speed between stops, ask players to go somewhere off-limits, or depend on blocking a sidewalk or a business.
+
+### Backup plans (Locked)
+
+- Every neighborhood has at least one backup quest that works in a public space (a puzzle on a mural, plaque or storefront) and needs no host, so a closed shop or a host who drops out doesn't stop the night.
+- Swapping a quest is an admin edit: open the session in admin, change the quest's title, place, briefing, answer and pin. The quest's code and QR plaque stay the same, so nothing has to be reprinted.
+- If a stop can't verify (bad GPS, missing answer), the host code or the game master's code is the backup. GPS and on-site answers stay the normal way to finish a stop.
+- Signal drops: check-ins and answers made without signal are saved on the phone and sent automatically when the connection returns. XP is never counted twice.
+
 ## 9. Progression and scoring
 
 **Locked:** XP, badges, levels that only go up, season progression. Leaderboards rank actions (quests completed, places discovered, judged challenges), **never money spent**. Only tournament teams appear on standings.
@@ -190,6 +220,8 @@ Tournament points (Proposed, tournament teams only): quest completion, speed, ac
 Badges (Proposed): **Session** (numbered, matches the physical keepsake), **Founding** (registered for a chapter's first season), **Full season** (attended every session), **Two-city** (played in two chapters), **Chapter Champion** (won the Chapter Finals).
 
 Deferred until after the pilot: level thresholds beyond the first few, cross-city and referral bonuses, badge rarity tiers.
+
+Future badge ideas (not built; decide after the pilot): **Taster** (finished every tasting in a gathering) and **3 Gatherings** (played three gatherings).
 
 ## 10. Session flow and rituals
 
@@ -271,13 +303,20 @@ The pilot answers one question: **will someone who had a good time at gathering 
 
 **Locked scope:** Salt Lake City, one season of 3–4 gatherings, 30–50 players each, one walkable neighborhood (9th & 9th). Adults 18+. The first event is a small pilot/dry run in October 2026, before the full season. Persistent profiles, teams, XP, quests, casual/tournament choice. Build spec: [mvp-spec.md](mvp-spec.md).
 
-| Area | Metric | Target |
+**Pilot metrics (Oct 1, 2026):** the pilot measures what actually happens; it has no pass/fail targets. Its results become the baseline that later targets are set from.
+
+| Area | What we measure | Where it comes from |
 | --- | --- | --- |
-| Retention | Players who return for gatherings 2, 3 and 4 | More than 50% |
-| Engagement | Teams finishing all main quests | More than 85% |
-| Satisfaction | Net Promoter Score | Above 65 |
-| Host value | Hosts who want to do it again | All or nearly all |
-| Tournament | Share of teams that opt in | Baseline in season 1 |
-| Unit economics | Ticket price vs. cost per player | $75 vs. $40 |
+| Return rate | Players who come back to a later gathering | Tickets and check-ins |
+| Engagement | Teams finishing all main quests | Check-ins |
+| Clarity | "Was it easy to understand what you were supposed to do?" | Survey |
+| Enjoyment | Enjoyed the gathering, quests fun, neighborhood added to it, web pass | Survey |
+| Best and worst quest | Most and least liked quest | Survey |
+| Word of mouth | Would attend again; would recommend to a friend | Survey |
+| What to change | One thing players would change, plus comments | Survey |
+| Host value | Hosts who want to do it again | Asked after the gathering |
+| Unit economics | Ticket price vs. cost per player | $75 vs. actual costs |
+
+The survey is built into the player app (10 questions plus an optional comment), linked from the pass and the thank-you email after the gathering. Results: admin → session → Survey answers.
 
 **Build order (Locked):** one city → persistent game → repeat behavior → local chapter model → multiple cities → flagship. Each step starts only when the one before it is proven.

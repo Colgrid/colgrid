@@ -10,7 +10,7 @@ import { updateSession } from "@/lib/supabase/middleware";
 // Only these exact hosts are touched, so previews and local development behave as before.
 const MARKETING_HOSTS = ["getcolgrid.com", "www.getcolgrid.com"];
 const APP_HOSTS = ["colgrid.app", "www.colgrid.app"];
-const APP_PATHS = ["/signin", "/pass", "/check-in", "/team", "/standings", "/admin", "/gm", "/auth"];
+const APP_PATHS = ["/signin", "/pass", "/check-in", "/team", "/standings", "/admin", "/gm", "/auth", "/survey"];
 
 export async function middleware(request: NextRequest) {
   const host = (request.headers.get("host") ?? "").toLowerCase();

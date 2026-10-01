@@ -1,3 +1,4 @@
+import PendingSync from "@/app/components/PendingSync";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -64,6 +65,7 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
             <SupportLine />
           </div>
         )}
+        <PendingSync />
       </main>
       <TabBar active="checkin" />
     </>

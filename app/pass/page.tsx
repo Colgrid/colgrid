@@ -1,3 +1,4 @@
+import PendingSync from "@/app/components/PendingSync";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +22,9 @@ export const dynamic = "force-dynamic";
 const CHAPTER_TIME_ZONE = "America/Denver";
 
 type Pass = Extract<PassData, { kind: "pass" }>;
+
+// The built-in survey, unless the crew set a different survey link for this session.
+const surveyHref = (s: { id: string; survey_url?: string | null }) => s.survey_url || `/survey/${s.id}`;
 
 export default async function PassPage({ searchParams }: { searchParams: Promise<{ complete?: string; kind?: string }> }) {
   const { complete, kind } = await searchParams;
@@ -77,12 +81,17 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
             <h2 className="mission__title">You&apos;re done.</h2>
             <p className="done__xp mono">{level.totalXp.toLocaleString("en-US")} XP</p>
             <p className="done__level">Level {formatNumber(level.level)}</p>
+            <a href={surveyHref(pass.focus!.session)} className="button button--primary" style={{ marginTop: 20, width: "100%" }}>
+              How was it?
+            </a>
           </section>
         ) : (
           <NowCard pass={pass} level={level} />
         )}
 
         <MissionPanel pass={pass} />
+
+        <PendingSync />
 
         {(live || pass.sessions.next) && <SupportLine />}
 
@@ -318,8 +327,8 @@ function QuestSection({ pass, tournament }: { pass: Pass; tournament: boolean })
           {done} / {total}
         </span>
       </div>
-      {!live && focus.session.survey_url && (
-        <a href={focus.session.survey_url} className="button button--primary" target="_blank" rel="noopener" style={{ marginTop: 12 }}>
+      {focus.session.status === "closed" && (
+        <a href={surveyHref(focus.session)} className="button button--primary" style={{ marginTop: 12 }}>
           How was it? Take the 2-minute survey
         </a>
       )}
