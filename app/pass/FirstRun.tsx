@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-const KEY = "colgrid.intro.v1";
+// v2: the Find, Play, Progress wording. A new key so it shows once on phones that saw the earlier draft.
+const KEY = "colgrid.intro.v2";
 
 // First time on the pass: three steps, once. Remembered on this phone only.
 export default function FirstRun() {
@@ -22,24 +23,29 @@ export default function FirstRun() {
   return (
     <div className="complete" role="dialog" aria-modal="true" aria-label="How Colgrid works">
       <div className="complete__card first-run">
-        <p className="complete__kicker mono">HOW IT WORKS</p>
         <ol className="first-run__steps">
           <li>
             <span className="mono">1</span>
             <span>
-              <strong>Find</strong> the spot your mission points to.
+              <strong>Find</strong>
+              <br />
+              Go to the location.
             </span>
           </li>
           <li>
             <span className="mono">2</span>
             <span>
-              <strong>Complete</strong> it, then tap the button to check in.
+              <strong>Play</strong>
+              <br />
+              Complete the challenge.
             </span>
           </li>
           <li>
             <span className="mono">3</span>
             <span>
-              <strong>Level up.</strong> Your XP and badges stay with you, every time you play.
+              <strong>Progress</strong>
+              <br />
+              Earn XP and level up.
             </span>
           </li>
         </ol>
