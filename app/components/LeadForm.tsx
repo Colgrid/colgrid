@@ -51,7 +51,7 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" | "conta
           rows={contact ? 5 : 3}
           maxLength={2000}
           required={contact}
-          placeholder={contact ? "Questions about a ticket, accessibility, press…" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
+          placeholder={contact ? "Questions about playing, accessibility, press…" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
         />
       </label>
       {turnstileSiteKey && (

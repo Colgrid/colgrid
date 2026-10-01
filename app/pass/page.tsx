@@ -536,15 +536,11 @@ function NoPass({ email, isStaff, isAdmin, routes }: { email: string; isStaff: b
       ) : (
         <>
           <p className="lede">
-            We couldn&apos;t find a ticket for <strong>{email}</strong>.
-          </p>
-          <p className="lede">
-            Bought with a different email? Sign out and use that one. Just bought? Your pass opens once your ticket is in. We&apos;ll
-            email you.
+            There&apos;s no Colgrid pass on <strong>{email}</strong> yet. {routes.length ? "Pick a route to start one." : "Routes open soon."}
           </p>
         </>
       )}
-      {!isStaff && <RouteList routes={routes} title="Or play a route now" />}
+      {!isStaff && <RouteList routes={routes} title="Routes" />}
       <div style={{ marginTop: 32 }}>
         <AccountFooter email={email} isStaff={isStaff} isAdmin={isAdmin} />
       </div>

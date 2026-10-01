@@ -86,7 +86,7 @@ export async function arriveHere(prev: MissionState, form: FormData): Promise<Mi
     case "not_live":
       return fail("This session has ended.");
     case "no_team":
-      return fail("We can't find your ticket. Ask the crew.");
+      return fail("You're not on a team yet.");
     default:
       return fail("Didn't work. Try again.");
   }

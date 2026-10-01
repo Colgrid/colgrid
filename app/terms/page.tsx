@@ -7,24 +7,23 @@ export const metadata: Metadata = { title: "Terms", description: "The terms for 
 
 export default function Terms() {
   return (
-    <LegalPage title="Terms" updated="September 30, 2026">
+    <LegalPage title="Terms" updated="October 1, 2026">
       <p>
         These terms cover playing Colgrid and using getcolgrid.com and your Colgrid pass. Colgrid is run by {SITE.legalName} (&ldquo;Colgrid,&rdquo;
-        &ldquo;we&rdquo;), based in Utah. By buying a ticket or using the site, you agree to them.
+        &ldquo;we&rdquo;), based in Utah. By using the site or playing, you agree to them.
       </p>
 
-      <h2>Tickets</h2>
+      <h2>Routes</h2>
       <ul>
-        <li>Tickets are sold through Eventbrite. Eventbrite&apos;s terms apply to the purchase, and the refund policy is the one shown on the ticket page.</li>
-        <li>A ticket is for one player at one gathering. If a gathering is cancelled, you get a full refund.</li>
-        <li>We may change a gathering&apos;s start spot, stops or partners. The start location is revealed before the gathering by email and on your pass.</li>
+        <li>We may change a route&apos;s stops, hours or partners, or close a route, at any time.</li>
+        <li>If we ever charge for something, the price and refund terms are shown before you pay.</li>
       </ul>
 
       <h2>Who can play</h2>
       <ul>
         <li>Players must be 18 or older. Where alcohol is served, you must be 21+ and show ID to drink.</li>
-        <li>You play at your own risk. Gatherings involve walking outdoors, crossing streets and trying food. Watch where you&apos;re going, follow traffic rules, and tell us about allergies before you play.</li>
-        <li>You may be asked to accept a separate waiver when you buy a ticket.</li>
+        <li>You play at your own risk. Routes involve walking outdoors, crossing streets and trying food. Watch where you&apos;re going, follow traffic rules, and tell us about allergies before you play.</li>
+        <li>You may be asked to accept a separate waiver before you play.</li>
       </ul>
 
       <h2>Playing fair</h2>
@@ -42,17 +41,17 @@ export default function Terms() {
 
       <h2>Photos</h2>
       <p>
-        We may take photos and video at gatherings and share them on our site and social accounts. If you&apos;d rather not appear, tell the
-        crew on the day or <Link href="/contact">contact us</Link> and we&apos;ll take it down.
+        We may share photos and video from Colgrid on our site and social accounts. If you&apos;d rather not appear,{" "}
+        <Link href="/contact">contact us</Link> and we&apos;ll take it down.
       </p>
 
       <h2>Partners</h2>
-      <p>Quests are hosted by independent local businesses. They are responsible for their own premises, food and drinks.</p>
+      <p>Stops are run by independent local businesses. They are responsible for their own premises, food and drinks.</p>
 
       <h2>The legal part</h2>
       <p>
-        Colgrid is provided as is. To the extent the law allows, we aren&apos;t liable for indirect losses, and our total liability for any
-        gathering is limited to what you paid for that ticket. These terms are governed by the laws of Utah. We may update them; the date at
+        Colgrid is provided as is. To the extent the law allows, we aren&apos;t liable for indirect losses, and our total liability is limited to
+        what you paid us, if anything. These terms are governed by the laws of Utah. We may update them; the date at
         the top shows the latest version.
       </p>
 

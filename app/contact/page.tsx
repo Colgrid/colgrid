@@ -5,7 +5,7 @@ import LegalFooter from "@/app/components/LegalFooter";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Questions about Colgrid, a ticket, accessibility or press? Send us a message.",
+  description: "Questions about Colgrid, accessibility or press? Send us a message.",
   alternates: { canonical: "/contact" },
 };
 
@@ -15,7 +15,7 @@ export default function Contact() {
     <main className="page">
       <h1 style={{ fontSize: 36, marginTop: 8 }}>Say hello.</h1>
       <p className="lede">
-        Questions about a ticket, accessibility, press, or anything else. We answer within two days. Want to host a quest or book your
+        Questions about playing, accessibility, press, or anything else. We answer within two days. Want to host a quest or book your
         company? See the <Link href="/hosts">hosts</Link> or <Link href="/companies">companies</Link> page instead. You can also DM us on{" "}
         <a href="https://www.instagram.com/colgrid/" rel="noopener" target="_blank">
           Instagram

@@ -37,20 +37,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
         <SignInForm linkError={error === "link"} next={next} />
       </div>
 
-      {next && /^\/(play|join)\//.test(next) ? (
-        <p className="fine-print">New to Colgrid? Any email works. No ticket needed.</p>
-      ) : (
-      <p className="fine-print">
-        Use your ticket email. New here?{" "}
-        {SITE.nextGathering.ticketsOpen ? (
-          <a href={SITE.nextGathering.ticketUrl} rel="noopener">
-            Get a ticket for {SITE.nextGathering.when.split(" · ")[0]}
-          </a>
-        ) : (
-          <a href={SITE.url}>Tickets open soon.</a>
-        )}
-      </p>
-      )}
+      <p className="fine-print">New to Colgrid? Any email works.</p>
     </main>
   );
 }
