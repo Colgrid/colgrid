@@ -15,7 +15,7 @@ export default function Terms() {
 
       <h2>Routes</h2>
       <ul>
-        <li>We may change a route&apos;s stops, hours or partners, or close a route, at any time.</li>
+        <li>We may change a route&apos;s stops or hours, or close a route, at any time.</li>
         <li>If we ever charge for something, the price and refund terms are shown before you pay.</li>
       </ul>
 
@@ -28,7 +28,7 @@ export default function Terms() {
 
       <h2>Playing fair</h2>
       <ul>
-        <li>Respect our local partners, their staff and customers, neighbors and everyone else on the street. Private property is off-limits unless a mission sends you there.</li>
+        <li>Respect the shops on each route, their staff and customers, neighbors and everyone else on the street. Private property is off-limits unless a mission sends you there.</li>
         <li>Don&apos;t share quest codes or answers, fake your location, or interfere with other teams.</li>
         <li>We can remove a player who puts others at risk or breaks these rules, without a refund.</li>
       </ul>
@@ -45,8 +45,8 @@ export default function Terms() {
         <Link href="/contact">contact us</Link> and we&apos;ll take it down.
       </p>
 
-      <h2>Partners</h2>
-      <p>Stops are run by independent local partners. They are responsible for their own premises, food and drinks.</p>
+      <h2>Local businesses</h2>
+      <p>Shops and restaurants at stops are independent local businesses. They are responsible for their own premises, food and drinks.</p>
 
       <h2>The legal part</h2>
       <p>

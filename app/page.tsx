@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
 // The home page sells the player experience to someone who has never heard of Colgrid:
 // what it is, how it works, and how progress carries on. No tickets, no dates: Colgrid is a game
 // you play with friends whenever the places are open (Open Play, decided Oct 1, 2026).
-// Companies, partners and the full FAQ have their own pages.
+// Companies, businesses and the full FAQ have their own pages.
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },

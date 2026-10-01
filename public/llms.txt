@@ -11,7 +11,7 @@
 - Competitive? No. Nobody is ranked; it's about the experience. Everyone earns XP, levels and badges.
 - No download: Colgrid runs in the phone's browser at colgrid.app and can be added to the home screen.
 - Companies: private team experiences. Request a quote: https://getcolgrid.com/companies
-- Local businesses: shops, restaurants and makers can become a Colgrid partner: https://getcolgrid.com/partners
+- Local businesses: experiential marketing for shops, restaurants and makers. A business can become a stop in the game: https://getcolgrid.com/business
 - Contact: https://getcolgrid.com/contact
 
 ## Official profiles
@@ -25,7 +25,7 @@
 - [Home](https://getcolgrid.com/): what Colgrid is and how it works
 - [FAQ](https://getcolgrid.com/faq)
 - [Companies](https://getcolgrid.com/companies): private team experiences
-- [Partners](https://getcolgrid.com/partners): become a local partner
+- [For businesses](https://getcolgrid.com/business): get your business into Colgrid
 - [Player app](https://colgrid.app): sign in, pass, routes, missions
 - [Contact](https://getcolgrid.com/contact)
 - [Terms](https://getcolgrid.com/terms)
