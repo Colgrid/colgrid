@@ -11,16 +11,16 @@ export default function Countdown({ startedAt, minutes }: { startedAt: string; m
     const t = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(t);
   }, []);
-  if (now === null) return <span className="mono mission__clock">{minutes} MIN</span>;
+  if (now === null) return <span className="mono mission__clock">AIM {minutes} MIN</span>;
   const left = Math.round((end - now) / 1000);
   if (left <= 0) {
-    return <span className="mono mission__clock mission__clock--over">+{Math.ceil(-left / 60)} MIN · KEEP GOING</span>;
+    return <span className="mono mission__clock mission__clock--over">AIM {minutes} MIN · NO RUSH</span>;
   }
   const m = Math.floor(left / 60);
   const s = String(left % 60).padStart(2, "0");
   return (
     <span className={`mono mission__clock${left < 180 ? " mission__clock--soon" : ""}`} aria-label={`${m} minutes ${s} seconds left`}>
-      {m}:{s} LEFT
+      AIM {minutes} MIN · {m}:{s}
     </span>
   );
 }

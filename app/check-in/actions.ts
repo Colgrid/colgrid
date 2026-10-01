@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { CheckInResult } from "@/lib/game/checkin";
 
@@ -20,5 +21,12 @@ export async function submitCheckIn(_prev: CheckInState, formData: FormData): Pr
   }
 
   revalidatePath("/pass");
-  return { result: data as CheckInResult, code };
+  const r = data as CheckInResult;
+  // A new check-in goes straight back to the pass for the mission-complete moment and the next mission.
+  if (r.status === "ok" || r.status === "arrived") {
+    const gained = Math.max(0, (r.xp_after ?? 0) - (r.xp_before ?? 0));
+    const kind = r.status === "arrived" ? "arrived" : r.is_hidden ? "hidden" : "mission";
+    redirect(`/pass?complete=${gained}&kind=${kind}`);
+  }
+  return { result: r, code };
 }
