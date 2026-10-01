@@ -8,6 +8,8 @@ import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { SITE } from "@/lib/site";
 import { activeQuest, allMainDone, arrivalOpen, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
+import BadgeIcon from "@/app/components/BadgeIcon";
+import CompleteOverlay from "./CompleteOverlay";
 import MissionCheck from "./MissionCheck";
 import Countdown from "./Countdown";
 import { loadPass, type PassData } from "./data";
@@ -21,26 +23,29 @@ const CHAPTER_TIME_ZONE = "America/Denver";
 
 type Pass = Extract<PassData, { kind: "pass" }>;
 
-export default async function PassPage({ searchParams }: { searchParams: Promise<{ complete?: string }> }) {
-  const { complete } = await searchParams;
+export default async function PassPage({ searchParams }: { searchParams: Promise<{ complete?: string; kind?: string }> }) {
+  const { complete, kind } = await searchParams;
   const data = await loadPass();
   if (!data) redirect("/signin");
   if (data.kind === "no-pass") return <NoPass email={data.email} isStaff={data.isStaff} isAdmin={data.isAdmin} />;
   const gained = complete !== undefined ? Math.max(0, Number(complete) || 0) : null;
-  return <PlayerPass pass={data} gained={gained} />;
+  return <PlayerPass pass={data} gained={gained} kind={kind ?? "mission"} />;
 }
 
 // ------------------------------------------------------------------------------------------------
 
-function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
+function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null; kind: string }) {
   const level = levelFor(pass.totalXp);
   const mode = pass.team?.mode ?? "casual";
   const tournament = SITE.tournamentOpen && mode === "tournament";
-  const finals = pass.sessions.next?.is_finals ? pass.sessions.next : null;
+  const live = pass.sessions.live;
+  const earned = pass.badges.filter((b) => b.earned);
 
   return (
     <>
       <main className="page page--tabs">
+        {gained !== null && <Celebration pass={pass} gained={gained} kind={kind} />}
+
         <header className="pass-header">
           <span className="logo-tile logo-tile--sm">
             {/* Scaled inside the tile to trim the file's white margin. The logo itself is unchanged. */}
@@ -55,12 +60,7 @@ function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
         <section className="identity">
           <div>
             <h1 className="identity__name">{pass.player.name}</h1>
-            <p className="identity__team">{pass.team?.name ?? "Your team drops at the opening ritual."}</p>
-            {pass.chapter && (
-              <p className="mono identity__chapter">
-                {pass.chapter.city}
-              </p>
-            )}
+            <p className="identity__team">{pass.team?.name ?? "Your team drops at the start."}</p>
           </div>
           {tournament && pass.standing && (
             <div className="rank-box" aria-label={`Rank ${pass.standing.rank}, ${pass.standing.points} points`}>
@@ -70,90 +70,66 @@ function PlayerPass({ pass, gained }: { pass: Pass; gained: number | null }) {
           )}
         </section>
 
-        {gained !== null && (
-          <p className="mission-toast" role="status">
-            <strong>Mission complete.</strong>
-            {gained > 0 && <span className="mono"> +{gained} XP</span>}
-          </p>
-        )}
+        {/* What matters right now: the session and your progress, then the mission. */}
+        <NowCard pass={pass} level={level} />
 
         <MissionPanel pass={pass} />
 
-        {(pass.sessions.live || pass.sessions.next) && <SupportLine prominent={!!pass.sessions.live} />}
+        {(live || pass.sessions.next) && <SupportLine prominent={!!live} />}
 
-        <NowCard pass={pass} level={level} />
-
-        <InstallCard />
-
-        <QuestSection pass={pass} tournament={tournament} />
-
-        <section className="section">
-          <h2 className="section__title">{tournament ? "Road to the Championship" : "Road to the flagship"}</h2>
-          <div className="path-card">
-            {tournament ? (
-              <>
-                <p>
-                  The top 4 tournament teams play the Chapter Finals{finals ? ` at Session ${formatNumber(finals.number)}` : ""}. The
-                  finals decide who goes on to the Championship at the flagship.
-                </p>
-                <dl className="stats">
-                  <div>
-                    <dt className="mono">RANK</dt>
-                    <dd>{pass.standing ? `#${pass.standing.rank} of ${pass.standing.teamCount}` : "—"}</dd>
-                  </div>
-                  <div>
-                    <dt className="mono">POINTS</dt>
-                    <dd>{pass.standing?.points ?? 0}</dd>
-                  </div>
-                </dl>
-              </>
-            ) : (
-              <>
-                <p>
-                  Casual players can be drawn for the Explorer weekend at the flagship. Showing up and finding hidden quests earn
-                  lottery entries. No ranking, ever.
-                </p>
-                <dl className="stats">
-                  <div>
-                    <dt className="mono">SESSIONS</dt>
-                    <dd>
-                      {pass.sessionsAttended} / {pass.sessionCount}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="mono">HIDDEN FOUND</dt>
-                    <dd>{pass.hiddenFound}</dd>
-                  </div>
-                </dl>
-              </>
-            )}
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="section__head">
+        {earned.length > 0 && (
+          <section className="section">
             <h2 className="section__title">Badges</h2>
-            <span className="mono section__count">
-              {pass.badges.filter((b) => b.earned).length} / {pass.badges.length}
-            </span>
-          </div>
-          <ul className="badges">
-            {pass.badges.map((b) => (
-              <li key={b.key} className={`badge${b.earned ? " badge--earned" : ""}`} title={b.description ?? undefined}>
-                <span className="badge__mark" aria-hidden="true">
-                  {b.earned ? "★" : "?"}
-                </span>
-                <span className="badge__name">{b.name}</span>
-                <span className="visually-hidden">{b.earned ? "earned" : "not earned yet"}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+            <ul className="badge-row">
+              {earned.map((b) => (
+                <li key={b.key} title={b.description ?? undefined}>
+                  <span className="badge-row__icon">
+                    <BadgeIcon badgeKey={b.key} />
+                  </span>
+                  <span className="badge-row__name">{b.name}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* During a session the mission card is the whole story; the list comes back as a recap. */}
+        {!live && <QuestSection pass={pass} tournament={tournament} />}
+
+        {!live && <InstallCard />}
 
         <AccountFooter email={pass.email} isStaff={pass.isStaff} isAdmin={pass.isAdmin} />
       </main>
       <TabBar active="pass" />
     </>
+  );
+}
+
+// The mission-complete moment. Before/after XP comes from the pass (the XP just earned is already in).
+function Celebration({ pass, gained, kind }: { pass: Pass; gained: number; kind: string }) {
+  const after = levelFor(pass.totalXp);
+  const before = levelFor(Math.max(0, pass.totalXp - gained));
+  const focus = pass.focus;
+  let next: string | null = null;
+  if (focus && focus.session.status === "live") {
+    const active = activeQuest(focus.quests);
+    if (allMainDone(focus.quests)) next = focus.guided?.finale_name ? "Final mission unlocked" : "Every mission done";
+    else if (active?.mission) next = `Mission ${active.mission} unlocked`;
+  }
+  const headline = kind === "arrived" ? "You're in." : kind === "hidden" ? "Hidden quest found." : "Mission complete.";
+  return (
+    <CompleteOverlay
+      headline={headline}
+      sub={kind === "arrived" && pass.team ? `Your team: ${pass.team.name}` : null}
+      gained={gained}
+      fromXp={before.totalXp}
+      toXp={after.totalXp}
+      levelStart={after.levelStartXp}
+      levelEnd={after.nextLevelXp}
+      levelLabel={formatLevel(after.level)}
+      leveledUp={after.level > before.level}
+      next={next}
+    />
   );
 }
 
@@ -289,9 +265,17 @@ function MissionPanel({ pass }: { pass: Pass }) {
   return (
     <section className="mission" aria-labelledby="mission-title">
       <div className="mission__top">
-        <p className="mono mission__kicker">
-          MISSION {q.mission} OF {main.length}
-        </p>
+        <div>
+          <p className="mono mission__kicker">
+            MISSION {q.mission} OF {main.length}
+          </p>
+          <ol className="mission-dots" aria-label={`Mission ${q.mission} of ${main.length}`}>
+            {main.map((m) => (
+              <li key={m.id} className={`mission-dots__dot mission-dots__dot--${m.state}`} />
+            ))}
+            <li className="mission-dots__flag mono">{guided?.finale_name ? "FINALE" : "DONE"}</li>
+          </ol>
+        </div>
         {q.time_limit_min && guided?.mission_started_at && <Countdown startedAt={guided.mission_started_at} minutes={q.time_limit_min} />}
       </div>
       <h2 id="mission-title" className="mission__title">
