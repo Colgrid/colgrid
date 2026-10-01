@@ -10,10 +10,10 @@
 - Who it's for: adults 18+ who want more from a night out than dinner and drinks: friends, partners, family, coworkers and solo players. Solo players are placed on a team.
 - Competitive? No. Nobody is ranked; it's about the experience. Everyone earns XP, levels and badges.
 - Price: $75 per player, sold on Eventbrite.
-- A ticket includes: 3–4 hosted quests and materials, tastings, a finale meal and first drink, a numbered session badge, and the web pass.
+- A ticket includes: 3–4 hosted missions, local tastings, the finale meal, a keepsake, and your Colgrid pass.
 - Next gathering: the first Colgrid gathering is Saturday, October 17, 2026, 4–7 PM, in 9th & 9th, Salt Lake City. $75 per person, adults 18+. Tickets: https://www.eventbrite.com/e/9th-9th-interactive-team-quest-tastings-finale-meal-tickets-2002520543853
-- Companies: private team runs from $2,500 for up to 20 players (+$95 per extra player). Request a quote on the home page.
-- Local businesses: makers, kitchens and guides can apply to host a quest on the home page.
+- Companies: private team runs from $2,500 for up to 20 players (+$95 per extra player). Request a quote: https://getcolgrid.com/companies
+- Local businesses: makers, kitchens and guides can apply to host a quest: https://getcolgrid.com/hosts
 - Contact: https://getcolgrid.com/contact
 
 ## Official profiles
@@ -24,7 +24,11 @@
 
 ## Pages
 
-- [Home](https://getcolgrid.com/): what Colgrid is, how it works, the next gathering, prices, corporate runs, hosting, FAQ
+- [Home](https://getcolgrid.com/): what Colgrid is, how it works, the next gathering and price
+- [FAQ](https://getcolgrid.com/faq)
+- [Companies](https://getcolgrid.com/companies): private team runs
+- [Hosts](https://getcolgrid.com/hosts): host a quest
+- [Player app](https://colgrid.app): sign in, pass, missions
 - [Contact](https://getcolgrid.com/contact)
 - [Terms](https://getcolgrid.com/terms)
 - [Privacy](https://getcolgrid.com/privacy)

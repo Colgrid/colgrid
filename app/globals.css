@@ -1682,20 +1682,8 @@ button.button {
 }
 
 /* Home: next gathering */
-.next-card {
-  margin-top: 28px;
-  padding: 18px;
-  border-radius: var(--radius-card);
-  background: var(--asphalt-raised);
-  border: 2px solid var(--beacon-amber);
-}
 .next-card p {
   margin: 0;
-}
-.next-card__kicker {
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  color: var(--beacon-amber);
 }
 .next-card__when {
   margin-top: 8px !important;
@@ -1703,22 +1691,11 @@ button.button {
   font-size: 24px;
   font-weight: 700;
 }
-.next-card__where {
-  margin-top: 4px !important;
-  color: var(--ink-muted);
-}
 .next-card__meta {
   margin-top: 10px !important;
   font-size: 15px;
   line-height: 1.45;
   color: var(--ink-subtle);
-}
-.next-card__soon {
-  margin-top: 14px !important;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--chapter-teal);
 }
 .next-card .button {
   display: flex;
@@ -1953,39 +1930,18 @@ button.button {
 /* ---------------------------------------------------------------------------------------------
    Home: the night in three parts, and the corporate + host forms
    --------------------------------------------------------------------------------------------- */
-.night {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 .night li {
   padding: 16px;
   border-radius: var(--radius-card);
   background: var(--asphalt-raised);
   border-left: 4px solid var(--beacon-amber);
 }
-.night li:nth-child(2) {
-  border-left-color: var(--chapter-teal);
-}
 .night li:nth-child(3) {
   border-left-color: var(--concrete);
-}
-.night__when {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--ink-subtle);
 }
 .night h3 {
   font-size: 21px;
   margin-top: 4px;
-}
-.night p {
-  margin: 6px 0 0;
-  line-height: 1.5;
-  color: var(--ink-muted);
 }
 .lead-card {
   margin-top: 40px;
@@ -2519,4 +2475,137 @@ button.button {
 .badge-list__desc {
   font-size: 14px;
   color: var(--ink-muted);
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Home: one idea at a time, big type, lots of space
+   --------------------------------------------------------------------------------------------- */
+.page.home {
+  max-width: 680px;
+  padding-top: 28px;
+}
+.home-hero {
+  margin-top: 56px;
+}
+.home-hero h1 {
+  font-size: clamp(40px, 10vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.home-lede {
+  margin: 20px 0 0;
+  max-width: 36ch;
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--ink-muted);
+}
+.home-when {
+  margin: 36px 0 0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+.home-when strong {
+  color: var(--concrete);
+}
+.home-cta {
+  margin-top: 28px;
+}
+.home-soon {
+  margin-top: 28px;
+  color: var(--beacon-amber);
+  letter-spacing: 0.1em;
+}
+.home-quiet {
+  display: block;
+  width: fit-content;
+  margin-top: 20px;
+  min-height: 32px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+.home-quiet:hover {
+  color: var(--concrete);
+}
+.home-section {
+  margin-top: 104px;
+}
+.home-section h2 {
+  font-size: clamp(28px, 6.5vw, 42px);
+  line-height: 1.08;
+}
+.home-section > p {
+  margin: 16px 0 0;
+  max-width: 34ch;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+.home-steps {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.home-steps li {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--ink-muted);
+}
+.home-steps strong {
+  color: var(--concrete);
+}
+.home-steps__n {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--beacon-amber);
+  color: var(--beacon-amber);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  transform: translateY(-2px);
+}
+.home-included {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  border-top: 1px solid #2c3136;
+}
+.home-included li {
+  padding: 14px 0;
+  font-size: 19px;
+  border-bottom: 1px solid #2c3136;
+}
+.home-section > p.home-note {
+  margin: 16px 0 0;
+  font-size: 15px;
+  color: var(--ink-subtle);
+}
+.home .faq {
+  margin-top: 24px;
+}
+.home .home-footer {
+  margin-top: 112px;
+}
+@media (min-width: 640px) {
+  .home-cta {
+    display: inline-flex;
+    padding: 0 40px;
+  }
+  .home-hero {
+    margin-top: 80px;
+  }
+  .home-section {
+    margin-top: 136px;
+  }
 }

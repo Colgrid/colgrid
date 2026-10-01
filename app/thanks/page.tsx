@@ -23,7 +23,7 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
                 : "Lots of sign-ups at once. Give it a few minutes. "}
             Or try the <Link href="/contact">contact form</Link> in a bit.
           </p>
-          <Link href={contact ? "/contact" : `/#${host ? "host" : "corporate"}`} className="button button--primary" style={{ marginTop: 24 }}>
+          <Link href={contact ? "/contact" : host ? "/hosts" : "/companies"} className="button button--primary" style={{ marginTop: 24 }}>
             Try again
           </Link>
         </>
