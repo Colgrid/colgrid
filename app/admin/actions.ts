@@ -22,6 +22,20 @@ function int(form: FormData, key: string): number | null {
   const n = Number(v);
   return Number.isFinite(n) ? Math.round(n) : null;
 }
+// Start pin for GPS check-in at the start. Blank = no location check (the start code still works).
+function parsePin(raw: string): { lat: number; lng: number } | null {
+  const m = raw.match(/(-?\d{1,2}(?:\.\d+)?)\s*[, ]\s*(-?\d{1,3}(?:\.\d+)?)/);
+  if (!m) return null;
+  const lat = Number(m[1]);
+  const lng = Number(m[2]);
+  return Math.abs(lat) <= 90 && Math.abs(lng) <= 180 ? { lat, lng } : null;
+}
+function startPin(form: FormData) {
+  const pin = parsePin(String(form.get("start_pin") ?? ""));
+  const radius = int(form, "start_radius_m");
+  return { start_lat: pin?.lat ?? null, start_lng: pin?.lng ?? null, start_radius_m: radius ? Math.min(500, Math.max(10, radius)) : 60 };
+}
+
 // Guided mode: the mission briefing players see when the quest unlocks.
 function briefingFields(form: FormData) {
   const minutes = int(form, "time_limit_min");
@@ -62,6 +76,7 @@ function sessionFields(form: FormData) {
     start_location: text(form, "start_location", 200),
     revealed_at: revealAt,
     is_finals: form.get("is_finals") === "on",
+    ...startPin(form),
     finale_name: text(form, "finale_name", 120),
     finale_where: text(form, "finale_where", 300),
     finale_at: localToIso(String(form.get("finale_at") ?? "")),

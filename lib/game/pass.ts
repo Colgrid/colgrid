@@ -56,7 +56,7 @@ export type SessionPick = {
   last: PassSession | null; // most recent closed session
 };
 
-// Check-in at the start sign opens 30 minutes before a session starts (the database starts the
+// Check-in at the start opens 30 minutes before a session starts (the database starts the
 // session on the first scan). Until then, there's nothing to do but wait.
 export const ARRIVAL_WINDOW_MIN = 30;
 export function arrivalOpen(session: PassSession | null, now: number = Date.now()): boolean {

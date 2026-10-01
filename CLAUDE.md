@@ -33,7 +33,7 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 ## Current focus (Sept 30, 2026)
 
 - Tournament paused (`SITE.tournamentOpen = false`): no standings or tournament switch for players. Rules 1–2 still hold for when it returns.
-- Oct 17 = 3–4 quests + tastings + finale meal + player pass. The app runs the night; stops are verified by location + on-site answer, with host codes as backup.
+- Oct 17 = 3–4 quests + tastings + finale meal + player pass. The app runs the night. Check-in at the start is by GPS (start pin + radius, no sign; start code as a spoken backup). Stops are verified by location + on-site answer, with host codes as backup.
 - Design challenges around being physically present, not around beating AI. Rotate locations and questions.
 - Two domains, one app: getcolgrid.com is the public site (home, tickets, corporate, hosts, contact, legal); colgrid.app is the player app (sign-in, pass, check-in, team) and crew tools. `middleware.ts` moves player pages to colgrid.app; player links in emails and QR codes use `SITE.appUrl`.
 - Public site style: Apple-like. No small labels/eyebrows above headlines, short copy, lots of space, one orange CTA per section at most.

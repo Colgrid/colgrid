@@ -52,7 +52,7 @@ test("every failure has plain words", () => {
   }
 });
 
-test("the start sign checks you in and points to the first mission", () => {
+test("checking in at the start and points to the first mission", () => {
   const v = describeCheckIn({ status: "arrived", team_name: "The Night Owls", xp_before: 0, xp_after: 50, breakdown: [{ reason: "attend", amount: 50 }] });
   assert.equal(v.kind, "success");
   if (v.kind !== "success") return;

@@ -13,6 +13,7 @@
 | `migrations/20260930000013_location.sql` | Verify stops with no one there: map pin + radius, on-site answer, short stay; `complete_mission()` |
 | `migrations/20260930000014_contact.sql` | The contact form (no public email address) |
 | `migrations/20260930000015_share.sql` | Sharing phase 1: `log_share()` and share counts (admins only) |
+| `migrations/20260930000016_start_gps.sql` | Check in at the start by GPS: start pin + radius, `arrive_here()` |
 | `migrations/20260930000010_reveal_schedule.sql` | Supabase only: pings the site every 5 minutes (pg_cron + pg_net). Skip it in local tests |
 | `migrations/20260928000006_gm.sql` | Game master console: attendance, start/close (session badge), survey link |
 | `migrations/20260928000005_admin.sql` | Admin: pilot season (Season 00), tickets, generated quest codes, Eventbrite import, "coming with" answer |
@@ -30,6 +31,7 @@
 | `tests/95_guided.test.sql` | 3 checks on guided mode |
 | `tests/96_location.test.sql` | 2 checks on location verification |
 | `tests/97_share.test.sql` | 3 checks on share counts |
+| `tests/98_start_gps.test.sql` | 1 check on GPS check-in at the start |
 | `templates/` | Branded sign-in emails to paste into Supabase |
 | `tests/00_local_supabase_stub.sql` | Local testing only; never run on Supabase |
 
@@ -108,6 +110,7 @@ psql -d colgrid_test -f supabase/migrations/20260930000012_guided.sql
 psql -d colgrid_test -f supabase/migrations/20260930000013_location.sql
 psql -d colgrid_test -f supabase/migrations/20260930000014_contact.sql
 psql -d colgrid_test -f supabase/migrations/20260930000015_share.sql
+psql -d colgrid_test -f supabase/migrations/20260930000016_start_gps.sql
 psql -d colgrid_test -f supabase/seed.sql
 psql -d colgrid_test -f supabase/tests/10_rules.test.sql
 psql -d colgrid_test -f supabase/tests/20_signin.test.sql
@@ -121,6 +124,7 @@ psql -d colgrid_test -f supabase/tests/90_leads.test.sql
 psql -d colgrid_test -f supabase/tests/95_guided.test.sql
 psql -d colgrid_test -f supabase/tests/96_location.test.sql
 psql -d colgrid_test -f supabase/tests/97_share.test.sql
+psql -d colgrid_test -f supabase/tests/98_start_gps.test.sql
 ```
 
 Every line should read `PASS`.
