@@ -74,7 +74,7 @@ export default function CompleteOverlay(p: Props) {
   return (
     <div className="complete" role="dialog" aria-modal="true" aria-label={p.headline} onClick={() => setOpen(false)}>
       <div className="complete__card">
-        <p className="complete__kicker mono">{p.leveledUp ? "LEVEL UP" : "NICE"}</p>
+        {p.leveledUp && <p className="complete__kicker mono">LEVEL UP</p>}
         <h2 className="complete__headline">{p.headline}</h2>
         {p.sub && <p className="complete__sub">{p.sub}</p>}
         {p.gained > 0 && <p className="complete__xp mono">+{p.gained} XP</p>}
@@ -98,7 +98,7 @@ export default function CompleteOverlay(p: Props) {
               setSharing(true);
             }}
           >
-            Share your moment
+            Share
           </button>
         )}
       </div>

@@ -68,35 +68,35 @@ function pad(n: number): string {
 export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => LevelProgress): CheckInView {
   switch (r.status) {
     case "bad_code":
-      return { kind: "error", title: "That code didn't work.", message: "Check it with your host and try again." };
+      return { kind: "error", title: "That code didn't work.", message: "Check it and try again." };
     case "not_live":
       return {
         kind: "error",
         title: "That mission is over.",
-        message: r.session_number ? `That code is from Session ${pad(r.session_number)}, which has closed.` : "That session has closed.",
+        message: "That session has ended.",
       };
     case "judged":
       return {
         kind: "error",
         title: "No code needed.",
-        message: `${r.quest_title ?? "This challenge"} is scored by the game master. Just bring your best.`,
+        message: "This one is scored by the crew.",
       };
     case "no_team":
-      return { kind: "error", title: "You're not on a team yet.", message: "Scan the Colgrid sign at the start, or find the Colgrid crew." };
+      return { kind: "error", title: "No team yet.", message: "Check in at the start first." };
     case "no_pass":
       return { kind: "error", title: "We can't find your pass.", message: "Sign in with the email on your ticket." };
     case "too_many":
       return {
         kind: "error",
         title: "Too many wrong codes.",
-        message: "Check-in is paused for a few minutes. Get the code from your host, then try again.",
+        message: "Wait a few minutes, then try again.",
       };
     case "error":
-      return { kind: "error", title: "Something went wrong.", message: "Your code wasn't counted. Try again in a moment." };
+      return { kind: "error", title: "Something went wrong.", message: "Try again." };
     case "too_early":
-      return { kind: "error", title: "Not yet.", message: "Check-in at the start opens 30 minutes before the session. Grab a coffee." };
+      return { kind: "error", title: "Not yet.", message: "Check-in opens 30 minutes before the start." };
     case "wrong_answer":
-      return { kind: "error", title: "Not quite.", message: "Look again. The answer is out there." };
+      return { kind: "error", title: "Not quite.", message: "Look again." };
     case "arrived":
     case "already_here": {
       const beforeXp = r.xp_before ?? 0;
@@ -114,7 +114,7 @@ export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => Leve
         after,
         leveledUp: after.level > before.level,
         badges: [],
-        note: "Your first mission is on your pass. Find your teammates and go.",
+        note: null,
       };
     }
     case "ok":
@@ -136,7 +136,7 @@ export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => Leve
         after,
         leveledUp: after.level > before.level,
         badges: (r.new_badges ?? []).map((b) => b.name),
-        note: already ? "Your team already got credit for this one." : null,
+        note: already ? "Your team already has this one." : null,
       };
     }
   }

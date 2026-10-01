@@ -37,8 +37,7 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
         ) : arriving ? (
           <>
             <p className="lede">
-              {arriving.revealed && arriving.start_location ? `At the start (${arriving.start_location})? ` : "At the start? "}
-              Scan the Colgrid sign, or type its code, to check in and unlock your first mission.
+              Scan the Colgrid sign at the start.
             </p>
             <div style={{ marginTop: 28 }}>
               <CheckInForm initialCode={code ?? ""} />
@@ -46,14 +45,14 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
           </>
         ) : !live ? (
           <p className="empty" style={{ marginTop: 20 }}>
-            No session is live right now. Check-in opens when the next session starts.
+            Check-in opens when the session starts.
           </p>
         ) : (
           <>
             <p className="lede">
               {data.focus?.guided && !data.focus.guided.arrived
-                ? "Just got here? Scan the Colgrid sign at the start to check in and unlock your first mission."
-                : "Your host has the code. Ask for it, or scan the QR at the counter."}
+                ? "Scan the Colgrid sign at the start."
+                : "Enter your mission code."}
             </p>
             <div style={{ marginTop: 28 }}>
               <CheckInForm initialCode={code ?? ""} />

@@ -31,14 +31,14 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
       </span>
 
       <h1 style={{ fontSize: 36, marginTop: 20 }}>Open your pass.</h1>
-      <p className="lede">We&apos;ll email you a link. Tap it and you&apos;re in. No password.</p>
+      <p className="lede">We&apos;ll email you a link. No password.</p>
 
       <div style={{ marginTop: 32 }}>
         <SignInForm linkError={error === "link"} next={next} />
       </div>
 
       <p className="fine-print">
-        Use the email you bought your ticket with. New here?{" "}
+        Use your ticket email. New here?{" "}
         {SITE.nextGathering.ticketsOpen ? (
           <a href={SITE.nextGathering.ticketUrl} rel="noopener">
             Get a ticket for {SITE.nextGathering.when.split(" · ")[0]}

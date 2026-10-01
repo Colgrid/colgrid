@@ -28,7 +28,7 @@ export async function completeMission(prev: MissionState, form: FormData): Promi
   });
   const r = (data ?? {}) as { status?: string; xp_before?: number; xp_after?: number; distance_m?: number; seconds_left?: number };
   const fail = (error: string) => ({ error, stay: null, attempt });
-  if (error || !r.status) return fail("Something went wrong. Try again in a moment.");
+  if (error || !r.status) return fail("Didn't work. Try again.");
   switch (r.status) {
     case "ok":
     case "already":
@@ -37,17 +37,17 @@ export async function completeMission(prev: MissionState, form: FormData): Promi
     case "stay":
       return { error: null, stay: r.seconds_left ?? 30, attempt };
     case "too_far":
-      return fail(`You're about ${r.distance_m ?? "?"} m away. Get to the spot and try again.`);
+      return fail(`About ${r.distance_m ?? "?"} m away. Get closer.`);
     case "need_location":
-      return fail("We need your location to check you in here. Allow location for this site, then try again.");
+      return fail("Turn on location to check in here.");
     case "weak_signal":
-      return fail("Your location is too fuzzy right now. Step outside or away from tall walls and try again.");
+      return fail("Signal is weak. Step outside and try again.");
     case "wrong_answer":
-      return fail("Not quite. Look again: the answer is out there.");
+      return fail("Not quite. Look again.");
     case "too_many":
-      return fail("Too many guesses. Take a breath and try again in a few minutes.");
+      return fail("Too many tries. Wait a few minutes.");
     case "no_team":
-      return fail("You're not on a team yet. Scan the start sign first.");
+      return fail("Check in at the start first.");
     default:
       return fail("That mission isn't open right now.");
   }

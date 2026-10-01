@@ -44,7 +44,7 @@ export default function MissionCheck({ questId, needsLocation, needsAnswer }: Pr
     e.preventDefault();
     setGeoError(null);
     if (!("geolocation" in navigator)) {
-      setGeoError("This phone can't share its location. Ask for the host code instead.");
+      setGeoError("Location isn't available. Use a host code.");
       return;
     }
     setLocating(true);
@@ -61,8 +61,8 @@ export default function MissionCheck({ questId, needsLocation, needsAnswer }: Pr
         setLocating(false);
         setGeoError(
           err.code === err.PERMISSION_DENIED
-            ? "Location is blocked. Allow it for getcolgrid.com in your browser settings, then try again."
-            : "Couldn't get your location. Step outside and try again.",
+            ? "Location is off. Turn it on in settings."
+            : "Can't find you. Step outside and try again.",
         );
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 },
@@ -104,7 +104,7 @@ export default function MissionCheck({ questId, needsLocation, needsAnswer }: Pr
       )}
       {stayLeft !== null && (
         <p className="mission__stay" role="status">
-          You&apos;re here. Stay a moment: checking you in in <span className="mono">{stayLeft}s</span>.
+          Stay here… <span className="mono">{stayLeft}s</span>
         </p>
       )}
       <button type="submit" className="button button--primary" disabled={busy} style={{ width: "100%", marginTop: 12 }}>
