@@ -2261,39 +2261,21 @@ button.button {
   margin-top: 8px;
 }
 
-/* Game-day support line (pass, check-in) */
+/* Game-day support line (pass, check-in): small and quiet */
 .support-line {
-  margin: 16px 0 0;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: var(--asphalt-raised);
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-subtle);
+}
+.support-line a {
   color: var(--ink-muted);
-  font-size: 15px;
-  line-height: 1.4;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
-.support-line--live {
-  border: 2px solid var(--chapter-teal);
-  color: var(--concrete);
-}
-.support-line__actions {
-  display: inline-flex;
-  gap: 8px;
-}
-.support-line__actions a {
-  min-height: 40px;
-  padding: 0 12px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 10px;
-  background: var(--concrete);
-  color: var(--asphalt);
-  font-weight: 700;
-  text-decoration: none;
+.support-line__num {
+  margin-left: 2px;
+  white-space: nowrap;
 }
 
 /* ---------------------------------------------------------------------------------------------
@@ -2453,4 +2435,29 @@ button.button {
   .complete__bar span {
     transition: none;
   }
+}
+
+/* Session card, simplified */
+.now-card__tag {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #5a6067;
+}
+.now-card__name {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+}
+.now-card__xp {
+  margin: 14px 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+}
+.now-card__to {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #5a6067;
 }

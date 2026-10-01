@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import BadgeIcon from "@/app/components/BadgeIcon";
 import TabBar from "@/app/components/TabBar";
 import { loadPass } from "@/app/pass/data";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
@@ -153,6 +154,23 @@ export default async function TeamPage({ searchParams }: { searchParams: Promise
               </ol>
             </section>
           </>
+        )}
+        {pass.kind === "pass" && pass.badges.some((b) => b.earned) && (
+          <section className="section">
+            <h2 className="section__title">Your badges</h2>
+            <ul className="badge-row">
+              {pass.badges
+                .filter((b) => b.earned)
+                .map((b) => (
+                  <li key={b.key} title={b.description ?? undefined}>
+                    <span className="badge-row__icon">
+                      <BadgeIcon badgeKey={b.key} />
+                    </span>
+                    <span className="badge-row__name">{b.name}</span>
+                  </li>
+                ))}
+            </ul>
+          </section>
         )}
       </main>
       <TabBar active="team" />
