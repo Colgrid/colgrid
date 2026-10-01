@@ -9,6 +9,7 @@ import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { SITE } from "@/lib/site";
 import { activeQuest, allMainDone, arrivalOpen, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
 import CompleteOverlay from "./CompleteOverlay";
+import FirstRun from "./FirstRun";
 import MissionCheck from "./MissionCheck";
 import { loadPass, type PassData } from "./data";
 
@@ -41,7 +42,7 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
   return (
     <>
       <main className="page page--tabs">
-        {gained !== null && <Celebration pass={pass} gained={gained} kind={kind} />}
+        {gained !== null ? <Celebration pass={pass} gained={gained} kind={kind} /> : <FirstRun />}
 
         <header className="pass-header">
           <span className="logo-tile logo-tile--sm">
