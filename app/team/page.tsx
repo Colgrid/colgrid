@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import BadgeIcon from "@/app/components/BadgeIcon";
 import TabBar from "@/app/components/TabBar";
 import { loadPass } from "@/app/pass/data";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
@@ -38,6 +39,9 @@ const initials = (name: string) =>
     .slice(0, 2)
     .map((w) => w[0]!.toUpperCase())
     .join("");
+
+const formatDay = (iso: string) =>
+  new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/Denver" }).format(new Date(iso)).toUpperCase();
 
 export default async function TeamPage({ searchParams }: { searchParams: Promise<{ msg?: string }> }) {
   const { msg } = await searchParams;
@@ -153,6 +157,27 @@ export default async function TeamPage({ searchParams }: { searchParams: Promise
               </ol>
             </section>
           </>
+        )}
+        {pass.kind === "pass" && pass.badges.some((b) => b.earned) && (
+          <section className="section">
+            <h2 className="section__title">Your badges</h2>
+            <ul className="badge-list">
+              {pass.badges
+                .filter((b) => b.earned)
+                .map((b) => (
+                  <li key={b.key}>
+                    <span className="badge-row__icon">
+                      <BadgeIcon badgeKey={b.key} />
+                    </span>
+                    <span className="badge-list__text">
+                      <strong>{b.name}</strong>
+                      {b.earnedAt && <span className="mono badge-list__date">{formatDay(b.earnedAt)}</span>}
+                      {b.description && <span className="badge-list__desc">{b.description}</span>}
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </section>
         )}
       </main>
       <TabBar active="team" />

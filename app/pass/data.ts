@@ -16,7 +16,7 @@ export type Guided = {
   finale_at: string | null;
 };
 
-export type PassBadge = { key: string; name: string; description: string | null; earned: boolean };
+export type PassBadge = { key: string; name: string; description: string | null; earned: boolean; earnedAt: string | null };
 
 export type PassData =
   | { kind: "no-pass"; email: string; isStaff: boolean; isAdmin: boolean }
@@ -84,7 +84,7 @@ export async function loadPass(): Promise<PassData | null> {
       .order("joined_at", { ascending: false }),
     supabase.from("season").select("id, number, chapter:chapter_id (number, city)").order("number", { ascending: false }),
     supabase.from("badge").select("key, name, description, id"),
-    supabase.from("player_badge").select("badge_id").eq("player_id", playerId),
+    supabase.from("player_badge").select("badge_id, awarded_at").eq("player_id", playerId),
     supabase.from("xp_event").select("id", { count: "exact", head: true }).eq("player_id", playerId).eq("reason", "hidden_quest"),
     supabase.from("attendance").select("session_id").eq("player_id", playerId),
   ]);
@@ -100,9 +100,9 @@ export async function loadPass(): Promise<PassData | null> {
   const seasons = rows<SeasonRow>(seasonRes.data);
   const seasonRow = (team && seasons.find((s) => s.id === team.season_id)) || seasons[0] || null;
 
-  const earnedIds = new Set(rows<{ badge_id: string }>(myBadgeRes.data).map((b) => b.badge_id));
+  const earnedAt = new Map(rows<{ badge_id: string; awarded_at: string }>(myBadgeRes.data).map((b) => [b.badge_id, b.awarded_at]));
   const badges: PassBadge[] = rows<{ id: string; key: string; name: string; description: string | null }>(badgeRes.data)
-    .map((b) => ({ key: b.key, name: b.name, description: b.description, earned: earnedIds.has(b.id) }))
+    .map((b) => ({ key: b.key, name: b.name, description: b.description, earned: earnedAt.has(b.id), earnedAt: earnedAt.get(b.id) ?? null }))
     // Earned first, then in the order a season unfolds.
     .sort((a, b) => Number(b.earned) - Number(a.earned) || badgeOrder(a.key) - badgeOrder(b.key) || a.name.localeCompare(b.name));
 

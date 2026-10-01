@@ -1,17 +1,14 @@
 import { SITE } from "@/lib/site";
 
-// Game-day help: one obvious fast channel. Tap to call or text.
-export default function SupportLine({ prominent = false }: { prominent?: boolean }) {
-  const { label, phone, tel } = SITE.support;
+// Game-day help, kept small: it's there when you need it, it doesn't compete with the mission.
+export default function SupportLine() {
+  const { phone, tel } = SITE.support;
   return (
-    <p className={`support-line${prominent ? " support-line--live" : ""}`}>
-      <span>{label}</span>{" "}
-      <span className="support-line__actions">
-        <a href={`tel:${tel}`} className="mono">
-          {phone}
-        </a>
-        <a href={`sms:${tel}`}>Text</a>
-      </span>
+    <p className="support-line">
+      Need help? <a href={`tel:${tel}`}>Call</a> or <a href={`sms:${tel}`}>text</a>{" "}
+      <a href={`tel:${tel}`} className="mono support-line__num">
+        {phone}
+      </a>
     </p>
   );
 }

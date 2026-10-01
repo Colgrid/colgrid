@@ -8,10 +8,9 @@ import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { SITE } from "@/lib/site";
 import { activeQuest, allMainDone, arrivalOpen, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
-import BadgeIcon from "@/app/components/BadgeIcon";
 import CompleteOverlay from "./CompleteOverlay";
+import FirstRun from "./FirstRun";
 import MissionCheck from "./MissionCheck";
-import Countdown from "./Countdown";
 import { loadPass, type PassData } from "./data";
 
 // Private page: keep it out of search results.
@@ -39,12 +38,11 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
   const mode = pass.team?.mode ?? "casual";
   const tournament = SITE.tournamentOpen && mode === "tournament";
   const live = pass.sessions.live;
-  const earned = pass.badges.filter((b) => b.earned);
 
   return (
     <>
       <main className="page page--tabs">
-        {gained !== null && <Celebration pass={pass} gained={gained} kind={kind} />}
+        {gained !== null ? <Celebration pass={pass} gained={gained} kind={kind} /> : <FirstRun />}
 
         <header className="pass-header">
           <span className="logo-tile logo-tile--sm">
@@ -75,23 +73,8 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
 
         <MissionPanel pass={pass} />
 
-        {(live || pass.sessions.next) && <SupportLine prominent={!!live} />}
+        {(live || pass.sessions.next) && <SupportLine />}
 
-        {earned.length > 0 && (
-          <section className="section">
-            <h2 className="section__title">Badges</h2>
-            <ul className="badge-row">
-              {earned.map((b) => (
-                <li key={b.key} title={b.description ?? undefined}>
-                  <span className="badge-row__icon">
-                    <BadgeIcon badgeKey={b.key} />
-                  </span>
-                  <span className="badge-row__name">{b.name}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
 
         {/* During a session the mission card is the whole story; the list comes back as a recap. */}
         {!live && <QuestSection pass={pass} tournament={tournament} />}
@@ -147,15 +130,9 @@ function formatWhen(iso: string | null): string | null {
   }).format(new Date(iso));
 }
 
-function sessionLabel(s: PassSession): string {
-  const name = s.is_finals ? `Session ${formatNumber(s.number)} · Finals` : `Session ${formatNumber(s.number)}`;
-  return s.neighborhood ? `${name} · ${s.neighborhood}` : name;
-}
-
 function NowCard({ pass, level }: { pass: Pass; level: ReturnType<typeof levelFor> }) {
   const { live, next } = pass.sessions;
   const shown = live ?? next;
-  const tag = live ? "NOW" : next ? "NEXT" : "SEASON";
   const pct = Math.round(level.progress * 100);
 
   let detail: string | null = null;
@@ -167,23 +144,11 @@ function NowCard({ pass, level }: { pass: Pass; level: ReturnType<typeof levelFo
 
   return (
     <section className={`now-card${live ? " now-card--live" : ""}`}>
-      <p className="now-card__session">
-        <span className="now-card__dot" aria-hidden="true" />
-        <span className="mono now-card__tag">{tag}</span>
-        <span>{shown ? sessionLabel(shown) : "Season complete. See you next season."}</span>
-      </p>
-      {detail && <p className="now-card__detail">{detail}</p>}
+      <p className="mono now-card__tag">{shown ? `SESSION ${formatNumber(shown.number)}${live ? " · NOW" : ""}` : "SEASON"}</p>
+      <p className="now-card__name">{shown ? shown.neighborhood ?? "Colgrid" : "See you next season."}</p>
+      {!live && detail && <p className="now-card__detail">{detail}</p>}
 
-      <div className="xp-row">
-        <span className="mono xp-row__total">
-          {level.totalXp.toLocaleString("en-US")}
-          {level.nextLevelXp !== null && <span className="xp-row__of"> / {level.nextLevelXp.toLocaleString("en-US")} XP</span>}
-          {level.nextLevelXp === null && <span className="xp-row__of"> XP</span>}
-        </span>
-        <span className="mono xp-row__to">
-          {level.xpToNext !== null ? `${level.xpToNext.toLocaleString("en-US")} TO ${formatLevel(level.level + 1)}` : "TOP LEVEL"}
-        </span>
-      </div>
+      <p className="now-card__xp mono">{level.totalXp.toLocaleString("en-US")} XP</p>
       <div
         className="xp-bar"
         role="progressbar"
@@ -194,6 +159,7 @@ function NowCard({ pass, level }: { pass: Pass; level: ReturnType<typeof levelFo
       >
         <span style={{ width: `${pct}%` }} />
       </div>
+      <p className="now-card__to">{level.xpToNext !== null ? `${level.xpToNext.toLocaleString("en-US")} to Level ${formatNumber(level.level + 1)}` : "Top level"}</p>
     </section>
   );
 }
@@ -265,18 +231,9 @@ function MissionPanel({ pass }: { pass: Pass }) {
   return (
     <section className="mission" aria-labelledby="mission-title">
       <div className="mission__top">
-        <div>
-          <p className="mono mission__kicker">
-            MISSION {q.mission} OF {main.length}
-          </p>
-          <ol className="mission-dots" aria-label={`Mission ${q.mission} of ${main.length}`}>
-            {main.map((m) => (
-              <li key={m.id} className={`mission-dots__dot mission-dots__dot--${m.state}`} />
-            ))}
-            <li className="mission-dots__flag mono">{guided?.finale_name ? "FINALE" : "DONE"}</li>
-          </ol>
-        </div>
-        {q.time_limit_min && guided?.mission_started_at && <Countdown startedAt={guided.mission_started_at} minutes={q.time_limit_min} />}
+        <p className="mono mission__kicker">
+          MISSION {q.mission} OF {main.length}
+        </p>
       </div>
       <h2 id="mission-title" className="mission__title">
         {q.title}
