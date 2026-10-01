@@ -14,7 +14,16 @@ export type Guided = {
   finale_name: string | null;
   finale_where: string | null;
   finale_at: string | null;
+  // Open routes (self-guided): no start gate, a route name, the team's invite link.
+  open_route?: boolean;
+  route_name?: string | null;
+  slug?: string | null;
+  open_until?: string | null;
+  invite?: string | null;
 };
+
+// Open routes anyone can play right now (open_routes()).
+export type OpenRoute = { slug: string; route_name: string; neighborhood: string | null; stops: number; open_until: string; my_started: boolean; my_done: boolean };
 
 export type PassBadge = { key: string; name: string; description: string | null; earned: boolean; earnedAt: string | null };
 
@@ -39,6 +48,8 @@ export type PassData =
       badges: PassBadge[];
       sessionsAttended: number;
       hiddenFound: number;
+      // Open routes to play (shown when there's no team yet, or after finishing a route).
+      routes: OpenRoute[];
     };
 
 // Supabase rows come back untyped (no generated types yet); this names the shape we selected.
@@ -74,7 +85,7 @@ export async function loadPass(): Promise<PassData | null> {
   const playerId = typeof claimed === "string" ? claimed : null;
   if (!playerId) return { kind: "no-pass", email, isStaff, isAdmin };
 
-  const [playerRes, xpRes, memberRes, seasonRes, badgeRes, myBadgeRes, hiddenRes, attendanceRes] = await Promise.all([
+  const [playerRes, xpRes, memberRes, seasonRes, badgeRes, myBadgeRes, hiddenRes, attendanceRes, passSeasonRes] = await Promise.all([
     supabase.from("player").select("id, name").eq("id", playerId).single(),
     supabase.from("player_xp_total").select("total_xp").eq("player_id", playerId).maybeSingle(),
     supabase
@@ -87,6 +98,7 @@ export async function loadPass(): Promise<PassData | null> {
     supabase.from("player_badge").select("badge_id, awarded_at").eq("player_id", playerId),
     supabase.from("xp_event").select("id", { count: "exact", head: true }).eq("player_id", playerId).eq("reason", "hidden_quest"),
     supabase.from("attendance").select("session_id").eq("player_id", playerId),
+    supabase.rpc("my_pass_season"),
   ]);
 
   const player = playerRes.data as unknown as { id: string; name: string } | null;
@@ -95,10 +107,12 @@ export async function loadPass(): Promise<PassData | null> {
   const totalXp = Number((xpRes.data as unknown as { total_xp: number } | null)?.total_xp ?? 0);
 
   const memberships = rows<{ team: TeamRow | null }>(memberRes.data);
-  const team = memberships.find((m) => m.team)?.team ?? null;
-
   const seasons = rows<SeasonRow>(seasonRes.data);
-  const seasonRow = (team && seasons.find((s) => s.id === team.season_id)) || seasons[0] || null;
+  // The season on the pass: tonight's gathering if they have a ticket, else their latest team, else
+  // their latest ticket (my_pass_season()). A brand-new self-signup has none yet: they pick a route.
+  const passSeasonId = typeof passSeasonRes.data === "string" ? passSeasonRes.data : null;
+  const seasonRow = (passSeasonId && seasons.find((s) => s.id === passSeasonId)) || null;
+  const team = memberships.find((m) => m.team && m.team.season_id === seasonRow?.id)?.team ?? null;
 
   const earnedAt = new Map(rows<{ badge_id: string; awarded_at: string }>(myBadgeRes.data).map((b) => [b.badge_id, b.awarded_at]));
   const badges: PassBadge[] = rows<{ id: string; key: string; name: string; description: string | null }>(badgeRes.data)
@@ -123,7 +137,14 @@ export async function loadPass(): Promise<PassData | null> {
     }
   }
 
-  const sessions = pickSessions(sessionList);
+  let sessions = pickSessions(sessionList);
+  // Open routes: the pass follows the route the team started last (several can be open at once).
+  const hasRoutes = sessionList.some((s) => s.open_until);
+  if (hasRoutes) {
+    const { data: routeId } = await supabase.rpc("my_route");
+    const route = sessionList.find((s) => s.id === routeId);
+    if (route) sessions = { live: route.status === "live" ? route : null, next: null, last: route.status === "closed" ? route : null };
+  }
   const focusSession = sessions.live ?? sessions.last;
   let focus: Extract<PassData, { kind: "pass" }>["focus"] = null;
   if (focusSession && focusSession.status !== "scheduled") {
@@ -133,6 +154,19 @@ export async function loadPass(): Promise<PassData | null> {
     ]);
     const guided = (guidedData as Guided | null) ?? null;
     focus = { session: focusSession, quests: questViews(rows<PassQuest>(data), focusSession.status, guided?.slot ?? null), guided };
+    // Test count: the team has the mission in front of them (counted once per team and stop).
+    const active = focus.quests.find((q) => q.state === "active");
+    if (guided?.open_route && focusSession.status === "live" && active) {
+      await supabase.rpc("log_play", { p_kind: "quest_start", p_session_id: focusSession.id, p_quest_id: active.id });
+    }
+  }
+
+  // Routes to play: with no team yet, or once the current route is done or over.
+  let routes: OpenRoute[] = [];
+  const routeDone = !!focus?.guided?.open_route && (focus.session.status === "closed" || focus.quests.filter((q) => q.mission !== undefined).every((q) => q.state === "done"));
+  if (!team || routeDone) {
+    const { data: routeRows } = await supabase.rpc("open_routes");
+    routes = rows<OpenRoute>(routeRows);
   }
 
   const seasonSessionIds = new Set(sessionList.map((s) => s.id));
@@ -155,5 +189,6 @@ export async function loadPass(): Promise<PassData | null> {
     badges,
     sessionsAttended,
     hiddenFound: hiddenRes.count ?? 0,
+    routes,
   };
 }

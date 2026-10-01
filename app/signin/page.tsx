@@ -31,12 +31,15 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
       </span>
 
       <h1 style={{ fontSize: 36, marginTop: 20 }}>Open your pass.</h1>
-      <p className="lede">We&apos;ll email you a link. No password.</p>
+      <p className="lede">We&apos;ll email you a link and a code. No password.</p>
 
       <div style={{ marginTop: 32 }}>
         <SignInForm linkError={error === "link"} next={next} />
       </div>
 
+      {next && /^\/(play|join)\//.test(next) ? (
+        <p className="fine-print">New to Colgrid? Any email works. No ticket needed.</p>
+      ) : (
       <p className="fine-print">
         Use your ticket email. New here?{" "}
         {SITE.nextGathering.ticketsOpen ? (
@@ -47,6 +50,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
           <a href={SITE.url}>Tickets open soon.</a>
         )}
       </p>
+      )}
     </main>
   );
 }

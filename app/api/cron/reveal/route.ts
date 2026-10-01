@@ -1,7 +1,7 @@
 // Sends the location-reveal email automatically. Supabase pings this every 5 minutes
 // (supabase/migrations/20260930000010_reveal_schedule.sql) with a secret that only the database
 // knows; the database checks it, hands over the sessions that just revealed, and marks each one
-// so it's emailed once.
+// so it's emailed once. The same ping closes open routes whose window has ended.
 import { NextResponse } from "next/server";
 import { revealEmail, type Recipient } from "@/lib/email/notices";
 import { sendBatch } from "@/lib/email/resend";
@@ -28,6 +28,9 @@ export async function POST(req: Request) {
   const { data, error } = await supabase.rpc("cron_due_reveals", { p_secret: secret });
   if (error) return NextResponse.json({ error: "Not allowed." }, { status: 401 });
 
+  // Open routes whose play window has ended close here too (no badge, no emails).
+  const { data: closedRoutes } = await supabase.rpc("cron_close_routes", { p_secret: secret });
+
   const results = [];
   for (const s of (Array.isArray(data) ? data : []) as Due[]) {
     const label = `Colgrid ${s.season_number === 0 ? "Pilot " : ""}Session ${String(s.number).padStart(2, "0")}`;
@@ -39,5 +42,5 @@ export async function POST(req: Request) {
     }
     results.push({ session: s.number, sent: sent.length, error: mailError });
   }
-  return NextResponse.json({ ok: true, results });
+  return NextResponse.json({ ok: true, results, closedRoutes: closedRoutes ?? 0 });
 }

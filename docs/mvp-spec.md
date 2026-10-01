@@ -35,6 +35,17 @@ Source of truth for rules: [game-design.md](game-design.md). Brand: [brand-ident
 
 The dry run's players, XP and badges are real and stay on their passes (progress only goes up). It runs as its own practice season so it doesn't use up Season 1's sessions or its tournament opt-in window.
 
+## Open routes test (Oct 1, 2026)
+
+Testing a second way to play next to the hosted gathering: an **open route** that people play on their own, any time the places are open. The question: will someone discover a route, make a team, invite friends, play without a host, finish, and choose another route?
+
+- An open route is a normal session with a route name, a link (`colgrid.app/play/<route>`) and a closing time. Admin → session → **Open route**: Open now / Close now; it closes itself at the closing time (no badge, no emails). Sessions without this (the Oct 17 gathering) are unchanged.
+- Anyone can sign up from the route page (email link or 6-digit code, first name, no ticket), name a team and text an invite link (`/join/<token>`). Friends who join go on that team; nobody is placed on a stranger's team.
+- No start pin and no host: the first finished stop starts a team's route (+50). Stops are verified the usual way (location + on-site answer; host code as backup). Same XP: 25 per quest, +20 each for finishing every stop. Each stop shows hours (typed in admin) and Open in Maps (hands off to the phone's maps app; no map in Colgrid).
+- After the first finished stop, the pass offers Add to Home Screen (never required). After the last, it shows the survey and the other open routes.
+- Counts (admin → session → Open route): route page visits, sign-ups, teams created/started, invites sent/accepted, quest starts and completions, route completions, install card shown/installed/opened from the home screen.
+- Not part of this test: payments, subscriptions, leaderboards, rankings, tournament, push notifications, in-app maps, chat.
+
 ## Users
 
 | Role | What they do |

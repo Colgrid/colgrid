@@ -121,6 +121,7 @@ test("check-in at the start opens 30 minutes before the session, until someone s
   const s = { ...session(1, "scheduled"), starts_at: "2026-10-17T22:00:00Z" };
   assert.equal(arrivalOpen(s, at - 31 * 60_000), false);
   assert.equal(arrivalOpen(s, at - 29 * 60_000), true);
+  assert.equal(arrivalOpen({ ...s, open_until: "2099-01-01T00:00:00Z" }, at - 29 * 60_000), false); // open routes have no start
   assert.equal(arrivalOpen(s, at + 90 * 60_000), true); // late, but nobody has scanned yet
   assert.equal(arrivalOpen({ ...s, status: "live" }, at), false); // live sessions use the live flow
   assert.equal(arrivalOpen({ ...s, starts_at: null }, at), false);

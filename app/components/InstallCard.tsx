@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { logPlay } from "@/app/pass/play-actions";
 
 // "Add Colgrid to your home screen": shown on the pass until the player installs it or closes the card.
 // Colgrid is a web app (no app store), so this is how it gets an icon and opens full-screen.
@@ -15,7 +16,7 @@ function isStandalone(): boolean {
   return window.matchMedia?.("(display-mode: standalone)").matches || nav.standalone === true;
 }
 
-export default function InstallCard() {
+export default function InstallCard({ sessionId = null }: { sessionId?: string | null }) {
   const [show, setShow] = useState(false);
   const [ios, setIos] = useState(false);
   const [promptEvent, setPromptEvent] = useState<InstallEvent | null>(null);
@@ -27,16 +28,21 @@ export default function InstallCard() {
     } catch {
       // Private browsing: just show it.
     }
-    if (dismissed || isStandalone()) return;
+    if (isStandalone()) {
+      void logPlay("installed_open", sessionId); // opened from the home screen (counted once per player)
+      return;
+    }
+    if (dismissed) return;
     setIos(/iphone|ipad|ipod/i.test(navigator.userAgent));
     setShow(true);
+    void logPlay("install_shown", sessionId);
     const onPrompt = (e: Event) => {
       e.preventDefault();
       setPromptEvent(e as InstallEvent);
     };
     window.addEventListener("beforeinstallprompt", onPrompt);
     return () => window.removeEventListener("beforeinstallprompt", onPrompt);
-  }, []);
+  }, [sessionId]);
 
   const close = () => {
     setShow(false);
@@ -57,7 +63,8 @@ export default function InstallCard() {
           <span>One tap, and Colgrid opens like an app. No app store.</span>
         ) : ios ? (
           <span>
-            In Safari, tap <b>Share</b> <span aria-hidden="true">(□↑)</span>, then <b>Add to Home Screen</b>. It opens like an app.
+            In Safari, tap <b>Share</b> <span aria-hidden="true">(□↑)</span>, then <b>Add to Home Screen</b>. Open it and sign in with the
+            code we email you.
           </span>
         ) : (
           <span>
@@ -73,7 +80,10 @@ export default function InstallCard() {
             onClick={async () => {
               await promptEvent.prompt();
               const choice = await promptEvent.userChoice.catch(() => ({ outcome: "dismissed" }));
-              if (choice.outcome === "accepted") close();
+              if (choice.outcome === "accepted") {
+                void logPlay("install_accepted", sessionId);
+                close();
+              }
               setPromptEvent(null);
             }}
           >
