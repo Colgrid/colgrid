@@ -5,14 +5,8 @@ set client_min_messages = notice;
 create or replace function pg_temp.pass(msg text) returns void language plpgsql as $$
 begin raise notice 'PASS  %', msg; end $$;
 
--- A ticket holder for the launch (the Pilot, Season 00) who hasn't signed in yet, plus three accounts.
+-- A ticket holder who hasn't signed in yet, plus three accounts.
 insert into public.player (email, name) values ('new.player@example.com', 'New Player');
-insert into public.session (id, season_id, number, neighborhood)
-select '00000000-0000-0000-0000-0000000005f1', se.id, 9, '9th & 9th'
-from public.season se join public.chapter c on c.id = se.chapter_id where c.number = 1 and se.number = 0
-on conflict do nothing;
-insert into public.ticket (session_id, player_id, source)
-select '00000000-0000-0000-0000-0000000005f1', id, 'manual' from public.player where email = 'new.player@example.com';
 insert into auth.users (id, email, email_confirmed_at) values
   ('00000000-0000-0000-0000-0000000000d1', 'New.Player@Example.com', now()),   -- same email, different case
   ('00000000-0000-0000-0000-0000000000d2', 'no.ticket@example.com', now()),
