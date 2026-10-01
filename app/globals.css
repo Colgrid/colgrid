@@ -2605,3 +2605,20 @@ button.button {
   color: #5a6067;
   font-weight: 700;
 }
+
+/* After the night: You're done. */
+.mission--done {
+  border-top-color: var(--chapter-teal);
+  text-align: center;
+  padding: 32px 16px;
+}
+.done__xp {
+  margin: 14px 0 0;
+  font-size: 40px;
+  font-weight: 700;
+}
+.done__level {
+  margin: 4px 0 0;
+  font-size: 18px;
+  color: #5a6067;
+}

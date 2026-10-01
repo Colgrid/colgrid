@@ -38,6 +38,9 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
   const mode = pass.team?.mode ?? "casual";
   const tournament = SITE.tournamentOpen && mode === "tournament";
   const live = pass.sessions.live;
+  // After the night: the last session has closed and nothing is about to start. The pass just says so;
+  // the thank-you email handles what's next.
+  const done = !live && pass.focus?.session.status === "closed" && !arrivalOpen(pass.sessions.next);
 
   return (
     <>
@@ -69,7 +72,15 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
         </section>
 
         {/* What matters right now: the session and your progress, then the mission. */}
-        <NowCard pass={pass} level={level} />
+        {done ? (
+          <section className="mission mission--done">
+            <h2 className="mission__title">You&apos;re done.</h2>
+            <p className="done__xp mono">{level.totalXp.toLocaleString("en-US")} XP</p>
+            <p className="done__level">Level {formatNumber(level.level)}</p>
+          </section>
+        ) : (
+          <NowCard pass={pass} level={level} />
+        )}
 
         <MissionPanel pass={pass} />
 
@@ -77,7 +88,7 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
 
 
         {/* During a session the mission card is the whole story; the list comes back as a recap. */}
-        {!live && <QuestSection pass={pass} tournament={tournament} />}
+        {!live && !done && <QuestSection pass={pass} tournament={tournament} />}
 
 
         <AccountFooter email={pass.email} isStaff={pass.isStaff} isAdmin={pass.isAdmin} />
