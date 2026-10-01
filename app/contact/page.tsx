@@ -19,7 +19,7 @@ export default function Contact() {
       <h1 style={{ fontSize: 36, marginTop: 8 }}>Say hello.</h1>
       <p className="lede">
         Questions about a ticket, accessibility, press, or anything else. We answer within two days. Want to host a quest or book your
-        company? Use the <Link href="/#host">host</Link> or <Link href="/#corporate">corporate</Link> forms instead. You can also DM us on{" "}
+        company? See the <Link href="/hosts">hosts</Link> or <Link href="/companies">companies</Link> page instead. You can also DM us on{" "}
         <a href="https://www.instagram.com/colgrid/" rel="noopener" target="_blank">
           Instagram
         </a>

@@ -219,7 +219,7 @@ function MissionPanel({ pass }: { pass: Pass }) {
         <h2 className="mission__title">Head to {guided.finale_name}.</h2>
         {guided.finale_where && <p className="mission__where">{guided.finale_where}</p>}
         <p className="mission__text">
-          Every mission done. Regroup with every team for the finale meal and your first drink
+          Every mission done. Regroup with every team for the finale meal
           {guided.finale_at ? `, around ${formatTime(guided.finale_at)}` : ""}. Badges get handed out there.
         </p>
       </section>

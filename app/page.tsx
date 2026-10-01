@@ -1,91 +1,26 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import LeadForm from "@/app/components/LeadForm";
+import LegalFooter from "@/app/components/LegalFooter";
+import { HOME_FAQ } from "@/lib/faq";
 import { SITE } from "@/lib/site";
 
-// Public home page. The full version is step 7 of docs/mvp-spec.md; this one already carries the
-// words search engines and AI assistants read: what Colgrid is, how it works, prices and an FAQ.
-// Facts come from docs/game-design.md, docs/pricing.md and docs/brand-identity.md.
+// The home page sells the player experience to someone who has never heard of Colgrid:
+// what it is, why play, the next gathering, how it works, and how progress carries on.
+// Companies, hosts and the full FAQ have their own pages.
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const HOW_IT_WORKS = [
-  {
-    title: "Join a team",
-    body: "Bring friends or come solo. Solo players get placed on a team, and that team is waiting for you next time.",
-  },
-  {
-    title: "Get the location",
-    body: "The starting point drops 24–48 hours before. Then you meet your team in one walkable neighborhood for 2–4 hours.",
-  },
-  {
-    title: "Take on missions",
-    body: "Quests hosted by local makers, kitchens and guides: make something, taste something, find a place you'd never find alone.",
-  },
-  {
-    title: "Level up",
-    body: "Every quest earns XP. Your level, badges and team history follow you to every gathering and every city.",
-  },
+const STEPS = [
+  { title: "Meet your team.", body: "Come with friends, or solo and we'll place you." },
+  { title: "Take on missions.", body: "Make something, taste something, solve something." },
+  { title: "Discover the neighborhood.", body: "Places you'd normally walk right past." },
+  { title: "Earn XP.", body: "Every mission counts." },
 ];
 
-// The pilot night, hour by hour (Saturday, Oct 17, 4–7 PM).
-const THE_NIGHT = [
-  {
-    title: "Quests",
-    when: "4:00",
-    body: "Meet at the drop point, get your team and your first mission, then work through 3–4 hosted quests across the neighborhood. Make something, find something, solve something.",
-  },
-  {
-    title: "Local tastings",
-    when: "Along the way",
-    body: "Some missions happen at the counter. Taste what the neighborhood's kitchens and makers are proudest of, and earn XP for it.",
-  },
-  {
-    title: "Finale meal",
-    when: "Around 6:00",
-    body: "Every team regroups for a shared meal and first drink. Stories, badges, and a hint of what the next session holds.",
-  },
-];
-
-const FAQ = [
-  {
-    q: "What is Colgrid?",
-    a: "Colgrid is a real-world team game that turns a city into missions: hidden places, local makers, and challenges you'd never try alone. Your team, your level and your badges carry forward to every gathering and every city, building toward an annual flagship.",
-  },
-  {
-    q: "Where does it happen?",
-    a: "Salt Lake City, Utah. Each gathering takes place in one walkable neighborhood, and the starting location is revealed 24–48 hours before.",
-  },
-  {
-    q: "How much does it cost?",
-    a: "$75 per player. A ticket includes 3–4 hosted quests and all materials, a finale meal and first drink, a numbered session badge, and your web pass with XP, levels and badges.",
-  },
-  {
-    q: "Who can play?",
-    a: "Adults 18 and over. Come with friends, a partner, family, coworkers, or on your own.",
-  },
-  {
-    q: "Do I need a team?",
-    a: "No. Bring friends or come solo. Solo players are placed on a team.",
-  },
-  {
-    q: "Is it competitive?",
-    a: SITE.tournamentOpen
-      ? "Only if you want it to be. Every team plays casually by default, and nobody is ranked. Teams can opt into the tournament before the season's second session to climb the chapter standings, play the Chapter Finals and go for the Championship. Entering the tournament costs nothing extra."
-      : "No. Colgrid is about the experience: nobody is ranked, and there's no race against other teams. Everyone earns XP, levels and badges that carry forward to every gathering.",
-  },
-  {
-    q: "Can we book a private run for our company?",
-    a: "Yes. A corporate private run is $2,500 for up to 20 players, plus $95 per extra player, with hosted quests, tastings and a finale meal planned for your group. Use the form on this page to get a quote.",
-  },
-  {
-    q: "How long is a gathering?",
-    a: "2–4 hours, with 30–50 players in teams.",
-  },
-];
+const INCLUDED = ["3–4 hosted missions", "Local tastings", "Finale meal", "A keepsake to take home", "About 3 hours", "One walkable neighborhood"];
 
 // Structured data (schema.org) so search engines and AI assistants can read the facts directly.
 const jsonLd = {
@@ -113,7 +48,7 @@ const jsonLd = {
     {
       "@type": "FAQPage",
       "@id": `${SITE.url}/#faq`,
-      mainEntity: FAQ.map((f) => ({
+      mainEntity: HOME_FAQ.map((f) => ({
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -143,149 +78,106 @@ const eventLd = next.ticketsOpen
 
 export default function Home() {
   const structured = eventLd ? { ...jsonLd, "@graph": [...jsonLd["@graph"], eventLd] } : jsonLd;
+  const day = next.when.split(" · ")[0]; // "Saturday, October 17"
+  const shortDay = day.split(", ")[1] ?? day; // "October 17"
   return (
-    <main className="page">
+    <main className="page home">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured).replace(/</g, "\\u003c") }} />
 
-      <span className="logo-tile">
-        {/* Scaled inside the tile to trim the file's white margin, as in the mockups. The logo itself is unchanged. */}
-        <Image src="/brand/colgrid-logo.png" alt="Colgrid" width={96} height={96} priority style={{ transform: "scale(1.7)" }} />
+      <span className="logo-tile logo-tile--sm">
+        {/* Scaled inside the tile to trim the file's white margin. The logo itself is unchanged. */}
+        <Image src="/brand/colgrid-logo.png" alt="Colgrid" width={48} height={48} priority style={{ transform: "scale(1.7)" }} />
       </span>
 
-      <h1 style={{ fontSize: 44, marginTop: 28 }}>Turn your city into a game board.</h1>
-      <p style={{ fontSize: 18, lineHeight: 1.45, color: "var(--ink-muted)", marginTop: 16 }}>
-        Colgrid is a real-world team game. Meet your team in one walkable neighborhood. Take on missions hosted by local makers,
-        kitchens and guides. Your XP follows you to every city.
-      </p>
-
-      {SITE.tournamentOpen && (
-        <div style={{ display: "flex", gap: 8, marginTop: 20 }}>
-          <span className="chip chip--casual">CASUAL</span>
-          <span className="chip chip--tournament">TOURNAMENT</span>
-        </div>
-      )}
-
-      <section className="next-card" aria-labelledby="next">
-        <p id="next" className="mono next-card__kicker">
-          NEXT GATHERING · THE FIRST ONE
-        </p>
-        <p className="next-card__when">{next.when}</p>
-        <p className="next-card__where">
-          {next.neighborhood}, Salt Lake City · start location drops 48 hours before
-        </p>
-        <p className="next-card__meta">
-          3–4 hosted missions, local tastings, a finale meal and a keepsake. Adults 18+. ${next.price} per person.
+      {/* 1. Hero */}
+      <section className="home-hero">
+        <h1>Turn your city into a game board.</h1>
+        <p className="home-lede">Colgrid is a real-world team game. Take on missions. Discover local places. Earn XP.</p>
+        <p className="home-when">
+          <strong>{next.when}</strong>
+          <br />
+          {next.neighborhood} · Salt Lake City
+          <br />${next.price} · Adults 18+
         </p>
         {next.ticketsOpen ? (
-          <a href={next.ticketUrl} className="button button--primary" style={{ marginTop: 16 }} rel="noopener">
+          <a href={next.ticketUrl} className="button button--primary home-cta" rel="noopener">
             Get tickets · ${next.price}
           </a>
         ) : (
-          <p className="next-card__soon mono">TICKETS OPEN SOON</p>
+          <p className="mono home-soon">TICKETS OPEN SOON</p>
         )}
+        <a href={`${SITE.appUrl}/signin`} className="home-quiet">
+          Open your pass →
+        </a>
       </section>
 
-      <a href={`${SITE.appUrl}/signin`} className="button button--secondary" style={{ marginTop: 24 }}>
-        Have a ticket? Open your pass
-      </a>
+      {/* 2. What is Colgrid? */}
+      <section className="home-section" aria-labelledby="what">
+        <h2 id="what">A night out that&apos;s actually a game.</h2>
+        <p>
+          You and your team explore one neighborhood, taking on missions hosted by local makers, kitchens and guides. Your phone shows you
+          where to go next.
+        </p>
+      </section>
 
-      <section className="section" aria-labelledby="how">
-        <h2 id="how" className="mono home-kicker">
-          HOW IT WORKS
-        </h2>
-        <ol className="steps">
-          {HOW_IT_WORKS.map((s, i) => (
+      {/* 3. How it works */}
+      <section className="home-section" aria-labelledby="how">
+        <h2 id="how">How it works</h2>
+        <ol className="home-steps">
+          {STEPS.map((s, i) => (
             <li key={s.title}>
-              <span className="steps__num mono" aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
+              <span className="mono home-steps__n" aria-hidden="true">
+                {i + 1}
               </span>
-              <div>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
-              </div>
+              <span>
+                <strong>{s.title}</strong> {s.body}
+              </span>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="section" aria-labelledby="night">
-        <h2 id="night" className="mono home-kicker">
-          THREE HOURS, THREE PARTS
+      {/* 4. The next gathering */}
+      <section className="home-section" aria-labelledby="next">
+        <h2 id="next">
+          {shortDay} · {next.neighborhood}
         </h2>
-        <ol className="night">
-          {THE_NIGHT.map((p) => (
-            <li key={p.title}>
-              <span className="night__when mono">{p.when}</span>
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </li>
+        <ul className="home-included">
+          {INCLUDED.map((x) => (
+            <li key={x}>{x}</li>
           ))}
-        </ol>
+        </ul>
+        <p className="home-note">The exact start spot drops 48 hours before.</p>
         {next.ticketsOpen && (
-          <a href={next.ticketUrl} className="button button--primary" style={{ marginTop: 20 }} rel="noopener">
-            Get tickets for Oct 17 · ${next.price}
+          <a href={next.ticketUrl} className="button button--primary home-cta" rel="noopener">
+            Get tickets · ${next.price}
           </a>
         )}
       </section>
 
-      <section className="section lead-card" id="corporate" aria-labelledby="corporate-h">
-        <h2 id="corporate-h" className="lead-card__title" style={{ marginTop: 0 }}>
-          Your team, a whole neighborhood, one afternoon.
-        </h2>
-        <p className="lead-card__body">
-          A private Colgrid run for your company: hosted quests, local tastings and a finale meal, built around your group. $2,500 for up to 20
-          players, +$95 per extra player.
-        </p>
-        <LeadForm kind="corporate" />
+      {/* 5. Progress */}
+      <section className="home-section" aria-labelledby="progress">
+        <h2 id="progress">Your progress follows you.</h2>
+        <p>Earn XP and badges as you play. They carry into every future Colgrid gathering, and every city.</p>
       </section>
 
-      <section className="section lead-card" id="host" aria-labelledby="host-h">
-        <h2 id="host-h" className="lead-card__title" style={{ marginTop: 0 }}>
-          Host a quest.
-        </h2>
-        <p className="lead-card__body">
-          Teams of players come to you with a mission you design: a tasting, a quick make, a story only you can tell. You&apos;re paid for every
-          session, and players leave knowing where to find you.
-        </p>
-        <LeadForm kind="host" />
-      </section>
-
-      <section className="section" aria-labelledby="faq">
-        <h2 id="faq" className="mono home-kicker">
-          QUESTIONS
-        </h2>
+      {/* 6. FAQ */}
+      <section className="home-section" aria-labelledby="faq">
+        <h2 id="faq">Questions</h2>
         <div className="faq">
-          {FAQ.map((f) => (
+          {HOME_FAQ.map((f) => (
             <details key={f.q}>
               <summary>{f.q}</summary>
               <p>{f.a}</p>
             </details>
           ))}
         </div>
+        <Link href="/faq" className="home-quiet">
+          More questions →
+        </Link>
       </section>
 
-      <footer className="home-footer">
-        <p className="home-footer__brand">
-          <strong>Colgrid</strong>
-          <br />
-          {SITE.footerLine}
-        </p>
-        <ul className="social" aria-label="Colgrid elsewhere">
-          {SITE.social.map((s) => (
-            <li key={s.name}>
-              <a href={s.url} rel="me noopener" target="_blank">
-                {s.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <nav className="home-footer__links" aria-label="About Colgrid">
-          <Link href="/contact">Contact</Link>
-          <Link href="/terms">Terms</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/accessibility">Accessibility</Link>
-        </nav>
-      </footer>
+      <LegalFooter social />
     </main>
   );
 }
