@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { ShareMoment } from "@/lib/share";
+import ShareSheet from "./ShareSheet";
 
 type Props = {
   headline: string; // "Mission complete" / "You're in" / "Hidden quest found"
@@ -13,6 +15,7 @@ type Props = {
   levelLabel: string; // "LVL 02"
   leveledUp: boolean;
   next: string | null; // "Mission 2 unlocked" / "Final mission unlocked"
+  share: ShareMoment | null; // meaningful moments only (not the start-sign check-in)
 };
 
 // The "something happened" moment after finishing a mission: XP counts up, the bar fills, a level-up
@@ -21,6 +24,7 @@ export default function CompleteOverlay(p: Props) {
   const [open, setOpen] = useState(true);
   const [shownXp, setShownXp] = useState(p.fromXp);
   const [filled, setFilled] = useState(false);
+  const [sharing, setSharing] = useState(false);
 
   useEffect(() => {
     // Don't replay it on refresh.
@@ -40,15 +44,29 @@ export default function CompleteOverlay(p: Props) {
     };
     frame = requestAnimationFrame(tick);
     const fill = setTimeout(() => setFilled(true), 60);
-    const close = setTimeout(() => setOpen(false), 3600);
     return () => {
       cancelAnimationFrame(frame);
       clearTimeout(fill);
-      clearTimeout(close);
     };
   }, [p.fromXp, p.toXp]);
 
+  // Closes by itself, a beat longer when the moment can be shared, and never while sharing.
+  useEffect(() => {
+    if (sharing) return;
+    const close = setTimeout(() => setOpen(false), p.share ? 6000 : 3600);
+    return () => clearTimeout(close);
+  }, [sharing, p.share]);
+
   if (!open) return null;
+  if (sharing && p.share) {
+    return (
+      <div className="complete" role="dialog" aria-modal="true" aria-label="Share your moment">
+        <div className="complete__card">
+          <ShareSheet moment={p.share} onClose={() => setOpen(false)} />
+        </div>
+      </div>
+    );
+  }
   const span = p.levelEnd === null ? 1 : p.levelEnd - p.levelStart;
   const pctFrom = p.levelEnd === null ? 100 : Math.max(0, Math.min(100, ((p.fromXp - p.levelStart) / span) * 100));
   const pctTo = p.levelEnd === null ? 100 : Math.max(0, Math.min(100, ((p.toXp - p.levelStart) / span) * 100));
@@ -68,9 +86,21 @@ export default function CompleteOverlay(p: Props) {
           {p.levelEnd !== null ? ` / ${p.levelEnd} XP` : " XP"}
         </p>
         {p.next && <p className="complete__next mono">{p.next.toUpperCase()}</p>}
-        <button type="button" className="button button--primary" onClick={() => setOpen(false)}>
+        <button type="button" className="button button--primary" onClick={(e: { stopPropagation(): void }) => (e.stopPropagation(), setOpen(false))}>
           {p.next ? "Let's go" : "Back to my pass"}
         </button>
+        {p.share && (
+          <button
+            type="button"
+            className="link-button complete__share"
+            onClick={(e: { stopPropagation(): void }) => {
+              e.stopPropagation();
+              setSharing(true);
+            }}
+          >
+            Share your moment
+          </button>
+        )}
       </div>
     </div>
   );

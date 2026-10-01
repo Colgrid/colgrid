@@ -14,12 +14,16 @@ const seasonLabel = (s: Season) => `Season ${pad(s.number)}${s.name ? ` · ${s.n
 export default async function AdminHome({ searchParams }: { searchParams: Promise<{ msg?: string }> }) {
   const { msg } = await searchParams;
   const { supabase } = await requireAdmin();
-  const [seasonRes, sessionRes, ticketRes, questRes] = await Promise.all([
+  const [seasonRes, sessionRes, ticketRes, questRes, shareRes] = await Promise.all([
     supabase.from("season").select("id, number, name, chapter:chapter_id (number, city, neighborhood_default)").order("number"),
     supabase.from("session").select("id, season_id, number, neighborhood, starts_at, status, is_finals").order("number"),
     supabase.from("ticket").select("session_id"),
     supabase.from("quest").select("session_id"),
+    // Basic share counts (phase 1 sharing), last 30 days.
+    supabase.from("share_event").select("action").gte("created_at", new Date(Date.now() - 30 * 864e5).toISOString()),
   ]);
+  const shares = rows<{ action: string }>(shareRes.data);
+  const shareCount = (a: string) => shares.filter((s) => s.action === a).length;
   const seasons = rows<Season>(seasonRes.data);
   const sessions = rows<Session>(sessionRes.data);
   const count = (list: { session_id: string }[], id: string) => list.filter((t) => t.session_id === id).length;
@@ -37,6 +41,11 @@ export default async function AdminHome({ searchParams }: { searchParams: Promis
           Hosts
         </Link>
       </div>
+
+      <p className="admin-meta">
+        Sharing, last 30 days: {shareCount("opened")} opened the share sheet · {shareCount("shared")} shared · {shareCount("saved")} saved the
+        image · {shareCount("copied")} copied the caption. Visits from shared links show up in your site analytics as utm_source=share.
+      </p>
 
       {seasons.length === 0 && <p className="admin-empty">No seasons yet. Run the step 6 database update first.</p>}
 

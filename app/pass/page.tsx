@@ -6,6 +6,7 @@ import InstallCard from "@/app/components/InstallCard";
 import SupportLine from "@/app/components/SupportLine";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
+import type { ShareMoment } from "@/lib/share";
 import { SITE } from "@/lib/site";
 import { activeQuest, allMainDone, arrivalOpen, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
 import CompleteOverlay from "./CompleteOverlay";
@@ -100,6 +101,24 @@ function Celebration({ pass, gained, kind }: { pass: Pass; gained: number; kind:
     else if (active?.mission) next = `Mission ${active.mission} unlocked`;
   }
   const headline = kind === "arrived" ? "You're in." : kind === "hidden" ? "Hidden quest found." : "Mission complete.";
+  // What can be shared from this moment: never the arrival, never a mission's name or place (lib/share.ts).
+  let share: ShareMoment | null = null;
+  if (kind !== "arrived" && focus) {
+    const main = focus.quests.filter((q) => q.mission !== undefined);
+    const done = main.filter((q) => q.state === "done").length;
+    const leveled = after.level > before.level;
+    share = {
+      kind: kind === "hidden" ? "hidden" : main.length > 0 && done === main.length ? "all" : "mission",
+      mission: kind === "hidden" ? null : done || null,
+      of: main.length || null,
+      xp: gained,
+      level: leveled ? after.level : null,
+      place: focus.session.neighborhood,
+      date: focus.session.starts_at
+        ? new Intl.DateTimeFormat("en-CA", { timeZone: CHAPTER_TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(focus.session.starts_at))
+        : null,
+    };
+  }
   return (
     <CompleteOverlay
       headline={headline}
@@ -112,6 +131,7 @@ function Celebration({ pass, gained, kind }: { pass: Pass; gained: number; kind:
       levelLabel={formatLevel(after.level)}
       leveledUp={after.level > before.level}
       next={next}
+      share={share}
     />
   );
 }
