@@ -7,7 +7,7 @@ import SupportLine from "@/app/components/SupportLine";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
 import { SITE } from "@/lib/site";
-import { activeQuest, allMainDone, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
+import { activeQuest, allMainDone, arrivalOpen, questProgress, type PassSession, type QuestView } from "@/lib/game/pass";
 import MissionCheck from "./MissionCheck";
 import Countdown from "./Countdown";
 import { loadPass, type PassData } from "./data";
@@ -232,6 +232,23 @@ function formatTime(iso: string | null): string | null {
 
 function MissionPanel({ pass }: { pass: Pass }) {
   const focus = pass.focus;
+  // Nobody has started the session yet, but it's time: point the player to the start sign.
+  const arriving = !pass.sessions.live && arrivalOpen(pass.sessions.next) ? pass.sessions.next : null;
+  if (arriving) {
+    return (
+      <section className="mission mission--arrive">
+        <p className="mono mission__kicker">IT&apos;S TIME · CHECK IN TO START</p>
+        <h2 className="mission__title">Find the Colgrid sign.</h2>
+        <p className="mission__text">
+          {arriving.revealed && arriving.start_location ? `It's at the start: ${arriving.start_location}. ` : ""}Scan it, or type its code, to
+          check in, meet your team and unlock your first mission.
+        </p>
+        <Link href="/check-in" className="button button--primary">
+          Check in at the start
+        </Link>
+      </section>
+    );
+  }
   if (!focus || focus.session.status !== "live") return null;
   const guided = focus.guided;
 
@@ -322,7 +339,11 @@ function QuestSection({ pass, tournament }: { pass: Pass; tournament: boolean })
       <section className="section">
         <h2 className="section__title">Quests</h2>
         <p className="empty">
-          {next ? `Quests unlock when Session ${formatNumber(next.number)} starts. Keep your phone charged.` : "No quests right now."}
+          {next
+            ? arrivalOpen(next)
+              ? "Check in at the start to unlock your first mission."
+              : `Quests unlock when Session ${formatNumber(next.number)} starts. Keep your phone charged.`
+            : "No quests right now."}
         </p>
       </section>
     );

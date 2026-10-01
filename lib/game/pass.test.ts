@@ -1,7 +1,7 @@
 // Run with: npm test
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { activeQuest, allMainDone, pickSessions, questViews, questProgress, routeOrder } from "./pass.ts";
+import { activeQuest, allMainDone, arrivalOpen, pickSessions, questViews, questProgress, routeOrder } from "./pass.ts";
 import type { PassQuest, PassSession } from "./pass.ts";
 
 function session(number: number, status: PassSession["status"]): PassSession {
@@ -114,4 +114,15 @@ test("missions are numbered in the team's route order; the first unfinished one 
   const done = questViews([quest("a", 1, { completed: true }), quest("b", 2, { completed: true }), quest("h", null, { is_hidden: true, unlocked: false })], "live", 1);
   assert.equal(allMainDone(done), true);
   assert.equal(allMainDone(questViews([], "live")), false);
+});
+
+test("check-in at the start opens 30 minutes before the session, until someone starts it", () => {
+  const at = Date.parse("2026-10-17T22:00:00Z");
+  const s = { ...session(1, "scheduled"), starts_at: "2026-10-17T22:00:00Z" };
+  assert.equal(arrivalOpen(s, at - 31 * 60_000), false);
+  assert.equal(arrivalOpen(s, at - 29 * 60_000), true);
+  assert.equal(arrivalOpen(s, at + 90 * 60_000), true); // late, but nobody has scanned yet
+  assert.equal(arrivalOpen({ ...s, status: "live" }, at), false); // live sessions use the live flow
+  assert.equal(arrivalOpen({ ...s, starts_at: null }, at), false);
+  assert.equal(arrivalOpen(null, at), false);
 });

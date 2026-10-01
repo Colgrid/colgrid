@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import SupportLine from "@/app/components/SupportLine";
 import TabBar from "@/app/components/TabBar";
 import { loadPass } from "@/app/pass/data";
-import { activeQuest } from "@/lib/game/pass";
+import { activeQuest, arrivalOpen } from "@/lib/game/pass";
 import CheckInForm from "./CheckInForm";
 
 // Private page: keep it out of search results.
@@ -17,6 +17,8 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
   if (!data) redirect(`/signin?next=${encodeURIComponent(`/check-in${code ? `?code=${encodeURIComponent(code)}` : ""}`)}`);
 
   const live = data.kind === "pass" ? data.sessions.live : null;
+  // Before anyone has started the session: the start code is the only thing to enter.
+  const arriving = data.kind === "pass" && !live && arrivalOpen(data.sessions.next) ? data.sessions.next : null;
   const current = data.kind === "pass" && data.focus?.session.status === "live" ? activeQuest(data.focus.quests) : null;
   const where = [current?.stop_number != null ? `STOP ${current.stop_number}` : null, live?.neighborhood?.toUpperCase()]
     .filter(Boolean)
@@ -32,6 +34,16 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
           <p className="lede">
             There&apos;s no player pass on this account. <Link href="/pass">See why</Link>.
           </p>
+        ) : arriving ? (
+          <>
+            <p className="lede">
+              {arriving.revealed && arriving.start_location ? `At the start (${arriving.start_location})? ` : "At the start? "}
+              Scan the Colgrid sign, or type its code, to check in and unlock your first mission.
+            </p>
+            <div style={{ marginTop: 28 }}>
+              <CheckInForm initialCode={code ?? ""} />
+            </div>
+          </>
         ) : !live ? (
           <p className="empty" style={{ marginTop: 20 }}>
             No session is live right now. Check-in opens when the next session starts.
@@ -48,7 +60,7 @@ export default async function CheckInPage({ searchParams }: { searchParams: Prom
             </div>
           </>
         )}
-        {live && (
+        {(live || arriving) && (
           <div style={{ marginTop: 28 }}>
             <SupportLine />
           </div>
