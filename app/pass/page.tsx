@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import InstallCard from "@/app/components/InstallCard";
 import SupportLine from "@/app/components/SupportLine";
 import TabBar from "@/app/components/TabBar";
 import { formatLevel, formatNumber, levelFor } from "@/lib/game/levels";
@@ -80,7 +79,6 @@ function PlayerPass({ pass, gained, kind }: { pass: Pass; gained: number | null;
         {/* During a session the mission card is the whole story; the list comes back as a recap. */}
         {!live && <QuestSection pass={pass} tournament={tournament} />}
 
-        {!live && <InstallCard />}
 
         <AccountFooter email={pass.email} isStaff={pass.isStaff} isAdmin={pass.isAdmin} />
       </main>
@@ -258,17 +256,7 @@ function MissionPanel({ pass }: { pass: Pass }) {
         {q.title}
       </h2>
       {(q.where_text || q.host_business) && (
-        <p className="mission__where">
-          {q.where_text ?? q.host_business}{" "}
-          <a
-            className="mission__map"
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${q.where_text ?? q.host_business}, ${focus.session.neighborhood ?? ""} Salt Lake City`)}`}
-            target="_blank"
-            rel="noopener"
-          >
-            Map
-          </a>
-        </p>
+        <p className="mission__where">{q.where_text ?? q.host_business}</p>
       )}
       {q.briefing && <p className="mission__text">{q.briefing}</p>}
       {q.verify && q.verify !== "code" ? (
@@ -280,7 +268,6 @@ function MissionPanel({ pass }: { pass: Pass }) {
         </>
       ) : (
         <>
-          <p className="mission__verify">Done? Your host has the code.</p>
           <Link href="/check-in" className="button button--primary">
             Enter the code
           </Link>

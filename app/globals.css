@@ -2045,23 +2045,6 @@ button.button {
 .mission--finale .mission__kicker {
   color: var(--asphalt);
 }
-.mission__clock {
-  font-size: 13px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 8px;
-  background: var(--asphalt);
-  color: var(--concrete);
-  white-space: nowrap;
-}
-.mission__clock--soon {
-  background: var(--beacon-amber);
-  color: var(--asphalt);
-}
-.mission__clock--over {
-  background: #d9dce0;
-  color: var(--asphalt);
-}
 .mission__title {
   font-size: 28px;
   line-height: 1.1;
@@ -2084,11 +2067,6 @@ button.button {
   margin: 10px 0 0;
   line-height: 1.5;
   font-size: 17px;
-}
-.mission__verify {
-  margin: 16px 0 0;
-  font-size: 14px;
-  color: #5a6067;
 }
 .mission .button {
   margin-top: 12px;
@@ -2123,17 +2101,6 @@ button.button {
   background: var(--chapter-teal);
   color: var(--asphalt);
   font-weight: 600;
-}
-.mission__hint {
-  margin: 8px 0 0;
-  font-size: 13px;
-  color: #5a6067;
-}
-.mission__map {
-  margin-left: 6px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #b86e00;
 }
 .mission__fallback {
   display: block;
@@ -2234,50 +2201,6 @@ button.button {
 /* ---------------------------------------------------------------------------------------------
    Simple pass: mission dots, earned badges, the mission-complete moment
    --------------------------------------------------------------------------------------------- */
-.mission-dots {
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.mission-dots__dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid #9aa0a6;
-}
-.mission-dots__dot--done {
-  background: var(--chapter-teal);
-  border-color: var(--chapter-teal);
-}
-.mission-dots__dot--active {
-  background: var(--beacon-amber);
-  border-color: var(--beacon-amber);
-  box-shadow: 0 0 0 4px rgba(255, 159, 28, 0.25);
-}
-.mission-dots__flag {
-  margin-left: 4px;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: #5a6067;
-}
-.badge-row {
-  list-style: none;
-  margin: 12px 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-.badge-row li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  width: 72px;
-}
 .badge-row__icon {
   width: 56px;
   height: 56px;

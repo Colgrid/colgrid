@@ -112,7 +112,6 @@ export default function MissionCheck({ questId, sessionId, needsLocation, needsA
       <button type="submit" className="button button--primary" disabled={busy} style={{ width: "100%", marginTop: 12 }}>
         {label}
       </button>
-      {needsLocation && <p className="mission__hint">Uses your location once to confirm you&apos;re at the stop. It isn&apos;t saved.</p>}
     </form>
   );
 }
