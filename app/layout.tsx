@@ -30,8 +30,10 @@ export const metadata: Metadata = {
   applicationName: SITE.name,
   keywords: [
     "Colgrid",
-    "team game",
-    "real-world game",
+    "singles night",
+    "meet new people",
+    "social night",
+    "game night",
     "things to do in Salt Lake City",
     "Salt Lake City",
     "team building",
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
   ],
   creator: SITE.name,
   publisher: SITE.name,
-  category: "games",
+  category: "social",
   openGraph: {
     type: "website",
     siteName: SITE.name,

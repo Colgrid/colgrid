@@ -30,7 +30,14 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 6. **Hidden stays hidden** until revealed (start location, hidden quests).
 7. Stay in MVP scope (`docs/mvp-spec.md`). No native app, no built-in checkout, no chat.
 
-## Current focus (Oct 1, 2026)
+## Current focus (Oct 1, 2026, evening)
+
+- **Hosted social nights are what the public site sells.** Ticketed nights for meeting new people (first: Game Night for Singles, ages 21 to 35), sold on Eventbrite. The home page leads to the next night; its details live in `NIGHT` in `lib/site.ts`. This replaces the earlier "no Eventbrite, no ticketed events" rule for the public site.
+- **Still no built-in checkout** (rule 7): the site links out to Eventbrite.
+- **Don't name the venue until it has confirmed in writing** (`NIGHT.venueConfirmed`).
+- **Open Play is kept, not promoted.** The player app, routes, pass, XP and badges stay in place on colgrid.app and are not mentioned on the public home page for now. Don't delete them.
+
+### Earlier the same day (Open Play; kept for reference)
 
 - **Open Play is the product.** Free sign-up, teams, invite links, routes, location checks, on-site answers, XP, levels, badges, the pass and repeat play. Route 01 and Route 02 (Season 10 · Open Play) are built and stay closed until phone testing with friends passes.
 - **No Eventbrite and no ticketed events.** The Oct 17 event and the $75 ticket model are dropped. Nothing in the public site or the Open Play flow may require or mention a ticket.

@@ -4,19 +4,19 @@ export const SITE = {
   name: "Colgrid",
   url: "https://getcolgrid.com", // the public site: home, companies, businesses, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
-  tagline: "Your city has missions.",
-  title: "Colgrid: a real-world team game in Salt Lake City",
+  tagline: "Come alone. Leave knowing people.",
+  title: "Colgrid: hosted nights for meeting new people in Salt Lake City",
   description:
-    "Colgrid is a real-world game you play with friends. Pick a route through a Salt Lake City neighborhood, take on missions at local makers, kitchens and hidden places, and earn XP, levels and badges that follow you to every route and every city.",
+    "Colgrid runs hosted social nights in Salt Lake City. We mix you into small teams and give you something to do together, so you meet new people without the awkward part. Come alone or bring a friend.",
   shortDescription:
-    "A real-world game you play with friends in Salt Lake City. Routes through local places, missions at every stop, and XP, levels and badges that follow you to every city.",
+    "Hosted social nights in Salt Lake City. Small teams, quick games, new people. Come alone or bring a friend.",
   locale: "en_US",
   city: "Salt Lake City",
   region: "UT",
   country: "US",
   location: "Salt Lake City, Utah",
   // The line at the bottom of every page. No city: Colgrid will run in more than one.
-  footerLine: "Colgrid creates fun team experiences with games, challenges, food, and local adventures.",
+  footerLine: "Colgrid creates in-person experiences that help people connect with others in their city.",
   // Legal name, used only where it matters (Terms, Privacy). The brand everywhere else is just "Colgrid".
   legalName: "Colgrid LLC",
   // Where form submissions (corporate, business, contact) are sent. Never shown on the site:
@@ -39,4 +39,29 @@ export const SITE = {
     { name: "LinkedIn", url: "https://www.linkedin.com/company/colgrid/" },
     // Add Facebook here once the page exists.
   ],
+} as const;
+
+// The next hosted night, shown on the home page. Change it here and the page follows.
+// Tickets are sold on Eventbrite (no checkout on this site).
+export const NIGHT = {
+  name: "Game Night for Singles",
+  ages: "Singles, ages 21 to 35",
+  date: "Thursday, October 22",
+  shortDate: "Thu, Oct 22",
+  time: "7 to 10 PM",
+  doors: "Doors at 7:00. Games start at 7:30.",
+  area: "Sugar House, Salt Lake City",
+  // Shown only once the venue has confirmed the date in writing: set venueConfirmed to true.
+  venue: "Sugar House Pub",
+  venueAddress: "1994 S 1100 E, Salt Lake City",
+  venueConfirmed: false,
+  prices: [
+    { label: "Early bird", price: "$21", note: "through Oct 15" },
+    { label: "General", price: "$25", note: "" },
+    { label: "At the door", price: "$29", note: "if there's room" },
+  ],
+  // Paste the Eventbrite listing link here once it is published. Until then the button
+  // opens Colgrid's Eventbrite page, where the listing appears as soon as it goes live.
+  ticketUrl: "",
+  organizerUrl: "https://www.eventbrite.com/o/colgrid-121801268102",
 } as const;
