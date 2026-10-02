@@ -72,6 +72,15 @@ export default function Home() {
       <section className="home-hero">
         <h1>Come alone. Leave knowing people.</h1>
         <p className="home-lede">Colgrid runs hosted nights in Salt Lake City that make meeting new people easy.</p>
+        <Image
+          src="/home/game-night.jpg"
+          alt="A group of friends laughing around a pub table covered in cards, score sheets and drinks."
+          width={1200}
+          height={700}
+          priority
+          sizes="(min-width: 680px) 640px, 100vw"
+          className="home-photo"
+        />
         <p className="home-when">
           <strong>{NIGHT.name}</strong>
           <br />
