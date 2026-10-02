@@ -2506,6 +2506,42 @@ button.button {
   font-size: 19px;
   border-bottom: 1px solid #2c3136;
 }
+.home-facts {
+  margin: 28px 0 0;
+  border-top: 1px solid #2c3136;
+}
+.home-facts > div {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #2c3136;
+}
+.home-facts dt {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-subtle);
+}
+.home-facts dd {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--concrete);
+}
+.home-facts small {
+  display: block;
+  font-size: 15px;
+  color: var(--ink-muted);
+}
+.home-facts__price {
+  display: block;
+}
+.home-facts__price small {
+  display: inline;
+}
+.home-facts__price .mono {
+  color: var(--beacon-amber);
+}
 .home-section > p.home-note {
   margin: 16px 0 0;
   font-size: 15px;

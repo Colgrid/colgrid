@@ -5,7 +5,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Questions about Colgrid: teams, ages, where you meet, what's included, price and private runs.",
+  description: "Questions about Colgrid nights: coming alone, who it's for, what happens, tickets and private nights.",
   alternates: { canonical: "/faq" },
 };
 

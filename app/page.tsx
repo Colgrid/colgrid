@@ -3,23 +3,25 @@ import Image from "next/image";
 import Link from "next/link";
 import LegalFooter from "@/app/components/LegalFooter";
 import { HOME_FAQ } from "@/lib/faq";
-import { SITE } from "@/lib/site";
+import { NIGHT, SITE } from "@/lib/site";
 
-// The home page sells the player experience to someone who has never heard of Colgrid:
-// what it is, how it works, and how progress carries on. No tickets, no dates: Colgrid is a game
-// you play with friends whenever the places are open (Open Play, decided Oct 1, 2026).
-// Companies, businesses and the full FAQ have their own pages.
+// The home page has one job: get someone who has never heard of Colgrid to the next night.
+// What Colgrid is, the next night, how it goes, why it exists, questions. Tickets are sold on
+// Eventbrite (hosted social nights, decided Oct 1, 2026). The night's details live in lib/site.ts.
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
 const STEPS = [
-  { title: "Pick a route.", body: "A few stops through one neighborhood." },
-  { title: "Bring your friends.", body: "Start a team and send them one link." },
-  { title: "Take on missions.", body: "Your phone shows where to go and checks you're there." },
-  { title: "Earn XP.", body: "Levels and badges that stay with you." },
+  { title: "Show up.", body: "Come on your own or bring a single friend." },
+  { title: "Get your team.", body: "Six people you haven't met yet." },
+  { title: "Play.", body: "Quick, easy games. Teams reshuffle twice, so you meet about 18 people." },
+  { title: "Stay.", body: "The music comes up, the bar's open, and the night is yours." },
 ];
+
+const ticketUrl = NIGHT.ticketUrl || NIGHT.organizerUrl;
+const where = NIGHT.venueConfirmed ? `${NIGHT.venue}, ${NIGHT.area}` : NIGHT.area;
 
 // Structured data (schema.org) so search engines and AI assistants can read the facts directly.
 const jsonLd = {
@@ -68,22 +70,63 @@ export default function Home() {
 
       {/* 1. Hero */}
       <section className="home-hero">
-        <h1>Turn your city into a game board.</h1>
-        <p className="home-lede">Colgrid is a real-world game you play with friends. Pick a route, take on missions, discover local places, earn XP.</p>
-        <p className="home-when">Opening soon in Salt Lake City.</p>
-      </section>
-
-      {/* 2. What is Colgrid? */}
-      <section className="home-section" aria-labelledby="what">
-        <h2 id="what">A game you can play any day.</h2>
-        <p>
-          Routes run through one neighborhood, with stops at local makers, kitchens and places you&apos;d normally walk right past. Go when your friends are free and the places are open.
+        <h1>Come alone. Leave knowing people.</h1>
+        <p className="home-lede">Colgrid runs hosted nights in Salt Lake City that make meeting new people easy.</p>
+        <p className="home-when">
+          <strong>{NIGHT.name}</strong>
+          <br />
+          {NIGHT.shortDate} · {NIGHT.time} · {NIGHT.area}
         </p>
+        <a href={ticketUrl} className="button button--primary home-cta" rel="noopener" target="_blank">
+          Get tickets
+        </a>
       </section>
 
-      {/* 3. How it works */}
+      {/* 2. The next night */}
+      <section className="home-section" aria-labelledby="next">
+        <h2 id="next">The next night</h2>
+        <p>
+          You&apos;re put on a team of six strangers for an hour of quick, silly games. Then the bar and the music take over. No apps. No awkward one-on-one interviews.
+        </p>
+        <dl className="home-facts">
+          <div>
+            <dt>When</dt>
+            <dd>
+              {NIGHT.date}, {NIGHT.time}
+              <small>{NIGHT.doors}</small>
+            </dd>
+          </div>
+          <div>
+            <dt>Where</dt>
+            <dd>
+              {where}
+              {NIGHT.venueConfirmed && <small>{NIGHT.venueAddress}</small>}
+            </dd>
+          </div>
+          <div>
+            <dt>Who</dt>
+            <dd>
+              {NIGHT.ages}
+              <small>21 and over. Bring your ID.</small>
+            </dd>
+          </div>
+          <div>
+            <dt>Tickets</dt>
+            <dd>
+              {NIGHT.prices.map((p) => (
+                <span key={p.label} className="home-facts__price">
+                  <span className="mono">{p.price}</span> {p.label}
+                  {p.note && <small> {p.note}</small>}
+                </span>
+              ))}
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      {/* 3. How it goes */}
       <section className="home-section" aria-labelledby="how">
-        <h2 id="how">How it works</h2>
+        <h2 id="how">How it goes</h2>
         <ol className="home-steps">
           {STEPS.map((s, i) => (
             <li key={s.title}>
@@ -98,13 +141,15 @@ export default function Home() {
         </ol>
       </section>
 
-      {/* 5. Progress */}
-      <section className="home-section" aria-labelledby="progress">
-        <h2 id="progress">Your progress follows you.</h2>
-        <p>Earn XP and badges as you play. They carry into every route, and every city.</p>
+      {/* 4. Why */}
+      <section className="home-section" aria-labelledby="why">
+        <h2 id="why">Meeting people shouldn&apos;t be this hard.</h2>
+        <p>
+          Apps haven&apos;t made it easier. People connect faster when they&apos;re doing something together, so every Colgrid night is hosted and gives you something to do.
+        </p>
       </section>
 
-      {/* 6. FAQ */}
+      {/* 5. FAQ */}
       <section className="home-section" aria-labelledby="faq">
         <h2 id="faq">Questions</h2>
         <div className="faq">
@@ -117,6 +162,15 @@ export default function Home() {
         </div>
         <Link href="/faq" className="home-quiet">
           More questions →
+        </Link>
+      </section>
+
+      {/* 6. Can't make it */}
+      <section className="home-section" aria-labelledby="later">
+        <h2 id="later">Can&apos;t make this one?</h2>
+        <p>Tell us, and we&apos;ll let you know when the next night is set.</p>
+        <Link href="/contact" className="home-quiet">
+          Send us a note →
         </Link>
       </section>
 
