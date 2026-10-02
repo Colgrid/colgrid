@@ -2419,6 +2419,13 @@ button.button {
   line-height: 1.45;
   color: var(--ink-muted);
 }
+.home-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 36px;
+  border-radius: var(--radius-card);
+}
 .home-when {
   margin: 36px 0 0;
   font-size: 17px;
