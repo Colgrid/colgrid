@@ -118,6 +118,11 @@ export default function Home() {
               <strong>Do the work</strong>
               Get outdoors with friends and neighbors to do direct work that makes an immediate difference.
             </li>
+            <li>
+              <strong>Get paid for showing up</strong>
+              {CHALLENGE.rewards[0].amount} for completing the base asks, bounties from local businesses, and a share of the bonus when the challenge
+              hits its targets.
+            </li>
           </ul>
           <a href={`${SITE.appUrl}/signin`} className="button button--secondary">
             Take action in your area

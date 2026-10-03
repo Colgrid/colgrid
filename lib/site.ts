@@ -54,6 +54,13 @@ export const CHALLENGE = {
     { name: "Standard Challenge", price: "$3,500", note: "Fully custom. More participants. Detailed Outcome Report." },
     { name: "Campaign Contract", price: "$2,500/mo", note: "A challenge every month. Quarterly Outcome Report." },
   ],
+  // How participants are paid (reward model of Oct 2, 2026). Funded by the client and sponsors, and
+  // released only after a verified check-in or photo. Amounts are starting assumptions.
+  rewards: [
+    { name: "Guaranteed base", amount: "$20", body: "Everyone who completes the base set of asks gets paid. Usually a gift card for a shop in the district." },
+    { name: "Action bounties", amount: "$25 to $250", body: "Local businesses fund specific asks. The people who complete them get the bounty." },
+    { name: "Shared value pool", amount: "10% of the fee", body: "If the challenge hits its targets, the top-contributing teams share a bonus. When the district wins, so do the people who did the work." },
+  ],
   terms: "50% deposit at signing. 50% due within 15 days of your Outcome Report.",
   // Photo of people, shown in the hero. Swap for a real photo from a challenge when there is one.
   heroPhoto: "/home/field-team.jpg",
