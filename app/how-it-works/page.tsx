@@ -18,7 +18,7 @@ const STEPS = [
   { title: "We mobilize.", body: "We set up your challenge on colgrid.app and recruit residents through flyers, social media and local outreach." },
   { title: "Challenge day.", body: "Residents join alone or as a team, open the field map, complete tasks, check in by GPS and submit photos and logs." },
   { title: "Outcome Report.", body: "The field data is compiled into your report: check-ins, sites audited, completed actions and feedback." },
-  { title: "Neighbors get paid.", body: "Verified participants receive their base reward, any bounties they earned, and a share of the bonus if targets were hit." },
+  { title: "Rewards go out.", body: "Verified participants receive their guaranteed reward, any business-sponsored rewards they earned, and a share of the bonus if the target was hit." },
 ];
 
 export default function HowItWorks() {
@@ -50,7 +50,7 @@ export default function HowItWorks() {
       </section>
 
       <section className="home-section" aria-labelledby="rewards">
-        <h2 id="rewards">How neighbors get paid</h2>
+        <h2 id="rewards">How neighbors are rewarded</h2>
         <ul className="plans">
           {CHALLENGE.rewards.map((r) => (
             <li key={r.name}>
@@ -60,7 +60,7 @@ export default function HowItWorks() {
             </li>
           ))}
         </ul>
-        <p className="show-wide">Rewards are funded by the organization and its sponsors, and released after a verified check-in or photo.</p>
+        <p className="show-wide">Rewards are funded by the organization and its sponsors, and released only after the action is verified: QR code, location check-in, photo or business confirmation.</p>
       </section>
 
       <section className="home-section show-form" aria-labelledby="safety">

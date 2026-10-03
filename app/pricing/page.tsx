@@ -26,7 +26,7 @@ export default function Pricing() {
             </li>
           ))}
         </ul>
-        <p className="show-wide">Every price includes the reward pool that pays the neighbors who do the work.</p>
+        <p className="show-wide">Every price includes guaranteed rewards for the neighbors who do the work. Add a performance bonus and part of it is shared with them when the target is hit.</p>
         <Link href="/#commission" className="button button--primary home-cta">
           Commission a challenge
         </Link>

@@ -57,9 +57,9 @@ export const CHALLENGE = {
   // How participants are paid (reward model of Oct 2, 2026). Funded by the client and sponsors, and
   // released only after a verified check-in or photo. Amounts are starting assumptions.
   rewards: [
-    { name: "Guaranteed base", amount: "$20", body: "Everyone who completes the base set of asks gets paid. Usually a gift card for a shop in the district." },
-    { name: "Action bounties", amount: "$25 to $250", body: "Local businesses fund specific asks. The people who complete them get the bounty." },
-    { name: "Shared value pool", amount: "10% of the fee", body: "If the challenge hits its targets, the top-contributing teams share a bonus. When the district wins, so do the people who did the work." },
+    { name: "Guaranteed rewards", amount: "$10 gift card", body: "Complete a set of asks, such as visiting three businesses, and the reward is guaranteed." },
+    { name: "Business-sponsored rewards", amount: "Paid by the business", body: "A business pays for a specific ask, like 50 people visiting and giving feedback. The people who complete it are rewarded." },
+    { name: "Performance pool", amount: "A share of the bonus", body: "The client adds a bonus if the challenge reaches its target. Part of it goes to the people who created the result. Better results, more to share." },
   ],
   terms: "50% deposit at signing. 50% due within 15 days of your Outcome Report.",
   // Photo of people, shown in the hero. Swap for a real photo from a challenge when there is one.

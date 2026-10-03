@@ -32,7 +32,7 @@ export const FULL_FAQ: Faq[] = [
 // Questions on /how-it-works (blueprint of Oct 2, 2026).
 export const CHALLENGE_FAQ: Faq[] = [
   { q: "Who takes part?", a: "Everyday residents who live nearby and want to take direct action. We recruit them through flyers, social media and local outreach. You don't need to bring a crowd." },
-  { q: "Who pays?", a: "The organization that commissions the challenge. Residents never pay to take part, and they are paid for verified work." },
+  { q: "Who pays?", a: "The organization that commissions the challenge. Residents never pay to take part, and they are rewarded for verified work." },
   { q: "What is in the Outcome Report?", a: "Verified field data: check-ins, sites audited, completed actions and what participants told us. Organizations use it to prove impact to boards, grantors and city officials." },
   { q: "What kinds of problems work?", a: "Problems that need many people each doing a small, physical task: inspect, count, map, collect, visit. If we can't measure it, we'll say so before you pay." },
   { q: "How do we pay?", a: "50% deposit at signing. The other 50% is due within 15 days of your Outcome Report." },
