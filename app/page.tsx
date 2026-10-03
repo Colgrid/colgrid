@@ -166,7 +166,7 @@ export default function Home() {
           ))}
         </div>
         <Link href="/nights" className="home-quiet">
-          Here to play? See the next night →
+          Looking for the singles night? →
         </Link>
       </section>
 
