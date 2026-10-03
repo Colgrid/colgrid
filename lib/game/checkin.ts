@@ -54,7 +54,7 @@ export type CheckInView =
 
 const REASON_LABEL: Record<XpReason, string> = {
   attend: "You showed up",
-  quest: "Quest complete",
+  quest: "Ask complete",
   hidden_quest: "Hidden quest found",
   all_main_quests: "Every main quest done",
   adjustment: "Bonus from the game master",
@@ -72,7 +72,7 @@ export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => Leve
     case "not_live":
       return {
         kind: "error",
-        title: "That mission is over.",
+        title: "That ask is over.",
         message: "That session has ended.",
       };
     case "judged":
@@ -127,7 +127,7 @@ export function describeCheckIn(r: CheckInResult, levelFor: (xp: number) => Leve
       const already = r.status === "already";
       return {
         kind: "success",
-        headline: already ? "Already checked in." : r.is_hidden ? "Hidden quest found." : "Quest complete.",
+        headline: already ? "Already checked in." : r.is_hidden ? "Hidden ask found." : "Ask complete.",
         questTitle: r.quest_title ?? "",
         xpGained: Math.max(0, afterXp - beforeXp),
         lines,

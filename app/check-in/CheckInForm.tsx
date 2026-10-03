@@ -6,6 +6,7 @@ import { describeCheckIn } from "@/lib/game/checkin";
 import { formatLevel, levelFor } from "@/lib/game/levels";
 import { queueForLater } from "@/app/components/PendingSync";
 import { enqueue, isNetworkError, timeout } from "@/lib/offline-queue";
+import { SITE } from "@/lib/site";
 import { submitCheckIn, type CheckInState } from "./actions";
 
 // No signal (or it drops mid-send): keep the code on the phone and send it when signal is back.
@@ -60,12 +61,12 @@ export default function CheckInForm({ initialCode }: { initialCode: string }) {
     const { after } = view;
     return (
       <div className="checkin-success" role="status">
-        {view.xpGained > 0 && <p className="checkin-success__xp mono">+{view.xpGained} XP</p>}
+        {SITE.pointsVisible && view.xpGained > 0 && <p className="checkin-success__xp mono">+{view.xpGained} XP</p>}
         <h2 className="checkin-success__headline">{view.headline}</h2>
         <p className="checkin-success__quest">{view.questTitle}</p>
         {view.note && <p className="fine-print">{view.note}</p>}
 
-        {view.lines.length > 0 && (
+        {SITE.pointsVisible && view.lines.length > 0 && (
           <ul className="xp-lines">
             {view.lines.map((l, i) => (
               <li key={i}>
@@ -82,26 +83,28 @@ export default function CheckInForm({ initialCode }: { initialCode: string }) {
           </ul>
         )}
 
-        <div className={`level-card${view.leveledUp ? " level-card--up" : ""}`}>
-          <p className="level-card__top mono">
-            {view.leveledUp ? (
-              <>
-                <span className="level-card__tag">LEVEL UP</span> {formatLevel(view.before.level)} → <strong>{formatLevel(after.level)}</strong>
-              </>
-            ) : (
-              <strong>{formatLevel(after.level)}</strong>
-            )}
-          </p>
-          <div className="xp-bar" aria-hidden="true">
-            <span style={{ width: `${Math.round(after.progress * 100)}%` }} />
+        {SITE.pointsVisible && (
+          <div className={`level-card${view.leveledUp ? " level-card--up" : ""}`}>
+            <p className="level-card__top mono">
+              {view.leveledUp ? (
+                <>
+                  <span className="level-card__tag">LEVEL UP</span> {formatLevel(view.before.level)} → <strong>{formatLevel(after.level)}</strong>
+                </>
+              ) : (
+                <strong>{formatLevel(after.level)}</strong>
+              )}
+            </p>
+            <div className="xp-bar" aria-hidden="true">
+              <span style={{ width: `${Math.round(after.progress * 100)}%` }} />
+            </div>
+            <p className="level-card__nums mono">
+              {after.totalXp.toLocaleString("en-US")}
+              {after.nextLevelXp !== null ? ` / ${after.nextLevelXp.toLocaleString("en-US")} XP` : " XP · TOP LEVEL"}
+            </p>
           </div>
-          <p className="level-card__nums mono">
-            {after.totalXp.toLocaleString("en-US")}
-            {after.nextLevelXp !== null ? ` / ${after.nextLevelXp.toLocaleString("en-US")} XP` : " XP · TOP LEVEL"}
-          </p>
-        </div>
+        )}
 
-        {view.badges.length > 0 && (
+        {SITE.pointsVisible && view.badges.length > 0 && (
           <p className="checkin-success__badge">
             New badge: <strong>{view.badges.join(", ")}</strong>
           </p>

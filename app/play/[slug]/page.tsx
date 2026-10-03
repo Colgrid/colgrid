@@ -32,10 +32,10 @@ async function load(slug: string, count: boolean): Promise<Route | null> {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const r = await load((await params).slug, false);
-  if (!r) return { title: "Route" };
+  if (!r) return { title: "Challenge" };
   return {
     title: `${r.route_name}${r.neighborhood ? ` · ${r.neighborhood}` : ""}`,
-    description: `A Colgrid route: ${r.stops.length} stops to play with friends.`,
+    description: `A Colgrid challenge: ${r.stops.length} stops to take on with friends.`,
   };
 }
 
@@ -43,7 +43,7 @@ const MESSAGES: Record<string, string> = {
   name: "Add your first name.",
   team: "Name your team.",
   taken: "That team name is taken. Try another.",
-  closed: "This route isn't open right now.",
+  closed: "This challenge isn't open right now.",
   error: "Something went wrong. Try again.",
 };
 
@@ -65,7 +65,7 @@ export default async function PlayRoute({ params, searchParams }: { params: Prom
           ? `${r.stops.length} stops${r.neighborhood ? ` in ${r.neighborhood}` : ""}. Go with friends, any time the places are open.`
           : r.status === "not_open"
             ? "Opens soon."
-            : "This route has closed."}
+            : "This challenge has closed."}
       </p>
       {open && r.open_until && <p className="play__window">{openThrough(r.open_until)}</p>}
 
@@ -95,7 +95,7 @@ export default async function PlayRoute({ params, searchParams }: { params: Prom
             </Link>
           ) : r.started ? (
             <Link href="/pass" className="button button--primary play__cta">
-              {r.done ? "See my pass" : "Keep playing"}
+              {r.done ? "See my pass" : "Keep going"}
             </Link>
           ) : (
             <form action={startRoute} className="form">
@@ -118,7 +118,7 @@ export default async function PlayRoute({ params, searchParams }: { params: Prom
                 </>
               )}
               <button type="submit" className="button button--primary play__cta">
-                {r.team_name ? `Play with ${r.team_name}` : "Start with friends"}
+                {r.team_name ? `Go with ${r.team_name}` : "Start with friends"}
               </button>
               <p className="fine-print">Next, you&apos;ll get a link to text your friends so they join your team.</p>
             </form>

@@ -35,17 +35,17 @@ export default function FirstRun() {
           <li>
             <span className="mono">2</span>
             <span>
-              <strong>Play</strong>
+              <strong>Do</strong>
               <br />
-              Complete the challenge.
+              Complete the ask.
             </span>
           </li>
           <li>
             <span className="mono">3</span>
             <span>
-              <strong>Progress</strong>
+              <strong>Earn</strong>
               <br />
-              Earn XP and level up.
+              Rewards are sent once your work is verified.
             </span>
           </li>
         </ol>

@@ -34,6 +34,10 @@ export const SITE = {
   // experience first (decided Sept 30, 2026). While false, players never see standings or the
   // tournament switch. The rules and database stay in place for when it comes back.
   tournamentOpen: false,
+  // Points, levels and badges are hidden in the participant app (decided Oct 2, 2026): the app uses the
+  // same plain words as the public site (challenge, ask, reward). The XP data keeps being recorded, so
+  // points can be switched back on later by setting this to true.
+  pointsVisible: false,
   // Official profiles, in the footer. Listed in structured data ("sameAs") so search engines and AI assistants
   // know these accounts are Colgrid, and linked in the site footer.
   social: [

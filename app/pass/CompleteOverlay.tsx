@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { ShareMoment } from "@/lib/share";
+import { SITE } from "@/lib/site";
 import ShareSheet from "./ShareSheet";
 
 type Props = {
@@ -74,17 +75,21 @@ export default function CompleteOverlay(p: Props) {
   return (
     <div className="complete" role="dialog" aria-modal="true" aria-label={p.headline} onClick={() => setOpen(false)}>
       <div className="complete__card">
-        {p.leveledUp && <p className="complete__kicker mono">LEVEL UP</p>}
+        {SITE.pointsVisible && p.leveledUp && <p className="complete__kicker mono">LEVEL UP</p>}
         <h2 className="complete__headline">{p.headline}</h2>
         {p.sub && <p className="complete__sub">{p.sub}</p>}
-        {p.gained > 0 && <p className="complete__xp mono">+{p.gained} XP</p>}
-        <div className="complete__bar" aria-hidden="true">
-          <span style={{ width: `${filled ? pctTo : p.leveledUp ? 0 : pctFrom}%` }} />
-        </div>
-        <p className="complete__nums mono">
-          {p.levelLabel} · {shownXp}
-          {p.levelEnd !== null ? ` / ${p.levelEnd} XP` : " XP"}
-        </p>
+        {SITE.pointsVisible && (
+          <>
+          {p.gained > 0 && <p className="complete__xp mono">+{p.gained} XP</p>}
+          <div className="complete__bar" aria-hidden="true">
+            <span style={{ width: `${filled ? pctTo : p.leveledUp ? 0 : pctFrom}%` }} />
+          </div>
+          <p className="complete__nums mono">
+            {p.levelLabel} · {shownXp}
+            {p.levelEnd !== null ? ` / ${p.levelEnd} XP` : " XP"}
+          </p>
+          </>
+        )}
         {p.next && <p className="complete__next mono">{p.next.toUpperCase()}</p>}
         <button type="button" className="button button--primary" onClick={(e: { stopPropagation(): void }) => (e.stopPropagation(), setOpen(false))}>
           {p.next ? "Let's go" : "Back to my pass"}
