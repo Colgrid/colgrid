@@ -26,6 +26,7 @@ export default function Pricing() {
             </li>
           ))}
         </ul>
+        <p className="show-wide">Every price includes the reward pool that pays the neighbors who do the work.</p>
         <Link href="/#commission" className="button button--primary home-cta">
           Commission a challenge
         </Link>
