@@ -23,7 +23,7 @@ type Invite = {
 
 const MESSAGES: Record<string, string> = {
   name: "Add your first name.",
-  other: "You've already played with another team this season, so your progress stays with that team.",
+  other: "You've already joined another team this season, so your progress stays with that team.",
   closed: "This route isn't open right now.",
   error: "Something went wrong. Try again.",
 };
@@ -47,7 +47,7 @@ export default async function JoinPage({ params, searchParams }: { params: Promi
       <h1 className="play__title">Join {invite.team_name}.</h1>
       <p className="lede">
         {invite.route_name}
-        {invite.neighborhood ? ` in ${invite.neighborhood}` : ""}. A Colgrid route you play together.
+        {invite.neighborhood ? ` in ${invite.neighborhood}` : ""}. A Colgrid challenge you take on together.
       </p>
 
       {invite.status === "closed" ? (
@@ -91,7 +91,7 @@ export default async function JoinPage({ params, searchParams }: { params: Promi
         </div>
       )}
       <p className="fine-print">
-        <Link href={`/play/${invite.slug}`}>See the route</Link>
+        <Link href={`/play/${invite.slug}`}>See the challenge</Link>
       </p>
     </main>
   );

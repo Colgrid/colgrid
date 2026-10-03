@@ -19,7 +19,7 @@ test("a first-night check-in that crosses 100 XP is a level up", () => {
   assert.equal(v.before.level, 1);
   assert.equal(v.after.level, 2);
   assert.equal(v.points, null);
-  assert.deepEqual(v.lines.map((l) => l.label), ["Quest complete", "Every main quest done", "You showed up"]);
+  assert.deepEqual(v.lines.map((l) => l.label), ["Ask complete", "Every main quest done", "You showed up"]);
 });
 
 test("tournament points show for tournament teams only", () => {
@@ -31,7 +31,7 @@ test("tournament points show for tournament teams only", () => {
 
 test("hidden quests get their own headline", () => {
   const v = describeCheckIn({ status: "ok", is_hidden: true, xp_before: 0, xp_after: 30 });
-  assert.equal(v.kind === "success" && v.headline, "Hidden quest found.");
+  assert.equal(v.kind === "success" && v.headline, "Hidden ask found.");
 });
 
 test("a repeat code gives no points and says so", () => {
