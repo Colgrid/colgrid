@@ -33,6 +33,7 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 ## Current focus (Oct 2, 2026)
 
 - **The public site follows the Oct 2 blueprint: paid civic action and crowdsourced field operations.** Organizations (business districts, city groups, nonprofits, developers) pay Colgrid as a contractor to mobilize everyday citizens, coordinate field work and deliver verified impact. Citizens take part for free. Copy, examples, the sample report, prices and payment terms live in `CHALLENGE` in `lib/site.ts`.
+- **Tagline (hero and footer): "Colgrid turns people who care into people who act."** Plain words, no corporate jargon. The buyer's job: get field work done and get proof. The neighbor's job: a hands-on, social way to fix things where they live.
 - **Pages:** `/` (hero, core model, organizations vs. residents, what we solve, outcome report, lead form), `/how-it-works`, `/pricing`, `/contact`.
 - **Words:** challenge, field operation, residents, citizens, Outcome Report, verified. It is not a game: on the public site don't say game, mission, quest, XP, players or play. (Player screens on colgrid.app keep their game language.)
 - **Lead intake:** the home-page form asks name, email, organization, location, primary objective and target timeline, and is stored as a corporate lead whose message starts "Challenge inquiry". When `SITE.schedulerUrl` is set, the thanks page offers the 20-minute call.

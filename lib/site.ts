@@ -4,19 +4,19 @@ export const SITE = {
   name: "Colgrid",
   url: "https://getcolgrid.com", // the public site: home, companies, businesses, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
-  tagline: "Real community problems need boots on the ground. We bring the crowd.",
-  title: "Colgrid: community challenges in Salt Lake City",
+  tagline: "Colgrid turns people who care into people who act.",
+  title: "Colgrid turns people who care into people who act",
   description:
-    "Colgrid organizes everyday citizens to solve urgent local challenges, delivering measurable field impact for the organizations funding real change. Organizations fund the work. Neighbors take direct action where they live.",
+    "Colgrid turns people who care into people who act. We organize everyday citizens to solve urgent local challenges, delivering real, measurable field impact for the organizations funding change.",
   shortDescription:
-    "Paid civic action and crowdsourced field operations in Salt Lake City. Organizations fund the challenge. Neighbors do the work. Results verified.",
+    "Colgrid turns people who care into people who act. Organizations fund the work. Neighbors take direct action together. Results verified.",
   locale: "en_US",
   city: "Salt Lake City",
   region: "UT",
   country: "US",
   location: "Salt Lake City, Utah",
   // The line at the bottom of every page. No city: Colgrid will run in more than one.
-  footerLine: "Colgrid creates in-person experiences that help people connect with others in their city.",
+  footerLine: "Colgrid turns people who care into people who act.",
   // Legal name, used only where it matters (Terms, Privacy). The brand everywhere else is just "Colgrid".
   legalName: "Colgrid LLC",
   // Where form submissions (corporate, business, contact) are sent. Never shown on the site:
@@ -56,8 +56,8 @@ export const CHALLENGE = {
   ],
   terms: "50% deposit at signing. 50% due within 15 days of your Outcome Report.",
   // Photo of people, shown in the hero. Swap for a real photo from a challenge when there is one.
-  heroPhoto: "/home/game-night.jpg",
-  heroPhotoAlt: "A group of people laughing together around a table.",
+  heroPhoto: "/home/field-team.jpg",
+  heroPhotoAlt: "Four neighbors at a street crossing: two in Colgrid shirts with a clipboard and a phone, one photographing a street sign, one watching the road.",
   // "What we solve" cards on the home page. `ask` is what participants are asked to do.
   // `photo` is a path under /public (e.g. "/home/creek.jpg"); leave it blank to show a colored tile.
   examples: [

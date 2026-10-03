@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { SITE } from "@/lib/site";
 
-export const alt = `${SITE.name}: ${SITE.tagline} Paid civic action in Salt Lake City.`;
+export const alt = `${SITE.name}: ${SITE.tagline} Community challenges in Salt Lake City.`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -74,7 +74,7 @@ export default async function OpenGraphImage() {
           {SITE.tagline}
         </div>
         <div style={{ marginTop: 26, fontSize: 32, color: "#C9CDD2", maxWidth: 980, lineHeight: 1.35 }}>
-          Paid civic action in Salt Lake City. Small teams, quick games, new people.
+          Community challenges in Salt Lake City. Small teams, quick games, new people.
         </div>
         <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 12, background: "#FF9F1C" }} />
       </div>
