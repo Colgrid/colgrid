@@ -42,7 +42,8 @@ export type PassData =
       sessions: SessionPick;
       sessionCount: number;
       // The session whose quests the pass shows: the live one, else the last one played.
-      focus: { session: PassSession; quests: QuestView[]; guided: Guided | null } | null;
+      // photoAsks: ask id -> photos this team has sent, for asks that need a photo (my_photo_asks()).
+      focus: { session: PassSession; quests: QuestView[]; guided: Guided | null; photoAsks: Record<string, number> } | null;
       // Tournament teams only. Casual teams are never ranked (CLAUDE.md rule 1).
       standing: { rank: number; points: number; teamCount: number } | null;
       badges: PassBadge[];
@@ -148,12 +149,16 @@ export async function loadPass(): Promise<PassData | null> {
   const focusSession = sessions.live ?? sessions.last;
   let focus: Extract<PassData, { kind: "pass" }>["focus"] = null;
   if (focusSession && focusSession.status !== "scheduled") {
-    const [{ data }, { data: guidedData }] = await Promise.all([
+    const [{ data }, { data: guidedData }, { data: photoData }] = await Promise.all([
       supabase.rpc("player_quests", { p_session_id: focusSession.id }),
       supabase.rpc("my_guided", { p_session_id: focusSession.id }),
+      // Returns nothing (and the pass works as before) until the challenges migration has been applied.
+      supabase.rpc("my_photo_asks", { p_session_id: focusSession.id }),
     ]);
+    const photoAsks: Record<string, number> = {};
+    for (const p of rows<{ quest_id: string; photos: number }>(photoData)) photoAsks[p.quest_id] = p.photos;
     const guided = (guidedData as Guided | null) ?? null;
-    focus = { session: focusSession, quests: questViews(rows<PassQuest>(data), focusSession.status, guided?.slot ?? null), guided };
+    focus = { session: focusSession, quests: questViews(rows<PassQuest>(data), focusSession.status, guided?.slot ?? null), guided, photoAsks };
     // Test count: the team has the mission in front of them (counted once per team and stop).
     const active = focus.quests.find((q) => q.state === "active");
     if (guided?.open_route && focusSession.status === "live" && active) {
