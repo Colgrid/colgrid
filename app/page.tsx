@@ -55,8 +55,8 @@ export default function Home() {
         <div>
           <h1>{SITE.tagline}</h1>
           <p className="home-lede">
-            Colgrid organizes everyday citizens to solve urgent local challenges, delivering measurable field impact for the organizations funding
-            real change.
+            We organize everyday citizens to solve urgent local challenges, delivering real, measurable field impact for the organizations funding
+            change.
           </p>
           <div className="show-ctas">
             <a href="#commission" className="button button--primary">
@@ -68,7 +68,7 @@ export default function Home() {
           </div>
         </div>
         <div className="show-visual">
-          <Image src={CHALLENGE.heroPhoto} alt={CHALLENGE.heroPhotoAlt} width={1200} height={700} priority sizes="(min-width: 860px) 480px, 100vw" />
+          <Image src={CHALLENGE.heroPhoto} alt={CHALLENGE.heroPhotoAlt} width={1408} height={768} priority sizes="(min-width: 860px) 480px, 100vw" />
           <div className="mission">
             <span className="mono mission__n">THE ASK</span>
             <p className="mission__text">{CHALLENGE.examples[0].ask}</p>
@@ -78,27 +78,28 @@ export default function Home() {
 
       {/* B. Core model */}
       <section className="home-section" aria-labelledby="model">
-        <h2 id="model">Mobilizing communities to solve real social problems</h2>
+        <h2 id="model">From talking to doing.</h2>
         <p className="show-wide">
-          When local organizations need real-world results, whether auditing street safety, logging environmental damage or driving foot traffic back
-          into hard-hit neighborhoods, posting ads or begging for volunteers isn&apos;t enough. Colgrid provides paid, structured field operations.
-          Organizations fund the initiative to get real results. Neighbors step up to take direct action where they live.
+          Most people want to make a difference where they live, but sign-up sheets and endless meetings don&apos;t get results. Colgrid turns
+          community challenges into structured, collective action. Organizations fund the initiative to get real field work done. Neighbors step up
+          to take direct action together.
         </p>
       </section>
 
       {/* C. Organizations and residents */}
       <section className="audience" aria-label="Who Colgrid is for">
         <div>
-          <p className="audience__who">For organizations and decision-makers</p>
-          <h2>Fund verified, on-the-ground action</h2>
+          <p className="audience__who">For organizations, business districts, nonprofits and cities</p>
+          <h2>Get the field work done</h2>
           <ul>
             <li>
-              <strong>Grassroots execution at scale</strong>
-              Hire Colgrid to deploy local residents directly to the problem area to execute targeted field tasks.
+              <strong>A field force that shows up</strong>
+              Stop paying for unmeasured ads or begging for volunteers who don&apos;t show up. Hire Colgrid to deploy a coordinated field force of local
+              residents directly to the problem area.
             </li>
             <li>
-              <strong>Hard data and proof of impact</strong>
-              Receive an Outcome Report showing GPS check-ins, audited sites, crowd feedback and verified completed actions.
+              <strong>Hard proof</strong>
+              Verified field data, completed asks and an official Outcome Report to prove real impact to boards, grantors and city leaders.
             </li>
           </ul>
           <a href="#commission" className="button button--primary">
@@ -106,21 +107,20 @@ export default function Home() {
           </a>
         </div>
         <div>
-          <p className="audience__who">For local residents</p>
-          <h2>Become a force for grassroots change</h2>
+          <p className="audience__who">For neighbors</p>
+          <h2>Fix it together</h2>
           <ul>
             <li>
-              <strong>Direct local impact</strong>
-              Skip the endless committee meetings. Get out in your neighborhood and do the hands-on work that drives real policy and community fixes.
+              <strong>Skip the talking</strong>
+              Skip the committee meetings, donation links and internet debates.
             </li>
             <li>
-              <strong>Power in numbers</strong>
-              Join structured, team-based mobilizations, from mapping unsafe intersections to supporting local resilience hubs, and hold leaders
-              accountable with real evidence.
+              <strong>Do the work</strong>
+              Get outdoors with friends and neighbors to do direct work that makes an immediate difference.
             </li>
           </ul>
           <a href={`${SITE.appUrl}/signin`} className="button button--secondary">
-            Join the next deployment
+            Take action in your area
           </a>
         </div>
       </section>
