@@ -6,7 +6,8 @@ import LegalFooter from "@/app/components/LegalFooter";
 import { CHALLENGE_FAQ } from "@/lib/faq";
 import { CHALLENGE, SITE } from "@/lib/site";
 
-// The home page speaks to the organization with a goal (decided Oct 2, 2026), and it shows instead
+// The home page is about grassroots community change (decided Oct 2, 2026): a community organization
+// brings a problem and pays, neighbors take part because they care. It shows instead
 // of tells: a mission card over a photo, a grid of example challenges, a sample report, three prices,
 // a form. Keep words to a minimum; if something needs explaining, show it. Nights live on /nights.
 
@@ -65,7 +66,7 @@ export default function Home() {
       <section className="show-hero">
         <div>
           <h1>{SITE.tagline}</h1>
-          <p className="home-lede">Real-world team challenges in Salt Lake City.</p>
+          <p className="home-lede">Community organizations bring the challenge. Neighbors do the work.</p>
           <a href="#talk" className="button button--primary home-cta">
             Start a conversation
           </a>
@@ -79,11 +80,8 @@ export default function Home() {
             priority
             sizes="(min-width: 860px) 480px, 100vw"
           />
-          <p className="show-visual__stat">
-            <strong>97</strong> first-time visits
-          </p>
           <div className="mission">
-            <span className="mono mission__n">MISSION 03</span>
+            <span className="mono mission__n">MISSION 01</span>
             <p className="mission__text">{CHALLENGE.examples[0].mission}</p>
             <span className="mission__xp">+50 XP</span>
           </div>
@@ -92,7 +90,7 @@ export default function Home() {
 
       {/* 2. Example challenges, as cards */}
       <section className="home-section" aria-labelledby="challenges">
-        <h2 id="challenges">Pick a goal.</h2>
+        <h2 id="challenges">Pick a challenge.</h2>
         <ul className="cards">
           {CHALLENGE.examples.map((c, i) => (
             <li key={c.title}>
@@ -112,7 +110,7 @@ export default function Home() {
 
       {/* 3. The report, shown */}
       <section className="home-section" aria-labelledby="report">
-        <h2 id="report">Get the proof.</h2>
+        <h2 id="report">See what changed.</h2>
         <div className="report">
           <div className="report__head">
             <span>Challenge report</span>
@@ -126,7 +124,8 @@ export default function Home() {
               </div>
             ))}
           </dl>
-          <ul className="report__bars" aria-label="Visits by stop">
+          <p className="report__sub">{CHALLENGE.sample.barsLabel}</p>
+          <ul className="report__bars" aria-label={CHALLENGE.sample.barsLabel}>
             {CHALLENGE.sample.stops.map((s) => (
               <li key={s.name}>
                 <span>{s.name}</span>
@@ -157,7 +156,7 @@ export default function Home() {
 
       {/* 5. Start */}
       <section className="home-section show-form" aria-labelledby="talk">
-        <h2 id="talk">Tell us your goal.</h2>
+        <h2 id="talk">Bring us a problem.</h2>
         <LeadForm kind="corporate" challenge />
       </section>
 

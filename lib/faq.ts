@@ -31,9 +31,9 @@ export const FULL_FAQ: Faq[] = [
 
 // Questions on the home page (challenges for organizations, Oct 2, 2026).
 export const CHALLENGE_FAQ: Faq[] = [
-  { q: "Who are the players?", a: "People in your city who sign up to play in teams. We recruit them. You don't need to bring a crowd." },
-  { q: "What do we get at the end?", a: "A report: how many people played, which places they visited, how many were there for the first time, which missions they finished and what they told us." },
-  { q: "How long does it take to set up?", a: "About four weeks from a first call to game day." },
-  { q: "What kinds of goals work?", a: "Goals that need people to physically do something: visit a district, try a new place, discover a project, give feedback. If we can't measure it, we'll say so before you pay." },
-  { q: "How do we pay?", a: "Half at signing, the rest after you have the report." },
+  { q: "Who takes part?", a: "People who live nearby and want to help. We recruit them and put them in teams. You don't need to bring a crowd." },
+  { q: "Who pays?", a: "The community organization that owns the problem. Taking part is free or low-cost for neighbors." },
+  { q: "What do we get at the end?", a: "A report: how many people took part, what they did, what they found and what they told us." },
+  { q: "What kinds of problems work?", a: "Problems that get better when a lot of people each do something small: clean, count, map, plant, collect, visit, meet. If we can't measure it, we'll say so before you pay." },
+  { q: "How long does it take to set up?", a: "About four weeks from a first call to challenge day." },
 ];

@@ -4,12 +4,12 @@ export const SITE = {
   name: "Colgrid",
   url: "https://getcolgrid.com", // the public site: home, companies, businesses, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
-  tagline: "Turn your goal into a game people show up for.",
-  title: "Colgrid: real-world challenges that get people to show up, in Salt Lake City",
+  tagline: "Turn a community problem into a game people show up for.",
+  title: "Colgrid: community challenges people show up for, in Salt Lake City",
   description:
-    "Colgrid turns an organization's goal into a real-world team game. We design the challenge, bring the players, run the day and report what happened: who came, where they went and what they said.",
+    "Colgrid turns a community problem into a real-world team game. A community organization brings the challenge, neighbors show up to play, and the work gets done. We design it, run the day and report what happened.",
   shortDescription:
-    "Real-world team challenges for business districts, developers and community organizations in Salt Lake City. Players included. Results reported.",
+    "Real-world team challenges for community change in Salt Lake City. Community organizations bring the problem. Neighbors do the work. Results reported.",
   locale: "en_US",
   city: "Salt Lake City",
   region: "UT",
@@ -41,39 +41,41 @@ export const SITE = {
   ],
 } as const;
 
-// What the public site sells (decided Oct 2, 2026): challenges paid for by the organization with the goal.
+// What the public site sells (decided Oct 2, 2026): community challenges. A community organization pays,
+// neighbors take part because they want to help change something where they live (creating shared value).
 // Prices follow business/ (challenge-model business plan). They are starting prices, still to be tested.
 export const CHALLENGE = {
   plans: [
-    { name: "Pilot", price: "$1,500", note: "One game day. Up to 10 stops. One-page report." },
-    { name: "Standard", price: "$3,500", note: "Fully custom. More players. Detailed report." },
+    { name: "Pilot", price: "$1,500", note: "One challenge day. One-page report." },
+    { name: "Standard", price: "$3,500", note: "Fully custom. More neighbors. Detailed report." },
     { name: "Monthly", price: "$2,500/mo", note: "A challenge every month. Season standings." },
   ],
   // Example challenges shown as cards on the home page. The "picture" on each card is a sample mission.
   examples: [
-    { title: "Bring them back", who: "Business districts during road work", mission: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "amber" },
-    { title: "Fill the empty storefront", who: "Property owners", mission: "Stand in the empty shop on the corner. Vote: bakery, bike repair or bookstore?", tone: "teal" },
-    { title: "Welcome the new neighbors", who: "Apartment developers", mission: "Find the oldest shop on the block. Ask the owner what was here before.", tone: "red" },
-    { title: "Off-season rally", who: "Districts in the slow months", mission: "It's January. Find the warmest drink on the street. Photo or it didn't happen.", tone: "teal" },
-    { title: "Campus to city", who: "Universities", mission: "Leave campus. Find the record store. Ask for the staff pick.", tone: "red" },
-    { title: "Makers' gauntlet", who: "Local makers", mission: "Taste three hot sauces. Rank them. Tell the maker why.", tone: "amber" },
+    { title: "Safer streets", who: "Neighborhood councils and schools", mission: "Walk the route kids take to school. Mark every crossing that feels unsafe.", tone: "teal" },
+    { title: "Clean the creek", who: "Parks and watershed groups", mission: "Fill one bag along the creek trail. Weigh it at the finish.", tone: "amber" },
+    { title: "Stock the pantry", who: "Food pantries", mission: "Your team has $20 and the pantry's short list. Bring back what's missing.", tone: "red" },
+    { title: "Know your neighbors", who: "Neighborhood councils", mission: "Find someone on your street you've never met. Learn one thing they'd change here.", tone: "amber" },
+    { title: "Keep it local", who: "Small-business districts", mission: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "red" },
+    { title: "Plant the block", who: "Tree and garden groups", mission: "Plant one tree with your team. Name it. Check on it in a month.", tone: "teal" },
   ],
-  // The sample report on the home page. Illustrative numbers, labeled "Sample" on the page.
-  // Replace with a real report after the first challenge.
+  // The sample report on the home page (a "Safer streets" challenge). Illustrative numbers, labeled
+  // "Sample" on the page. Replace with a real report after the first challenge.
   sample: {
     stats: [
-      { n: "64", label: "players" },
-      { n: "12", label: "shops visited" },
-      { n: "212", label: "visits" },
-      { n: "97", label: "first-time visits" },
+      { n: "64", label: "neighbors played" },
+      { n: "212", label: "crossings checked" },
+      { n: "38", label: "flagged unsafe" },
+      { n: "41", label: "first-time volunteers" },
     ],
     stops: [
-      { name: "Coffee shop", visits: 31 },
-      { name: "Bookstore", visits: 26 },
-      { name: "Bakery", visits: 24 },
-      { name: "Plant shop", visits: 17 },
+      { name: "By the school", visits: 14 },
+      { name: "By the park", visits: 11 },
+      { name: "Bus stop", visits: 8 },
+      { name: "Main street", visits: 5 },
     ],
-    quote: "\u201cI've lived six blocks away for three years and never walked in here.\u201d",
+    barsLabel: "Unsafe crossings flagged, by area",
+    quote: "\u201cThree years here and this is the first thing I've done with my neighbors.\u201d",
   },
 } as const;
 

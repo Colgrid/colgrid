@@ -49,13 +49,13 @@ export default function LeadForm({ kind, challenge = false }: { kind: "corporate
         </label>
       )}
       <label>
-        {contact ? "Your message" : challenge ? "What do you need people to do?" : corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
+        {contact ? "Your message" : challenge ? "What problem do you want your community to take on?" : corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
         <textarea
           name="message"
           rows={contact ? 5 : 3}
           maxLength={2000}
           required={contact}
-          placeholder={contact ? "Questions about playing, accessibility, press…" : challenge ? "e.g. get people back into our shops during road work" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
+          placeholder={contact ? "Questions about playing, accessibility, press…" : challenge ? "e.g. get neighbors out to clean up the creek" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
         />
       </label>
       {turnstileSiteKey && (

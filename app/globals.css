@@ -3049,8 +3049,13 @@ button.button {
   display: flex;
   flex-direction: column-reverse;
 }
-.report__bars {
+.report__sub {
   margin: 28px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+.report__bars {
+  margin: 8px 0 0;
   padding: 0;
   list-style: none;
   font-size: 14px;
