@@ -15,6 +15,7 @@ import { activeQuest, allMainDone, arrivalOpen, questProgress, type PassSession,
 import CompleteOverlay from "./CompleteOverlay";
 import FirstRun from "./FirstRun";
 import MissionCheck from "./MissionCheck";
+import PhotoProof from "./PhotoProof";
 import InviteButton from "./InviteButton";
 import { loadPass, type OpenRoute, type PassData } from "./data";
 import { createClient } from "@/lib/supabase/server";
@@ -299,6 +300,9 @@ function MissionPanel({ pass, ios }: { pass: Pass; ios: boolean }) {
 
   const q = activeQuest(focus.quests);
   if (!q) return null;
+  // Asks that need a photo: the photo comes first, then the check-in.
+  const needsPhoto = q.id in focus.photoAsks;
+  const photosSent = focus.photoAsks[q.id] ?? 0;
   return (
     <section className="mission" aria-labelledby="mission-title">
       <div className="mission__top">
@@ -314,7 +318,8 @@ function MissionPanel({ pass, ios }: { pass: Pass; ios: boolean }) {
       )}
       {guided?.open_route && <StopDirections quest={q} ios={ios} />}
       {q.briefing && <p className="mission__text">{q.briefing}</p>}
-      {q.verify && q.verify !== "code" ? (
+      {needsPhoto && <PhotoProof questId={q.id} sent={photosSent} />}
+      {needsPhoto && photosSent === 0 ? null : q.verify && q.verify !== "code" ? (
         <>
           <MissionCheck questId={q.id} needsLocation={q.verify.startsWith("location")} needsAnswer={q.verify.endsWith("answer")} />
           <Link href="/check-in" className="mission__fallback">

@@ -114,3 +114,15 @@ begin
   perform pg_temp.pass('signed-out visitors cannot submit photos');
 end $$;
 reset role;
+
+set role authenticated;
+select set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-00000000e1a1', false);
+do $$
+declare r record;
+begin
+  select * into r from public.my_photo_asks('00000000-0000-0000-0000-00000000e001');
+  if r.quest_id <> '00000000-0000-0000-0000-00000000e0a1' or r.photos <> 1 or r.approved <> 1 then raise exception 'FAIL photo asks %', r; end if;
+  if (select count(*) from public.my_photo_asks('00000000-0000-0000-0000-00000000e001')) <> 1 then raise exception 'FAIL only asks that need a photo'; end if;
+  perform pg_temp.pass('the pass knows which asks need a photo and how many the team sent');
+end $$;
+reset role;

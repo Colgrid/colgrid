@@ -19,6 +19,7 @@
 | `migrations/20260928000005_admin.sql` | Admin: pilot season (Season 00), tickets, generated quest codes, Eventbrite import, "coming with" answer |
 | `migrations/20260928000004_checkin.sql` | Quest check-in: codes, XP to present teammates, tournament points, all-quests bonus, code-guessing limit |
 | `migrations/20261002000020_challenges.sql` | Paid challenges: photo proof (table + private `proof` storage bucket), rewards and their fulfilment, the Outcome Report (`challenge_report()`), and the columns that mark a client's challenge. **Not applied yet: review, then paste into the SQL Editor** |
+| `migrations/20261002000021_photo_asks.sql` | `my_photo_asks()`: tells the pass which asks need a photo and how many the team has sent. Run after 20. **Not applied yet** |
 | `seed.sql` | Sample data: Chapter 01 Salt Lake, Season 1, 4 sessions, 18 quests, 6 teams, 30 players (made up) |
 | `tests/10_rules.test.sql` | 13 checks that the rules hold |
 | `tests/20_signin.test.sql` | 6 checks that sign-in links the right pass |
@@ -33,7 +34,7 @@
 | `tests/96_location.test.sql` | 2 checks on location verification |
 | `tests/97_share.test.sql` | 3 checks on share counts |
 | `tests/98_start_gps.test.sql` | 1 check on GPS check-in at the start |
-| `tests/99_x_challenges.test.sql` | 8 checks on photo proof, rewards and the Outcome Report |
+| `tests/99_x_challenges.test.sql` | 9 checks on photo proof, rewards and the Outcome Report |
 | `templates/` | Branded sign-in emails to paste into Supabase |
 | `tests/00_local_supabase_stub.sql` | Local testing only; never run on Supabase |
 
