@@ -33,6 +33,8 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 ## Current focus (Oct 2, 2026)
 
 - **The public home page is about grassroots community change (creating shared value).** A community organization pays Colgrid to turn a community problem into a real-world team challenge; neighbors take part because they want to help change something where they live; Colgrid designs it, runs the day and delivers an outcome report. Example challenges and the sample report live in `CHALLENGE` in `lib/site.ts`. Prices live in `CHALLENGE` in `lib/site.ts` (pilot $1,500, standard $3,500, monthly $2,500) and are still to be tested. Business plan: `business/`.
+- **It is not a game.** On the public home page, don't say game, mission, quest, XP, players or play. Say challenge, the ask, neighbors, showed up, helped. (Player screens on colgrid.app keep their game language.)
+- **Use photos of real people helping.** The hero photo and each example card take a photo (`heroPhoto` and `photo` in `CHALLENGE`); cards without one show a colored tile.
 - **The customer is the community organization; the participants are neighbors.** The home page shows instead of tells (mission cards, a sample report, prices) and keeps words to a minimum.
 - **Hosted nights moved to `/nights`** (linked in the footer), unchanged. Open Play stays on colgrid.app, not promoted.
 - Home-page inquiries use the corporate lead form (`<LeadForm kind="corporate" challenge />`) and arrive marked "Challenge inquiry".

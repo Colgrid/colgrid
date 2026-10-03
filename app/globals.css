@@ -2910,7 +2910,7 @@ button.button {
   color: var(--chapter-teal);
 }
 .mission__text {
-  margin: 8px 0 12px;
+  margin: 8px 0 0;
   font-family: var(--font-display);
   font-size: 19px;
   font-weight: 600;
@@ -2965,6 +2965,26 @@ button.button {
   padding: 18px;
   border-radius: var(--radius-card);
   border: 1px solid #2c3136;
+}
+.card__art {
+  position: relative;
+  overflow: hidden;
+}
+.card__art img {
+  object-fit: cover;
+  z-index: 0;
+}
+.card__art:has(img)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17, 19, 21, 0.88), rgba(17, 19, 21, 0.1) 65%);
+  z-index: 1;
+}
+.card__art > span,
+.card__art > p {
+  position: relative;
+  z-index: 2;
 }
 .card__art .mission__text {
   margin-bottom: 0;

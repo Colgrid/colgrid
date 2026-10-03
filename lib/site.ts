@@ -4,12 +4,12 @@ export const SITE = {
   name: "Colgrid",
   url: "https://getcolgrid.com", // the public site: home, companies, businesses, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
-  tagline: "Turn a community problem into a game people show up for.",
-  title: "Colgrid: community challenges people show up for, in Salt Lake City",
+  tagline: "Your community has a problem. People want to help.",
+  title: "Colgrid: community challenges in Salt Lake City",
   description:
-    "Colgrid turns a community problem into a real-world team game. A community organization brings the challenge, neighbors show up to play, and the work gets done. We design it, run the day and report what happened.",
+    "Colgrid turns a real community problem into a challenge neighbors can show up for. A community organization brings the problem, people who live nearby come out and do the work together, and we report what changed.",
   shortDescription:
-    "Real-world team challenges for community change in Salt Lake City. Community organizations bring the problem. Neighbors do the work. Results reported.",
+    "Community challenges in Salt Lake City. Community organizations bring the problem. Neighbors show up and do the work. Results reported.",
   locale: "en_US",
   city: "Salt Lake City",
   region: "UT",
@@ -48,22 +48,26 @@ export const CHALLENGE = {
   plans: [
     { name: "Pilot", price: "$1,500", note: "One challenge day. One-page report." },
     { name: "Standard", price: "$3,500", note: "Fully custom. More neighbors. Detailed report." },
-    { name: "Monthly", price: "$2,500/mo", note: "A challenge every month. Season standings." },
+    { name: "Monthly", price: "$2,500/mo", note: "A challenge every month. Quarterly report." },
   ],
-  // Example challenges shown as cards on the home page. The "picture" on each card is a sample mission.
+  // Photo of people helping, shown in the hero. Swap for a real photo from a challenge when there is one.
+  heroPhoto: "/home/game-night.jpg",
+  heroPhotoAlt: "A group of people laughing together around a table.",
+  // Example challenges shown as cards on the home page. Each card shows what people are asked to do.
+  // `photo` is a path under /public (e.g. "/home/creek.jpg"); leave it blank to show a colored tile.
   examples: [
-    { title: "Safer streets", who: "Neighborhood councils and schools", mission: "Walk the route kids take to school. Mark every crossing that feels unsafe.", tone: "teal" },
-    { title: "Clean the creek", who: "Parks and watershed groups", mission: "Fill one bag along the creek trail. Weigh it at the finish.", tone: "amber" },
-    { title: "Stock the pantry", who: "Food pantries", mission: "Your team has $20 and the pantry's short list. Bring back what's missing.", tone: "red" },
-    { title: "Know your neighbors", who: "Neighborhood councils", mission: "Find someone on your street you've never met. Learn one thing they'd change here.", tone: "amber" },
-    { title: "Keep it local", who: "Small-business districts", mission: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "red" },
-    { title: "Plant the block", who: "Tree and garden groups", mission: "Plant one tree with your team. Name it. Check on it in a month.", tone: "teal" },
+    { title: "Safer streets", who: "Neighborhood councils and schools", ask: "Walk the route kids take to school. Mark every crossing that feels unsafe.", tone: "teal", photo: "" },
+    { title: "Clean the creek", who: "Parks and watershed groups", ask: "Fill one bag along the creek trail. Weigh it at the finish.", tone: "amber", photo: "" },
+    { title: "Stock the pantry", who: "Food pantries", ask: "Your team has $20 and the pantry's short list. Bring back what's missing.", tone: "red", photo: "" },
+    { title: "Know your neighbors", who: "Neighborhood councils", ask: "Find someone on your street you've never met. Learn one thing they'd change here.", tone: "amber", photo: "" },
+    { title: "Keep it local", who: "Small-business districts", ask: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "red", photo: "" },
+    { title: "Plant the block", who: "Tree and garden groups", ask: "Plant one tree with your team. Name it. Check on it in a month.", tone: "teal", photo: "" },
   ],
   // The sample report on the home page (a "Safer streets" challenge). Illustrative numbers, labeled
   // "Sample" on the page. Replace with a real report after the first challenge.
   sample: {
     stats: [
-      { n: "64", label: "neighbors played" },
+      { n: "64", label: "neighbors showed up" },
       { n: "212", label: "crossings checked" },
       { n: "38", label: "flagged unsafe" },
       { n: "41", label: "first-time volunteers" },

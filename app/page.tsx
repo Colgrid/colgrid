@@ -7,8 +7,9 @@ import { CHALLENGE_FAQ } from "@/lib/faq";
 import { CHALLENGE, SITE } from "@/lib/site";
 
 // The home page is about grassroots community change (decided Oct 2, 2026): a community organization
-// brings a problem and pays, neighbors take part because they care. It shows instead
-// of tells: a mission card over a photo, a grid of example challenges, a sample report, three prices,
+// brings a problem and pays, neighbors take part because they care. This is not a game: no game,
+// mission, XP or player language here. It shows instead
+// of tells: what people are asked to do, over a photo of people, a grid of example challenges, a sample report, three prices,
 // a form. Keep words to a minimum; if something needs explaining, show it. Nights live on /nights.
 
 export const metadata: Metadata = {
@@ -72,18 +73,10 @@ export default function Home() {
           </a>
         </div>
         <div className="show-visual">
-          <Image
-            src="/home/game-night.jpg"
-            alt="A team of players laughing around a table covered in cards and score sheets."
-            width={1200}
-            height={700}
-            priority
-            sizes="(min-width: 860px) 480px, 100vw"
-          />
+          <Image src={CHALLENGE.heroPhoto} alt={CHALLENGE.heroPhotoAlt} width={1200} height={700} priority sizes="(min-width: 860px) 480px, 100vw" />
           <div className="mission">
-            <span className="mono mission__n">MISSION 01</span>
-            <p className="mission__text">{CHALLENGE.examples[0].mission}</p>
-            <span className="mission__xp">+50 XP</span>
+            <span className="mono mission__n">THE ASK</span>
+            <p className="mission__text">{CHALLENGE.examples[0].ask}</p>
           </div>
         </div>
       </section>
@@ -92,11 +85,12 @@ export default function Home() {
       <section className="home-section" aria-labelledby="challenges">
         <h2 id="challenges">Pick a challenge.</h2>
         <ul className="cards">
-          {CHALLENGE.examples.map((c, i) => (
+          {CHALLENGE.examples.map((c) => (
             <li key={c.title}>
               <div className={`card__art card__art--${c.tone}`}>
-                <span className="mono mission__n">MISSION {String(i + 1).padStart(2, "0")}</span>
-                <p className="mission__text">{c.mission}</p>
+                {c.photo && <Image src={c.photo} alt="" fill sizes="(min-width: 600px) 320px, 78vw" />}
+                <span className="mono mission__n">THE ASK</span>
+                <p className="mission__text">{c.ask}</p>
               </div>
               <h3 className="card__title">{c.title}</h3>
               <p className="card__meta">{c.who}</p>
