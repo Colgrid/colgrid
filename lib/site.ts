@@ -45,10 +45,36 @@ export const SITE = {
 // Prices follow business/ (challenge-model business plan). They are starting prices, still to be tested.
 export const CHALLENGE = {
   plans: [
-    { name: "Pilot", price: "$1,500", note: "One game day, up to 10 stops, a one-page report. For a first challenge." },
-    { name: "Standard", price: "$3,500", note: "Fully custom, more players, sponsor missions, a detailed report with player feedback." },
-    { name: "Monthly", price: "$2,500 a month", note: "A challenge every month, season standings, a quarterly report." },
+    { name: "Pilot", price: "$1,500", note: "One game day. Up to 10 stops. One-page report." },
+    { name: "Standard", price: "$3,500", note: "Fully custom. More players. Detailed report." },
+    { name: "Monthly", price: "$2,500/mo", note: "A challenge every month. Season standings." },
   ],
+  // Example challenges shown as cards on the home page. The "picture" on each card is a sample mission.
+  examples: [
+    { title: "Bring them back", who: "Business districts during road work", mission: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "amber" },
+    { title: "Fill the empty storefront", who: "Property owners", mission: "Stand in the empty shop on the corner. Vote: bakery, bike repair or bookstore?", tone: "teal" },
+    { title: "Welcome the new neighbors", who: "Apartment developers", mission: "Find the oldest shop on the block. Ask the owner what was here before.", tone: "red" },
+    { title: "Off-season rally", who: "Districts in the slow months", mission: "It's January. Find the warmest drink on the street. Photo or it didn't happen.", tone: "teal" },
+    { title: "Campus to city", who: "Universities", mission: "Leave campus. Find the record store. Ask for the staff pick.", tone: "red" },
+    { title: "Makers' gauntlet", who: "Local makers", mission: "Taste three hot sauces. Rank them. Tell the maker why.", tone: "amber" },
+  ],
+  // The sample report on the home page. Illustrative numbers, labeled "Sample" on the page.
+  // Replace with a real report after the first challenge.
+  sample: {
+    stats: [
+      { n: "64", label: "players" },
+      { n: "12", label: "shops visited" },
+      { n: "212", label: "visits" },
+      { n: "97", label: "first-time visits" },
+    ],
+    stops: [
+      { name: "Coffee shop", visits: 31 },
+      { name: "Bookstore", visits: 26 },
+      { name: "Bakery", visits: 24 },
+      { name: "Plant shop", visits: 17 },
+    ],
+    quote: "\u201cI've lived six blocks away for three years and never walked in here.\u201d",
+  },
 } as const;
 
 // The next hosted night, shown on the nights page (/nights). Change it here and the page follows.
