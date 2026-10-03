@@ -3,20 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import LeadForm from "@/app/components/LeadForm";
 import LegalFooter from "@/app/components/LegalFooter";
-import { CHALLENGE_FAQ } from "@/lib/faq";
+import OutcomeReport from "@/app/components/OutcomeReport";
 import { CHALLENGE, SITE } from "@/lib/site";
 
-// The home page is about grassroots community change (decided Oct 2, 2026): a community organization
-// brings a problem and pays, neighbors take part because they care. This is not a game: no game,
-// mission, XP or player language here. It shows instead
-// of tells: what people are asked to do, over a photo of people, a grid of example challenges, a sample report, three prices,
-// a form. Keep words to a minimum; if something needs explaining, show it. Nights live on /nights.
+// The home page follows the Oct 2, 2026 blueprint: lead generation for organizations that fund a
+// challenge, with a second path for residents. Hero, core model, organizations vs. residents,
+// what we solve, outcome report, lead form. Not a game: no game, mission, XP or player language.
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
-
-const maxVisits = Math.max(...CHALLENGE.sample.stops.map((s) => s.visits));
 
 // Structured data (schema.org) so search engines and AI assistants can read the facts directly.
 const jsonLd = {
@@ -41,15 +37,6 @@ const jsonLd = {
       publisher: { "@id": `${SITE.url}/#organization` },
       inLanguage: "en-US",
     },
-    {
-      "@type": "FAQPage",
-      "@id": `${SITE.url}/#faq`,
-      mainEntity: CHALLENGE_FAQ.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    },
   ],
 };
 
@@ -63,14 +50,22 @@ export default function Home() {
         <Image src="/brand/colgrid-logo.png" alt="Colgrid" width={48} height={48} priority style={{ transform: "scale(1.7)" }} />
       </span>
 
-      {/* 1. Hero: the headline, and a picture of the product at work */}
+      {/* A. Hero */}
       <section className="show-hero">
         <div>
           <h1>{SITE.tagline}</h1>
-          <p className="home-lede">Community organizations bring the challenge. Neighbors do the work.</p>
-          <a href="#talk" className="button button--primary home-cta">
-            Start a conversation
-          </a>
+          <p className="home-lede">
+            Colgrid organizes everyday citizens to solve urgent local challenges, delivering measurable field impact for the organizations funding
+            real change.
+          </p>
+          <div className="show-ctas">
+            <a href="#commission" className="button button--primary">
+              Commission a challenge
+            </a>
+            <a href={`${SITE.appUrl}/signin`} className="button button--secondary">
+              Take action in your area
+            </a>
+          </div>
         </div>
         <div className="show-visual">
           <Image src={CHALLENGE.heroPhoto} alt={CHALLENGE.heroPhotoAlt} width={1200} height={700} priority sizes="(min-width: 860px) 480px, 100vw" />
@@ -81,10 +76,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. Example challenges, as cards */}
-      <section className="home-section" aria-labelledby="challenges">
-        <h2 id="challenges">Pick a challenge.</h2>
-        <ul className="cards">
+      {/* B. Core model */}
+      <section className="home-section" aria-labelledby="model">
+        <h2 id="model">Mobilizing communities to solve real social problems</h2>
+        <p className="show-wide">
+          When local organizations need real-world results, whether auditing street safety, logging environmental damage or driving foot traffic back
+          into hard-hit neighborhoods, posting ads or begging for volunteers isn&apos;t enough. Colgrid provides paid, structured field operations.
+          Organizations fund the initiative to get real results. Neighbors step up to take direct action where they live.
+        </p>
+      </section>
+
+      {/* C. Organizations and residents */}
+      <section className="audience" aria-label="Who Colgrid is for">
+        <div>
+          <p className="audience__who">For organizations and decision-makers</p>
+          <h2>Fund verified, on-the-ground action</h2>
+          <ul>
+            <li>
+              <strong>Grassroots execution at scale</strong>
+              Hire Colgrid to deploy local residents directly to the problem area to execute targeted field tasks.
+            </li>
+            <li>
+              <strong>Hard data and proof of impact</strong>
+              Receive an Outcome Report showing GPS check-ins, audited sites, crowd feedback and verified completed actions.
+            </li>
+          </ul>
+          <a href="#commission" className="button button--primary">
+            Request an action plan
+          </a>
+        </div>
+        <div>
+          <p className="audience__who">For local residents</p>
+          <h2>Become a force for grassroots change</h2>
+          <ul>
+            <li>
+              <strong>Direct local impact</strong>
+              Skip the endless committee meetings. Get out in your neighborhood and do the hands-on work that drives real policy and community fixes.
+            </li>
+            <li>
+              <strong>Power in numbers</strong>
+              Join structured, team-based mobilizations, from mapping unsafe intersections to supporting local resilience hubs, and hold leaders
+              accountable with real evidence.
+            </li>
+          </ul>
+          <a href={`${SITE.appUrl}/signin`} className="button button--secondary">
+            Join the next deployment
+          </a>
+        </div>
+      </section>
+
+      {/* D. What we solve */}
+      <section className="home-section" aria-labelledby="solve">
+        <h2 id="solve">What we solve</h2>
+        <ul className="cards cards--two">
           {CHALLENGE.examples.map((c) => (
             <li key={c.title}>
               <div className={`card__art card__art--${c.tone}`}>
@@ -93,80 +137,32 @@ export default function Home() {
                 <p className="mission__text">{c.ask}</p>
               </div>
               <h3 className="card__title">{c.title}</h3>
-              <p className="card__meta">{c.who}</p>
-              <p className="card__price">
-                From <strong>{CHALLENGE.plans[0].price}</strong>
-              </p>
+              <p className="card__body">{c.body}</p>
             </li>
           ))}
         </ul>
       </section>
 
-      {/* 3. The report, shown */}
-      <section className="home-section" aria-labelledby="report">
-        <h2 id="report">See what changed.</h2>
-        <div className="report">
-          <div className="report__head">
-            <span>Challenge report</span>
-            <span className="report__tag">Sample</span>
-          </div>
-          <dl className="report__stats">
-            {CHALLENGE.sample.stats.map((s) => (
-              <div key={s.label}>
-                <dt>{s.label}</dt>
-                <dd>{s.n}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="report__sub">{CHALLENGE.sample.barsLabel}</p>
-          <ul className="report__bars" aria-label={CHALLENGE.sample.barsLabel}>
-            {CHALLENGE.sample.stops.map((s) => (
-              <li key={s.name}>
-                <span>{s.name}</span>
-                <span>
-                  <i style={{ width: `${Math.round((s.visits / maxVisits) * 100)}%` }} />
-                </span>
-                <span>{s.visits}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="report__quote">{CHALLENGE.sample.quote}</p>
-        </div>
+      {/* E. Outcome and proof */}
+      <section className="home-section" aria-labelledby="proof">
+        <h2 id="proof">From field action to real policy and results</h2>
+        <p className="show-wide">
+          Every funded challenge produces verified field data, completed objectives and an official Outcome Report that organizations use to prove
+          impact to boards, grantors and city officials.
+        </p>
+        <OutcomeReport />
+        <Link href="/how-it-works" className="home-quiet">
+          How it works →
+        </Link>
       </section>
 
-      {/* 4. Prices */}
-      <section className="home-section" aria-labelledby="prices">
-        <h2 id="prices">Three ways to start.</h2>
-        <ul className="plans">
-          {CHALLENGE.plans.map((p) => (
-            <li key={p.name}>
-              <strong>{p.name}</strong>
-              <span className="mono">{p.price}</span>
-              <small>{p.note}</small>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* 5. Start */}
-      <section className="home-section show-form" aria-labelledby="talk">
-        <h2 id="talk">Bring us a problem.</h2>
+      {/* F. Lead form */}
+      <section className="home-section show-form" aria-labelledby="commission">
+        <h2 id="commission">Commission a challenge</h2>
+        <p>Thirty seconds. We reply within two days to set up a 20-minute strategy call.</p>
         <LeadForm kind="corporate" challenge />
-      </section>
-
-      {/* 6. Questions, collapsed */}
-      <section className="home-section show-form" aria-labelledby="faq">
-        <h2 id="faq">Questions</h2>
-        <div className="faq">
-          {CHALLENGE_FAQ.map((f) => (
-            <details key={f.q}>
-              <summary>{f.q}</summary>
-              <p>{f.a}</p>
-            </details>
-          ))}
-        </div>
-        <Link href="/nights" className="home-quiet">
-          Looking for the singles night? →
+        <Link href="/pricing" className="home-quiet">
+          See pricing →
         </Link>
       </section>
 

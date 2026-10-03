@@ -3160,3 +3160,68 @@ button.button {
     scroll-snap-align: start;
   }
 }
+
+/* Blueprint pages (Oct 2, 2026): hero button row, organizations vs. residents columns, card body text. */
+.show-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.show-ctas .button {
+  margin-top: 0;
+}
+.audience {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 104px;
+}
+.audience > div {
+  padding: 28px 24px;
+  border: 1px solid #2c3136;
+  border-radius: var(--radius-card);
+  background: var(--asphalt-raised);
+}
+.audience h2 {
+  font-size: clamp(24px, 5vw, 30px);
+  line-height: 1.1;
+}
+.audience__who {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: var(--ink-subtle);
+}
+.audience ul {
+  margin: 18px 0 24px;
+  padding: 0;
+  list-style: none;
+}
+.audience li {
+  padding: 12px 0;
+  border-top: 1px solid #2c3136;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.audience li strong {
+  display: block;
+  color: var(--concrete);
+}
+.card__body {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.home-section > p.show-wide {
+  max-width: 62ch;
+}
+@media (min-width: 601px) {
+  .cards--two {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cards--two .card__art {
+    aspect-ratio: 16 / 9;
+  }
+}

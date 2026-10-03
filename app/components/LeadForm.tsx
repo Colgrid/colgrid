@@ -30,7 +30,16 @@ export default function LeadForm({ kind, challenge = false }: { kind: "corporate
         </label>
       )}
       {contact ? null : challenge ? (
-        <input type="hidden" name="preferred_dates" value="Challenge inquiry (home page)" />
+        <>
+          <label>
+            Neighborhood or location
+            <input name="location" maxLength={160} placeholder="e.g. Sugar House" />
+          </label>
+          <label>
+            Target timeline
+            <input name="preferred_dates" maxLength={200} placeholder="e.g. this spring" />
+          </label>
+        </>
       ) : corporate ? (
         <>
           <label>
@@ -49,13 +58,13 @@ export default function LeadForm({ kind, challenge = false }: { kind: "corporate
         </label>
       )}
       <label>
-        {contact ? "Your message" : challenge ? "What problem do you want your community to take on?" : corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
+        {contact ? "Your message" : challenge ? "Primary objective" : corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
         <textarea
           name="message"
           rows={contact ? 5 : 3}
           maxLength={2000}
-          required={contact}
-          placeholder={contact ? "Questions about playing, accessibility, press…" : challenge ? "e.g. get neighbors out to clean up the creek" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
+          required={contact || challenge}
+          placeholder={contact ? "Questions about playing, accessibility, press…" : challenge ? "e.g. audit every crosswalk within a mile of the school" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
         />
       </label>
       {turnstileSiteKey && (
@@ -65,7 +74,7 @@ export default function LeadForm({ kind, challenge = false }: { kind: "corporate
         </>
       )}
       <button type="submit" className="button button--primary">
-        {contact ? "Send" : challenge ? "Start a conversation" : corporate ? "Get a quote" : "Get in touch"}
+        {contact ? "Send" : challenge ? "Commission a challenge" : corporate ? "Get a quote" : "Get in touch"}
       </button>
     </form>
   );

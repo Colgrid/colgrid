@@ -29,11 +29,11 @@ export const FULL_FAQ: Faq[] = [
   },
 ];
 
-// Questions on the home page (challenges for organizations, Oct 2, 2026).
+// Questions on /how-it-works (blueprint of Oct 2, 2026).
 export const CHALLENGE_FAQ: Faq[] = [
-  { q: "Who takes part?", a: "People who live nearby and want to help. We recruit them and put them in teams. You don't need to bring a crowd." },
-  { q: "Who pays?", a: "The community organization that owns the problem. Taking part is free or low-cost for neighbors." },
-  { q: "What do we get at the end?", a: "A report: how many people took part, what they did, what they found and what they told us." },
-  { q: "What kinds of problems work?", a: "Problems that get better when a lot of people each do something small: clean, count, map, plant, collect, visit, meet. If we can't measure it, we'll say so before you pay." },
-  { q: "How long does it take to set up?", a: "About four weeks from a first call to challenge day." },
+  { q: "Who takes part?", a: "Everyday residents who live nearby and want to take direct action. We recruit them through flyers, social media and local outreach. You don't need to bring a crowd." },
+  { q: "Who pays?", a: "The organization that commissions the challenge. Residents take part for free." },
+  { q: "What is in the Outcome Report?", a: "Verified field data: check-ins, sites audited, completed actions and what participants told us. Organizations use it to prove impact to boards, grantors and city officials." },
+  { q: "What kinds of problems work?", a: "Problems that need many people each doing a small, physical task: inspect, count, map, collect, visit. If we can't measure it, we'll say so before you pay." },
+  { q: "How do we pay?", a: "50% deposit at signing. The other 50% is due within 15 days of your Outcome Report." },
 ];
