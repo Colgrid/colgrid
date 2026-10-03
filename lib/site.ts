@@ -4,12 +4,12 @@ export const SITE = {
   name: "Colgrid",
   url: "https://getcolgrid.com", // the public site: home, companies, businesses, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
-  tagline: "Your community has a problem. People want to help.",
+  tagline: "Real community problems need boots on the ground. We bring the crowd.",
   title: "Colgrid: community challenges in Salt Lake City",
   description:
-    "Colgrid turns a real community problem into a challenge neighbors can show up for. A community organization brings the problem, people who live nearby come out and do the work together, and we report what changed.",
+    "Colgrid organizes everyday citizens to solve urgent local challenges, delivering measurable field impact for the organizations funding real change. Organizations fund the work. Neighbors take direct action where they live.",
   shortDescription:
-    "Community challenges in Salt Lake City. Community organizations bring the problem. Neighbors show up and do the work. Results reported.",
+    "Paid civic action and crowdsourced field operations in Salt Lake City. Organizations fund the challenge. Neighbors do the work. Results verified.",
   locale: "en_US",
   city: "Salt Lake City",
   region: "UT",
@@ -27,6 +27,9 @@ export const SITE = {
   // Cloudflare Turnstile site key (public by design). The secret goes in Vercel as TURNSTILE_SECRET_KEY.
   // Blank = the forms work without the check (the hidden honeypot field still stops simple bots).
   turnstileSiteKey: "",
+  // Booking link (Cal.com or Calendly) for the 20-minute strategy call. Blank = no scheduler shown;
+  // the lead form still works and Matt replies by email. Paste the link here when the calendar exists.
+  schedulerUrl: "",
   // The tournament (team rankings, standings, Chapter Finals) is paused: Colgrid is about the
   // experience first (decided Sept 30, 2026). While false, players never see standings or the
   // tournament switch. The rules and database stay in place for when it comes back.
@@ -41,34 +44,34 @@ export const SITE = {
   ],
 } as const;
 
-// What the public site sells (decided Oct 2, 2026): community challenges. A community organization pays,
-// neighbors take part because they want to help change something where they live (creating shared value).
-// Prices follow business/ (challenge-model business plan). They are starting prices, still to be tested.
+// What the public site sells (blueprint of Oct 2, 2026): paid civic action and crowdsourced field
+// operations. Organizations (business districts, city groups, nonprofits, developers) pay Colgrid as a
+// contractor to mobilize everyday citizens, coordinate the field work and deliver verified impact.
+// Prices are starting prices, still to be tested.
 export const CHALLENGE = {
   plans: [
-    { name: "Pilot", price: "$1,500", note: "One challenge day. One-page report." },
-    { name: "Standard", price: "$3,500", note: "Fully custom. More neighbors. Detailed report." },
-    { name: "Monthly", price: "$2,500/mo", note: "A challenge every month. Quarterly report." },
+    { name: "Pilot Challenge", price: "$1,500", note: "One challenge day. One-page Outcome Report." },
+    { name: "Standard Challenge", price: "$3,500", note: "Fully custom. More participants. Detailed Outcome Report." },
+    { name: "Campaign Contract", price: "$2,500/mo", note: "A challenge every month. Quarterly Outcome Report." },
   ],
-  // Photo of people helping, shown in the hero. Swap for a real photo from a challenge when there is one.
+  terms: "50% deposit at signing. 50% due within 15 days of your Outcome Report.",
+  // Photo of people, shown in the hero. Swap for a real photo from a challenge when there is one.
   heroPhoto: "/home/game-night.jpg",
   heroPhotoAlt: "A group of people laughing together around a table.",
-  // Example challenges shown as cards on the home page. Each card shows what people are asked to do.
+  // "What we solve" cards on the home page. `ask` is what participants are asked to do.
   // `photo` is a path under /public (e.g. "/home/creek.jpg"); leave it blank to show a colored tile.
   examples: [
-    { title: "Safer streets", who: "Neighborhood councils and schools", ask: "Walk the route kids take to school. Mark every crossing that feels unsafe.", tone: "teal", photo: "" },
-    { title: "Clean the creek", who: "Parks and watershed groups", ask: "Fill one bag along the creek trail. Weigh it at the finish.", tone: "amber", photo: "" },
-    { title: "Stock the pantry", who: "Food pantries", ask: "Your team has $20 and the pantry's short list. Bring back what's missing.", tone: "red", photo: "" },
-    { title: "Know your neighbors", who: "Neighborhood councils", ask: "Find someone on your street you've never met. Learn one thing they'd change here.", tone: "amber", photo: "" },
-    { title: "Keep it local", who: "Small-business districts", ask: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "red", photo: "" },
-    { title: "Plant the block", who: "Tree and garden groups", ask: "Plant one tree with your team. Name it. Check on it in a month.", tone: "teal", photo: "" },
+    { title: "Vision safety audits", body: "Citizens systematically inspect crosswalks, lighting and speed zones to force city infrastructure improvements.", ask: "Walk the route kids take to school. Log every crossing that feels unsafe.", tone: "teal", photo: "" },
+    { title: "Environmental field logging", body: "Crowd teams map trail erosion, creek pollution or urban heat zones to direct remediation funding.", ask: "Walk the creek trail. Photograph and pin every spot that needs repair.", tone: "amber", photo: "" },
+    { title: "Food security and pantry drives", body: "Rapid-response citizen teams collect and route essential goods to local distribution points.", ask: "Your team has the pantry's short list. Collect what's missing and deliver it.", tone: "red", photo: "" },
+    { title: "District economic revitalization", body: "Organized local actions that direct foot traffic back into small business corridors facing construction or economic disruption.", ask: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "amber", photo: "" },
   ],
-  // The sample report on the home page (a "Safer streets" challenge). Illustrative numbers, labeled
-  // "Sample" on the page. Replace with a real report after the first challenge.
+  // The sample report on the home page (a safety audit). Illustrative numbers, labeled "Sample" on the
+  // page. Replace with a real report after the first challenge.
   sample: {
     stats: [
-      { n: "64", label: "neighbors showed up" },
-      { n: "212", label: "crossings checked" },
+      { n: "64", label: "residents took part" },
+      { n: "212", label: "crossings audited" },
       { n: "38", label: "flagged unsafe" },
       { n: "41", label: "first-time volunteers" },
     ],
