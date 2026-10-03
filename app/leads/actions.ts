@@ -30,6 +30,9 @@ export async function submitLead(form: FormData) {
     dates: field(form, "preferred_dates", 200),
     message: field(form, "message", 2000),
   };
+  // The challenge form (home page) also asks where. There is no column for it, so it rides in the message.
+  const location = field(form, "location", 160);
+  if (location) lead.message = `Challenge inquiry. Location: ${location}\n\n${lead.message ?? ""}`.slice(0, 2000);
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("submit_lead", {
     p_kind: kind,

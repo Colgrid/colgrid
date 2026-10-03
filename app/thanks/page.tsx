@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Thanks", robots: { index: false, follow: false } };
 
@@ -20,7 +21,7 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
                 : "Lots of sign-ups at once. Give it a few minutes. "}
             Or try the <Link href="/contact">contact form</Link> in a bit.
           </p>
-          <Link href={contact ? "/contact" : host ? "/business" : "/companies"} className="button button--primary" style={{ marginTop: 24 }}>
+          <Link href={contact ? "/contact" : host ? "/business" : "/#commission"} className="button button--primary" style={{ marginTop: 24 }}>
             Try again
           </Link>
         </>
@@ -34,6 +35,11 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
           ? "We'll be in touch within two days to talk about your stop. Teams are going to love finding you."
           : "We'll be in touch within two days to talk it through."}
       </p>
+      {!contact && !host && SITE.schedulerUrl && (
+        <a href={SITE.schedulerUrl} className="button button--primary" style={{ marginTop: 24 }} rel="noopener" target="_blank">
+          Pick a time for a 20-minute call
+        </a>
+      )}
       </>
       )}
       <Link href="/" className="button button--secondary" style={{ marginTop: 24 }}>

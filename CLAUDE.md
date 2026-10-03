@@ -32,10 +32,12 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 
 ## Current focus (Oct 2, 2026)
 
-- **The public home page is about grassroots community change (creating shared value).** A community organization pays Colgrid to turn a community problem into a real-world team challenge; neighbors take part because they want to help change something where they live; Colgrid designs it, runs the day and delivers an outcome report. Example challenges and the sample report live in `CHALLENGE` in `lib/site.ts`. Prices live in `CHALLENGE` in `lib/site.ts` (pilot $1,500, standard $3,500, monthly $2,500) and are still to be tested. Business plan: `business/`.
-- **It is not a game.** On the public home page, don't say game, mission, quest, XP, players or play. Say challenge, the ask, neighbors, showed up, helped. (Player screens on colgrid.app keep their game language.)
-- **Use photos of real people helping.** The hero photo and each example card take a photo (`heroPhoto` and `photo` in `CHALLENGE`); cards without one show a colored tile.
-- **The customer is the community organization; the participants are neighbors.** The home page shows instead of tells (mission cards, a sample report, prices) and keeps words to a minimum.
+- **The public site follows the Oct 2 blueprint: paid civic action and crowdsourced field operations.** Organizations (business districts, city groups, nonprofits, developers) pay Colgrid as a contractor to mobilize everyday citizens, coordinate field work and deliver verified impact. Citizens take part for free. Copy, examples, the sample report, prices and payment terms live in `CHALLENGE` in `lib/site.ts`.
+- **Pages:** `/` (hero, core model, organizations vs. residents, what we solve, outcome report, lead form), `/how-it-works`, `/pricing`, `/contact`.
+- **Words:** challenge, field operation, residents, citizens, Outcome Report, verified. It is not a game: on the public site don't say game, mission, quest, XP, players or play. (Player screens on colgrid.app keep their game language.)
+- **Lead intake:** the home-page form asks name, email, organization, location, primary objective and target timeline, and is stored as a corporate lead whose message starts "Challenge inquiry". When `SITE.schedulerUrl` is set, the thanks page offers the 20-minute call.
+- **Still never show an email address on the site** (the blueprint asked for one; the contact form stays instead until Matt decides).
+- **Use photos of real people.** The hero and each "what we solve" card take a photo (`heroPhoto`, `photo`); cards without one show a colored tile.
 - **Hosted nights moved to `/nights`** (linked in the footer), unchanged. Open Play stays on colgrid.app, not promoted.
 - Home-page inquiries use the corporate lead form (`<LeadForm kind="corporate" challenge />`) and arrive marked "Challenge inquiry".
 
