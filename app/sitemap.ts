@@ -5,6 +5,7 @@ import { SITE } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     { path: "", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/nights", priority: 0.7, changeFrequency: "weekly" as const },
     { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/companies", priority: 0.6, changeFrequency: "monthly" as const },
     { path: "/business", priority: 0.6, changeFrequency: "monthly" as const },

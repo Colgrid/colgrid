@@ -2868,3 +2868,295 @@ button.button {
 .play .form .label {
   margin-top: 0;
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Home, show-don't-tell version (Oct 2, 2026): pictures of the product instead of paragraphs.
+   A mission card, a grid of example challenges, a sample report, three prices.
+   --------------------------------------------------------------------------------------------- */
+.page.home.home--wide {
+  max-width: 1040px;
+}
+.show-hero {
+  display: grid;
+  gap: 40px;
+  margin-top: 48px;
+  align-items: center;
+}
+.show-hero h1 {
+  font-size: clamp(40px, 9vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.show-visual {
+  position: relative;
+  padding-bottom: 56px;
+}
+.show-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-card);
+}
+.mission {
+  background: var(--asphalt-raised);
+  border: 1px solid #343a40;
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+.mission__n {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--chapter-teal);
+}
+.mission__text {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--concrete);
+}
+.mission__xp {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--beacon-amber);
+  color: var(--asphalt);
+  font-size: 12px;
+  font-weight: 700;
+}
+.show-visual .mission {
+  position: absolute;
+  left: 16px;
+  bottom: 0;
+  width: min(300px, 78%);
+}
+.show-visual__stat {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--concrete);
+  color: var(--asphalt);
+  font-size: 13px;
+  line-height: 1.3;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+.show-visual__stat strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 24px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px 24px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.card__art {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 4 / 3;
+  padding: 18px;
+  border-radius: var(--radius-card);
+  border: 1px solid #2c3136;
+}
+.card__art {
+  position: relative;
+  overflow: hidden;
+}
+.card__art img {
+  object-fit: cover;
+  z-index: 0;
+}
+.card__art:has(img)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17, 19, 21, 0.88), rgba(17, 19, 21, 0.1) 65%);
+  z-index: 1;
+}
+.card__art > span,
+.card__art > p {
+  position: relative;
+  z-index: 2;
+}
+.card__art .mission__text {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+.card__art--teal {
+  background: linear-gradient(160deg, rgba(46, 196, 182, 0.38), rgba(46, 196, 182, 0.06) 70%), var(--asphalt-raised);
+}
+.card__art--amber {
+  background: linear-gradient(160deg, rgba(255, 159, 28, 0.36), rgba(255, 159, 28, 0.05) 70%), var(--asphalt-raised);
+}
+.card__art--red {
+  background: linear-gradient(160deg, rgba(231, 29, 54, 0.34), rgba(231, 29, 54, 0.05) 70%), var(--asphalt-raised);
+}
+.card__art--amber .mission__n {
+  color: var(--beacon-amber);
+}
+.card__art--red .mission__n {
+  color: var(--signal-red-text);
+}
+.card__title {
+  margin: 14px 0 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.card__meta {
+  margin: 2px 0 0;
+  font-size: 15px;
+  color: var(--ink-subtle);
+}
+.card__price {
+  margin: 6px 0 0;
+  font-size: 15px;
+  color: var(--ink-muted);
+}
+.card__price strong {
+  color: var(--concrete);
+}
+.report {
+  margin-top: 32px;
+  padding: 28px 24px;
+  border-radius: var(--radius-card);
+  background: var(--concrete);
+  color: var(--asphalt);
+}
+.report__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 15px;
+  font-weight: 700;
+}
+.report__tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--asphalt);
+  color: var(--concrete);
+  font-size: 12px;
+  font-weight: 600;
+}
+.report__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 24px 16px;
+  margin: 24px 0 0;
+}
+.report__stats dt {
+  font-size: 14px;
+  color: #5b6168;
+}
+.report__stats dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(34px, 7vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+}
+.report__stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.report__sub {
+  margin: 28px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+.report__bars {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+.report__bars li {
+  display: grid;
+  grid-template-columns: 120px 1fr 32px;
+  gap: 12px;
+  align-items: center;
+  padding: 5px 0;
+}
+.report__bars i {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--chapter-teal);
+}
+.report__bars span:last-child {
+  font-family: var(--font-mono);
+  text-align: right;
+}
+.report__quote {
+  margin: 24px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid #d9dce0;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.plans li {
+  padding: 22px 20px;
+  border: 1px solid #2c3136;
+  border-radius: var(--radius-card);
+  background: var(--asphalt-raised);
+}
+.plans strong {
+  display: block;
+  font-size: 15px;
+  color: var(--ink-muted);
+}
+.plans .mono {
+  display: block;
+  margin: 6px 0 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--beacon-amber);
+}
+.plans small {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-muted);
+}
+.show-form {
+  max-width: 560px;
+}
+@media (min-width: 860px) {
+  .show-hero {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-top: 72px;
+  }
+}
+/* On phones the example cards scroll sideways, like a row of listings. */
+@media (max-width: 600px) {
+  .cards {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-right: -20px;
+    padding: 0 20px 8px 0;
+  }
+  .cards li {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+}

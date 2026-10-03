@@ -28,3 +28,12 @@ export const FULL_FAQ: Faq[] = [
     a: "Yes. Private runs start at $2,500 for up to 20 players, plus $95 per extra player. See the Companies page to get a quote.",
   },
 ];
+
+// Questions on the home page (challenges for organizations, Oct 2, 2026).
+export const CHALLENGE_FAQ: Faq[] = [
+  { q: "Who takes part?", a: "People who live nearby and want to help. We recruit them and put them in teams. You don't need to bring a crowd." },
+  { q: "Who pays?", a: "The community organization that owns the problem. Taking part is free or low-cost for neighbors." },
+  { q: "What do we get at the end?", a: "A report: how many people took part, what they did, what they found and what they told us." },
+  { q: "What kinds of problems work?", a: "Problems that get better when a lot of people each do something small: clean, count, map, plant, collect, visit, meet. If we can't measure it, we'll say so before you pay." },
+  { q: "How long does it take to set up?", a: "About four weeks from a first call to challenge day." },
+];

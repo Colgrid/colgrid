@@ -4,12 +4,12 @@ export const SITE = {
   name: "Colgrid",
   url: "https://getcolgrid.com", // the public site: home, companies, businesses, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
-  tagline: "Come alone. Leave knowing people.",
-  title: "Colgrid: hosted nights for meeting new people in Salt Lake City",
+  tagline: "Your community has a problem. People want to help.",
+  title: "Colgrid: community challenges in Salt Lake City",
   description:
-    "Colgrid runs hosted social nights in Salt Lake City. We mix you into small teams and give you something to do together, so you meet new people without the awkward part. Come alone or bring a friend.",
+    "Colgrid turns a real community problem into a challenge neighbors can show up for. A community organization brings the problem, people who live nearby come out and do the work together, and we report what changed.",
   shortDescription:
-    "Hosted social nights in Salt Lake City. Small teams, quick games, new people. Come alone or bring a friend.",
+    "Community challenges in Salt Lake City. Community organizations bring the problem. Neighbors show up and do the work. Results reported.",
   locale: "en_US",
   city: "Salt Lake City",
   region: "UT",
@@ -41,7 +41,49 @@ export const SITE = {
   ],
 } as const;
 
-// The next hosted night, shown on the home page. Change it here and the page follows.
+// What the public site sells (decided Oct 2, 2026): community challenges. A community organization pays,
+// neighbors take part because they want to help change something where they live (creating shared value).
+// Prices follow business/ (challenge-model business plan). They are starting prices, still to be tested.
+export const CHALLENGE = {
+  plans: [
+    { name: "Pilot", price: "$1,500", note: "One challenge day. One-page report." },
+    { name: "Standard", price: "$3,500", note: "Fully custom. More neighbors. Detailed report." },
+    { name: "Monthly", price: "$2,500/mo", note: "A challenge every month. Quarterly report." },
+  ],
+  // Photo of people helping, shown in the hero. Swap for a real photo from a challenge when there is one.
+  heroPhoto: "/home/game-night.jpg",
+  heroPhotoAlt: "A group of people laughing together around a table.",
+  // Example challenges shown as cards on the home page. Each card shows what people are asked to do.
+  // `photo` is a path under /public (e.g. "/home/creek.jpg"); leave it blank to show a colored tile.
+  examples: [
+    { title: "Safer streets", who: "Neighborhood councils and schools", ask: "Walk the route kids take to school. Mark every crossing that feels unsafe.", tone: "teal", photo: "" },
+    { title: "Clean the creek", who: "Parks and watershed groups", ask: "Fill one bag along the creek trail. Weigh it at the finish.", tone: "amber", photo: "" },
+    { title: "Stock the pantry", who: "Food pantries", ask: "Your team has $20 and the pantry's short list. Bring back what's missing.", tone: "red", photo: "" },
+    { title: "Know your neighbors", who: "Neighborhood councils", ask: "Find someone on your street you've never met. Learn one thing they'd change here.", tone: "amber", photo: "" },
+    { title: "Keep it local", who: "Small-business districts", ask: "Three shops behind the orange cones. Buy one thing under $5 at each.", tone: "red", photo: "" },
+    { title: "Plant the block", who: "Tree and garden groups", ask: "Plant one tree with your team. Name it. Check on it in a month.", tone: "teal", photo: "" },
+  ],
+  // The sample report on the home page (a "Safer streets" challenge). Illustrative numbers, labeled
+  // "Sample" on the page. Replace with a real report after the first challenge.
+  sample: {
+    stats: [
+      { n: "64", label: "neighbors showed up" },
+      { n: "212", label: "crossings checked" },
+      { n: "38", label: "flagged unsafe" },
+      { n: "41", label: "first-time volunteers" },
+    ],
+    stops: [
+      { name: "By the school", visits: 14 },
+      { name: "By the park", visits: 11 },
+      { name: "Bus stop", visits: 8 },
+      { name: "Main street", visits: 5 },
+    ],
+    barsLabel: "Unsafe crossings flagged, by area",
+    quote: "\u201cThree years here and this is the first thing I've done with my neighbors.\u201d",
+  },
+} as const;
+
+// The next hosted night, shown on the nights page (/nights). Change it here and the page follows.
 // Tickets are sold on Eventbrite (no checkout on this site).
 export const NIGHT = {
   name: "Game Night for Singles",
