@@ -4,12 +4,12 @@ export const SITE = {
   name: "Colgrid",
   url: "https://getcolgrid.com", // the public site: home, companies, businesses, contact, legal
   appUrl: "https://colgrid.app", // the player app: sign-in, pass, quests, check-in, XP (and crew tools)
-  tagline: "Come alone. Leave knowing people.",
-  title: "Colgrid: hosted nights for meeting new people in Salt Lake City",
+  tagline: "Turn your goal into a game people show up for.",
+  title: "Colgrid: real-world challenges that get people to show up, in Salt Lake City",
   description:
-    "Colgrid runs hosted social nights in Salt Lake City. We mix you into small teams and give you something to do together, so you meet new people without the awkward part. Come alone or bring a friend.",
+    "Colgrid turns an organization's goal into a real-world team game. We design the challenge, bring the players, run the day and report what happened: who came, where they went and what they said.",
   shortDescription:
-    "Hosted social nights in Salt Lake City. Small teams, quick games, new people. Come alone or bring a friend.",
+    "Real-world team challenges for business districts, developers and community organizations in Salt Lake City. Players included. Results reported.",
   locale: "en_US",
   city: "Salt Lake City",
   region: "UT",
@@ -41,7 +41,17 @@ export const SITE = {
   ],
 } as const;
 
-// The next hosted night, shown on the home page. Change it here and the page follows.
+// What the public site sells (decided Oct 2, 2026): challenges paid for by the organization with the goal.
+// Prices follow business/ (challenge-model business plan). They are starting prices, still to be tested.
+export const CHALLENGE = {
+  plans: [
+    { name: "Pilot", price: "$1,500", note: "One game day, up to 10 stops, a one-page report. For a first challenge." },
+    { name: "Standard", price: "$3,500", note: "Fully custom, more players, sponsor missions, a detailed report with player feedback." },
+    { name: "Monthly", price: "$2,500 a month", note: "A challenge every month, season standings, a quarterly report." },
+  ],
+} as const;
+
+// The next hosted night, shown on the nights page (/nights). Change it here and the page follows.
 // Tickets are sold on Eventbrite (no checkout on this site).
 export const NIGHT = {
   name: "Game Night for Singles",

@@ -30,7 +30,14 @@ If code and docs disagree, the docs win; ask before changing a rule. Match the m
 6. **Hidden stays hidden** until revealed (start location, hidden quests).
 7. Stay in MVP scope (`docs/mvp-spec.md`). No native app, no built-in checkout, no chat.
 
-## Current focus (Oct 1, 2026, evening)
+## Current focus (Oct 2, 2026)
+
+- **The public home page sells challenges to organizations.** A business district, developer or community organization pays Colgrid to turn its goal into a real-world team game; Colgrid designs it, brings the players, runs the day and delivers an outcome report. Prices live in `CHALLENGE` in `lib/site.ts` (pilot $1,500, standard $3,500, monthly $2,500) and are still to be tested. Business plan: `business/`.
+- **The customer is the organization, not the player.** The home page speaks to them in plain business language; the playful voice stays for player screens.
+- **Hosted nights moved to `/nights`** (linked in the footer), unchanged. Open Play stays on colgrid.app, not promoted.
+- Home-page inquiries use the corporate lead form (`<LeadForm kind="corporate" challenge />`) and arrive marked "Challenge inquiry".
+
+### Oct 1, 2026, evening (hosted nights; still true for `/nights`)
 
 - **Hosted social nights are what the public site sells.** Ticketed nights for meeting new people (first: Game Night for Singles, ages 21 to 35), sold on Eventbrite. The home page leads to the next night; its details live in `NIGHT` in `lib/site.ts`. This replaces the earlier "no Eventbrite, no ticketed events" rule for the public site.
 - **Still no built-in checkout** (rule 7): the site links out to Eventbrite.

@@ -32,7 +32,7 @@ export default async function Thanks({ searchParams }: { searchParams: Promise<{
           ? "Thanks for writing. We'll get back to you within two days."
           : host
           ? "We'll be in touch within two days to talk about your stop. Teams are going to love finding you."
-          : "We'll be in touch within two days with dates and a quote. Your team doesn't know what's coming."}
+          : "We'll be in touch within two days to talk it through."}
       </p>
       </>
       )}

@@ -1,27 +1,39 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import LeadForm from "@/app/components/LeadForm";
 import LegalFooter from "@/app/components/LegalFooter";
-import { HOME_FAQ } from "@/lib/faq";
-import { NIGHT, SITE } from "@/lib/site";
+import { CHALLENGE_FAQ } from "@/lib/faq";
+import { CHALLENGE, SITE } from "@/lib/site";
 
-// The home page has one job: get someone who has never heard of Colgrid to the next night.
-// What Colgrid is, the next night, how it goes, why it exists, questions. Tickets are sold on
-// Eventbrite (hosted social nights, decided Oct 1, 2026). The night's details live in lib/site.ts.
+// The home page speaks to the organization with a goal (decided Oct 2, 2026): what a challenge is,
+// how it works, what the report shows, what it costs, and a form to start a conversation.
+// Hosted nights for players live on /nights.
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
 const STEPS = [
-  { title: "Show up.", body: "Come on your own or bring a single friend." },
-  { title: "Get your team.", body: "Six people you haven't met yet." },
-  { title: "Play.", body: "Quick, easy games. Teams reshuffle twice, so you meet about 18 people." },
-  { title: "Stay.", body: "The music comes up, the bar's open, and the night is yours." },
+  { title: "Tell us the goal.", body: "More people in your shops, your district or your new project." },
+  { title: "We build the game.", body: "Team missions that can only be finished by doing the thing you need." },
+  { title: "We bring the players.", body: "People sign up because it's a good afternoon out." },
+  { title: "You get the proof.", body: "A report of what happened, within a week." },
 ];
 
-const ticketUrl = NIGHT.ticketUrl || NIGHT.organizerUrl;
-const where = NIGHT.venueConfirmed ? `${NIGHT.venue}, ${NIGHT.area}` : NIGHT.area;
+const REPORT = [
+  { label: "Players", body: "How many people played, and in how many teams." },
+  { label: "Places", body: "Which stops they visited, and how many times." },
+  { label: "First visits", body: "How many were there for the first time." },
+  { label: "Missions", body: "What they finished at each stop." },
+  { label: "Feedback", body: "What they told us, in their own words." },
+];
+
+const WHO = [
+  { title: "Business districts.", body: "Bring people back during road work, slow seasons or after a reopening." },
+  { title: "Developers and property owners.", body: "Help the neighborhood discover a new project, and help new residents feel at home." },
+  { title: "Community organizations.", body: "Get people to show up, take part and tell you what they think." },
+];
 
 // Structured data (schema.org) so search engines and AI assistants can read the facts directly.
 const jsonLd = {
@@ -49,7 +61,7 @@ const jsonLd = {
     {
       "@type": "FAQPage",
       "@id": `${SITE.url}/#faq`,
-      mainEntity: HOME_FAQ.map((f) => ({
+      mainEntity: CHALLENGE_FAQ.map((f) => ({
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -70,72 +82,18 @@ export default function Home() {
 
       {/* 1. Hero */}
       <section className="home-hero">
-        <h1>Come alone. Leave knowing people.</h1>
-        <p className="home-lede">Colgrid runs hosted nights in Salt Lake City that make meeting new people easy.</p>
-        <Image
-          src="/home/game-night.jpg"
-          alt="A group of friends laughing around a pub table covered in cards, score sheets and drinks."
-          width={1200}
-          height={700}
-          priority
-          sizes="(min-width: 680px) 640px, 100vw"
-          className="home-photo"
-        />
-        <p className="home-when">
-          <strong>{NIGHT.name}</strong>
-          <br />
-          {NIGHT.shortDate} · {NIGHT.time} · {NIGHT.area}
+        <h1>{SITE.tagline}</h1>
+        <p className="home-lede">
+          Colgrid builds real-world team challenges in Salt Lake City. We design it, bring the players and show you what happened.
         </p>
-        <a href={ticketUrl} className="button button--primary home-cta" rel="noopener" target="_blank">
-          Get tickets
+        <a href="#talk" className="button button--primary home-cta">
+          Start a conversation
         </a>
       </section>
 
-      {/* 2. The next night */}
-      <section className="home-section" aria-labelledby="next">
-        <h2 id="next">The next night</h2>
-        <p>
-          You&apos;re put on a team of six strangers for an hour of quick, silly games. Then the bar and the music take over. No apps. No awkward one-on-one interviews.
-        </p>
-        <dl className="home-facts">
-          <div>
-            <dt>When</dt>
-            <dd>
-              {NIGHT.date}, {NIGHT.time}
-              <small>{NIGHT.doors}</small>
-            </dd>
-          </div>
-          <div>
-            <dt>Where</dt>
-            <dd>
-              {where}
-              {NIGHT.venueConfirmed && <small>{NIGHT.venueAddress}</small>}
-            </dd>
-          </div>
-          <div>
-            <dt>Who</dt>
-            <dd>
-              {NIGHT.ages}
-              <small>21 and over. Bring your ID.</small>
-            </dd>
-          </div>
-          <div>
-            <dt>Tickets</dt>
-            <dd>
-              {NIGHT.prices.map((p) => (
-                <span key={p.label} className="home-facts__price">
-                  <span className="mono">{p.price}</span> {p.label}
-                  {p.note && <small> {p.note}</small>}
-                </span>
-              ))}
-            </dd>
-          </div>
-        </dl>
-      </section>
-
-      {/* 3. How it goes */}
+      {/* 2. How it works */}
       <section className="home-section" aria-labelledby="how">
-        <h2 id="how">How it goes</h2>
+        <h2 id="how">How it works</h2>
         <ol className="home-steps">
           {STEPS.map((s, i) => (
             <li key={s.title}>
@@ -150,36 +108,81 @@ export default function Home() {
         </ol>
       </section>
 
-      {/* 4. Why */}
+      {/* 3. Why */}
       <section className="home-section" aria-labelledby="why">
-        <h2 id="why">Meeting people shouldn&apos;t be this hard.</h2>
+        <h2 id="why">Asking people to care doesn&apos;t work.</h2>
         <p>
-          Apps haven&apos;t made it easier. People connect faster when they&apos;re doing something together, so every Colgrid night is hosted and gives you something to do.
+          Giving them something to do does. A team with a mission will walk into a shop it has passed a hundred times. That visit is the result you
+          were paying for.
         </p>
       </section>
 
-      {/* 5. FAQ */}
+      {/* 4. The report */}
+      <section className="home-section" aria-labelledby="report">
+        <h2 id="report">What your report shows</h2>
+        <dl className="home-facts">
+          {REPORT.map((r) => (
+            <div key={r.label}>
+              <dt>{r.label}</dt>
+              <dd>{r.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* 5. Who it's for */}
+      <section className="home-section" aria-labelledby="who">
+        <h2 id="who">Who it&apos;s for</h2>
+        <ul className="home-included">
+          {WHO.map((w) => (
+            <li key={w.title}>
+              <strong>{w.title}</strong> {w.body}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 6. Prices */}
+      <section className="home-section" aria-labelledby="prices">
+        <h2 id="prices">Prices</h2>
+        <dl className="home-facts">
+          {CHALLENGE.plans.map((p) => (
+            <div key={p.name}>
+              <dt>{p.name}</dt>
+              <dd>
+                <span className="mono">{p.price}</span>
+                <small>{p.note}</small>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* 7. FAQ */}
       <section className="home-section" aria-labelledby="faq">
         <h2 id="faq">Questions</h2>
         <div className="faq">
-          {HOME_FAQ.map((f) => (
+          {CHALLENGE_FAQ.map((f) => (
             <details key={f.q}>
               <summary>{f.q}</summary>
               <p>{f.a}</p>
             </details>
           ))}
         </div>
-        <Link href="/faq" className="home-quiet">
-          More questions →
-        </Link>
       </section>
 
-      {/* 6. Can't make it */}
-      <section className="home-section" aria-labelledby="later">
-        <h2 id="later">Can&apos;t make this one?</h2>
-        <p>Tell us, and we&apos;ll let you know when the next night is set.</p>
-        <Link href="/contact" className="home-quiet">
-          Send us a note →
+      {/* 8. Start */}
+      <section className="home-section" aria-labelledby="talk">
+        <h2 id="talk">Tell us what you need.</h2>
+        <p>We answer within two days.</p>
+        <LeadForm kind="corporate" challenge />
+      </section>
+
+      {/* 9. Players */}
+      <section className="home-section" aria-labelledby="play">
+        <h2 id="play">Here to play?</h2>
+        <Link href="/nights" className="home-quiet">
+          See the next night →
         </Link>
       </section>
 

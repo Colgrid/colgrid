@@ -1,8 +1,10 @@
 import { submitLead } from "@/app/leads/actions";
 import { turnstileSiteKey } from "@/lib/turnstile";
 
+// One form, a few flavors. `challenge` is the home-page version of the corporate form: it asks about
+// the goal instead of group size, and is stored as a corporate lead marked "Challenge inquiry".
 // One form, two flavors. Big fields and labels above inputs: most people fill this in on a phone.
-export default function LeadForm({ kind }: { kind: "corporate" | "host" | "contact" }) {
+export default function LeadForm({ kind, challenge = false }: { kind: "corporate" | "host" | "contact"; challenge?: boolean }) {
   const corporate = kind === "corporate";
   const contact = kind === "contact";
   return (
@@ -23,11 +25,13 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" | "conta
       </label>
       {!contact && (
         <label>
-          {corporate ? "Company" : "Business name"}
-          <input name="organization" maxLength={160} autoComplete="organization" required={!corporate} />
+          {challenge ? "Organization" : corporate ? "Company" : "Business name"}
+          <input name="organization" maxLength={160} autoComplete="organization" required={!corporate || challenge} />
         </label>
       )}
-      {contact ? null : corporate ? (
+      {contact ? null : challenge ? (
+        <input type="hidden" name="preferred_dates" value="Challenge inquiry (home page)" />
+      ) : corporate ? (
         <>
           <label>
             How many players?
@@ -45,13 +49,13 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" | "conta
         </label>
       )}
       <label>
-        {contact ? "Your message" : corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
+        {contact ? "Your message" : challenge ? "What do you need people to do?" : corporate ? "Anything we should know?" : "What could a team make, taste or discover with you?"}
         <textarea
           name="message"
           rows={contact ? 5 : 3}
           maxLength={2000}
           required={contact}
-          placeholder={contact ? "Questions about playing, accessibility, press…" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
+          placeholder={contact ? "Questions about playing, accessibility, press…" : challenge ? "e.g. get people back into our shops during road work" : corporate ? "Offsite, onboarding, a celebration…" : "e.g. a 15-minute glaze challenge"}
         />
       </label>
       {turnstileSiteKey && (
@@ -61,7 +65,7 @@ export default function LeadForm({ kind }: { kind: "corporate" | "host" | "conta
         </>
       )}
       <button type="submit" className="button button--primary">
-        {contact ? "Send" : corporate ? "Get a quote" : "Get in touch"}
+        {contact ? "Send" : challenge ? "Start a conversation" : corporate ? "Get a quote" : "Get in touch"}
       </button>
     </form>
   );
